@@ -11,26 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004142702) do
-
-  create_table "department_roles", force: true do |t|
-    t.integer  "department_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20131004140950) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "department_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "department_id"
-    t.date     "start_date"
-    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,6 +25,9 @@ ActiveRecord::Schema.define(version: 20131004142702) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+=======
+ActiveRecord::Schema.define(version: 20131004124118) do
+>>>>>>> d269fa693b10c6ac23a26aa9058c9ca1529896bc
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
