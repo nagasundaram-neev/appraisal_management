@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe DepartmentRole do
-  pending "add some examples to (or delete) #{__FILE__}"
+	before(:each) do
+    @deptartment = FactoryGirl.create(:department)
+  end
+	
+	it { should belong_to(:role) }
+	it { should belong_to(:department) }  
+
 end

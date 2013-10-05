@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem "rspec-rails", "~> 2.14.0", :group => [:development, :test]
+gem "factory_girl_rails", :group => [:development, :test]
+gem "database_cleaner", :group => :test
+gem "email_spec", :group => :test
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -7,10 +11,10 @@ gem 'rails', '4.0.0'
 gem 'mysql2'
 
 # Use rspec-rails for Testing
-gem  "rspec-rails", "~> 2.14.0"
+
 
 # Use factory_girl_rails for test data creation
-gem "factory_girl_rails", "~> 4.2.1"
+
 
 # Use devise for authentication
 gem "devise", "~> 3.1.1"
@@ -32,7 +36,7 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-
+gem 'shoulda-matchers'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
