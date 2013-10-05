@@ -12,5 +12,4 @@ describe Department do
     @dept2 = Department.new(:name => "BU3")
     @dept2.should_not be_valid
   end
-  pending "add some examples to (or delete) #{__FILE__}"
 end

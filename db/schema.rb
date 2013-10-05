@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004142702) do
+ActiveRecord::Schema.define(version: 20131005062130) do
 
   create_table "department_roles", force: true do |t|
     t.integer  "department_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "department_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "department_id"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,11 +35,11 @@ ActiveRecord::Schema.define(version: 20131004142702) do
     t.datetime "updated_at"
   end
 
-  create_table "department_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "department_id"
-    t.date     "start_date"
-    t.date     "end_date"
+  create_table "kra_attrs", force: true do |t|
+    t.string   "name"
+    t.float    "weightage"
+    t.text     "desc"
+    t.text     "measures"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
