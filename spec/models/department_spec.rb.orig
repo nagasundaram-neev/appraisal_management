@@ -1,0 +1,19 @@
+require 'spec_helper'
+
+describe Department do
+<<<<<<< HEAD
+  before(:each) do
+    @dept = FactoryGirl.create(:department)
+  end
+  it "should not be valid if dept name is missing" do
+    @dept.name = ""
+    @dept.should_not be_valid
+  end
+  it "should not have two departments with the same name" do
+    @dept2 = Department.new(:name => "BU3")
+    @dept2.should_not be_valid
+  end
+=======
+>>>>>>> fb71b8e32547a59186ba35137b498cef458b638c
+  pending "add some examples to (or delete) #{__FILE__}"
+end

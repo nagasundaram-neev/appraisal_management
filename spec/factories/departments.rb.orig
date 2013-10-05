@@ -1,0 +1,14 @@
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :department do
+<<<<<<< HEAD
+    name 'BU3'
+  end
+  factory :department2, class: Department do
+    name 'BU2'
+=======
+    name "MyString"
+>>>>>>> fb71b8e32547a59186ba35137b498cef458b638c
+  end
+end
