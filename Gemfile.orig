@@ -6,11 +6,23 @@ gem 'rails', '4.0.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
+<<<<<<< HEAD
 # Use rspec-rails for Testing
 gem  "rspec-rails", "~> 2.14.0"
 gem "shoulda-matchers", "~> 2.4.0"
 # Use factory_girl_rails for test data creation
 gem "factory_girl_rails", "~> 4.2.1"
+||||||| merged common ancestors
+# Use rspec-rails for Testing
+gem  "rspec-rails", "~> 2.14.0"
+
+# Use factory_girl_rails for test data creation
+gem "factory_girl_rails", "~> 4.2.1"
+=======
+gem 'rspec-rails', :group => [:development, :test]
+gem "factory_girl_rails", :group => [:development, :test]
+gem "database_cleaner", :group => :test
+>>>>>>> 8c22d84c04680fd2b1e3e416ba244f9907ce9db9
 
 # Use devise for authentication
 gem "devise", "~> 3.1.1"

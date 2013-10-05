@@ -13,8 +13,22 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+<<<<<<< HEAD
   
   config.include Devise::TestHelpers, :type => :controller
+||||||| merged common ancestors
+=======
+
+   config.before(:suite) do
+     DatabaseCleaner.strategy = :truncation
+   end
+   config.before(:each) do
+     DatabaseCleaner.start
+   end
+   config.after(:each) do
+     DatabaseCleaner.clean
+   end
+>>>>>>> 8c22d84c04680fd2b1e3e416ba244f9907ce9db9
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
