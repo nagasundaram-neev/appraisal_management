@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe DepartmentRole do
-  it { should belong_to(:department) }
-  it { should belong_to(:role) }
+	before(:each) do
+    @deptartment = FactoryGirl.create(:department)
+  end
+	
+	it { should belong_to(:role) }
+	it { should belong_to(:department) }  
+
 end

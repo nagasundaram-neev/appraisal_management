@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe Department do
+<<<<<<< HEAD
+	before(:each) do
+    @deptartment = FactoryGirl.create(:department)
+  end
+	it { should have_many(:department_roles) }
+
+  it { should have_many(:roles).through(:department_roles) }
+
+=======
   before(:each) do
     @dept = FactoryGirl.create(:department)
   end
@@ -12,15 +21,11 @@ describe Department do
     @dept2 = Department.new(:name => "BU3")
     @dept2.should_not be_valid
   end
-<<<<<<< HEAD
 
   it { should have_many(:roles).through(:department_roles) }
   it { should have_many(:department_roles) }
 
   it { should have_many(:users).through(:department_users) }
   it { should have_many(:department_users) }
-||||||| merged common ancestors
-  pending "add some examples to (or delete) #{__FILE__}"
-=======
->>>>>>> 961e1aebdde3991456a01aa443fbbea41cb001cb
+>>>>>>> a382c2d9b458ec004b630c91995fe91e79c809b9
 end

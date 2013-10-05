@@ -1,10 +1,13 @@
 class Department < ActiveRecord::Base
 <<<<<<< HEAD
-  validates :name, presence: true, uniqueness: true
-  has_many :department_users
-  has_many :users, through: :department_users
-=======
 	has_many :department_roles
     has_many :roles, through: :department_roles
->>>>>>> fb71b8e32547a59186ba35137b498cef458b638c
+    validates :name, presence: true, uniqueness: true
+=======
+  validates :name, presence: true, uniqueness: true
+  has_many :roles, through: :department_roles
+  has_many :department_roles
+  has_many :users, through: :department_users
+  has_many :department_users
+>>>>>>> a382c2d9b458ec004b630c91995fe91e79c809b9
 end

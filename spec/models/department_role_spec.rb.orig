@@ -1,0 +1,16 @@
+require 'spec_helper'
+
+describe DepartmentRole do
+<<<<<<< HEAD
+	before(:each) do
+    @deptartment = FactoryGirl.create(:department)
+  end
+	
+	it { should belong_to(:role) }
+	it { should belong_to(:department) }  
+
+=======
+  it { should belong_to(:department) }
+  it { should belong_to(:role) }
+>>>>>>> a382c2d9b458ec004b630c91995fe91e79c809b9
+end
