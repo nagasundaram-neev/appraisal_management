@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe DepartmentRole do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:department) }
+  it { should belong_to(:role) }
 end

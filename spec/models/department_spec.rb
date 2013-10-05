@@ -12,5 +12,10 @@ describe Department do
     @dept2 = Department.new(:name => "BU3")
     @dept2.should_not be_valid
   end
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { should have_many(:roles).through(:department_roles) }
+  it { should have_many(:department_roles) }
+
+  it { should have_many(:users).through(:department_users) }
+  it { should have_many(:department_users) }
 end

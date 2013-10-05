@@ -55,9 +55,14 @@ describe User do
 
     it {should ensure_inclusion_of(:gender).in_array(['M', 'F']) }
 
-
-
   end
+    # Specs for testing the association
+
+    it { should have_many(:roles).through(:role_users) }
+    it { should have_many(:role_users) }
+
+    it { should have_many(:departments).through(:department_users) }
+    it { should have_many(:department_users) }
 
 end
 
