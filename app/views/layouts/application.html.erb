@@ -12,12 +12,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body class="background-dark">
-	<div class="logo">
-    <h4><a href="help">Employee <strong>Appraisal</strong></a></h4>
-  </div>
 
+  
+	  <div class="row">
+      <div class="span4">
+        <div class="logo">
+          <h4><a href="help">Employee <strong>Appraisal</strong></a></h4>
+        </div>
+      </div>
+      <div class="span8">
+        <div class="nav pull-right">
+          <a href="help"><i class="icon-bell-alt icon-2x" ></i></a>&nbsp;&nbsp;
+          <a href="help"><i class="icon-signout icon-2x" ></i></a>
+          
+        </div>
+      </div>
+    </div>
+    
+ 
 
-  <nav id="sidebar" class="sidebar nav-collapse collapse">
+ <div class="row">
+  <div class="span2">
+    <nav id="sidebar" class="sidebar nav-collapse collapse">
     <ul id="side-nav" class="side-nav">
         <li class="active">
             <a href="help"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
@@ -41,7 +57,7 @@
             </ul>
         </li>
         <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#ui-collapse"><i class="eicon-vcard"></i> <span class="name">User Interface</span></a>
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#ui-collapse"><i class="eicon-vcard"></i> <span class="name">Profile</span></a>
             <ul id="ui-collapse" class="accordion-body collapse">
                 <li><a href="help">Personal</a></li>
                 <li><a href="help">Professional</a></li>
@@ -60,20 +76,18 @@
             </ul>
         </li>
         <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#tables-collapse"><i class="icon-table"></i> <span class="name">Tables</span></a>
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#tables-collapse"><i class="icon-table"></i> <span class="name">Pending Forms</span></a>
             <ul id="tables-collapse" class="accordion-body collapse">
-                <li><a href="help">Static</a></li>
-                <li><a href="help">Dynamic</a></li>
+                <li><a href="help">KRA Form</a></li>
+                <li><a href="help">DR Form</a></li>
             </ul>
         </li>
-        <li>
-            <a href="help"><i class="icon-reorder"></i> <span class="name">Grid</span></a>
-        </li>
+        
         <li class="accordion-group">
             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#special-collapse"><i class="icon-asterisk"></i> <span class="name">Special</span></a>
             <ul id="special-collapse" class="accordion-body collapse">
                 <li><a href="help">Login</a></li>
-                <li><a href="help">404</a></li>
+                <li><a href="help">Overall Performance</a></li>
                 <li><a href="help">Rating</a></li>
             </ul>
         </li>
@@ -86,45 +100,10 @@
         <button type="button" data-value="auto" class="btn-auto btn btn-transparent btn-small">Auto</button>
     </div>
   </nav>
-
-  <div class="wrap">
-    <header class="page-header">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    <li class="hidden-phone">
-                      <a href="help"><i class="icon-signout"></i></a></li>
-                    <button type="submit" class="btn btn-primary">
-                     Signout
-                </button>
-                </ul>
-                
-                
-            </div>
-        </div>
-    </header>
   </div>
-
-<script type="text/template" id="message-template">
-        <div class="sender pull-left">
-            <div class="icon">
-                <img src="img/2.jpg" class="img-circle" alt="">
-            </div>
-            <div class="time">
-                just now
-            </div>
-        </div>
-        <div class="chat-message-body">
-            <span class="arrow"></span>
-            <div class="sender">Tikhon Laninga</div>
-            <div class="text">
-                 text
-            </div>
-        </div>
-</script>
-
-
+<div class="span10" style="margin-top:95px;">
 <%= yield %>
-
+</div>
+</div>
 </body>
 </html>
