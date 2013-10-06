@@ -1,8 +1,8 @@
 class CreateDepartmentRoles < ActiveRecord::Migration
   def change
     create_table :department_roles do |t|
-      t.integer :department_id
-      t.integer :role_id
+      t.belongs_to :role
+      t.belongs_to :department
 
       t.timestamps
     end
