@@ -10,8 +10,10 @@ describe Role do
   it { should have_many(:department_roles) }
   it { should have_many(:departments).through(:department_roles) }
 
+
+
   it "should not be valid if role name is missing" do
-    @role.name = ""
+      @role.name = ""
     @role.should_not be_valid
   end
 

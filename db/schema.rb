@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005075759) do
+ActiveRecord::Schema.define(version: 20131006052256) do
+
+  create_table "appraisal_cycles", force: true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "department_roles", force: true do |t|
-    t.integer  "department_id"
     t.integer  "role_id"
+    t.integer  "department_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,8 +52,9 @@ ActiveRecord::Schema.define(version: 20131005075759) do
   end
 
   create_table "role_users", force: true do |t|
-    t.integer  "role_id"
     t.integer  "user_id"
+    t.integer  "role_id"
+    t.integer  "appraisal_cycles_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,2 @@
+class AppraisalCycleController < ApplicationController
+end

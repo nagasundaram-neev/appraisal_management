@@ -11,5 +11,11 @@ require 'spec_helper'
 #   end
 # end
 describe KraAttrsHelper do
+<<<<<<< HEAD
  
+||||||| merged common ancestors
+  pending "add some examples to (or delete) #{__FILE__}"
+=======
+  
+>>>>>>> 973042480927d192de65571f0bb788bf029b36f8
 end
