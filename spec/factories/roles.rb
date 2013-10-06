@@ -2,6 +2,9 @@
 
 FactoryGirl.define do
   factory :role do
-    name "MyString"
+    name "Manager"
+  end
+  factory :invalid_role, class: Department do
+    name nil
   end
 end
