@@ -7,4 +7,7 @@ FactoryGirl.define do
   factory :department2, class: Department do
     name 'BU2'
   end
+  factory :invalid_department, class: Department do
+    name nil
+  end
 end
