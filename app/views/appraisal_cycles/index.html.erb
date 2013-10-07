@@ -1,0 +1,14 @@
+<body onload="cancel()">
+<%= link_to "Define Appraisal Cycle Period", new_appraisal_cycle_path, :remote => true, class: "btn btn-success" %>
+
+<div id="appraisal_cycle_form"><%= render :partial => 'form' %></div>
+<div id="appraisal_cycles_list"><%= render :partial => "appraisal_cycles" %></div>
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("appraisal_cycle_form").style.display='none';
+}
+
+</script>
+</body>

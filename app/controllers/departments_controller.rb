@@ -1,5 +1,10 @@
 class DepartmentsController < ApplicationController
-	def index
+
+  def new
+    @dept = Department.new
+  end
+
+  def index
     @depts = Department.all
   end
 
@@ -8,7 +13,7 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @dept.save
         format.html
-        format.js
+        
       else
         format.html
       end
@@ -26,6 +31,6 @@ class DepartmentsController < ApplicationController
   end
   
   def department_params
-    params.require(:dept).permit(:name)
+    params.require(:department).permit(:name)
   end
 end

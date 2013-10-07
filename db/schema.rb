@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007114244) do
+ActiveRecord::Schema.define(version: 20131007105628) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -50,8 +50,14 @@ ActiveRecord::Schema.define(version: 20131007114244) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "kra_ratings", force: true do |t|
+   
+ create_table "kra_role_attrs", force: true do |t|
+    t.integer  "kra_attr_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+create_table "kra_ratings", force: true do |t|
     t.integer  "kra_sheet_id"
     t.integer  "kra_attr_id"
     t.float    "rating"
