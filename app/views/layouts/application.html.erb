@@ -12,98 +12,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body class="background-dark">
-
+<p class="navbar-text pull-right">
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path,:remote => true, :class => 'navbar-link' %> |
+  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
   
-	  <div class="row">
-      <div class="span4">
-        <div class="logo">
-          <h4><a href="help">Employee <strong>Appraisal</strong></a></h4>
-        </div>
-      </div>
-      <div class="span8">
-        <div class="nav pull-right">
-          <a href="help"><i class="icon-bell-alt icon-2x" ></i></a>&nbsp;&nbsp;
-          <a href="help"><i class="icon-signout icon-2x" ></i></a>
-          
-        </div>
-      </div>
-    </div>
-    
- 
-
- <div class="row">
-  <div class="span2">
-    <nav id="sidebar" class="sidebar nav-collapse collapse">
-    <ul id="side-nav" class="side-nav">
-        <li class="active">
-            <a href="help"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#forms-collapse"><i class="icon-edit"></i> <span class="name">Forms</span></a>
-            <ul id="forms-collapse" class="accordion-body collapse">
-                <li><a href="help">KRA</a></li>
-                <li><a href="help">DR</a></li>
-                <li><a href="help">Goals</a></li>
-                <li><a href="help">Learnings & needs</a></li>
-                <li><a href="help">Sign Off</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
-            <ul id="stats-collapse" class="accordion-body collapse">
-                <li><a href="help">Stats</a></li>
-                <li><a href="help">Charts</a></li>
-                <li><a href="help">Realtime</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#ui-collapse"><i class="eicon-vcard"></i> <span class="name">Profile</span></a>
-            <ul id="ui-collapse" class="accordion-body collapse">
-                <li><a href="help">Personal</a></li>
-                <li><a href="help">Professional</a></li>
-                <li><a href="help">Educational</a></li>
-                <li><a href="help">Others</a></li>
-                <li><a href="help">Contacts</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#components-collapse"><i class="icon-bookmark-empty"></i> <span class="name">Utilities</span></a>
-            <ul id="components-collapse" class="accordion-body collapse">
-                <li><a href="help">Calendar</a></li>
-                <li><a href="help">Maps</a></li>
-                <li><a href="help">Gallery</a></li>
-                <li><a href="help">Fileupload</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#tables-collapse"><i class="icon-table"></i> <span class="name">Pending Forms</span></a>
-            <ul id="tables-collapse" class="accordion-body collapse">
-                <li><a href="help">KRA Form</a></li>
-                <li><a href="help">DR Form</a></li>
-            </ul>
-        </li>
-        
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#special-collapse"><i class="icon-asterisk"></i> <span class="name">Special</span></a>
-            <ul id="special-collapse" class="accordion-body collapse">
-                <li><a href="help">Login</a></li>
-                <li><a href="help">Overall Performance</a></li>
-                <li><a href="help">Rating</a></li>
-            </ul>
-        </li>
-        <li class="visible-phone">
-            <a href="help"><i class="icon-signout"></i> <span class="name">Sign Out</span></a>
-        </li>
-    </ul>
-    <div id="sidebar-settings" class="settings">
-        <button type="button" data-value="icons" class="btn-icons btn btn-transparent btn-small">Icons</button>
-        <button type="button" data-value="auto" class="btn-auto btn btn-transparent btn-small">Auto</button>
-    </div>
-  </nav>
-  </div>
-<div class="span10" style="margin-top:95px;">
 <%= yield %>
-</div>
-</div>
+<div id="edit_form">
+</div> 
 </body>
 </html>

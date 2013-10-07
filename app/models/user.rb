@@ -5,7 +5,10 @@ class User < ActiveRecord::Base
   
   has_many :departments, through: :department_users
   has_many :department_users
-  
+
+  has_many :kra_sheets, :foreign_key => "appraisee_id", :class_name => "KraSheet"
+  has_many :appraiser_kra_sheets, :foreign_key => "appraiser_id", :class_name => "KraSheet"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
