@@ -1,0 +1,4 @@
+$("#edit-role").html("<%= escape_javascript(render(:partial => "form"))%>");
+
+
+
