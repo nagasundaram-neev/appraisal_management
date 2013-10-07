@@ -1,0 +1,2 @@
+class KraSheetsController < ApplicationController
+end
