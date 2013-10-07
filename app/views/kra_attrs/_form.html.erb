@@ -15,18 +15,7 @@
                 </header>
                 <div class="body">
                      <%= form_for(@kra_attr, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
-                        <div class=btn>
-                            <%= p @kra_attr.errors.any? %>
-                            <% if @kra_attr.errors.any? %>
-                            <%= p @kra_attr.errors.any? %>
-                            <h3><%= pluralize(@kra_attr.errors.count, "error") %> prohibited this from being saved:</h3>
-                            <ul>
-                            <% @kra_attr.errors.full_messages.each do |msg| %>
-                            <li><%= msg %></li>
-                            <% end %>
-                            </ul>
-                            <% end %>
-                          </div>
+                        
                     
                         <fieldset>
                             <legend class="section">Info </legend>

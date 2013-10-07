@@ -1,11 +1,16 @@
 class AppraisalCyclesController < ApplicationController
 
-  before_filter :load, :only => [:new,:index]
+  before_filter :load, :only => [:new,:index, :create, :update]
+  before_filter :create_new_appraisal_cycle, :only => [:new,:index]
 
   def load
     @appraisal_cycles = AppraisalCycle.all
+  end
+
+  def create_new_appraisal_cycle
     @appraisal_cycle = AppraisalCycle.new
   end
+
   def new
   end
 
@@ -18,12 +23,10 @@ class AppraisalCyclesController < ApplicationController
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
     #respond_to do |format|
-      if @appraisal_cycle.save
-        flash[:notice] = "Successfully created."
-        @appraisal_cycles=AppraisalCycle.all
-        #format.html
-        #format.js
-      #end
+    if @appraisal_cycle.save
+      flash[:notice] = "Successfully created."
+    else
+      raise "asd".inspect
     end
   end
 
