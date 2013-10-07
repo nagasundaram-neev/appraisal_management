@@ -5,13 +5,16 @@ class KraAttrsController < ApplicationController
   end
 
   def create
-    @kraattr = KraAttr.new(kraattr_params)
+    @kraattr = KraAttr.new(params[:name])
+    p "before save           "
     respond_to do |format|
       if @kraattr.save
+        p "doing"
         p @kraattr.id
         format.html
         format.js
       else
+        p "not doing wrong"
         format.html
       end
     

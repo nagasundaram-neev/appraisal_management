@@ -2,9 +2,9 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   devise_for :users
-  resources :kra_attrs, only: [:create, :show, :index, :update]
-  resources :departments, only: [:create, :show, :index, :update]
-  resources :roles, only: [:create, :show, :index, :update]
+  resources :kra_attrs, only: [:create, :show, :index, :update, :new]
+  resources :departments, only: [:create, :show, :index, :update, :new]
+  resources :roles, only: [:create, :show, :index, :update, :new]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

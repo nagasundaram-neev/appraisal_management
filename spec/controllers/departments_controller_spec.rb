@@ -19,7 +19,7 @@ describe DepartmentsController do
 
     context "valid attributes" do
       it "creates the new object and save it into the db" do
-        post(:create, dept: FactoryGirl.attributes_for(:department))
+        post(:create, department: FactoryGirl.attributes_for(:department))
         response.should be_success
         (Department.find_by name:'BU3').should_not == nil
       end
@@ -28,7 +28,7 @@ describe DepartmentsController do
     context "invalid attributes" do
       it "does not save the object into db " do
         expect{
-          post(:create, dept: FactoryGirl.attributes_for(:invalid_department))
+          post(:create, department: FactoryGirl.attributes_for(:invalid_department))
         }.to_not change(Department,:count)
       end
     end
@@ -46,18 +46,18 @@ describe DepartmentsController do
   describe "PUT: #update" do
     context "valid attributes" do
       it "located the requested @dept" do
-        put :update, id: @dept, dept: FactoryGirl.attributes_for(:department)
+        put :update, id: @dept, department: FactoryGirl.attributes_for(:department)
         assigns(:dept).should eq(@dept)
       end
       it "changes the @dept's attributes" do
-        put :update, id: @dept, dept: FactoryGirl.attributes_for(:department, name: "BU5")
+        put :update, id: @dept, department: FactoryGirl.attributes_for(:department, name: "BU5")
         @dept.reload
         @dept.name.should eq("BU5")
       end 
     end
     context "invalid attributes" do
       it "should not change the @dept attributes" do
-        put :update, id: @dept, dept: FactoryGirl.attributes_for(:department, name: nil)
+        put :update, id: @dept, department: FactoryGirl.attributes_for(:department, name: nil)
         @dept.reload
         @dept.name.should_not eq(nil)
       end
