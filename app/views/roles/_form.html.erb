@@ -14,20 +14,8 @@
                     </header>
                     <div class="body">
                         
-                        <%= form_for(@role, :id => "form", :class => "form-horizontal label-left", :novalidate => "novalidate", :data => {:validate => "parsley"}) do |f|  %>
-                            <% if @role %>
-                              <% if @role.errors.any? %>
-                                <div id="error_explanation">
-                                  <h3><%= pluralize(@role.errors.count, "error") %> prohibited this from being saved:</h3>
-
-                                  <ul>
-                                  <% @errors.full_messages.each do |msg| %>
-                                    <li><%= msg %></li>
-                                  <% end %>
-                                  </ul>
-                                </div>
-                              <% end %>
-                            <% end %>
+                        <%= form_for(@role, :remote => true, :class => "form-horizontal label-left") do |f|  %>
+                            
                             <fieldset>
                                 <legend class="section">Info </legend>
 

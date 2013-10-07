@@ -1,33 +1,59 @@
 class DepartmentsController < ApplicationController
 
-  def new
-    @dept = Department.new
+  before_filter :load, :only => [:new,:index, :create, :update]
+  before_filter :create_new_department, :only => [:new,:index]
+
+  def load
+    @departments = Department.all
   end
+
+  def create_new_department
+    @department = Department.new
+  end
+
+  def new
+  end
+
 
   def index
-    @depts = Department.all
   end
+
+
+
+  
 
   def create
-    @dept = Department.new(department_params)
-    respond_to do |format|
-      if @dept.save
-        format.html
+    @department = Department.new(department_params)
+    #respond_to do |format|
+      if @department.save
+        @departments = Department.all
+        #format.html
         
-      else
-        format.html
+      #else
+        #format.html
       end
     
-    end
+    #end
   end
 
+def edit 
+@department = Department.find(params[:id])
+end
+
   def show
-    @dept = Department.find(params[:id])
+    @department = Department.find(params[:id])
   end
 
   def update
-    @dept = Department.find(params[:id])
-    @dept.update_attributes(department_params)
+    @department = Department.find(params[:id])
+    @department.update_attributes(department_params)
+  end
+  def destroy
+    @department = Department.find { params[:id]  }
+    @department.destroy
+    flash[:notice] = "Successfully destroyed."
+    @departments = Department.all
+    #format.html
   end
   
   def department_params
