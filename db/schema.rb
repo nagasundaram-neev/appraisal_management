@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007105628) do
+ActiveRecord::Schema.define(version: 20131006052256) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -47,16 +47,6 @@ ActiveRecord::Schema.define(version: 20131007105628) do
     t.float    "weightage"
     t.text     "desc"
     t.text     "measures"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "kra_ratings", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "kra_sheets", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
