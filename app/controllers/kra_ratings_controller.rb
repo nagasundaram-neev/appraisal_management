@@ -1,0 +1,3 @@
+class KraRatingsController < ApplicationController
+	
+end
