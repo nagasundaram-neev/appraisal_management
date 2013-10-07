@@ -2,10 +2,10 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   devise_for :users
-  resources :kra_attrs, only: [:create, :show, :index, :update, :new]
-  resources :departments, only: [:create, :show, :index, :update, :new]
-  resources :roles, only: [:create, :show, :index, :update, :new]
-
+  resources :kra_attrs
+  resources :departments, only: [:create, :show, :index, :update]
+  resources :roles, only: [:create, :show, :index, :update]
+  resources :appraisal_cycles
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -16,7 +16,7 @@ AppraisalManagement::Application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  #   get 'products/:id/purchase_urlchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

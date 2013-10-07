@@ -13,7 +13,7 @@ class DepartmentsController < ApplicationController
     respond_to do |format|
       if @dept.save
         format.html
-        format.js
+        
       else
         format.html
       end

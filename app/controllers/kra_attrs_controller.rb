@@ -1,36 +1,60 @@
 class KraAttrsController < ApplicationController
 
-  def index
+  before_filter :load, :only => [:new,:index]
+
+  def load
     @kra_attrs = KraAttr.all
+    @kra_attr = KraAttr.new
+  end
+  def new
+    
   end
 
+  def index
+    
+  end
+  
   def create
-    @kraattr = KraAttr.new(params[:name])
-    p "before save           "
+    @kra_attr = KraAttr.new(kra_attr_params)
     respond_to do |format|
-      if @kraattr.save
-        p "doing"
-        p @kraattr.id
+
+       
+      if @kra_attr.save
+        flash[:notice] = "Successfully created the KRA Attributes."
+        @kra_attrs=KraAttr.all
         format.html
         format.js
-      else
-        p "not doing wrong"
+        else
         format.html
       end
-    
     end
   end
 
-  def show
+  def edit
     @kra_attr = KraAttr.find(params[:id])
+  end
+
+  def show
+     @kra_attr = KraAttr.find(params[:id])
   end
 
   def update
     @kra_attr = KraAttr.find(params[:id])
-    @kra_attr.update_attributes(kraattr_params)
+    if @kra_attr.update(kra_attr_params)
+      flash[:notice] = "Successfully updated KRA Attributes."
+      @kra_attrs = KraAttr.all
+    end
   end
-
-  def kraattr_params
-    params.require(:kraattr).permit(:name, :weightage, :desc, :measures)
+  
+  def destroy
+    @kra_attr = KraAttr.find { params[:id]  }
+    @kra_attr.destroy
+    flash[:notice] = "Successfully destroyed."
+    @kra_attrs = KraAttr.all
+    #format.html
+  end
+  
+  def kra_attr_params
+    params.require(:kra_attr).permit(:name, :weightage, :desc, :measures)
   end
 end
