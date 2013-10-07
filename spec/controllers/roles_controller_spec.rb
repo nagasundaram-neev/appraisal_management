@@ -28,7 +28,7 @@ describe RolesController do
       it "does not save the object into db " do
         expect{
           post(:create, role: FactoryGirl.attributes_for(:invalid_role))
-        }.to_not change(Department,:count)
+        }.to_not change(Role,:count)
       end
     end
   end
