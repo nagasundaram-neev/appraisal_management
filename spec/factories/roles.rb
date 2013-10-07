@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :role do
     name "Manager"
   end
-  factory :invalid_role, class: Department do
+  factory :invalid_role, class: Role do
     name nil
   end
 end
