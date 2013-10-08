@@ -16,18 +16,18 @@ class KraAttrsController < ApplicationController
   
   def create
     @kra_attr = KraAttr.new(kra_attr_params)
-    respond_to do |format|
+    #respond_to do |format|
 
        
       if @kra_attr.save
         flash[:notice] = "Successfully created the KRA Attributes."
         @kra_attrs=KraAttr.all
-        format.html
-        format.js
-        else
-        format.html
+        #format.html
+        #format.js
+        #else
+        #format.html
       end
-    end
+    #end
   end
 
   def edit

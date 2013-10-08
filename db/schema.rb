@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20131007114244) do
     t.integer  "appraisal_cycle_id"
     t.integer  "appraisee_id"
     t.integer  "appraiser_id"
+    t.boolean  "appraisee_status",   default: false
+    t.boolean  "appraiser_status",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,3 @@
+$(":input:not(input[type=submit])").val("");
+$("#departments_list").html("<%= escape_javascript( render(:partial => "departments") ) %>");
+$("#departments_form").hide(100)

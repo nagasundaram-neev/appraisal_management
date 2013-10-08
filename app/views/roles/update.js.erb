@@ -1,4 +1,3 @@
-alert("updated");
-
-
-
+$(":input:not(input[type=submit])").val("");
+$("#roles_list").html("<%= escape_javascript( render(:partial => "roles") ) %>");
+$("#roles_form").hide(100)

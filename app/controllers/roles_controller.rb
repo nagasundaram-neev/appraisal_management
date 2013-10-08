@@ -1,13 +1,26 @@
 class RolesController < ApplicationController
-	def index
+	
+
+before_filter :load, :only => [:new,:index, :create, :update]
+before_filter :create_new_role, :only => [:new,:index]
+
+  def load
     @roles = Role.all
+  end
+  
+  def create_new_role
+    @role = Role.new
+  end
+  
+  def index
   end
 
   def edit
+    @role = Role.find(params[:id])
   end
 
   def new
-    @role = Role.new
+  
   end
 
   def create
@@ -33,7 +46,17 @@ class RolesController < ApplicationController
 
   def update
     @role = Role.find(params[:id])
-    @role.update_attributes(role_params)
+    if @role.update_attributes(role_params)
+      flash[:notice] = "Successfully updated."
+      @roles = Role.all
+    end
+  end
+
+  def destroy
+    @role = Role.find(params[:id])
+    @role.destroy
+    flash[:notice] = "Successfully destroyed."
+    @roles = role.all
   end
   
   def add_role

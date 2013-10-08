@@ -68,19 +68,15 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="control-group no-margin">
                         <label class="control-label">Gender</label>
                         <div class="control">
                             <div class="input-prepend input-padding-increased">
-                               <span class="add-on">
-                                    <i class="icon-male icon-large"></i>
-                                </span>
-                                <%= f.text_field :gender,:autofocus => true ,:class =>"input-block-level"%>
-                            </div>
+                    <%= f.radio_button :gender, "M"%><%= f.label :gender, "Male" %>      
+                <%= f.radio_button :gender, "F"%><%= f.label :gender, "Female" %>
+ </div>
                         </div>
                     </div>
-
                     <div class="control-group no-margin">
                         <label class="control-label">Phone Number</label>
                         <div class="control">

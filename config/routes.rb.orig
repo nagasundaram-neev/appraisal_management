@@ -9,10 +9,16 @@ AppraisalManagement::Application.routes.draw do
 
 =======
   resources :kra_attrs
+<<<<<<< HEAD
   resources :departments, only: [:create, :show, :index, :update]
-  resources :roles, only: [:create, :show, :index, :update]
+=======
+  resources :departments
+>>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
+  resources :roles
   resources :appraisal_cycles
->>>>>>> 9a0f7ddcfa04c1322110d81ee8911c2ad993cd13
+  resources :kra_sheets
+  resources :kra_ratings
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
