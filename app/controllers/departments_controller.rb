@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :require_admin
 
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_department, :only => [:new,:index]

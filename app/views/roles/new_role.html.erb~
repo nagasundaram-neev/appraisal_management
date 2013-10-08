@@ -19,29 +19,34 @@
             <form accept-charset="UTF-8" action= "add_role" class="new_role" data-validate="parsley" id="new_role" method="post">
             <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="2p7xGQNi7nbdpg7BCgaRp4pgXExKIDaENPk6NxQZp+8="></div>
               
-
               <fieldset>
-                <legend class="section">Info </legend>
+                <legend class="section">User </legend>
+                  <div class="control-group">
+                    <label for="name" class="control-label">Select User <span class="required">*</label>
+                      <div class="controls controls-row">
+                        <%= collection_select(:user_id, :id, User.all, :id, :first_name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
+                        </select>
+                      </div>
+                  </div>
+              </fieldset>
+              <fieldset>
+                <legend class="section">Role </legend>
                   <div class="control-group">
                     <label for="name" class="control-label">Select Role <span class="required">*</label>
                       <div class="controls controls-row">
                         <%= collection_select(:role_id, :id, Role.all, :id, :name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
-
-                                            
-                                        </select>
+                        </select>
                       </div>
                   </div>
               </fieldset>
 
 	      <fieldset>
-                <legend class="section">Info </legend>
+                <legend class="section">Appraisal Cycle </legend>
                   <div class="control-group">
                     <label for="name" class="control-label">Select Appraisal Cycle <span class="required">*</label>
                       <div class="controls controls-row">
                         <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
-
-                                            
-                                        </select>
+                        </select>
                       </div>
                   </div>
               </fieldset>

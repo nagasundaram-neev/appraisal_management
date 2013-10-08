@@ -1,1 +1,1 @@
-$("#body-content").html("<%= escape_javascript(render(:partial => "departments"))%>");
+$("#body-content").html("<%= escape_javascript(render(:partial => "index"))%>");

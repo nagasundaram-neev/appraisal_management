@@ -1,27 +1,17 @@
 AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
-  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions'} 
-  resources :users, only: [] do
-    resource :departments, only: [] do
-      member do
-        get 'new_dept'
-        post 'add_dept'
-      end 
-    end
-    resource :roles, only: [] do
-      member do
-        get 'new_role'
-        post 'add_role'
-      end
-    end
-  end
+  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions'}
   resources :kra_attrs
-  resources :departments
-  resources :roles
+  resources :departments 
+  resources :roles 
   resources :appraisal_cycles
   resources :kra_sheets
   resources :kra_ratings
+  get 'new_role_user', to: 'roles#new_role'
+  post 'add_role', to: 'roles#add_role'
+  get 'new_dept', to: 'departments#new_dept'
+  post 'add_dept', to: 'departments#add_dept'
 
   
   root :to => 'home#index'

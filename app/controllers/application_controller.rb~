@@ -19,7 +19,14 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_out_path_for(resource)
-    stored_location_for(:user) || new_user_registration_path
+    stored_location_for(:user) || new_user_session_path
+  end
+  
+  def require_admin
+    unless current_user && current_user.role == 'admin'
+      flash[:error] = "You are not an admin"
+      redirect_to root_path
+    end        
   end
   
   
