@@ -2,6 +2,12 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   devise_for :users
+<<<<<<< HEAD
+  resources :kra_attrs, only: [:create, :show, :index, :update, :new]
+  resources :departments, only: [:create, :show, :index, :update, :new]
+  resources :roles, only: [:create, :show, :index, :update, :new]
+
+=======
   resources :kra_attrs
 <<<<<<< HEAD
   resources :departments, only: [:create, :show, :index, :update]

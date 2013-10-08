@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20131007093951) do
     t.datetime "updated_at"
   end
 
+
+  
   create_table "kra_attrs", force: true do |t|
     t.string   "name"
     t.float    "weightage"
@@ -53,9 +55,6 @@ ActiveRecord::Schema.define(version: 20131007093951) do
 <<<<<<< HEAD
 
   create_table "kra_role_attrs", force: true do |t|
-||||||| merged common ancestors
-
-create_table "kra_role_attrs", force: true do |t|
 =======
    
  create_table "kra_role_attrs", force: true do |t|
@@ -75,15 +74,7 @@ create_table "kra_ratings", force: true do |t|
     t.datetime "updated_at"
   end
 
-  create_table "kra_sheets", force: true do |t|
-    t.integer  "appraisal_cycle_id"
-    t.integer  "appraisee_id"
-    t.integer  "appraiser_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "role_users", force: true do |t|
+	create_table "role_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.integer  "appraisal_cycles_id"

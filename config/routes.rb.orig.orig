@@ -1,6 +1,7 @@
 AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
+<<<<<<< HEAD
   devise_for :users, :controllers => { registrations: 'users/registrations' } 
   resources :users, only: [] do
     resource :departments, only: [] do
@@ -16,6 +17,9 @@ AppraisalManagement::Application.routes.draw do
       end
     end
   end
+=======
+  devise_for :users 
+>>>>>>> 45ee95c9ce900b5ab53a9afd1deb5922c008bbda
   resources :kra_attrs
   resources :departments
   resources :roles
@@ -28,7 +32,7 @@ AppraisalManagement::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  # root 'apprindex'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

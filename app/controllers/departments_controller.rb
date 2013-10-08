@@ -55,6 +55,12 @@ end
     @departments = Department.all
     #format.html
   end
+  def add_dept
+    Department.new.save_dept_user(params[:user_id],params[:dept_id][:id])
+  end
+  def new_dept
+  @dept = Department.new
+  end 
   
   def department_params
     params.require(:department).permit(:name)

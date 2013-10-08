@@ -11,15 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20131007114244) do
-=======
-ActiveRecord::Schema.define(version: 20131007105628) do
->>>>>>> 331996b43f249724d37c8ac598336102f293e6a8
-=======
-ActiveRecord::Schema.define(version: 20131006052256) do
->>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
+ActiveRecord::Schema.define(version: 20131007093951) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -58,50 +50,42 @@ ActiveRecord::Schema.define(version: 20131006052256) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+<<<<<<< HEAD
 
+  create_table "kra_role_attrs", force: true do |t|
 <<<<<<< HEAD
-<<<<<<< HEAD
-  create_table "kra_ratings", force: true do |t|
+=======
+||||||| merged common ancestors
+
+create_table "kra_role_attrs", force: true do |t|
+>>>>>>> 45ee95c9ce900b5ab53a9afd1deb5922c008bbda
+=======
+   
+ create_table "kra_role_attrs", force: true do |t|
+>>>>>>> 83349b0aeb0a4647491821868c73e45b5a0bdbd3
+    t.integer  "kra_attr_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+create_table "kra_ratings", force: true do |t|
     t.integer  "kra_sheet_id"
     t.integer  "kra_attr_id"
     t.float    "rating"
     t.text     "comment"
     t.boolean  "rated_by"
-=======
-||||||| merged common ancestors
-  create_table "kra_ratings", force: true do |t|
->>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "kra_sheets", force: true do |t|
-<<<<<<< HEAD
     t.integer  "appraisal_cycle_id"
     t.integer  "appraisee_id"
     t.integer  "appraiser_id"
-=======
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
->>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
-=======
-create_table "kra_role_attrs", force: true do |t|
-    t.integer  "kra_attr_id"
-    t.integer  "role_id"
-<<<<<<< HEAD
->>>>>>> 331996b43f249724d37c8ac598336102f293e6a8
-=======
->>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-<<<<<<< HEAD
-=======
->>>>>>> 331996b43f249724d37c8ac598336102f293e6a8
->>>>>>> 0a895c0d3011ce719b9218f174f0b18be21c398f
   create_table "role_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
