@@ -21,7 +21,7 @@
                     Cycle list
                 </label>
                 <div class="controls">
-                  <%= f.collection_select :appraisal_cycle_id, AppraisalCycle.all, :id, :start_date, :prompt => "Seleccione el municipio" %>
+                  <%= f.collection_select :appraisal_cycle_id, AppraisalCycle.all, :id, :start_date, :prompt => "Select appraisal cycle" %>
                   </select>
                 </div>
                 <label class="control-label" for="appraisee_id">
@@ -29,7 +29,7 @@
                 </label>
                 <div class="controls">
                  
-                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "Seleccione el municipio" %>
+                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee" %>
                   
                 </div>
                 <label class="control-label" for="appraiser_id">
@@ -37,7 +37,7 @@
                 </label>
                 <div class="controls">
 
-                  <%= f.collection_select :appraiser_id, User.all, :id, :email, :prompt => "Seleccione el municipio" %>
+                  <%= f.collection_select :appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>
