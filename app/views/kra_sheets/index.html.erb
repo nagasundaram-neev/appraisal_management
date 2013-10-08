@@ -1,0 +1,14 @@
+<body onload="cancel()">
+<%= link_to "Assign the KRA", new_kra_sheet_path, :remote => true, class: "btn btn-success" %>
+
+<div id="kra_sheet_form"><%= render :partial => 'form' %></div>
+<div id="kra_sheet_list"><%= render :partial => "kra_sheet" %></div>
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("kra_sheet_form").style.display='none';
+}
+
+</script>
+</body>

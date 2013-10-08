@@ -1,0 +1,3 @@
+$(":input:not(input[type=submit])").val("");
+$("#kra_attrs_list").html("<%= escape_javascript( render(:partial => "kra_sheet") ) %>");
+$("#kra_sheet_form").hide(100)
