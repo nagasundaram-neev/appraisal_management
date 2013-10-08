@@ -1,7 +1,7 @@
 AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
-  devise_for :users, :controllers => { registrations: 'users/registrations' } 
+  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions'} 
   resources :users, only: [] do
     resource :departments, only: [] do
       member do
@@ -23,12 +23,16 @@ AppraisalManagement::Application.routes.draw do
   resources :kra_sheets
   resources :kra_ratings
 
+  
+  root :to => 'home#index'
+  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'apprindex'
+  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
