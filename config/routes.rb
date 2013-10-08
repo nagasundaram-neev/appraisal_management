@@ -5,10 +5,14 @@ AppraisalManagement::Application.routes.draw do
   resources :kra_attrs
   resources :departments
   resources :roles
-  resources :appraisal_cycles
+  resources :appraisal_cycles do
+    collection do 
+      post 'overall_performance'
+    end
+  end
   resources :kra_sheets
   resources :kra_ratings
-
+  root "appraisal_cycles#overall_performance"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

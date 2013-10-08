@@ -1,0 +1,28 @@
+<body onload="cancel()">
+
+
+
+
+ <%= form_for(:appraisal_cycle,:method => :post, :url => { :action => :overall_performance  } , :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+
+<div class="controls">
+
+<%= f.collection_select :id, AppraisalCycle.all, :id, :start_date, :prompt => "Select Duration" %>
+  </select>
+  </div>
+<%= f.submit class: "btn btn-primary" %> 
+<% end %>
+   
+</form>
+<div id="appraisal_cycles_list"></div>
+
+
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("list_performace").style.display='none';
+}
+
+</script>
+</body>

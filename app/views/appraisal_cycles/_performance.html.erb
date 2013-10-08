@@ -1,0 +1,135 @@
+<% if @status.appraisee_status==false %>
+    <div class="alert alert-error">  
+  <a class="close" data-dismiss="alert">×</a>  
+  <strong>Warning!</strong>Your KRA sheet is not submitted  
+</div> 
+<% else %>
+  <div class="alert alert-success">  
+  <a class="close" data-dismiss="alert">×</a>  
+  <strong>Success!</strong>Your KRA sheet is completed the assessing  
+  </div>  
+<% end %>
+<div class="content container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <h2 class="page-title">Performance Rating recommended <small>by Supervisor / manager</small></h2>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+
+                            KRA Assessment 
+                        </h4>
+                    </header>
+                    <div class="body">
+
+                            Rating <code>x 0.7</code>
+                            <div class="badge btn btn-block btn-info">100</div>
+
+                    </div>
+                </section>
+            </div>
+         <div class="span4">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+
+                           Development Review 
+                        </h4>
+                    </header>
+                    <div class="body">
+
+                            Rating <code>x 0.3</code>
+                            <div class="badge btn btn-block btn-info">100</div>
+
+                    </div>
+                </section>
+            </div>
+<div class="span4">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+
+                           Overall Rating
+                            <div class="badge btn btn-block btn-info">200</div>
+                        </h4>
+                    </header>
+                    <div class="body">
+
+                            
+                    </div>
+                </section>
+            </div>
+
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+                           Appraisee's Overall Comments and sign-off
+                        </h4>
+                    </header>
+                    <div class="body">
+                        <blockquote>
+                           <textarea id="Manager" rows="5" name="text" placeholder="Commetnts" class="elastic-textarea autogrow input-block-level">                          </textarea>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+                            Manager's Overall Comments and sign-off
+                        </h4>
+                    </header>
+                    <div class="body">
+<blockquote>
+                           <textarea id="Manager" rows="5" name="text" placeholder="Commetnts" class="elastic-textarea autogrow input-block-level">                          </textarea>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+            <div class="span4 offset1">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+                            KRA Manager:
+                        </h4>
+                    </header>
+                    <div class="body">
+<blockquote>
+                           <textarea id="Manager" rows="5" name="text" placeholder="Commetnts" class="elastic-textarea autogrow input-block-level">                          </textarea>
+                           <button class="btn btn-success btn-block">Sign off</button>
+                        </blockquote>
+                    </div>
+                </section>
+                </div>
+<div class="span4">
+                <section class="widget tiny">
+                    <header>
+                        <h4>
+                            DR Manager:
+                        </h4>
+                    </header>
+                    <div class="body">
+<blockquote>
+                           <textarea id="Manager" rows="5" name="text" placeholder="Commetnts" class="elastic-textarea autogrow input-block-level">                          </textarea>
+                        <button class="btn btn-success btn-block">Sign off</button>
+                        </blockquote>
+
+                    
+
+                    </div>
+                </section>
+                </div>
+            
+        </div>
+    </div>
+</div>
