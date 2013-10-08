@@ -1,7 +1,7 @@
 AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
-  devise_for :users, :controllers => { registrations: 'users/registrations' } 
+  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions'} 
   resources :users, only: [] do
     resource :departments, only: [] do
       member do
@@ -22,6 +22,10 @@ AppraisalManagement::Application.routes.draw do
   resources :appraisal_cycles
   resources :kra_sheets
   resources :kra_ratings
+
+  
+  root :to => 'home#index'
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.
