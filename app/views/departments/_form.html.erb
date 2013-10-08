@@ -15,21 +15,8 @@
             <h4>Department <small>Add new department.</small></h4>
           </header>
           <div class="body">
-            <%= form_for(@dept, :id => "form", :class => "form-horizontal label-left", :novalidate => "novalidate", :data => {:validate => "parsley"}) do |f|  %>
-              <% if @dept %>
-                <% if @dept.errors.any? %>
-                  <div id="error_explanation">
-                    <h3><%= pluralize(@dept.errors.count, "error") %> prohibited this from being saved:</h3>
-
-                    <ul>
-                    <% @errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                    <% end %>
-                    </ul>
-                  </div>
-                <% end %>
-              <% end %>
-
+            <%= form_for(@department, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+              
               <fieldset>
                 <legend class="section">Info </legend>
                   <div class="control-group">
@@ -43,7 +30,7 @@
               </fieldset>
 
               <div class="form-actions">
-                <%= f.submit value='Create', :class => "btn btn-primary"%>
+                <%= f.submit :class => "btn btn-primary"%>
                 <button type="button" class="btn">Cancel</button>
               </div>
             <% end %>

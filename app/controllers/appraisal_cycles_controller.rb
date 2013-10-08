@@ -22,11 +22,10 @@ class AppraisalCyclesController < ApplicationController
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
-    #respond_to do |format|
+    
     if @appraisal_cycle.save
       flash[:notice] = "Successfully created."
-    else
-      raise "asd".inspect
+    
     end
   end
 

@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20131007105628) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-   
- create_table "kra_role_attrs", force: true do |t|
+
+create_table "kra_role_attrs", force: true do |t|
     t.integer  "kra_attr_id"
     t.integer  "role_id"
     t.datetime "created_at"

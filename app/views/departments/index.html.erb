@@ -1,1 +1,14 @@
-hai
+<body onload="cancel()">
+<%= link_to "Add Department", new_department_path, :remote => true, class: "btn btn-success" %>
+
+<div id="departments_form"><%= render :partial => 'form' %></div>
+<div id="departments_list"><%= render :partial => "departments" %></div>
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("departments_form").style.display='none';
+}
+
+</script>
+</body>

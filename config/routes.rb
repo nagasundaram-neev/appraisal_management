@@ -3,7 +3,7 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/help"
   devise_for :users
   resources :kra_attrs
-  resources :departments, only: [:create, :show, :index, :update]
+  resources :departments
   resources :roles
   resources :appraisal_cycles
   resources :kra_sheets

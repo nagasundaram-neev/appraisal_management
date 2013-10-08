@@ -1,0 +1,27 @@
+<div class="flash_notice"><div class="alert alert-success"> <%= notice %> </div></div>
+ <ul class="nav nav-pills nav-stacked">
+<li class="active">
+    <a href="#">
+      <span class="badge "><%= Role.count %></span>
+       Roles
+    </a>
+  </li>
+</ul>
+<% if Role.count > 0 %>
+<table class="table table-hover">
+  <tbody><tr> 
+    <th>Role</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @roles.each do |role| %>
+    <tr>
+      <td><%= role.name %></td>
+      <td><%= link_to "Edit", edit_role_path(role), :remote => true, class: "btn btn-warning" %></td>
+      <td><%= link_to "Destroy", role, :remote => true, :data => { :confirm => 'Are you sure?'} , :method => :delete, class: "btn btn-danger"  %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
