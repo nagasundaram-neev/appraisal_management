@@ -5,12 +5,10 @@ class AppraisalCyclesController < ApplicationController
 
   def load
     @appraisal_cycles = AppraisalCycle.all
-    @appraisals=AppraisalCycle.find(1)
   end
 
   def create_new_appraisal_cycle
     @appraisal_cycle = AppraisalCycle.new
-    @appraisals=AppraisalCycle.find(1)
   end
 
   def new
@@ -61,6 +59,10 @@ class AppraisalCyclesController < ApplicationController
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
       p @kra_sheets
     end
+  end
+
+  def performance_graph
+    @appraisal_cycle = AppraisalCycle.all
   end
 
   def performance_params
