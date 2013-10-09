@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
-	
-
+before_filter :authenticate_user!
+before_filter :require_admin
 before_filter :load, :only => [:new,:index, :create, :update]
 before_filter :create_new_role, :only => [:new,:index]
 
@@ -45,7 +45,12 @@ before_filter :create_new_role, :only => [:new,:index]
   end
 
   def update
-    @role = Role.find(params[:id])
+  	  @role = Role.find(params[:id])
+  	  params[:kra_attrs_id][:id].each do |id|
+          if id != "" then
+            @role.save_kr_role_attr(id)
+          end
+        end
     if @role.update_attributes(role_params)
       flash[:notice] = "Successfully updated."
       @roles = Role.all

@@ -1,0 +1,37 @@
+
+<% if user_signed_in? %>
+
+  
+  <h3>you have succesfully signed in</h3>
+  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %><br>
+  
+  
+  
+  <% if current_user.role == "admin" then %>
+   <%= link_to "Users", new_user_registration_path, :remote => true %><br>
+   <%= link_to "Departments", departments_path, :remote => true %><br>
+   <%= link_to "Attributes", kra_attrs_path, :remote => true %><br>
+   <%= link_to "Roles ", roles_path, :remote => true %><br>
+   <%= link_to "Users_role", new_role_user_path %><br>
+   <%= link_to "Department_role", new_dept_path %><br>
+   
+  <% end %>
+  <div id="body-content">
+  </div>
+  <div id="role_form"></div>
+  <div id="kra_attributes_form"></div>
+  <div id="departments_form"></div>
+  
+  
+  
+
+<% else %>
+
+  
+<h1>Rails Club</h1>
+Jan 1, 2012	sreehari k m
+<div class="CL"></div>
+
+
+
+<% end %>

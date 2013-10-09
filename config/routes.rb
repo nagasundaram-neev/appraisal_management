@@ -3,21 +3,7 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/help"
   match 'appraisal_cycles/overall_performance' => 'appraisal_cycles#overall_performance', as: :appraisal_cycles_overall_performance, via: [:get, :post]
   match 'kra_sheets/kra_status_update' => 'kra_sheets#kra_status_update', as: :kra_sheets_kra_status_update, via: [:get, :post]
-  devise_for :users, :controllers => { registrations: 'users/registrations' } 
-  resources :users, only: [] do
-    resource :departments, only: [] do
-      member do
-        get 'new_dept'
-        post 'add_dept'
-      end 
-    end
-    resource :roles, only: [] do
-      member do
-        get 'new_role'
-        post 'add_role'
-      end
-    end
-  end
+  devise_for :users, :controllers => { registrations: 'users/registrations', sessions: 'users/sessions'}
   resources :kra_attrs
   resources :departments
   resources :roles
@@ -32,8 +18,16 @@ AppraisalManagement::Application.routes.draw do
     end
   end
   resources :kra_ratings
+  get 'new_role_user', to: 'roles#new_role'
+  post 'add_role', to: 'roles#add_role'
+  get 'new_dept', to: 'departments#new_dept'
+  post 'add_dept', to: 'departments#add_dept'
+
   
-  root "appraisal_cycles#overall_performance"
+  root :to => 'home#index'
+  
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

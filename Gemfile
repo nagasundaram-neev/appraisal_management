@@ -6,6 +6,8 @@ gem 'rails', '4.0.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
+gem 'cancan'
+
 # Use rspec-rails for Testing
 gem  "rspec-rails", "~> 2.14.0"
 gem "shoulda-matchers", "~> 2.4.0"

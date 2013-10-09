@@ -32,8 +32,8 @@
                                 <label for="weightage" class="control-label">Weightage </label>
                                 <div class="controls controls-row">
                                     <div class="input-append span12">
-                                        <%= f.text_field :weightage,   :class => "span6",  :maxlength => "28", :placeholder => "Weightage b/w 1 and 100" %>
-                                        <span class="add-on pull-left">%</span>     
+                                        <%= f.range_field :weightage, :placeholder => "Weightage b/w 1 and 100", :min => "1",:max => "100" %>
+                                        <!--<span class="add-on pull-left">%</span>   -->  
                                     </div>
                                 </div>
                             </div>

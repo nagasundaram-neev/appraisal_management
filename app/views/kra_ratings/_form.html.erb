@@ -103,29 +103,29 @@
                  <td style="text-align:justify;font-size:80%">
                  <small><%= kra_attr.measures %></small>
                   </td>
-                <%= form_for(@kra_rating, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+                <%= form_for(@kra_rating, :remote => true) do |f|  %>
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
                     <%= f.hidden_field :rated_by, :value => 0 %>
                     <td>
-                    <section class="widget" style="width:10">
+                    <section class="widget">
                     <span id='<%= "self-rating_#{kra_attr.id}" %>'>
                     </span>
-                   <%= f.text_field :rating,:style => "width: 30px", :id => "self-result_#{kra_attr.id}",  :value => 0 %>
+                   <%= f.text_field :rating,:style => "width: 20px", :id => "self-result_#{kra_attr.id}",  :value => 0 %>
                    <%= f.text_area :comment, :rows => "3" %>
                   <%= f.submit "Save", class: "btn btn-primary" %>
                   </td> 
               <%end%>
                   
-              <%= form_for(@kra_rating, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+              <%= form_for(@kra_rating, :remote => true ) do |f|  %>
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_manager(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
                      <%= f.hidden_field :rated_by, :value => 1 %>
                               <td>
-                                <section class="widget" style="width:100">
+                                <section class="widget">
                                   <span id='<%= "manager-rating_#{kra_attr.id}" %>'>
                                   </span>
-                                  <%= f.text_field :rating,:style => "width: 30px", :id => "manager-result_#{kra_attr.id}",  :value => 0 %>
+                                  <%= f.text_field :rating,:style => "width: 20px", :id => "manager-result_#{kra_attr.id}",  :value => 0 %>
                                 </div>
                                <%= f.text_area :comment, :rows => "3", :class => "input-block-level" %>
                         <%= f.submit "Save", class: "btn btn-primary" %>

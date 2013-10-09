@@ -18,6 +18,43 @@
   <%= link_to 'Edit profile', edit_user_registration_path,:remote => true, :class => 'navbar-link' %> |
   <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 <% end %>
+
+<nav id="sidebar" class="sidebar nav-collapse collapse">
+    <ul id="side-nav" class="side-nav">
+        
+        <li class="accordion-group">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#forms-collapse"> <span class="name"><%= link_to "Roles ", roles_path, :remote => true %><br></li></span></a>
+            
+        </li>
+        <li class="accordion-group">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"> <span class="name">Users</span></a>
+            <ul id="stats-collapse" class="accordion-body collapse">
+                <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
+                <li><%= link_to "Specify User's role", new_role_user_path %><br></li>                
+            </ul>
+        </li>
+        <li class="accordion-group">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"> <span class="name">Departments</span></a>
+            <ul id="stats-collapse" class="accordion-body collapse">
+                <li><%= link_to "Add New Department", departments_path, :remote => true %></li>
+                <li><%= link_to "Specify Department's roles", new_dept_path %><br></li>                
+            </ul>
+        </li>
+        <li class="accordion-group">
+            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
+            <ul id="stats-collapse" class="accordion-body collapse">
+                <li><a href="stat_statistics.html">Stats</a></li>
+                <li><a href="stat_charts.html">Charts</a></li>
+                <li><a href="stat_realtime.html">Realtime</a></li>
+            </ul>
+        </li>
+        
+        <li class="visible-phone">
+            <a href="login.html"><i class="icon-signout"></i> <span class="name">Sign Out</span></a>
+        </li>
+    </ul>
+    
+</nav>  
   
 <%= yield %>
 <div id="edit_form">

@@ -18,6 +18,7 @@ class KraSheetsController < ApplicationController
     @kra_sheet = KraSheet.new(kra_sheet_params)
     respond_to do |format|
       if @kra_sheet.save
+        @kra_sheet.alert_user(@kra_sheet.appraisee_id)
         flash[:notice] = "Successfully created the KRA Attributes."
         @kra_sheets=KraSheet.all
         format.html
