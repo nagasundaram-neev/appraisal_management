@@ -58,6 +58,15 @@ before_filter :create_new_role, :only => [:new,:index]
     flash[:notice] = "Successfully destroyed."
     @roles = role.all
   end
+  
+  def add_role
+    @role = Role.new
+    @role.save_role_user(params[:user_id],params[:role_id][:id],params[:aprsl_cycl_id][:id])
+  end
+  def new_role
+  @role = Role.new
+  end
+
 
   def role_params
     params.require(:role).permit(:name, :kra_attrs_id)

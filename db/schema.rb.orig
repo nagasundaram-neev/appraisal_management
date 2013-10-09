@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006052256) do
+ActiveRecord::Schema.define(version: 20131007093951) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20131006052256) do
     t.datetime "updated_at"
   end
 
+
+  
   create_table "kra_attrs", force: true do |t|
     t.string   "name"
     t.float    "weightage"
@@ -50,29 +52,29 @@ ActiveRecord::Schema.define(version: 20131006052256) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 <<<<<<< HEAD
-||||||| merged common ancestors
-  create_table "kra_ratings", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
-  create_table "kra_sheets", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
+  create_table "kra_role_attrs", force: true do |t|
 =======
-create_table "kra_role_attrs", force: true do |t|
+   
+ create_table "kra_role_attrs", force: true do |t|
+>>>>>>> 83349b0aeb0a4647491821868c73e45b5a0bdbd3
     t.integer  "kra_attr_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+create_table "kra_ratings", force: true do |t|
+    t.integer  "kra_sheet_id"
+    t.integer  "kra_attr_id"
+    t.float    "rating"
+    t.text     "comment"
+    t.boolean  "rated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
->>>>>>> 331996b43f249724d37c8ac598336102f293e6a8
-  create_table "role_users", force: true do |t|
+	create_table "role_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.integer  "appraisal_cycles_id"

@@ -1,0 +1,13 @@
+class KraAttr < ActiveRecord::Base
+
+  validates :name, presence: true
+  validates :weightage, presence: true, :inclusion => 1..99
+  validates :desc, presence:true
+<<<<<<< HEAD
+  has_many :kra_role_attrs, dependent: :destroy
+||||||| merged common ancestors
+=======
+
+  
+>>>>>>> 83349b0aeb0a4647491821868c73e45b5a0bdbd3
+end

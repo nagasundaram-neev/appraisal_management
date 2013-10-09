@@ -55,10 +55,12 @@ class AppraisalCyclesController < ApplicationController
 
   def overall_performance
     #p params[:appraisal_cycle][:id] unless params[:appraisal_cycle].nil?
-    @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
-    #p @appraisals.start_date unless @appraisals.nil?
-    @status=KraSheet.find_by_appraisal_cycle_id(@appraisals.id) unless @appraisals.nil?
-    #p @status.appraisee_status unless @appraisals.nil?
+    unless params[:appraisal_cycle].nil?
+      @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
+      #p @appraisals.start_date unless @appraisals.nil?
+      @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
+      p @kra_sheets
+    end
   end
 
   def performance_params

@@ -12,5 +12,10 @@ class Role < ActiveRecord::Base
     @kra_role_attr = self.kra_role_attrs.build(:kra_attr_id => id)
     @kra_role_attr.save
   end
-
+  
+  def save_role_user(user_id,role_id,aprsl_cycle_id)
+  @user  = User.find(user_id)
+  @role_user = @user.role_users.build(:role_id => role_id, :appraisal_cycles_id => aprsl_cycle_id)
+  @role_user.save
+  end
 end
