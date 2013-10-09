@@ -1,4 +1,5 @@
 
+<script type="text/javascript">$.validate(); </script> 
 <div class="wrap">
 
 <div class="content container-fluid">
@@ -14,17 +15,17 @@
                     <h4><i class="icon-user"></i> Attribute Description <small>Add new attribute</small></h4>
                 </header>
                 <div class="body">
-                     <%= form_for(@kra_attr, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+                     <%= form_for(@kra_attr, :remote => true,  :validate => true,  :class => "form-horizontal label-left") do |f|  %>
+                       
                         
-                    
                         <fieldset>
-                            <legend class="section">Info </legend>
+                            <legend class="section">Kra Attribute Details</legend>
                                   
                             <div class="control-group">
                                 <label for="name" class="control-label">Title </label>
                                 <div class="controls controls-row">
                                     <div class="input-append span12">
-                                        <%= f.text_field :name, :class => "span6",  :type => "text",  :maxlength => "28" %>
+                                        <%= f.text_field :name, :class => "span6",   :type => 'text', 'data-validation' => "required" %>
                                     </div>
                                 </div>
                             </div>
@@ -32,8 +33,10 @@
                                 <label for="weightage" class="control-label">Weightage </label>
                                 <div class="controls controls-row">
                                     <div class="input-append span12">
-                                        <%= f.range_field :weightage, :placeholder => "Weightage b/w 1 and 100", :min => "1",:max => "100" %>
-                                        <!--<span class="add-on pull-left">%</span>   -->  
+                            <%= f.text_field :weightage, :style => "width: 20px", :class => "btn btn-info", :id => 'range_val', 'data-validation' => "custom", 'data-validation-regexp' => "^(\d?[1-9]|[1-9]*\.[0-9]+|[0-9])$", :onkeyup => "document.getElementById('range_bar').value=this.value;"  %>
+                                    <span class="add-on">%</span>
+                                        <input type=range id='range_bar' min = "1" max = "99" class = "add-on " onchange = "document.getElementById('range_val').value=this.value;">
+                                                  
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +44,7 @@
                             <div class="control-group">
                                 <label for="description" class="control-label">Description </label>
                                 <div class="controls">
-                                    <%= f.text_area :desc,  :rows => "3",  :placeholder => "Write the description", :class => "input-block-level" %>
+                                    <%= f.text_area :desc,  :rows => "3",  :placeholder => "Write the description", :class => "input-block-level", :data => {:validation => "required"} %>
                                 </div>
                             </div>
 
