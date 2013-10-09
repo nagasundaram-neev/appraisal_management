@@ -1,4 +1,2 @@
-$("#new-role").html("<%= escape_javascript(render(:partial => "form"))%>");
-
-
-
+$("#body-conten").show(100)
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");

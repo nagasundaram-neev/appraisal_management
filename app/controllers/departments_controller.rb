@@ -20,22 +20,11 @@ class DepartmentsController < ApplicationController
   def index
   end
 
-
-
-  
-
   def create
     @department = Department.new(department_params)
-    #respond_to do |format|
       if @department.save
         @departments = Department.all
-        #format.html
-        
-      #else
-        #format.html
       end
-    
-    #end
   end
 
 def edit 
