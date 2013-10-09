@@ -13,9 +13,7 @@
           </header>
           <div class="body">
             
-            <form accept-charset="UTF-8" action= "add_role" class="new_role" data-validate="parsley" id="new_role" method="post">
-            <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="2p7xGQNi7nbdpg7BCgaRp4pgXExKIDaENPk6NxQZp+8="></div>
-              
+            <%= form_tag("/add_role", method: "post", :id => "new_role", :class => "new_role", :remote => true) do %>
               <fieldset>
                 <legend class="section">User </legend>
                   <div class="control-group">
@@ -49,11 +47,11 @@
               </fieldset>
 
               <div class="form-actions">
-                
-		<input type="submit" value="add" class="btn btn-primary">
+                <input type="submit" value="add" class="btn btn-primary">
                 <button type="button" class="btn">Cancel</button>
               </div>
-            </form>
+
+            <% end %>
           </div>
         </section>
       </div>
