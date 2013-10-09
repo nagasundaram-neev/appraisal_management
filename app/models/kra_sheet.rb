@@ -8,17 +8,15 @@ class KraSheet < ActiveRecord::Base
 
   def find_appraisee_name
   	@user=User.find(self.appraisee_id)
-  	@user.email
+  	@user.first_name
   end
 
   def find_appraiser_name
   	@user=User.find(self.appraiser_id)
-  	@user.email
+  	@user.first_name
   end
 
   def find_cycle
-    p "//////////////////////"
-    p self
   	@appraisal_cycle=AppraisalCycle.find(self.appraisal_cycle_id)
   	@appraisal_cycle.start_date.to_s+" to " + @appraisal_cycle.end_date.to_s
   end

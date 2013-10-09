@@ -40,6 +40,8 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
+    css3-progress-bar-rails (0.5.0)
+      rails (>= 3.1)
     database_cleaner (1.1.1)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
@@ -162,6 +164,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.2.2)
   cancan
   coffee-rails (~> 4.0.0)
+  css3-progress-bar-rails (~> 0.5.0)
   database_cleaner
   devise (~> 3.1.1)
   factory_girl_rails (~> 4.2.1)
