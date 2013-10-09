@@ -1,9 +1,15 @@
 
+<<<<<<< HEAD
 <script type="text/javascript">
   $(document).ready(function(){
     $('[data-behaviour~=datepicker]').datepicker();
   })
 </script>
+||||||| merged common ancestors
+<%= @appraisal_cycle.errors.inspect %>
+=======
+
+>>>>>>> 9c62481c6bb8da3d9dcbdcdbf862f032b8838d5d
 <div class="wrap">
 <div class="content container-fluid">
     <div class="row-fluid">

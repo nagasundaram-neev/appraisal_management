@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 <script type="text/javascript">$.validate(); </script> 
 <div >
 <div class="wrap">
   <div class="content container-fluid">
     <div class="row-fluid">
+||||||| merged common ancestors
+
+<div >
+
+<div class="wrap">
+  <div class="content container-fluid">
+    <div class="row-fluid">
+=======
+<div class="row-fluid">
+>>>>>>> 9c62481c6bb8da3d9dcbdcdbf862f032b8838d5d
       <div class="span12">
         <h2 class="page-title">Create Department </h2>
       </div>
@@ -37,6 +48,3 @@
         </section>
       </div>
     </div>
-  </div>
-</div>
-</div>

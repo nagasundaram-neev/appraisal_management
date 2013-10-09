@@ -1,18 +1,16 @@
+<<<<<<< HEAD
 
 <script type="text/javascript">$.validate(); </script> 
 <div class="wrap">
-   <style type="text/css">
-   input.valid {
-    background: url("/assets/valid.png") no-repeat scroll right center #E3FFE5;
-    border-color: #96B796 !important;
-    color: #002F00;
-}
-input.error {
-    background: url("/assets/error.png") no-repeat scroll right center #FFEBEF;
-    color: #480000;
-}
-   </style> 
+
 <div class="content container-fluid">
+||||||| merged common ancestors
+
+<div class="wrap">
+
+<div class="content container-fluid">
+=======
+>>>>>>> 9c62481c6bb8da3d9dcbdcdbf862f032b8838d5d
     <div class="row-fluid">
         <div class="span12">
             <h2 class="page-title">Create Attribute </h2>
@@ -28,7 +26,6 @@ input.error {
                      <%= form_for(@kra_attr, :remote => true,  :validate => true,  :class => "form-horizontal label-left") do |f|  %>
                        
                         
-                    
                         <fieldset>
                             <legend class="section">Kra Attribute Details</legend>
                                   
@@ -80,6 +77,3 @@ input.error {
         </div>
      
     </div>
-</div>
-</div>
-

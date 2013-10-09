@@ -1,33 +1,6 @@
-<html>
-  <head>
-    <title>
-      Light Blue - Admin Template
-  </title>
-  
-  <link href="css/application.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  
-  <script type="text/javascript" src="assets/javascripts/jquery.raty.min.js">
-  </script>
-  <style type="text/css">
-    .size-demo span {
-      width:10px;
-      height: 10px;
-    }
-  </style>
-  </head>
-  <body class="background-dark">
-    <div class="logo">
-      <h4>
-      </h4>
+<script type="text/javascript">$.validate(); </script> 
     </div>
-    
-    <div class="wrap">
+ <div class="wrap">
       <header class="page-header">
         <div class="navbar">
           
@@ -71,13 +44,16 @@
                   <th>
                     MEASURES
                   </th>
-                  
+                  <% if current_user.role == "appraisee" %>
                   <th class="hidden-phone">
                     SELF RATING &amp; COMMENTS
                   </th>
+                  <% end %>
+                  <% if current_user.role == "appraiser" %>
                   <th class="hidden-phone">
                     MANAGER'S RATING
                   </th>
+                  <% end %>
                   <th>
                   </th>
                 </tr>
@@ -103,6 +79,7 @@
                  <td style="text-align:justify;font-size:80%">
                  <small><%= kra_attr.measures %></small>
                   </td>
+                <% if current_user.role == "appraisee" %>
                 <%= form_for(@kra_rating, :remote => true) do |f|  %>
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
@@ -111,12 +88,43 @@
                     <section class="widget">
                     <span id='<%= "self-rating_#{kra_attr.id}" %>'>
                     </span>
-                   <%= f.text_field :rating,:style => "width: 20px", :id => "self-result_#{kra_attr.id}",  :value => 0 %>
-                   <%= f.text_area :comment, :rows => "3" %>
-                  <%= f.submit "Save", class: "btn btn-primary" %>
+                   <%= f.text_field :rating,:style => "width: 20px", :id => "self-result_#{kra_attr.id}",  :value => 0, :class => "btn btn-success search-query"%>
+                    <div class="body">
+                        <button data-backdrop="false" data-target="#selfModal" data-toggle="modal" class="btn" type="button" id="self_cmt_btn">
+                          Comments <i class="icon-comments">
+                          </i>
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal hide fade" id="selfModal" style="display: none;" aria-hidden="true">
+                          <div class="modal-header">
+                            <button data-dismiss="modal" class="close" type="button">
+                              ×
+                            </button>
+                            <h4 id="myModalLabel">
+                              Self Comments
+                            </h4>
+                          </div>
+                          
+                          <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows => "5"  %>
+                          
+                          
+                          <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-primary">
+                              Save comment
+                            </button>
+                            
+                          </div>
+                        </div></section>
+                    </div>
+   <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#self-rating_#{kra_attr.id}').hide(); $('#self_cmt_btn').hide() " %>
+                    
+
+                </td>
+                  </section>
                   </td> 
               <%end%>
+              <%end%>
                   
+               <% if current_user.role == "appraiser" %>    
               <%= form_for(@kra_rating, :remote => true ) do |f|  %>
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_manager(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
@@ -125,14 +133,39 @@
                                 <section class="widget">
                                   <span id='<%= "manager-rating_#{kra_attr.id}" %>'>
                                   </span>
-                                  <%= f.text_field :rating,:style => "width: 20px", :id => "manager-result_#{kra_attr.id}",  :value => 0 %>
-                                </div>
-                               <%= f.text_area :comment, :rows => "3", :class => "input-block-level" %>
-                        <%= f.submit "Save", class: "btn btn-primary" %>
-              </td> 
-                             <%end%>
-                          </section>
-              </tr>
+                                  <%= f.text_field :rating,:style => "width: 20px", :id => "manager-result_#{kra_attr.id}",  :value => 0, :class => "btn btn-success search-query" %>
+                                
+                        <div class="body">
+                        <button data-backdrop="false" data-target="#manModal" data-toggle="modal" class="btn" type="button" id="man_cmt_btn" >
+                          Comments<i class="icon-comments">
+                          </i>
+                        </button>
+                        <div role="dialog" tabindex="-1" class="modal hide fade" id="manModal" style="display: none;" aria-hidden="true">
+                          <div class="modal-header">
+                            <button data-dismiss="modal" class="close" type="button">
+                              ×
+                            </button>
+                            <h4 id="myModalLabel">
+                              Manager Comments
+                            </h4>
+                          </div>
+                          
+                          <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows => "5"  %>
+                          
+                          
+                          <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-primary">
+                              Save comment
+                            </button>
+                            
+                          </div>
+                        </div></section>
+                    </div>
+                       <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#manager-rating_#{kra_attr.id}').hide(); $('#man_cmt_btn').hide() " %>
+                   </section>
+                        </td> 
+                    <%end%><%end%>
+                   </tr>
                   
                   
                   
@@ -149,8 +182,8 @@
               starHalf : 'star-half-big.png',
               starOff  : 'star-off-big.png',
               starOn   : 'star-on-big.png',
-              //target    : "#self-result #{kra_attr.id}",
-              //targetType: 'score',
+              target    : '<%= "#self-result_#{kra_attr.id}" %>',
+              targetType: 'score',
               targetKeep: true,
               number: 10,
               mouseover: function(score, evt) {
@@ -175,8 +208,8 @@
               starHalf : 'star-half-big.png',
               starOff  : 'star-off-big.png',
               starOn   : 'star-on-big.png',
-              //target    : '#manager-result',
-              //targetType: 'score',
+              target    : '<%= "#manager-result_#{kra_attr.id}" %>',
+              targetType: 'score',
               targetKeep: true,
               number: 10,
               mouseover: function(score, evt) {
@@ -192,7 +225,7 @@
               </tbody>
               
           </table>
-          <div class="clearfix">
+          <!--<div class="clearfix">
             <div class="pull-right">
               <button class="btn btn-small">
                 Send to ...
@@ -230,11 +263,8 @@
               </div>
             </div>
             
-      </div>
+      </div> -->
   </section>
   </div>
   </div>
  
-
-</body>
-</html>
