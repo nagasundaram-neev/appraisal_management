@@ -6,8 +6,6 @@ class Department < ActiveRecord::Base
   has_many :department_users
   
   def save_dept_user(user_id,dept_id)
-  @user  = User.find(user_id)
-  @dept_user = @user.department_users.build(:department_id => dept_id)
-  @dept_user.save
+  User.find(user_id).department_users.build(:department_id => dept_id).save 
   end
 end

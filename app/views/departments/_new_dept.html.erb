@@ -12,9 +12,7 @@
             <h4>Department <small>Department of User. </small></h4>
           </header>
           <div class="body">
-            
-            <form accept-charset="UTF-8" action= "add_dept" class="new_dept" data-validate="parsley" id="new_dept" method="post">
-            <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="2p7xGQNi7nbdpg7BCgaRp4pgXExKIDaENPk6NxQZp+8=">
+            <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>
             </div>
             <fieldset>
                 <legend class="section">User </legend>
@@ -39,8 +37,8 @@
               <div class="form-actions">
               <input type="submit" value="Add" class="btn btn-primary">
                 <button type="button" class="btn">Cancel</button>
-              </div>
-            </form>
+              <% end %>
+            
           </div>
         </section>
       </div>
