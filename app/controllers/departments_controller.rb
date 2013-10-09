@@ -47,7 +47,7 @@ end
     #format.html
   end
   def add_dept
-    User.find(params[:user_id]).department_users.build(:department_id => params[:dept_id][:id]).save
+    User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id]).save
   end
   def new_dept
   @dept = Department.new

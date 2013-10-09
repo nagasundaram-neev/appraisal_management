@@ -35,11 +35,10 @@
                   </div>
               </fieldset>
               <div class="form-actions">
-              <input type="submit" value="Add" class="btn btn-primary">
-                <button type="button" class="btn">Cancel</button>
-              <% end %>
-            
+                <input type="submit" value="Add" class="btn btn-primary">
+                <button type="button" class="btn">Cancel</button>  
           </div>
+          <% end %>
         </section>
       </div>
     </div>

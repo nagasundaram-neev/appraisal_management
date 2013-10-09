@@ -1,5 +1,4 @@
-
-  <div class="content container-fluid">
+<div class="content container-fluid">
     <div class="row-fluid">
       <div class="span12">
         <h2 class="page-title">Specify User's Department </h2>
@@ -12,9 +11,8 @@
             <h4>Department <small>Department of User. </small></h4>
           </header>
           <div class="body">
-            <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>
-            </div>
-            <fieldset>
+            <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>            
+              <fieldset>
                 <legend class="section">User </legend>
                   <div class="control-group">
                     <label for="name" class="control-label">Select User <span class="required">*</label>
@@ -35,11 +33,11 @@
                   </div>
               </fieldset>
               <div class="form-actions">
-              <input type="submit" value="Add" class="btn btn-primary">
-                <button type="button" class="btn">Cancel</button>
-              <% end %>
-            
-          </div>
+                <input type="submit" value="Add" class="btn btn-primary">
+                <button type="button" class="btn">Cancel</button>  
+              </div>
+          <% end %>
+        </div>
         </section>
       </div>
     </div>
