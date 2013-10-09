@@ -1,3 +1,4 @@
+<div id='sheets_form'>
 <div class="wrap">
   <div class="content container-fluid">
     <div class="row-fluid">
@@ -9,7 +10,7 @@
       <div class="span7">
         <section class="widget">
           <header>
-            <h4> KRA <small>Generate the KRA for Employee</small></h4>
+            <h4> KRA <small>Generate the KRA for Employee</small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#sheets_form').hide()">x</button></h4>
             </header>
         <div class="body">              
           <%= form_for(@kra_sheet, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
@@ -45,7 +46,8 @@
 
                                                         
       <div class="form-actions">
-        <%= f.submit class: "btn btn-primary" %>                          
+        <%= f.submit class: "btn btn-primary" %>   
+        <button type="button" class="btn  btn-xs " onclick="$('#sheets_form').hide()">Close</button>                       
       </div>
     <% end %>
   </div>
@@ -53,7 +55,8 @@
 </div>
         </div>
     </div>
-</div
+</div>
 </div>
 </div>
 
+</div>

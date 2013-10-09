@@ -1,5 +1,5 @@
 <script type="text/javascript">$.validate(); </script> 
-<div >
+<div id='dept_form'>
 <div class="wrap">
   <div class="content container-fluid">
     <div class="row-fluid">
@@ -11,7 +11,8 @@
       <div class="span7">
         <section class="widget">
           <header>
-            <h4>Department <small>Add new department.</small></h4>
+            <h4>Department <small>Add new department.</small>
+              <button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#dept_form').hide()">x</button></h4>
           </header>
           <div class="body">
             <%= form_for(@department, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
@@ -30,7 +31,7 @@
 
               <div class="form-actions">
                 <%= f.submit :class => "btn btn-primary"%>
-                <button type="button" class="btn">Cancel</button>
+                <button type="button" class="btn btn-xs" onclick="$('#dept_form').hide()">Close</button>
               </div>
             <% end %>
           </div>

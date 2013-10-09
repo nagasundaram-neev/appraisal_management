@@ -1,5 +1,4 @@
 
-<div >
 
 <div class="wrap">
   <div class="content container-fluid">
@@ -8,11 +7,12 @@
         <h2 class="page-title">Create Department </h2>
       </div>
     </div>
+    <div id="dept_form">
     <div class="row-fluid">
       <div class="span7">
         <section class="widget">
           <header>
-            <h4>Department <small>Add new department.</small></h4>
+            <h4>Department <small>Add new department.</small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#dept_form').hide()">x</button>    </h4>
           </header>
           <div class="body">
             
@@ -35,9 +35,7 @@
                     <label for="name" class="control-label">Select Department <span class="required">*</label>
                       <div class="controls controls-row">
                         <%= collection_select(:dept_id, :id, Department.all, :id, :name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
-
-                                            
-                                        </select>
+                           </select>
                       </div>
                   </div>
               </fieldset>
