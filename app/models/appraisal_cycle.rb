@@ -2,6 +2,10 @@ class AppraisalCycle < ActiveRecord::Base
   validates :start_date, :end_date, :presence => true
   validate :end_after_start
 
+  def self.find_rating
+  	@ratings=KraRatings.where(:kra_sheet_id => self.id)
+  end
+
  private
 
 	def end_after_start

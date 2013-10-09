@@ -1,4 +1,6 @@
 class DepartmentsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :require_admin
 
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_department, :only => [:new,:index]
@@ -18,22 +20,11 @@ class DepartmentsController < ApplicationController
   def index
   end
 
-
-
-  
-
   def create
     @department = Department.new(department_params)
-    #respond_to do |format|
       if @department.save
         @departments = Department.all
-        #format.html
-        
-      #else
-        #format.html
       end
-    
-    #end
   end
 
 def edit 

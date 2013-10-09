@@ -5,10 +5,12 @@ class AppraisalCyclesController < ApplicationController
 
   def load
     @appraisal_cycles = AppraisalCycle.all
+    @appraisals=AppraisalCycle.find(1)
   end
 
   def create_new_appraisal_cycle
     @appraisal_cycle = AppraisalCycle.new
+    @appraisals=AppraisalCycle.find(1)
   end
 
   def new
@@ -51,7 +53,22 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycles = AppraisalCycle.all
   end
 
+  def overall_performance
+    #p params[:appraisal_cycle][:id] unless params[:appraisal_cycle].nil?
+    unless params[:appraisal_cycle].nil?
+      @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
+      #p @appraisals.start_date unless @appraisals.nil?
+      @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
+      p @kra_sheets
+    end
+  end
+
+  def performance_params
+    params.require(:appraisal_cycle).permit(:appraisal_cycle_id)
+  end
+
   def appraisal_cycle_params
     params.require(:appraisal_cycle).permit(:start_date,:end_date)
   end
+
 end
