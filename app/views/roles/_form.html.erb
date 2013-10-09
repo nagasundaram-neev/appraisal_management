@@ -1,4 +1,4 @@
-
+<script type="text/javascript">$.validate(); </script> 
 <div class="wrap">
     <div class="content container-fluid">
         <div class="row-fluid">
@@ -24,7 +24,7 @@
                                     <div class="controls controls-row">
                                         <div class="input-append span12">
                                             
-                                            <%= f.text_field :name, :class => "span6",  :id =>"dept", :type => "text", :required => "required", :maxlength => "28" %>                                       
+                                            <%= f.text_field :name, :class => "span6",  :id =>"dept", :type => "text", 'data-validation' => "required", :maxlength => "28" %>                                       
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                 <legend>KRA Attributes</legend>
                                 <div class="control-group">
                                     <label class="control-label" for="kra-attributes">
-                                        Attributes
+                                        Attributes (You can select Multiple Values)
                                     </label>
                                     <div class="controls">
                                       
