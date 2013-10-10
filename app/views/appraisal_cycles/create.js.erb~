@@ -1,3 +1,4 @@
 $(":input:not(input[type=submit])").val("");
+$("#body-content").html("")
 $("#body-content").html("<%= escape_javascript( render(:partial => "appraisal_cycles") ) %>");
-$("#appraisal_cycle_form").hide(100)
+

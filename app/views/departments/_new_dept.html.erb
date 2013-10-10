@@ -17,7 +17,7 @@
                   <div class="control-group">
                     <label for="name" class="control-label">Select User <span class="required">*</label>
                       <div class="controls controls-row">
-                        <%= collection_select(:user_id, :id, User.all, :id, :first_name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
+                        <%= collection_select(:user_id, :id, User.all, :id, :first_name, :prompt => "select user") %>
                         </select>
                       </div>
                   </div>
@@ -27,7 +27,7 @@
                   <div class="control-group">
                     <label for="name" class="control-label">Select Department <span class="required">*</label>
                       <div class="controls controls-row">
-                        <%= collection_select(:dept_id, :id, Department.all, :id, :name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
+                        <%= collection_select(:dept_id, :id, Department.all, :id, :name, :prompt => "select department") %>
                         </select>
                       </div>
                   </div>
