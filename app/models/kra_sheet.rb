@@ -26,4 +26,5 @@ class KraSheet < ActiveRecord::Base
     #UserMailer.new_aprsl_email(user).deliver
   end
   
+  
 end

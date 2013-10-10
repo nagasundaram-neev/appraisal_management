@@ -24,11 +24,11 @@ input.error {
 </style> 
 </head>
 <body class="background-dark">
-  <% if user_signed_in?%>
-    <%= render :partial => "sidebar" %>
-  
-    
+   
+    <% if user_signed_in?%>
+      <%= render :partial => "sidebar" %>
     <div class="wrap">
+      
       <header class="page-header">
           <div class="navbar">
               <div class="navbar-inner">
@@ -74,6 +74,7 @@ input.error {
               </div>
           </div>
       </header>
+
       <div class="content container-fluid" >
           <div class="row-fluid">
               <div class="span12">
@@ -119,6 +120,8 @@ input.error {
                       </div>
                   </section>                
             </div>
+            <div class='span4'>
+    <%= render :partial => "feeds" %></div>
             
       </div>
     </div>

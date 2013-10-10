@@ -27,15 +27,11 @@ before_filter :create_new_role, :only => [:new,:index]
     @role = Role.new(role_params)
     respond_to do |format|
       if @role.save
-        params[:kra_attrs_id][:id].each do |id|
-          if id != "" then
-            @role.save_kr_role_attr(id)
-          end
-        end
+        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
         format.html
         format.js
       else
-        format.html
+        format.html {}
       end
     end
   end
