@@ -81,6 +81,7 @@
                   </td>
                 <% if current_user.role == "appraisee" %>
                 <%= form_for(@kra_rating, :remote => true) do |f|  %>
+                
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
                     <%= f.hidden_field :rated_by, :value => 0 %>
@@ -129,7 +130,7 @@
                     <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_manager(current_user.id)}" %>
                     <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
                      <%= f.hidden_field :rated_by, :value => 1 %>
-                              <td>
+                              <td>  
                                 <section class="widget">
                                   <span id='<%= "manager-rating_#{kra_attr.id}" %>'>
                                   </span>

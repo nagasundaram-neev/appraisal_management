@@ -8,11 +8,11 @@ before_filter :load, :only => [:new,:index]
     @kra_rating = KraRating.new
   end
   def new
-    
+    @kra_rating = KraRating.new
   end
 
   def index
-    
+    @kra_ratings = KraRating.all
   end
 def create
     @kra_rating = KraRating.new(kra_rating_params)
