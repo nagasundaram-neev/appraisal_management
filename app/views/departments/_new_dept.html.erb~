@@ -1,4 +1,3 @@
-<div id='user_dept_form'>
 <div class="content container-fluid">
     <div class="row-fluid">
       <div class="span12">
@@ -9,7 +8,7 @@
       <div class="span7">
         <section class="widget">
           <header>
-            <h4>Department <small>Department of User. </small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#user_dept_form').hide()">x</button></h4>
+            <h4>Department <small>Department of User. </small></h4>
           </header>
           <div class="body">
             <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>            
@@ -35,7 +34,7 @@
               </fieldset>
               <div class="form-actions">
                 <input type="submit" value="Add" class="btn btn-primary">
-               <button type="button" class="btn btn-xs" onclick="$('#user_dept_form').hide()">Close</button>
+                <button type="button" class="btn">Cancel</button>  
               </div>
           <% end %>
         </div>
@@ -43,4 +42,4 @@
       </div>
     </div>
   </div>
-</div>
+

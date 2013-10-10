@@ -1,2 +1,2 @@
-$("#roles_form").show(100)
 $("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+$("#departments_form").show(100)
