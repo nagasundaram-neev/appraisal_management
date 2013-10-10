@@ -1,4 +1,11 @@
+<script type="text/javascript">$.validate();
+function cancel()
+{
+document.getElementById("roles_form").style.display='none';
+} 
+</script> 
 
+<div id="roles_form">
 <div class="wrap">
     <div class="content container-fluid">
         <div class="row-fluid">
@@ -20,11 +27,11 @@
                                 <legend class="section">Info </legend>
 
                                 <div class="control-group">
-                                    <label for="name" class="control-label">Name <span class="required">*</label>
+                                 <label for="name" class="control-label">Name <span class="required">*</label>
                                     <div class="controls controls-row">
                                         <div class="input-append span12">
                                             
-                                            <%= f.text_field :name, :class => "span6",  :id =>"dept", :type => "text", :required => "required", :maxlength => "28" %>                                       
+                                            <%= f.text_field :name, :class => "span6",  :id =>"dept", :type => "text", 'data-validation' => "required", :maxlength => "28" %>                                       
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +40,7 @@
                                 <legend>KRA Attributes</legend>
                                 <div class="control-group">
                                     <label class="control-label" for="kra-attributes">
-                                        Attributes
+                                        Attributes (You can select Multiple Values)
                                     </label>
                                     <div class="controls">
                                       
@@ -47,7 +54,7 @@
                                                         
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">Validate &amp; Submit</button>
-                                <button type="button" class="btn">Cancel</button>
+                                <button type="button" class="btn" onclick="cancel()">Cancel</button>
                             </div>
                         <% end %>
                     </div>
@@ -55,4 +62,5 @@
             </div>
         </div>
     </div>
-</div
+</div>
+</div>

@@ -1,14 +1,20 @@
+
+
+<div id="signup_form">
+
+
 <div class="content container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <h2 class="page-title">Account Demo <small>Out of the box form</small></h2>
+            <h2 class="page-title">Creat User <small></small></h2>
         </div>
     </div>
+
     <div class="row-fluid">
       <div class = "span7">
         <section class="widget">
           <header>
-              <h4><i class="icon-user"></i> Account Profile <small>Create new or edit existing user</small></h4>
+              <h4><i class="icon-user"></i> Account Profile <small>Create new or edit existing user </small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#signup_form').hide()">x</button></h4>
           </header>
           <div class="body">
             <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
@@ -129,7 +135,7 @@
                 </div>
               </fieldset>
               <div class="form-actions">
-                  <%= f.submit "Sign up" ,:class =>"btn btn-block btn-large btn-danger" %>
+                  <%= f.submit "Sign up" ,:class =>"btn btn-block btn-large btn-danger" %><button type="button" class="btn" onclick="$('#signup_form').hide()">Create Later (X)</button>
                   <% end %>
                   <%= render "devise/shared/links" %>
               </div>
@@ -139,3 +145,4 @@
       </div>
     </div>
   </div>
+</div>

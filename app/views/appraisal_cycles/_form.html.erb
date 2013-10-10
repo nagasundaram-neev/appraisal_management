@@ -3,19 +3,24 @@
   $(document).ready(function(){
     $('[data-behaviour~=datepicker]').datepicker();
   })
+
+function cancel(){document.getElementById("appraisal_cycle_form").style.display='none';
+
+}
 </script>
+<div id="appraisal_cycle_form">
 <div class="wrap">
 <div class="content container-fluid">
     <div class="row-fluid">
         <div class="span12">
-            <h2 class="page-title">Create Attribute </h2>
+           <h2 class="page-title">Create  Appraisal Cycles </h2>
         </div>
     </div>
     <div class="row-fluid">
     <div class="span7">
     <section class="widget">
        <header>
-        <h4><i class="icon-user"></i> Appraisal Cycles <small>Add new attribute</small></h4>
+        <h4><i class="icon-user"></i> Appraisal Cycles <small>Add new  Appraisal Cycle</small></h4>
                 </header>
                 <div class="body">
                      <%= form_for(@appraisal_cycle, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
@@ -28,7 +33,7 @@
                                 <div class="controls controls-row">
                                     <div class="input-append span7">
                                         <i class=" add-on icon-calendar"></i>
-                         <%= f.text_field :start_date, 'data-behaviour' => 'datepicker' %>
+                         <%= f.text_field :start_date, 'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd" %>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +42,7 @@
                                 <div class="controls controls-row">
                                     <div class="input-append span7">
                                         <i class=" add-on icon-calendar"></i>
-                         <%= f.text_field :end_date, 'data-behaviour' => 'datepicker' %>
+                         <%= f.text_field :end_date, 'data-behaviour' => 'datepicker','data-date-format' => "yyyy-mm-dd" %>
                                     </div>
                                 </div>
                             </div>
@@ -55,4 +60,4 @@
     </div>
 </div>
 </div>
-
+</div>

@@ -1,4 +1,0 @@
-$(":input:not(input[type=submit])").val("");
-$("#body-content").html("<%= escape_javascript( render(:partial => "roles") ) %>");
-
-$("#roles_form").hide();
