@@ -1,4 +1,4 @@
-
+<script type="text/javascript">$.validate(); </script> 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
 <div class="single-widget-container">
@@ -15,7 +15,7 @@
                                 <span class="add-on">
                                     <i class="icon-user icon-large"></i>
                                 </span>
-                                <%= f.email_field :email, :autofocus => true , :placeholder => "Your Email id" %>
+                                <%= f.email_field :email, 'data-validation' => "required", :autofocus => true , :placeholder => "Your Email id" %>
                                 
                             </div>
                         </div>

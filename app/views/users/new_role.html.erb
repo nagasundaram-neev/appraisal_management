@@ -16,12 +16,7 @@
           </header>
           <div class="body">
             <%= form_for(@user, :controller => "add_role", :id => "form", :class => "form-horizontal label-left", :novalidate => "novalidate", :data => {:validate => "parsley"}) do |f|  %>
-              <% if @user %>
-                <% if @user.errors.any? %>
-                  <div id="error_explanation">
-                    <h3><%= pluralize(@user.errors.count, "error") %> prohibited this from being saved:</h3>
-
-                    <ul>
+              
                     <% @errors.full_messages.each do |msg| %>
                       <li><%= msg %></li>
                     <% end %>

@@ -1,4 +1,5 @@
 class KraRatingsController < ApplicationController
+before_filter :authenticate_user!
 
 before_filter :load, :only => [:new,:index]
 
@@ -25,6 +26,31 @@ def create
         format.html
       end
     end
+  end
+
+
+  def edit
+    @kra_rating = KraRating.find(params[:id])
+  end
+
+  def show
+     @kra_rating = KraRating.find(params[:id])
+  end
+
+  def update
+    @kra_rating= KraRating.find(params[:id])
+    if @kra_rating.update(kra_rating_params)
+      flash[:notice] = "Successfully updated."
+      @kra_ratings = KraAttr.all
+    end
+  end
+  
+  def destroy
+    @kra_rating = KraRating.find { params[:id]  }
+    @kra_rating.destroy
+    flash[:notice] = "Successfully destroyed."
+    @kra_ratings = KraAttr.all
+    #format.html
   end
 
 	def kra_rating_params

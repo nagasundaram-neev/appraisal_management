@@ -1,14 +1,16 @@
 class AppraisalCyclesController < ApplicationController
-
+  
+  before_filter :authenticate_user!
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_appraisal_cycle, :only => [:new,:index]
 
   def load
     @appraisal_cycles = AppraisalCycle.all
+    
   end
 
   def create_new_appraisal_cycle
-    @appraisal_cycle = AppraisalCycle.new
+    @appraisal_cycle = AppraisalCycle.new    
   end
 
   def new
@@ -52,17 +54,24 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def overall_performance
-    #p params[:appraisal_cycle][:id] unless params[:appraisal_cycle].nil?
+
     unless params[:appraisal_cycle].nil?
       @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
-      #p @appraisals.start_date unless @appraisals.nil?
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
-      p @kra_sheets
+      @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id).last    
     end
+
+
   end
 
   def performance_graph
-    @appraisal_cycle = AppraisalCycle.all
+    @kra_sheet=KraSheet.find_by_appraisee_id(current_user.id)
+    @kra_ratings_by_manager_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1).select(:rating).map(&:rating)
+    @kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 0).select(:rating).map(&:rating)
+    @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
+    @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
+    @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
+
   end
 
   def performance_params

@@ -28,22 +28,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end        
   end
-  
-  
-=begin
- def after_sign_in_path_for(resource)
-    p "-------------------------------------------"
-      user = User.find_by_email(params[:user][:email])
-      if user.user_type == "admin" then
-        return edit_user_registration_path
-        elsif user.user_type == "appraisee" then
-        return static_pages_home_path
-        elsif user.user_type == "appraiser" then
-        return static_pages_help_path
-      end
-
-  end
-=end
 end
 
   

@@ -27,7 +27,7 @@
                     </header>
                     <div class="body">
                       Rating <code>x 0.7</code>
-                      <div class="badge btn btn-block btn-info">100</div>
+                      <%= progress_bar(progress_user, :color => 'green', :rounded => true) %> 
                       <table class="table table-hover">
                       <tbody><tr>
                         <th>Attribute</th>
@@ -54,7 +54,7 @@
                     </header>
                     <div class="body">
                       Rating <code>x 0.3</code>
-                      <%= progress_bar(55, :color => 'green', :rounded => true) %> 
+                      <%= progress_bar(progress_manager, :color => 'green', :rounded => true) %> 
                       <table class="table table-hover">
                       <tbody><tr>
                         <th>Attribute</th>
@@ -77,17 +77,38 @@
             </div>
 
         </div>
+
+          <div class="span8 offset2" align="center">
+                <section class="widget tiny">
+                    <header>
+                        <h3>
+                            <strong><%= current_user.first_name %> overall performance</strong>
+                        </h3>
+                    </header>
+                    <div class="body">
+                      <br><br>
+                        <strong>Overall Performance by you: <%= performance_sum_user  %></strong>
+                        <br>
+                        <strong>Overall Performance by Manager: <%= performance_sum_manager  %></strong>
+                        <br>
+                        <strong>Overall Performance <%= performance_sum_manager + performance_sum_user%></strong>
+
+                    </div>
+                </section>
+            </div> 
+
             <div class="span4 offset4" align="center">
                 <section class="widget tiny">
                     <header>
                         <h4>
                             User:
+
                         </h4>
                     </header>
                     <div class="body">
                         <blockquote>
                          </textarea>
-                         <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
+                         <% unless @status=KraSheet.where(:id => kra_sheet.id).last.appraisee_status %>
                            <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                            <% else %>
                             <strong ><h4 class="btn btn-success">You have submitted the KRA form</h4></strong>
@@ -95,7 +116,7 @@
                         </blockquote>
                     </div>
                 </section>
-                </div>          
+              </div>          
         </div>
     </div>
 </div>

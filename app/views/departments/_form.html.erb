@@ -1,4 +1,8 @@
-<div class="row-fluid">
+<script type="text/javascript">$.validate(); </script> 
+<div >
+<div class="wrap">
+  <div class="content container-fluid">
+    <div class="row-fluid">
       <div class="span12">
         <h2 class="page-title">Create Department </h2>
       </div>
@@ -18,7 +22,7 @@
                     <label for="name" class="control-label">Department Name <span class="required">*</label>
                       <div class="controls controls-row">
                         <div class="input-append span12">
-                          <%= f.text_field :name, :class => "span6",  :id =>"dept", :type => "text", :required => "required", :maxlength => "28" %>
+                          <%= f.text_field :name, 'data-validation' => "required", :class => "span6",  :id =>"dept", :type => "text" %>
                         </div>
                       </div>
                   </div>
@@ -33,3 +37,6 @@
         </section>
       </div>
     </div>
+  </div>
+</div>
+</div>
