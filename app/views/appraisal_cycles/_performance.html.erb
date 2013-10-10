@@ -24,7 +24,7 @@
             </header>
             <div class="body">
               Rating <code>x 0.7</code>
-              <div class="badge btn btn-block btn-info">100</div>
+              <%= progress_bar(progress_user, :color => 'green', :rounded => true) %> 
               <table class="table table-hover">
                 <tbody>
                   <tr>
@@ -52,7 +52,7 @@
                   </header>
                   <div class="body">
                     Rating <code>x 0.3</code>
-                    <%= progress_bar(55, :color => 'green', :rounded => true) %> 
+                    <%= progress_bar(progress_manager, :color => 'green', :rounded => true) %> 
                     <table class="table table-hover">
                     <tbody><tr>
                       <th>Attribute</th>
@@ -73,11 +73,34 @@
       <div class="span4">
       </div>
     </div>
-    <div class="span4 offset4" align="center">
+    <div class="span6 offset2" align="center">
+      <section class="widget tiny">
+          <header>
+              <h3>
+                <br>
+                Overall Performance
+              </h3>
+          </header>
+          <div class="body">
+            <br><br>
+              <h4>
+                Overall Performance by <%= current_user.first_name %> : &nbsp<%= performance_sum_user %>
+              </h4>
+              <h4>
+                Overall Performance by Appraisee :&nbsp<%= performance_sum_manager %>
+              </h4>
+              <h4>
+                Overall Performance  :&nbsp<%= performance_sum_manager + performance_sum_user %>
+              </h4>
+
+          </div>
+      </section>
+    </div>
+    <div class="span4 offset3" >
       <section class="widget tiny">
           <header>
               <h4>
-                  User:
+                 <%= current_user.first_name %>
               </h4>
           </header>
           <div class="body">

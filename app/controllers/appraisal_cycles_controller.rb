@@ -1,5 +1,5 @@
 class AppraisalCyclesController < ApplicationController
-  
+  include AppraisalCyclesHelper
   before_filter :authenticate_user!
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_appraisal_cycle, :only => [:new,:index]
@@ -54,13 +54,15 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def overall_performance
-
     unless params[:appraisal_cycle].nil?
       @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
       @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id).last    
     end
+  end
 
+  def total_performance_graph
+    
 
   end
 
@@ -71,7 +73,6 @@ class AppraisalCyclesController < ApplicationController
     @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
     @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
     @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
-
   end
 
   def performance_params

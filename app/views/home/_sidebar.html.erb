@@ -56,7 +56,7 @@
             </li>
           <% elsif current_user.role == "appraisee" then %>
             <li class="active">
-            <%= link_to "Overall Performance", appraisal_cycles_overall_performance_path, :remote => true %>
+            <%= link_to "Overall Performance", overall_performance_appraisal_cycles_path,:remote => true %>
           </li>
             <li class="accordion-group">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisals </span></a>
