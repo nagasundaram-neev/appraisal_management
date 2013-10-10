@@ -8,9 +8,7 @@ class KraRating < ActiveRecord::Base
 		@role
 	end
 	def find_kra_attrs_for_role(id)
-	  p "//////////////"
-	  p id
-		@kra_attrs=[]
+	  @kra_attrs=[]
 		for i in KraRoleAttr.find_all_by_role_id(find_current_user_role(id).role_id).to_a do
 			@kra_attrs.push(KraAttr.find(i.kra_attr_id))
 		end

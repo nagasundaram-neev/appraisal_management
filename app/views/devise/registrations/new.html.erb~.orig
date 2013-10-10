@@ -1,9 +1,4 @@
-<script type="text/javascript">$.validate(); 
-function cancel()
-{
-document.getElementById("signup_form").style.display='none';
-} 
-</script> 
+<script type="text/javascript">$.validate(); </script> 
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
  
@@ -135,17 +130,14 @@ document.getElementById("signup_form").style.display='none';
               </fieldset>
                 <div class="form-actions">
                     <%= f.submit "Sign up" ,:class =>"btn btn-block btn-large btn-danger" %>
-                    
                     <% end %>
-
                     <%= render "devise/shared/links" %>
                 </div>
             </form>
         </div>
-
     </section>
   </div>
-</div>
+
 
 
 

@@ -12,160 +12,115 @@
     <meta name="author" content="" />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+   <style type="text/css">
+   input.valid {
+    background: url("/assets/valid.png") no-repeat scroll right center #E3FFE5;
+    border-color: #96B796 !important;
+    color: #002F00;
+}
+input.error {
+    background: url("/assets/error.png") no-repeat scroll right center #FFEBEF;
+    color: #480000;
+}
+</style> 
 </head>
 <body class="background-dark">
   <% if user_signed_in?%>
-    <nav id="sidebar" class="sidebar nav-collapse collapse">
-      <ul id="side-nav" class="side-nav">
-          <li class="active">
-            <a href="/"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
-          </li>
-          <% if current_user.role == "admin" then %>
-          <li class="accordion-group">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisal Cycles</span></a>
-              <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
-                  <li><%= link_to "Appraisal Cycles", appraisal_cycles_path, :remote => true %></li>
-                  <li><%= link_to "New Appraisal Cycle", new_appraisal_cycle_path, :remote => true %></li>                          
-              </ul>            
-            </li>
-            <li class="accordion-group">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#roles-collapse"> <span class="name">Roles</span></a>
-              <ul id="roles-collapse" class="accordion-body collapse">
-                  <li><%= link_to "Roles", roles_path, :remote => true %></li>   <li><%= link_to "New Role", new_role_path, :remote => true %></li>                          
-              </ul>            
-            </li>
-            <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#users-collapse"> <span class="name">Users</span></a>
-                <ul id="users-collapse" class="accordion-body collapse">
-                    <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
-                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %><br></li>                
-                </ul>
-            </li>
-            <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#depts-collapse"> <span class="name">Departments</span></a>
-                <ul id="depts-collapse" class="accordion-body collapse">
-                    <li><%= link_to "Departments", departments_path, :remote => true %></li>
-                    <li><%= link_to "New Department", new_department_path, :remote => true %></li>
-                    <li><%= link_to "Specify Department's roles", new_dept_path, :remote => true %><br></li>                
-                </ul>
-            </li>
-            <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#attrs-collapse"> <span class="name">Attributes</span></a>
-                <ul id="attrs-collapse" class="accordion-body collapse">
-                    <li><%= link_to "Attributes", kra_attrs_path, :remote => true %></li>
-                    <li><%= link_to "New Attribute", new_kra_attr_path, :remote => true%></li>
-                </ul>
-            </li>
-            <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#kr-sheets-collapse"> <span class="name">KRA Sheets</span></a>
-                <ul id="kr-sheets-collapse" class="accordion-body collapse">
-                    <li><%= link_to "KRA Sheets", kra_sheets_path, :remote => true %></li>
-                    <li><%= link_to "New Sheet", new_kra_sheet_path, :remote => true%></li>
-                </ul>
-            </li>
-  <% end %>
-    <li class="accordion-group">
-        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
-        <ul id="stats-collapse" class="accordion-body collapse">
-            <li><a href="stat_statistics.html">Stats</a></li>
-            <li><a href="stat_charts.html">Charts</a></li>
-            <li><a href="stat_realtime.html">Realtime</a></li>
-        </ul>
-    </li>         
-        </ul>
-    </nav>
+    <%= render :partial => "sidebar" %>
     <div class="wrap">
       <header class="page-header">
-          <div class="navbar">
-              <div class="navbar-inner">
-                  <ul class="nav pull-right">
-                      
-                      
-                      <li class="hidden-phone dropdown">
-                          <a href="#" title="Account" id="account" class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="icon-user"></i>
-                          </a>
-                          <ul id="account-menu" class="dropdown-menu account" role="menu">
-                              <li role="presentation" class="account-picture">
-                                  <img src="img/2.jpg" alt="" />
-                                  <%= "#{current_user.first_name} #{current_user.last_name}" %>
-                              </li>
-                              <li role="presentation">
-                                  <a href="form_account.html" class="link">
-                                      <i class="icon-user"></i>
-                                      Profile
-                                  </a>
-                              </li>
-                              <li role="presentation">
-                                  <a href="component_calendar.html" class="link">
-                                      <i class="icon-calendar"></i>
-                                      Calendar
-                                  </a>
-                              </li>
-                              <li role="presentation">
-                                  <a href="#" class="link">
-                                      <i class="icon-inbox"></i>
-                                      Inbox
-                                  </a>
-                              </li>
-                          </ul>
-                      </li>
-                      <li class="visible-phone">
-                          <a href="#" class="btn-navbar" data-toggle="collapse" data-target=".sidebar" title="">
-                              <i class="icon-reorder"></i>
-                          </a>
-                      </li>
-                      <li class="hidden-phone"><a href="/users/sign_out" data-method ="delete" ><i class="icon-signout"></i></a></li>
-                  </ul>
-              </div>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <ul class="nav pull-right">
+             <li class="hidden-phone dropdown">
+                <a href="#" title="Account" id="account" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i>
+                </a>
+                <ul id="account-menu" class="dropdown-menu account" role="menu">
+                    <li role="presentation" class="account-picture">
+                        <img src="img/2.jpg" alt="" />
+                        <%= "#{current_user.first_name} #{current_user.last_name}" %>
+                    </li>
+                    <li role="presentation">
+                        <a href="form_account.html" class="link">
+                            <i class="icon-user"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="component_calendar.html" class="link">
+                            <i class="icon-calendar"></i>
+                            Calendar
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#" class="link">
+                            <i class="icon-inbox"></i>
+                            Inbox
+                        </a>
+                    </li>
+                </ul>
+              </li>
+              <li class="visible-phone">
+                  <a href="#" class="btn-navbar" data-toggle="collapse" data-target=".sidebar" title="">
+                      <i class="icon-reorder"></i>
+                  </a>
+              </li>
+              <li class="hidden-phone"><a href="/users/sign_out" data-method ="delete" ><i class="icon-signout"></i></a>
+              </li>
+            </ul>
           </div>
+        </div>
       </header>
-      <div class="content container-fluid" >
-          <div class="row-fluid">
-              <div class="span12">
-                  <h2 class="page-title">Dashboard <small>Statistics and more</small></h2>
-              </div>
+      <div class="content container-fluid" id="body-content">
+        <div class="row-fluid">
+          <div class="span12">
+              <h2 class="page-title">Dashboard </h2>
           </div>
           <div class="row-fluid" id="body-content">
             <div class="span8">
-                  <section class="widget">
-                      <header>
-                          <h4>
-                              <i class="icon-group"></i>
-                              Visits
-                              <small>
-                                  Based on a three months data
-                              </small>
-                          </h4>
-                      </header>
-                      <div class="body no-margin">
-                          <div id="visits-chart" class="chart visits-chart">
-                              <svg></svg>
-                          </div>
-                          <div class="visits-info well well-small">
-                              <div class="row-fluid">
-                                  <div class="span3">
-                                      <div class="key"><i class="eicon-users"></i> Total Traffic</div>
-                                      <div class="value">24 541 <i class="icon-caret-up color-green"></i></div>
-                                  </div>
-                                  <div class="span3">
-                                      <div class="key"><i class="eicon-user"></i> Unique Visits</div>
-                                      <div class="value">14 778 <i class="icon-caret-down color-red"></i></div>
-                                  </div>
-                                  <div class="span3">
-                                      <div class="key"><i class="icon-plus-sign-alt"></i> Revenue</div>
-                                      <div class="value">$3 583.18 <i class="icon-caret-up color-green"></i></div>
-                                  </div>
-                                  <div class="span3">
-                                      <div class="key"><i class="icon-user"></i> Total Sales</div>
-                                      <div class="value">$59 871.12 <i class="icon-caret-down color-red"></i></div>
-                                  </div>
+              <section class="widget">
+                <header>
+                  <h4>
+                    <i class="icon-group"></i>
+                    Visits
+                    <small>
+                        Based on a three months data
+                    </small>
+                  </h4>
+                </header>
+                  <div class="body no-margin">
+                    <div id="visits-chart" class="chart visits-chart">
+                        <svg></svg>
+                    </div>
+                      <div class="visits-info well well-small">
+                          <div class="row-fluid">
+                            <div class="span3">
+                                <div class="key"><i class="eicon-users"></i> Total Traffic</div>
+                                <div class="value">24 541 <i class="icon-caret-up color-green"></i></div>
+                            </div>
+                            <div class="span3">
+                                <div class="key"><i class="eicon-user"></i> Unique Visits</div>
+                                <div class="value">14 778 <i class="icon-caret-down color-red"></i></div>
+                            </div>
+                            <div class="span3">
+                                <div class="key"><i class="icon-plus-sign-alt"></i> Revenue
+                                </div>
+                                <div class="value">$3 583.18 <i class="icon-caret-up color-green"></i>
+                                </div>
+                            </div>
+                            <div class="span3">
+                              <div class="key"><i class="icon-user"></i> Total Sales</div>
+                              <div class="value">$59 871.12 <i class="icon-caret-down color-red"></i>
                               </div>
+                            </div>
                           </div>
                       </div>
-                  </section>                
+                  </div>
+              </section>                
             </div>
+            <div class='span4'>
+    <%= render :partial => "feeds" %></div>
             
       </div>
     </div>

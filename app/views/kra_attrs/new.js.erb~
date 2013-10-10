@@ -1,2 +1,0 @@
-$("#body-content").show(100)
-$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
