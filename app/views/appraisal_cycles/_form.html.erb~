@@ -3,7 +3,6 @@
   $(document).ready(function(){
     $('[data-behaviour~=datepicker]').datepicker();
   })
-  </script>
 <div id="appraisal_cycle_form">
   <div class="row-fluid">
           <div id="appraisal_cycle_form">
