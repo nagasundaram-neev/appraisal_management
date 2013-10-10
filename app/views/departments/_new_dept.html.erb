@@ -1,15 +1,14 @@
-<div id='user_dept_form'>
-<div class="content container-fluid">
-    <div class="row-fluid">
-      <div class="span12">
-        <h2 class="page-title">Specify User's Department </h2>
-      </div>
-    </div>
-    <div class="row-fluid">
-      <div class="span7">
-        <section class="widget">
+<div id="user_dept_form">
+<div class="row-fluid">
+          <div class="span12">
+              <h2 class="page-title">User </h2>
+          </div>
+        </div>
+          <div class="row-fluid" >
+            <div class="span8">
+                    <section class="widget">
           <header>
-            <h4>Department <small>Department of User. </small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#user_dept_form').hide()">x</button></h4>
+            <h4> <small>Department of User. </small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#user_dept_form').hide()">x</button></h4>
           </header>
           <div class="body">
             <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>            
@@ -41,6 +40,6 @@
         </div>
         </section>
       </div>
-    </div>
-  </div>
-</div>
+            </div>
+          </div>
+</div>          

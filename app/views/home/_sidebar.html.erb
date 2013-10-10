@@ -21,15 +21,15 @@
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#users-collapse"> <span class="name">Users</span></a>
                 <ul id="users-collapse" class="accordion-body collapse">
                     <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
-                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %><br></li>                
+                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %></li>
+                    <li><%= link_to "Specify User's department", new_dept_path, :remote => true %></li>               
                 </ul>
             </li>
             <li class="accordion-group">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#depts-collapse"> <span class="name">Departments</span></a>
                 <ul id="depts-collapse" class="accordion-body collapse">
                     <li><%= link_to "Departments", departments_path, :remote => true %></li>
-                    <li><%= link_to "New Department", new_department_path, :remote => true %></li>
-                    <li><%= link_to "Specify Department's roles", new_dept_path, :remote => true %><br></li>                
+                    <li><%= link_to "New Department", new_department_path, :remote => true %></li>                                   
                 </ul>
             </li>
             <li class="accordion-group">

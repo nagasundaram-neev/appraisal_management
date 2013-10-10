@@ -1,0 +1,6 @@
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<<<<<<< HEAD
+$("#kra_attributes_form").show(100)
+=======
+$("#body-content").show(100)
+>>>>>>> 6d61dc02873377c1175c6a265076542438b3a6d1

@@ -1,16 +1,14 @@
-
-  <div class="content container-fluid">
-    <div class="row-fluid">
-      <div class="span12">
-        <h2 class="page-title">Specify User's Role. </h2>
-      </div>
-    </div>
-   
-    <div class="row-fluid">
-      <div class="span7">
-        <section class="widget">
+<div id="user_role">
+<div class="row-fluid">
+          <div class="span12">
+              <h2 class="page-title">Users </h2>
+          </div>
+        </div>
+          <div class="row-fluid" >
+            <div class="span8">
+            <section class="widget">
           <header>
-            <h4>Role <small>Role of User.</small></h4>
+            <h4><small>Role of User.</small><button type="button" class="btn btn-xs btn-danger pull-right " onclick="$('#user_role').hide()">x</button></h4>
           </header>
           <div class="body">
             
@@ -50,13 +48,12 @@
 
               <div class="form-actions">
                 <input type="submit" value="add" class="btn btn-primary">
-                <button type="button" class="btn">Cancel</button>
+                <button type="button" class="btn" onclick="$('#user_role').hide()">Cancel</button>
               </div>
 
             <% end %>
           </div>
         </section>
-      </div>
-    </div>
-  </div>
-
+            </div>
+          </div>
+</div>          
