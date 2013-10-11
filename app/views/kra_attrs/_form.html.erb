@@ -9,8 +9,8 @@
             <div class="span8">
             <section class="widget">
                 <header>
-                    <h4><i class="icon-user"></i><small>Add new attribute</small>
-                        <button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#attrs_form').hide()">x</button></h4>
+                    <h4><i class="icon-file-alt"></i><small> Add new attribute</small>
+                        <button type="button" class="btn btn-danger btn-mini icon-remove pull-right" onclick="$('#attrs_form').hide()"></button></h4>
                 </header>
                 <div class="body">
                      <%= form_for(@kra_attr, :remote => true,  :validate => true,  :class => "form-horizontal label-left") do |f|  %>
@@ -19,7 +19,11 @@
                     
                         <fieldset>
                             <legend class="section">Kra Attribute Details</legend>
-                                  
+                             <div class="flash_notice" id='attr_errors'>
+                                    <div class="alert alert-error">
+                                        <%= notice %>
+                                     </div>
+                                    </div>
                             <div class="control-group">
                                 <label for="name" class="control-label">Title </label>
                                 <div class="controls controls-row">
@@ -32,7 +36,7 @@
                                 <label for="weightage" class="control-label">Weightage </label>
                                 <div class="controls controls-row">
                                     <div class="input-append span12">
-                            <%= f.text_field :weightage, :style => "width: 40px", :class => "btn btn-info", :id => 'range_val', 'data-validation' => "custom", 'data-validation-regexp' => "^(\d?[1-9]|[1-9]*\.[0-9]+|[0-9])$", :onkeyup => "document.getElementById('range_bar').value=this.value;"  %>
+                            <%= f.text_field :weightage, :style => "width: 40px", :class => "search-query", :id => 'range_val', 'data-validation' => "custom", 'data-validation-regexp' => "^(\d?[1-9]|[1-9]*\.[0-9]+|[0-9])$", :onkeyup => "document.getElementById('range_bar').value=this.value;"  %>
                                     <span class="add-on">%</span>
                                         <input type=range id='range_bar' min = "1" max = "99" class = "add-on " onchange = "document.getElementById('range_val').value=this.value;">
                                                   
@@ -60,7 +64,7 @@
                     
                         <div class="form-actions">
                             <%= f.submit class: "btn btn-primary" %>
-                            <button type="button" class="btn btn-xs" onclick="$('#attrs_form').hide()">Close</button>
+                            <button type="button" class="btn icon-remove-sign" onclick="$('#attrs_form').hide()"> Close</button>
                         </div>
                     <% end %>
                 </div>

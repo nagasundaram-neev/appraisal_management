@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+  $.validate();
+  </script>
 <div id="user_dept_form">
 <div class="row-fluid">
           <div class="span12">
@@ -8,12 +14,17 @@
             <div class="span8">
                     <section class="widget">
           <header>
-            <h4> <small>Department of User. </small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#user_dept_form').hide()">x</button></h4>
+            <h4> <small>Department of User. </small><button type="button" class="btn btn-danger btn-mini icon-remove pull-right" onclick="$('#user_dept_form').hide()"></button></h4>
           </header>
           <div class="body">
             <%= form_tag("/add_dept", :id => "add_dept", :class => "add_dept", :remote => true) do %>            
               <fieldset>
                 <legend class="section">User </legend>
+                <div class="flash_notice" id='user_dept_errors'>
+                    <div class="alert alert-error">
+                        <%= flash[:error] %>
+                  </div>
+                  </div>
                   <div class="control-group">
                     <label for="name" class="control-label">Select User <span class="required">*</label>
                       <div class="controls controls-row">
@@ -31,6 +42,19 @@
                         </select>
                       </div>
                   </div>
+              </fieldset>
+              <fieldset>
+                <legend class="section">Period</legend>
+                  <div class="control-group">
+                    <label for="name" class="control-label">Select Start Date <span class="required">*</label>
+                      <div class="controls controls-row">
+                        <div class="input-append span7">
+                        <i class=" add-on icon-calendar"></i>
+                        <%= text_field_tag :start_date, nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date", 'data-validation' => "required" %>
+                         </div>
+                      </div>
+                  </div>
+                  
               </fieldset>
               <div class="form-actions">
                 <input type="submit" value="Add" class="btn btn-primary">

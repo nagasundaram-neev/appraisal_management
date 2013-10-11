@@ -1,3 +1,8 @@
+<% if @department.errors.any? -%>
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+$('#dept_errors').show()
+<% else -%>
 $(":input:not(input[type=submit])").val("");
 $("#body-content").html("<%= escape_javascript( render(:partial => "departments") ) %>");
-$("#departments_form").hide(100)
+$('#dept_notice').show()
+<% end -%>

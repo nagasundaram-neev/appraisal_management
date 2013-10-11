@@ -24,6 +24,9 @@ class DepartmentsController < ApplicationController
     @department = Department.new(department_params)
       if @department.save
         @departments = Department.all
+        flash[:notice] = "A New Department has been Successfully Created."
+      else
+        flash[:notice] = @department.errors.full_messages
       end
   end
 
@@ -37,17 +40,32 @@ end
 
   def update
     @department = Department.find(params[:id])
-    @department.update_attributes(department_params)
+    if @department.update_attributes(department_params)
+      flash[:notice] = "Department has been Successfully Updated."
+      @departments = Department.all
+      else
+        flash[:notice] = @department.errors.full_messages
+      end
+
   end
   def destroy
     @department = Department.find { params[:id]  }
     @department.destroy
-    flash[:notice] = "Successfully destroyed."
+    flash[:notice] = "Department Successfully destroyed."
     @departments = Department.all
-    #format.html
   end
   def add_dept
-    User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id]).save
+    unless params[:user_id][:id].eql?("")
+    if User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
+      flash[:notice]="Department Successfully assigned to the user"
+      @departments = Department.all
+    else
+      flash[:error] = "Please select the Department for user."
+    end
+  else
+    flash[:error] = "Please select the user"
+    render :action => "new_dept"
+  end
   end
   def new_dept
   @dept = Department.new

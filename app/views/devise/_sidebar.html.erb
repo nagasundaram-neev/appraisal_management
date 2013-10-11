@@ -1,0 +1,70 @@
+<nav id="sidebar" class="sidebar nav-collapse collapse">
+      <ul id="side-nav" class="side-nav">
+          <li class="active">
+            <a href="/"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
+          </li>
+          <% if current_user.role == "admin" then %>
+            <li class="accordion-group">
+              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisal Cycles</span></a>
+              <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
+                  <li><%= link_to "Appraisal Cycles", appraisal_cycles_path, :remote => true %></li>
+                  <li><%= link_to "New Appraisal Cycle", new_appraisal_cycle_path, :remote => true %></li>                          
+              </ul>            
+            </li>
+            <li class="accordion-group">
+              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#roles-collapse"> <span class="name">Roles</span></a>
+              <ul id="roles-collapse" class="accordion-body collapse">
+                  <li><%= link_to "Roles", roles_path, :remote => true %></li>   <li><%= link_to "New Role", new_role_path, :remote => true %></li>                          
+              </ul>            
+            </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#users-collapse"> <span class="name">Users</span></a>
+                <ul id="users-collapse" class="accordion-body collapse">
+                    <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
+                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %></li>
+                    <li><%= link_to "Specify User's department", new_dept_path, :remote => true %></li>               
+                </ul>
+            </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#depts-collapse"> <span class="name">Departments</span></a>
+                <ul id="depts-collapse" class="accordion-body collapse">
+                    <li><%= link_to "Departments", departments_path, :remote => true %></li>
+                    <li><%= link_to "New Department", new_department_path, :remote => true %></li>                                   
+                </ul>
+            </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#attrs-collapse"> <span class="name">Attributes</span></a>
+                <ul id="attrs-collapse" class="accordion-body collapse">
+                    <li><%= link_to "Attributes", kra_attrs_path, :remote => true %></li>
+                    <li><%= link_to "New Attribute", new_kra_attr_path, :remote => true%></li>
+                </ul>
+            </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#kr-sheets-collapse"> <span class="name">KRA Sheets</span></a>
+                <ul id="kr-sheets-collapse" class="accordion-body collapse">
+                    <li><%= link_to "KRA Sheets", kra_sheets_path, :remote => true %></li>
+                    <li><%= link_to "New Sheet", new_kra_sheet_path, :remote => true%></li>
+                </ul>
+            </li>
+            <li class="accordion-group">
+              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
+              <ul id="stats-collapse" class="accordion-body collapse">
+                  <li><a href="stat_statistics.html">Stats</a></li>
+                  <li><a href="stat_charts.html">Charts</a></li>
+                  <li><a href="stat_realtime.html">Realtime</a></li>
+              </ul>
+            </li>
+          <% elsif current_user.role == "appraisee" then %>
+            <li class="active">
+            <%= link_to "Overall Performance", appraisal_cycles_overall_performance_path, :remote => true %>
+          </li>
+            <li class="accordion-group">
+              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisals </span></a>
+              <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
+                  <li><%= link_to "Previous Appraisal", appraisal_cycles_path, :remote => true %></li>
+                  <li><%= link_to "Current Appraisal", kra_ratings_path, :remote => true %></li>                          
+              </ul>
+            </li>
+          <% end %>       
+      </ul>
+</nav>

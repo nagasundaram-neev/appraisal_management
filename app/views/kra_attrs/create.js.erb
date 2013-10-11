@@ -1,3 +1,8 @@
+<% if @kra_attr.errors.any? -%>
+$('#attr_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
 $(":input:not(input[type=submit])").val("");
-
 $("#body-content").html("<%= escape_javascript( render(:partial => "kra_attrs") ) %>");
+$('#attr_notice').show()
+<% end -%>

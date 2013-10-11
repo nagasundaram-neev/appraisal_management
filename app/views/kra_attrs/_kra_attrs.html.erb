@@ -5,8 +5,7 @@
         </div>
           <div class="row-fluid" >
             <div class="span8">
-            <div class="flash_notice"><div class="alert alert-success"> <%= notice %> </div></div>
- 
+            <div class="flash_notice" id='attr_notice'><div class="alert alert-success"> <%= notice %> </div></div>
 <ul class="nav nav-pills nav-stacked">
 <li class="active">
     <a href="#">
@@ -19,7 +18,8 @@
 <table class="table table-hover">
   <tbody><tr>
     <th>Title</th>
-    <th>Descriptopm</th>
+    <th>Description</th>
+    <th>Weightage</th>
     <th></th>
     <th></th>
   </tr>
@@ -28,8 +28,9 @@
     <tr>
       <td><%= kra_attr.name %></td>
       <td><%= kra_attr.desc %></td>
-      <td><%= link_to "Edit", edit_kra_attr_path(kra_attr), :remote => true, class: "btn btn-warning" %></td>
-      <td><%= link_to "Destroy", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %></td>
+      <td><%= kra_attr.weightage %> %</td>
+      <td><%= link_to "", edit_kra_attr_path(kra_attr), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+      <td><%= link_to "", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
     </tr>
   <% end %>
   </tbody>

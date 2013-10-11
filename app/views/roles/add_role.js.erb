@@ -1,1 +1,7 @@
-$("#body-content").html("")
+
+<% if flash[:error] -%>
+$("#body-content").html("<%= escape_javascript( render(:partial => "new_role") ) %>");
+$('#user_role_errors').show(100)
+<% else -%>
+$("#body-content").html("<%= escape_javascript( render(:partial => "roles") ) %>")
+<% end %>

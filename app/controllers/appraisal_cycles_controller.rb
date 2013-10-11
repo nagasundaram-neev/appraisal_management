@@ -21,10 +21,11 @@ class AppraisalCyclesController < ApplicationController
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
-    
     if @appraisal_cycle.save
-      flash[:notice] = "Successfully created."
-    
+      flash[:notice] = "New Appraisal Cycle has been Successfully created."
+      @appraisal_cycles = AppraisalCycle.all
+    else
+        flash[:notice] = @appraisal_cycle.errors.full_messages
     end
   end
 
@@ -39,14 +40,16 @@ class AppraisalCyclesController < ApplicationController
   def update
     @appraisal_cycle = AppraisalCycle.find(params[:id])
     if @appraisal_cycle.update(appraisal_cycle_params)
-      flash[:notice] = "Successfully updated."
+      flash[:notice] = "Appraisal Cycle has been successfully updated."
       @appraisal_cycles = AppraisalCycle.all
+    else
+      flash[:notice] = @appraisal_cycle.errors.full_messages
     end
   end
   def destroy
     @appraisal_cycle = AppraisalCycle.find(params[:id])
     @appraisal_cycle.destroy
-    flash[:notice] = "Successfully destroyed post."
+    flash[:notice] = "Successfully removed."
     @appraisal_cycles = AppraisalCycle.all
   end
 

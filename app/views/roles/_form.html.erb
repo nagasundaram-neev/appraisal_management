@@ -1,9 +1,4 @@
-<script type="text/javascript">$.validate();
-function cancel()
-{
-document.getElementById("roles_form").style.display='none';
-} 
-</script> 
+<script type="text/javascript">$.validate();</script> 
 
 
 <div id="roles_form">
@@ -17,7 +12,7 @@ document.getElementById("roles_form").style.display='none';
             <div class="span8">
             <section class="widget">
                     <header>
-                        <h4><small>Add new role</small><button type="button" class="btn btn-xs btn-danger pull-right " onclick="$('#roles_form').hide()">x</button></h4>
+                        <h4><small>Add new role</small><button type="button" class="btn btn-mini btn-danger icon-remove pull-right " onclick="$('#roles_form').hide()"></button></h4>
                     </header>
                     <div class="body">
                         
@@ -25,7 +20,11 @@ document.getElementById("roles_form").style.display='none';
                             
                             <fieldset>
                                 <legend class="section">Info </legend>
-
+                                <div class="flash_notice" id='role_errors'>
+                                    <div class="alert alert-error">
+                                        <%= notice %>
+                                     </div>
+                                    </div>
                                 <div class="control-group">
                                  <label for="name" class="control-label">Name <span class="required">*</label>
                                     <div class="controls controls-row">
@@ -53,8 +52,8 @@ document.getElementById("roles_form").style.display='none';
                             </fieldset>
                                                         
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">Validate &amp; Submit</button>
-                                <button type="button" class="btn  btn-xs " onclick="$('#roles_form').hide()">Close</button>
+                                <%= f.submit "Save", :class => "btn btn-primary" %>
+                                <button type="button" class="btn btn-default icon-remove-sign " onclick="$('#roles_form').hide()"> Close</button>
                             </div>
                         <% end %>
                     </div>

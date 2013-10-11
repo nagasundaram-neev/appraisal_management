@@ -5,8 +5,7 @@
           </div>
         </div>
           <div class="row-fluid" >
-            <div class="span8">
-            <div class="flash_notice"><div class="alert alert-success"> <%= notice %> </div></div>
+            <div class="flash_notice" id='app_cycle_notice'><div class="alert alert-success"> <%= notice %> </div></div>
  
 <ul class="nav nav-pills nav-stacked">
 <li class="active">
@@ -29,8 +28,8 @@
     <tr>
       <td><%= appraisal_cycle.start_date %></td>
       <td><%= appraisal_cycle.end_date %></td>
-      <td><%= link_to "Edit", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "btn btn-warning" %></td>
-      <td><%= link_to "Destroy", appraisal_cycle, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %></td>
+      <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+      <td><%= link_to "", appraisal_cycle, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
     </tr>
   <% end %>
   </tbody>
