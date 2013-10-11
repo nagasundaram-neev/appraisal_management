@@ -62,8 +62,14 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def total_performance_graph
-    
-
+    @kra_sheets=KraSheet.where(:appraisee_id=>current_user.id)
+    @performance_manager_array=[]
+    @performance_self_array=[]
+    @kra_sheets.each do |kra_sheet|
+      @kra_sheet_temp=kra_sheet
+      @performance_manager_array<<performance_sum
+      @performance_self_array<<performance_sum_self
+    end
   end
 
   def performance_graph
@@ -73,6 +79,7 @@ class AppraisalCyclesController < ApplicationController
     @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
     @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
     @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
+    @kra_attr_list = KraAttr.all.collect(&:name)
   end
 
   def performance_params

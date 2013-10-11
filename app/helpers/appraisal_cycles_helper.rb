@@ -12,31 +12,29 @@ module AppraisalCyclesHelper
 		return ((@total_attributes-@empty_attributes)*100)/@total_attributes
 	end
 
-	def performance_sum_user
+	def performance_sum
+		@kra_ratings_by_manager=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 1)
+		@kra_attrs=KraAttr.all
 		sum=0
-
-		@kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0).select(:rating).map(&:rating)
-		@kra_ratings_by_self_array.each do |x| 
-			if x==nil
-				x=0
-			end  
-				sum+= x  
+		@kra_ratings_by_manager.each do |kra_rating|
+			if kra_rating.rating !=nil
+				@attr_weight=@kra_attrs.select(:id,:weightage).where(:id=>kra_rating.kra_attr_id).first
+				sum+=((kra_rating.rating*@attr_weight.weightage)/100)
 			end
-		return sum*0.7
+		end
+		return (sum*10).round(2)
 	end
 
-	def performance_sum_manager
+	def performance_sum_self
+		@kra_ratings_by_self=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0)
+		@kra_attrs=KraAttr.all
 		sum=0
-		@kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 1).select(:rating).map(&:rating)
-		@kra_ratings_by_self_array.each do |x|
-			if x==nil
-				x=0
-			end  
-		 	sum+= x
-		 end
-		return sum*0.3
+		@kra_ratings_by_self.each do |kra_rating|
+			if kra_rating.rating !=nil
+				@attr_weight=@kra_attrs.select(:id,:weightage).where(:id=>kra_rating.kra_attr_id).first
+				sum+=((kra_rating.rating*@attr_weight.weightage)/100)
+			end
+		end
+		return (sum*10).round(2)
 	end
-
-
-
 end
