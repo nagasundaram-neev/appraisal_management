@@ -6,10 +6,8 @@
         </div>
           <div class="row-fluid" >
             <div class="span8">
-              <div class="flash_notice">
-                <div class="alert alert-success"> <%= notice %>
-                </div>
-                </div>
+              
+            <div class="flash_notice" id='sheet_notice'><div class="alert alert-success"> <%= notice %> </div>
                 <ul class="nav nav-pills nav-stacked">
                   <li class="active">
                     <a href="#">
@@ -24,18 +22,16 @@
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th></th>
-                        <th></th>
+                        
                       </tr>
                       <% if current_user.role == "admin" then %>
                         <% @appraisal_cycles.each do |appraisal_cycle| %>
                           <tr>
                             <td><%= appraisal_cycle.start_date %></td>
                             <td><%= appraisal_cycle.end_date %></td>
-                            <td><%= link_to "Edit", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "btn btn-warning" %>
+                            <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %>
                             </td>
-                            <td>
-                              <%= link_to "Destroy", appraisal_cycle, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %>
-                            </td>
+                           
                           </tr>
                         <% end %>
                       <% else%>

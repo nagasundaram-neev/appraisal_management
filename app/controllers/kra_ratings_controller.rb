@@ -46,7 +46,7 @@ def create
   end
   
   def destroy
-    @kra_rating = KraRating.find { params[:id]  }
+    @kra_rating = KraRating.find (params[:id])
     @kra_rating.destroy
     flash[:notice] = "Successfully destroyed."
     @kra_ratings = KraAttr.all

@@ -13,22 +13,19 @@ before_filter :authenticate_user!
   end
 
   def index
-    
+    @kra_sheets = KraSheet.all
   end
   
   def create
     @kra_sheet = KraSheet.new(kra_sheet_params)
-    respond_to do |format|
       if @kra_sheet.save
         @kra_sheet.alert_user(@kra_sheet.appraisee_id)
-        flash[:notice] = "Successfully created the KRA Attributes."
+        flash[:notice] = "Successfully created the KRA sheets."
         @kra_sheets=KraSheet.all
-        format.html
-        format.js
-        else
-        format.html
+      else
+        flash[:notice] = @kra_sheet.errors.full_messages
       end
-    end
+    
   end
 
   def edit
@@ -42,7 +39,7 @@ before_filter :authenticate_user!
   def update
     @kra_sheet = KraSheet.find(params[:id])
     if @kra_sheet.update(kra_sheet_params)
-      flash[:notice] = "Successfully updated KRA Attributes."
+      flash[:notice] = "Successfully updated KRA sheets."
       @kra_sheets = KraSheet.all
     end
   end
