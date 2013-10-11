@@ -43,7 +43,7 @@ class KraAttrsController < ApplicationController
   end
   
   def destroy
-    @kra_attr = KraAttr.find { params[:id]  }
+    @kra_attr = KraAttr.find (params[:id]) 
     @kra_attr.destroy
     flash[:notice] = "KRA Attribute has been successfully destroyed."
     @kra_attrs = KraAttr.all

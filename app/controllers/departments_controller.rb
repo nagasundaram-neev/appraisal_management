@@ -30,9 +30,9 @@ class DepartmentsController < ApplicationController
       end
   end
 
-def edit 
-@department = Department.find(params[:id])
-end
+  def edit 
+  @department = Department.find(params[:id])
+  end
 
   def show
     @department = Department.find(params[:id])
@@ -48,12 +48,14 @@ end
       end
 
   end
+
   def destroy
-    @department = Department.find { params[:id]  }
+    @department = Department.find(params[:id])
     @department.destroy
     flash[:notice] = "Department Successfully destroyed."
     @departments = Department.all
   end
+
   def add_dept
     unless params[:user_id][:id].eql?("")
     if User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save

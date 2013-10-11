@@ -87,8 +87,10 @@ end
         p total
       end
     end
-   if total >100 || total < 100 then    
-    raise "total weightage is #{total}"
+   if total >100 then 
+     
+     flash[:notice] = "Total weightage is #{total} (it should be less than 100)"
+      
    end 
   end
 end
