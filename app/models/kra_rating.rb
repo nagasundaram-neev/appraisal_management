@@ -1,7 +1,10 @@
 class KraRating < ActiveRecord::Base
-	belongs_to :kra_attr
-	belongs_to :kra_sheet
-	include KraRatingsHelper
+  belongs_to :kra_attr
+  belongs_to :kra_sheet
+
+  validates_uniqueness_of :kra_sheet_id, scope: [:kra_attr_id, :rated_by]
+
+  include KraRatingsHelper
 	
 	def find_current_user_role(id)
 		@role=RoleUser.find_by_user_id(id)
@@ -15,11 +18,14 @@ class KraRating < ActiveRecord::Base
 		@kra_attrs
 	end
 
-	def find_kra_sheet_self(id)
-		@kra_sheet=KraSheet.where(:appraisal_cycle_id =>find_current_user_role(id).appraisal_cycles_id , :appraisee_id => id).all[0].id
+	def find_kra_sheet_self(id)		
+		@kra_sheet=KraSheet.where(:appraisee_status => 0, :appraisee_id => id).last.id
 	end
 
 	def find_kra_sheet_manager(id) 
-	  @kra_sheet=KraSheet.where(:appraisal_cycle_id => find_current_user_role(id).appraisal_cycles_id, :appraiser_id => id).all[0].id
+	  p current_user.kra_sheet
+		@kra_sheet=KraSheet.where(:appraiser_status => 0,:appraiser_id => id).all[0].id
 	end
+	
+
 end
