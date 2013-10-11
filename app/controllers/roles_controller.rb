@@ -8,11 +8,11 @@ before_action :check_selected_attributes, :only =>[:create, :update]
   def load
     @roles = Role.all
   end
-
+  
   def create_new_role
     @role = Role.new
   end
-
+  
   def index
   end
 
@@ -28,11 +28,11 @@ before_action :check_selected_attributes, :only =>[:create, :update]
     @role = Role.new(role_params)
     respond_to do |format|
       if @role.save
-         @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
+        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
         format.html
         format.js
       else
-        format.html
+        format.html {}
       end
     end
   end
