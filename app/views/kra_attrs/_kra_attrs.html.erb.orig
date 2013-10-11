@@ -1,0 +1,56 @@
+<div class="row-fluid">
+          <div class="span12">
+              <h2 class="page-title">Dashboard <small>Statistics and more</small></h2>
+          </div>
+        </div>
+          <div class="row-fluid" >
+            <div class="span8">
+            <div class="flash_notice" id='attr_notice'><div class="alert alert-success"> <%= notice %> </div></div>
+<ul class="nav nav-pills nav-stacked">
+<li class="active">
+    <a href="#">
+      <span class="badge "><%= KraAttr.count %></span>
+       KRA Attributes avaliable
+    </a>
+  </li>
+</ul>
+<% if KraAttr.count > 0 %>
+<table class="table table-hover">
+  <tbody><tr>
+    <th>Title</th>
+<<<<<<< HEAD
+    <th>Description</th>
+    <th>Weightage</th>
+||||||| merged common ancestors
+    <th>Descriptopm</th>
+=======
+    <th>DescriptoN</th>
+    <th>Weightage</th>
+>>>>>>> 33d08f490d1fdacf70a50e5e6b35b290c3c4398d
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @kra_attrs.each do |kra_attr| %>
+    <tr>
+      <td><%= kra_attr.name %></td>
+      <td><%= kra_attr.desc %></td>
+<<<<<<< HEAD
+      <td><%= kra_attr.weightage %> %</td>
+      <td><%= link_to "", edit_kra_attr_path(kra_attr), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+      <td><%= link_to "", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
+||||||| merged common ancestors
+      <td><%= link_to "Edit", edit_kra_attr_path(kra_attr), :remote => true, class: "btn btn-warning" %></td>
+      <td><%= link_to "Destroy", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %></td>
+=======
+      <td><%= kra_attr.weightage %></td>
+      <td><%= link_to "Edit", edit_kra_attr_path(kra_attr), :remote => true, class: "btn btn-warning" %></td>
+      <td><%= link_to "Destroy", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %></td>
+>>>>>>> 33d08f490d1fdacf70a50e5e6b35b290c3c4398d
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+            </div>
+          </div>

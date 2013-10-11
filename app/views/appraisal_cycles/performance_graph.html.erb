@@ -1,0 +1,86 @@
+<div id="container" style="width: 60%; height: 380px;"></div>
+<%= hidden_field_tag "kra_attr_list", @kra_attr_list.to_a %>
+    <script>
+        $(function () {
+
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart:{
+                        renderTo:'container',
+                        type:'line',
+                        defaultSeriesType: 'line',
+                        backgroundColor: {
+                          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                          stops: [
+                            [0, 'rgb(96, 96, 96)'],
+                            [1, 'rgb(16, 16, 16)']
+                          ]
+                        },
+                        borderWidth: 0,
+                        borderRadius: 15,
+                        plotBackgroundColor: null,
+                        plotShadow: false,
+                        plotBorderWidth: 0
+                      },
+                    title:{
+                        text:'<%= current_user.first_name %> last appraisal Performance'  ,
+                        color: '#FFF',    
+                        font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                    },
+                    xAxis:{
+                        
+                        title:{
+                            text:'Attributes'
+                        },
+                        categories: $("#kra_attr_list").val().split(" ")
+
+                    }, 
+                    yAxis:{
+                        min:0,
+                        title:{
+                            text:'Rating'
+                        }
+                    },
+                    legend:{
+                        layout:'vertical',
+                        backgroundColor:'#FFFFFF',
+                        align:'left',
+                        verticalAlign:'top',
+                        x:100,
+                        y:70,
+                        floating:true,
+                        shadow:true
+                    },
+                    tooltip:{
+                        formatter:function () {
+                            return '' +
+                                    'Rating' + ': ' +  + this.y;
+                        }
+                    },
+                    plotOptions:{
+                        column:{
+                            pointPadding:0.4,
+                            borderWidth:1
+                        }
+                    },
+
+
+                    series:[
+                        {
+                            name:'Rating By Manager',
+                            data:<%= @kra_ratings_by_manager_array %>
+                        },
+                        
+                        {
+                            name:'Rating by Employee',
+                            data: <%= @kra_ratings_by_self_array %>,
+                            color:'#FE9D00'
+                        }
+                    ]
+                });
+            });
+
+        });
+    </script>
+   

@@ -21,8 +21,8 @@
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#users-collapse"> <span class="name">Users</span></a>
                 <ul id="users-collapse" class="accordion-body collapse">
                     <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
-                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %></li>
-                    <li><%= link_to "Specify User's department", new_dept_path, :remote => true %></li>               
+                    <li><%= link_to "Update User's role", new_role_user_path, :remote => true %></li>
+                    <li><%= link_to "Update User's department", new_dept_path, :remote => true %></li>               
                 </ul>
             </li>
             <li class="accordion-group">
@@ -54,9 +54,9 @@
                   <li><a href="stat_realtime.html">Realtime</a></li>
               </ul>
             </li>
-          <% elsif current_user.role == "appraisee" then %>
+          <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>
             <li class="active">
-            <%= link_to "Overall Performance", appraisal_cycles_overall_performance_path, :remote => true %>
+            <%= link_to "Overall Performance", overall_performance_appraisal_cycles_path %>
           </li>
             <li class="accordion-group">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisals </span></a>

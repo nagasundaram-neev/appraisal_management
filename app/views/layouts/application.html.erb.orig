@@ -116,8 +116,15 @@ input.error {
               </section>                
             </div>
             <div class='span4'>
+<<<<<<< HEAD
     
             
+||||||| merged common ancestors
+    <%= render :partial => "feeds" %></div>
+            
+=======
+    </div>      
+>>>>>>> 33d08f490d1fdacf70a50e5e6b35b290c3c4398d
       </div>
     </div>
   <% end %>

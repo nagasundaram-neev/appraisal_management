@@ -6,7 +6,6 @@ class AppraisalCyclesController < ApplicationController
 
   def load
     @appraisal_cycles = AppraisalCycle.all
-    
   end
 
   def create_new_appraisal_cycle
@@ -21,12 +20,18 @@ class AppraisalCyclesController < ApplicationController
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
-    
     if @appraisal_cycle.save
+<<<<<<< HEAD
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
       @appraisal_cycles = AppraisalCycle.all
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages
+||||||| merged common ancestors
+      flash[:notice] = "Successfully created."
+    
+=======
+      flash[:notice] = "Successfully created."
+>>>>>>> 33d08f490d1fdacf70a50e5e6b35b290c3c4398d
     end
   end
 

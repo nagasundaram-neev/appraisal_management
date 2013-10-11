@@ -46,6 +46,11 @@ gem "bootstrap-sass", "~> 2.3.2.2"
 gem 'bootstrap-datepicker-rails'
 #Progress bar for UI design
 gem "css3-progress-bar-rails", "~> 0.5.0"
+
+#bar graph gem 
+
+
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
