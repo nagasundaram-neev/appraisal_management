@@ -3,15 +3,16 @@ before_filter :authenticate_user!
 before_filter :require_admin
 before_filter :load, :only => [:new,:index, :create, :update]
 before_filter :create_new_role, :only => [:new,:index]
+before_action :check_selected_attributes, :only =>[:create, :update] 
 
   def load
     @roles = Role.all
   end
-  
+
   def create_new_role
     @role = Role.new
   end
-  
+
   def index
   end
 
@@ -27,11 +28,7 @@ before_filter :create_new_role, :only => [:new,:index]
     @role = Role.new(role_params)
     respond_to do |format|
       if @role.save
-        params[:kra_attrs_id][:id].each do |id|
-          if id != "" then
-            @role.save_kr_role_attr(id)
-          end
-        end
+         @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
         format.html
         format.js
       else
@@ -45,13 +42,9 @@ before_filter :create_new_role, :only => [:new,:index]
   end
 
   def update
-  	  @role = Role.find(params[:id])
-  	  params[:kra_attrs_id][:id].each do |id|
-          if id != "" then
-            @role.save_kr_role_attr(id)
-          end
-        end
+    @role = Role.find(params[:id])
     if @role.update_attributes(role_params)
+       @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
       flash[:notice] = "Successfully updated."
       @roles = Role.all
     end
@@ -76,5 +69,18 @@ before_filter :create_new_role, :only => [:new,:index]
 
   def role_params
     params.require(:role).permit(:name, :kra_attrs_id)
+  end
+
+  def check_selected_attributes
+    total = 0
+    params[:kra_attrs_id][:id].each do |id|
+      if id != "" then
+        total += KraAttr.find(id).weightage
+        p total
+      end
+    end
+   if total >100 || total < 100 then    
+    raise "total weightage is #{total}"
+   end 
   end
 end

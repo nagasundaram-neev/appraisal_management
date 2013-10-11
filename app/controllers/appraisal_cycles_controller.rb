@@ -1,12 +1,11 @@
 class AppraisalCyclesController < ApplicationController
-  
+
   before_filter :authenticate_user!
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_appraisal_cycle, :only => [:new,:index]
 
   def load
     @appraisal_cycles = AppraisalCycle.all
-    
   end
 
   def create_new_appraisal_cycle
@@ -21,10 +20,8 @@ class AppraisalCyclesController < ApplicationController
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
-    
     if @appraisal_cycle.save
       flash[:notice] = "Successfully created."
-    
     end
   end
 
@@ -50,13 +47,9 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycles = AppraisalCycle.all
   end
 
-  def overall_performance
-    #p params[:appraisal_cycle][:id] unless params[:appraisal_cycle].nil?
+  def overall_performance    
     unless params[:appraisal_cycle].nil?
-      @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
-      #p @appraisals.start_date unless @appraisals.nil?
-      @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
-      p @kra_sheets
+      @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
     end
   end
 
@@ -68,4 +61,36 @@ class AppraisalCyclesController < ApplicationController
     params.require(:appraisal_cycle).permit(:start_date,:end_date)
   end
 
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

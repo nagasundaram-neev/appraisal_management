@@ -22,12 +22,7 @@ AppraisalManagement::Application.routes.draw do
   post 'add_role', to: 'roles#add_role'
   get 'new_dept', to: 'departments#new_dept'
   post 'add_dept', to: 'departments#add_dept'
-
-  
   root :to => 'home#index'
-  
-
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
