@@ -32,9 +32,9 @@
                                 <label for="weightage" class="control-label">Weightage </label>
                                 <div class="controls controls-row">
                                     <div class="input-append span12">
-                            <%= f.text_field :weightage, :style => "width: 40px", :class => "btn btn-info", :id => 'range_val', 'data-validation' => "custom", 'data-validation-regexp' => "^(\d?[1-9]|[1-9]*\.[0-9]+|[0-9])$", :onkeyup => "document.getElementById('range_bar').value=this.value;"  %>
+                            <%= f.text_field :weightage, :style => "width: 40px", :class => "search-query", :id => 'range_val', 'data-validation' => "custom", 'data-validation-regexp' => "^(\d?[1-9]|[1-9]*\.[0-9]+|[0-9])$", :onkeyup => "document.getElementById('range_bar').value=this.value;"  %>
                                     <span class="add-on">%</span>
-                                        <input type=range id='range_bar' min = "1" max = "99" class = "add-on " onchange = "document.getElementById('range_val').value=this.value;">
+                                        <input type=range id='range_bar' min = "1" max = "99" class = "add-on" onchange = "document.getElementById('range_val').value=this.value;">
                                                   
                                     </div>
                                 </div>

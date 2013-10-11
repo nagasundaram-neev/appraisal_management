@@ -44,7 +44,7 @@ document.getElementById("roles_form").style.display='none';
                                     </label>
                                     <div class="controls">
                                       
-                                        <%= collection_select(:kra_attrs_id, :id, KraAttr.all, :id, :name, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1", :multiple => "true"}) %>
+                                        <%= collection_select(:kra_attrs_id, :id, KraAttr.all, :id, "name_and_weightage", {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1", :multiple => "true"}) %>
 
                                             
                                         </select>
