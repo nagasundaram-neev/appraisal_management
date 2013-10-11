@@ -72,43 +72,36 @@
                            </small>
                          </td>
                          <% if current_user.role == 'appraisee' %>
-                                      <td>
-                                        <%= form_for(@kra_rating, :remote =>
-                                          true) do |f|  %>
-                                          <%= f.hidden_field :kra_sheet_id, :value =>
-                                            "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
-                                            <%= f.hidden_field :kra_attr_id, :value =>
-                                              "#{kra_attr.id}" %>
-                                              <%= f.hidden_field :rated_by, :value =>
-                                                0 %>
-                                                <section class="widget">
-                                          <span id='<%= "self-rating_#{kra_attr.id}" %>'></span>
-                      <%= f.text_field :rating,:style =>"width: 20px", :id =>
-                        "self-result_#{kra_attr.id}",  :value =>0, :class =>
-                        "btn btn-success search-query"%>
-                        
-                            
-                            <%= f.text_area :comment, :class =>
-                              "elastic-textarea autogrow input-block-level", :placeholder =>
-                              "Commetnts", :rows =>"5", :id =>"self-cmt_#{kra_attr.id}"  %>
-                              
-                              
-                              
-                        <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#self-rating_#{kra_attr.id}').hide(); $('#self-cmt_#{kra_attr.id}').hide(); " %>
-                          
-                          
-                        </td>
-                      </section>
-                      </td>
-                      
-                      <%end%>
-                        <%end%>
-                          
-                          <% if current_user.role == "appraiser" %>
-                            
-                            
+                           <td>
+                             <%= form_for(@kra_rating, :remote => true) do |f|  %>
+                               <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
+                               <%= f.hidden_field :kra_attr_id, :value => "#{kra_attr.id}" %>
+                               <%= f.hidden_field :rated_by, :value => 0 %>
+                               <section class="widget">
+                                 <span id=<%= "self-rating_#{kra_attr.id}" %> >
+                                 </span>
+                                 <% rating_val = kr_attr_rating(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
+                                 <% rating_comment = kr_attr_comment(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
+
+                                 <h1><%= "#{@kr_atr_rating}"  %></h1>
+                                 <% if kr_attr_rating(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0) != nil then %>
+                                   <h1>HELLO</h1>
+                                   <p><%= rating_val %></p>
+                                <% else%>
+                                  <%= f.text_field :rating,:style =>"width: 20px", :id => "self-result_#{kra_attr.id}",  :value =>0, :class => "btn btn-success search-query"%>
+                                <% end %>
+                                <% unless rating_comment.nil? then %>
+                                  <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"self-cmt_#{kra_attr.id}", :value => rating_comment  %>
+                                <% else %>
+                                  <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"self-cmt_#{kra_attr.id}"  %>
+                                <% end %>
+                                 <%= f.submit "Save", :class => "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#self-rating_#{kra_attr.id}').hide(); $('#self-cmt_#{kra_attr.id}').hide(); " %>
+                               </section>
+                             <% end %>
+                           </td>
+                         <%end%>
+                         <% if current_user.role == "appraiser" %>
                             <td>
-                              
                               <%= form_for(@kra_rating, :remote =>
                                 true ) do |f|  %>
                                 <%= f.hidden_field :kra_sheet_id, :value =>
@@ -125,26 +118,15 @@
                                     "manager-result_#{kra_attr.id}",  :value =>
                                     0, :class =>
                                     "btn btn-success search-query" %>
-                                    
-                                    
-                                        
                                         <%= f.text_area :comment, :class =>
                                           "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"man-cmt_#{kra_attr.id}"   %>
-                                          
-                                          
-                                          
                                     <%= f.submit "Save", class: "btn btn-primary", :onclick =>
                                       "this.disabled=true; this.value='Saved'; $('#manager-rating_#{kra_attr.id}').hide();$('#man-cmt_#{kra_attr.id}').hide();   " %>
                                     </section>
                                   </td>
-                                  
                                   <%end%>
                                     <%end%>
                                     </tr>
-                                    
-                                    
-                                    
-                                    
                                     <script type="text/javascript">
                                       $('<%= "#self-rating_#{kra_attr.id}" %>').raty({
                                         path     : '/assets',
@@ -172,9 +154,7 @@
                                         hover: function(score, evt) {
                                           document.getElementById('<%= "self-result_#{kra_attr.id}" %>').value=score;
                                         }
-                                        
-                                      }
-                                                                                    );
+                                      }     );
                                       $('<%= "#manager-rating_#{kra_attr.id}" %>').raty({
                                         path     : '/assets',
                                         cancel   : false,
