@@ -16,19 +16,13 @@ class KraAttrsController < ApplicationController
   
   def create
     @kra_attr = KraAttr.new(kra_attr_params)
-    #respond_to do |format|
-
-       
       if @kra_attr.save
-        flash[:notice] = "Successfully created the KRA Attributes."
+        flash[:notice] = "A KRA Attribute has been successfully created."
         @kra_attrs=KraAttr.all
-        #format.html
-        #format.js
-        #else
-        #format.html
+        else
+        flash[:notice] = @kra_attr.errors.full_messages
       end
-    #end
-  end
+    end
 
   def edit
     @kra_attr = KraAttr.find(params[:id])
@@ -41,17 +35,19 @@ class KraAttrsController < ApplicationController
   def update
     @kra_attr = KraAttr.find(params[:id])
     if @kra_attr.update(kra_attr_params)
-      flash[:notice] = "Successfully updated KRA Attributes."
+      flash[:notice] = "KRA Attribute has been successfully updated."
       @kra_attrs = KraAttr.all
+    else
+      flash[:notice] = @kra_attr.errors.full_messages
     end
   end
   
   def destroy
     @kra_attr = KraAttr.find { params[:id]  }
     @kra_attr.destroy
-    flash[:notice] = "Successfully destroyed."
+    flash[:notice] = "KRA Attribute has been successfully destroyed."
     @kra_attrs = KraAttr.all
-    #format.html
+    
   end
   
   def kra_attr_params

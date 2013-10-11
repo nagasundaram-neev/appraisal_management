@@ -1,4 +1,8 @@
+<% if @appraisal_cycle.errors.any? -%>
+$('#app_cycle_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
 $(":input:not(input[type=submit])").val("");
-$("#body-content").html("")
 $("#body-content").html("<%= escape_javascript( render(:partial => "appraisal_cycles") ) %>");
-
+$('#app_cycle_notice').show()
+<% end -%>
