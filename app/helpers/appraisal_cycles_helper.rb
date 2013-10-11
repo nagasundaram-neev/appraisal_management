@@ -37,4 +37,11 @@ module AppraisalCyclesHelper
 		end
 		return (sum*10).round(2)
 	end
+  def user_appraisal_cycle
+    @usr_aprsl_cycles = []
+    kr_sheets = current_user.kra_sheets.where("appraisee_status = (?) and appraiser_status = (?)", 1,1)
+    kr_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
+    @usr_aprsl_cycles
+  end
+
 end

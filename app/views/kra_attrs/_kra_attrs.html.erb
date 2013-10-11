@@ -19,7 +19,8 @@
 <table class="table table-hover">
   <tbody><tr>
     <th>Title</th>
-    <th>Descriptopm</th>
+    <th>DescriptoN</th>
+    <th>Weightage</th>
     <th></th>
     <th></th>
   </tr>
@@ -28,6 +29,7 @@
     <tr>
       <td><%= kra_attr.name %></td>
       <td><%= kra_attr.desc %></td>
+      <td><%= kra_attr.weightage %></td>
       <td><%= link_to "Edit", edit_kra_attr_path(kra_attr), :remote => true, class: "btn btn-warning" %></td>
       <td><%= link_to "Destroy", kra_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"  %></td>
     </tr>
