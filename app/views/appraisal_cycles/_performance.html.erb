@@ -1,4 +1,5 @@
 <% @kra_sheets.each do |kra_sheet| %>
+
   <% if kra_sheet.appraisee_status==false %>
     <div class="alert alert-error">  
       <a class="close" data-dismiss="alert">×</a>  
@@ -100,14 +101,22 @@
                  <%= current_user.first_name %>
               </h4>
           </header>
-          <div class="body">
+          <div id="status" class="body">
               <blockquote>
                </textarea>
-               <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
-                 <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
-                 <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form</h4></strong>
+               <% if @flag=="0" %>
+                 <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
+                  <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for Manager</h4></strong>
                 <% end %>
+              <% else %>
+                 <% unless @status=kra_sheet.appraiser_status %>
+                  <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for HR</h4></strong>
+                <% end %>
+              <% end %>
               </blockquote>
           </div>
       </section>

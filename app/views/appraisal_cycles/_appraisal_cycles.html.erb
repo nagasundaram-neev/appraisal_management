@@ -41,7 +41,7 @@
                             <td><%= appraisal_cycle.end_date %></td>
                             <td>
                               <li class="active">
-                                <%= link_to "View", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => appraisal_cycle.id}), :remote => true  %>
+                                <%= link_to "View", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => appraisal_cycle.id,:flag=> 0}), :remote => true  %>
                               </li>
                             </td>
                             <td></td>

@@ -18,7 +18,7 @@ class DepartmentsController < ApplicationController
 
 
   def index
-    raise @departments.inspect
+    
   end
 
   def create

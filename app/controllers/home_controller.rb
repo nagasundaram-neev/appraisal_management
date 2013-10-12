@@ -7,4 +7,7 @@ class HomeController < ApplicationController
   end
   def get_appraisees
   end
+  def get_past_appraisees
+  	@kra_sheets=KraSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1)
+  end
 end

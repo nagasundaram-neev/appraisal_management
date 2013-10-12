@@ -71,6 +71,7 @@
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraise Orhers</span></a>
                 <ul id="appraise-collapse" class="accordion-body collapse">
                     <li><%= link_to "All Appraisees", get_appraisees_path, :remote => true %></li>
+                    <li><%= link_to "Previous Appraisees", get_past_appraisees_path, :remote => true %></li>
                 </ul>
             </li>
           <% end %>
