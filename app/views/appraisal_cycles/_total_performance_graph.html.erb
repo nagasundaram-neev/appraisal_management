@@ -1,4 +1,21 @@
-<div id="container" style="width: 60%; height: 380px;"></div>
+<div class="row-fluid">
+          <div class="span12">
+              <h2 class="page-title">Dashboard </h2>
+          </div>
+          <div class="row-fluid" id="body-content">
+            <div class="span8">
+              <section class="widget">
+                <header>
+                  <h4>
+                    <i class="icon-group"></i>
+                    Visits
+                    <small>
+                        Based on a three months data
+                    </small>
+                  </h4>
+                </header>
+                <div class = "body">
+                  <div id="container" style="width: 60%; height: 300px;"></div>
 <%= hidden_field_tag "kra_attr_list", @kra_attr_list.to_a %>
     <script>
         $(function () {
@@ -47,7 +64,7 @@
                         backgroundColor:'#FFFFFF',
                         align:'left',
                         verticalAlign:'top',
-                        x:500,
+                        x:400,
                         y:0,
                         floating:true,
                         shadow:true
@@ -55,7 +72,7 @@
                     tooltip:{
                         formatter:function () {
                             return '' +
-                                    'Rating' + ': ' +  + this.y;
+                                    'Performance' + ': ' +  + this.y;
                         }
                     },
                     plotOptions:{
@@ -68,13 +85,13 @@
 
                     series:[
                         {
-                            name:'Rating By Manager',
-                            data:<%= @kra_ratings_by_manager_array %>
+                            name:' Rating By Manager',
+                            data:<%= @performance_manager_array %>
                         },
                         
                         {
-                            name:'Rating by Employee',
-                            data: <%= @kra_ratings_by_self_array %>,
+                            name:' Rating by Employee',
+                            data: <%= @performance_self_array %>,
                             color:'#FE9D00'
                         }
                     ]
@@ -84,3 +101,11 @@
         });
     </script>
    
+                </div>
+                  
+              </section>                
+            </div>
+
+
+
+

@@ -18,13 +18,14 @@ class KraRating < ActiveRecord::Base
 		@kra_attrs
 	end
 
-	def find_kra_sheet_self(id)		
+	def find_kra_sheet_self(id) 		
 		@kra_sheet=KraSheet.where(:appraisee_status => 0, :appraisee_id => id).last.id
+		
 	end
 
-	def find_kra_sheet_manager(id) 
+	def find_kra_sheet_manager(id,appraisee_id) 
 	  p current_user.kra_sheet
-		@kra_sheet=KraSheet.where(:appraiser_status => 0,:appraiser_id => id).all[0].id
+		@kra_sheet=KraSheet.where(:appraiser_status => 0,:appraiser_id => id, :appraisee_id => appraisee_id).first.id
 	end
 	
 

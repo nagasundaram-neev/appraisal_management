@@ -19,10 +19,11 @@
     <th>Email</th>
   </tr>
 
-  <% current_user.appraiser_kra_sheets.each do |sheet| %>
+  <% @appraisees.each do |sheet| %>
     <tr>
       <td><%= sheet.appraisee.first_name %></td>
       <td><%= sheet.appraisal_cycle.end_date %></td>
+      <td><%= link_to "Appraisee", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
       <td><%= link_to "Current Appraisal", kra_ratings_path, :remote => true %></td>
       <td><%= sheet.appraisee.email %></td>
     </tr>

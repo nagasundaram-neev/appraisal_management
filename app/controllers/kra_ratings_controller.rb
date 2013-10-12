@@ -12,6 +12,8 @@ before_filter :load, :only => [:new,:index]
   end
 
   def index
+    @flag = params[:appraisee_id][:flag]
+    @appraisee_id  = params[:appraisee_id][:id]
     @kra_ratings = KraRating.all
   end
 def create

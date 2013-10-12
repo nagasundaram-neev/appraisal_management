@@ -6,5 +6,15 @@ class HomeController < ApplicationController
     end
   end
   def get_appraisees
+    begin
+      @appraisees = current_user.appraiser_kra_sheets.where(:appraiser_status => 0)
+      if @appraisees.first.nil? then
+        return nil
+      else
+        return @appraisees
+      end
+    rescue
+      return nil
+    end
   end
 end

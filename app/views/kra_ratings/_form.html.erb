@@ -71,7 +71,7 @@
                              <%= kra_attr.measures %>
                            </small>
                          </td>
-                         <% if current_user.role == 'appraisee' %>
+                         <% if (current_user.role == 'appraisee dnt wrk'|| current_user.role == 'appraiser dnt wrk') && @flag == nil %>
                            <td>
                              <%= form_for(@kra_rating, :remote => true) do |f|  %>
                                <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
@@ -100,12 +100,12 @@
                              <% end %>
                            </td>
                          <%end%>
-                         <% if current_user.role == "appraiser" %>
+                         <% if current_user.role == "appraiser"  then  %>
                             <td>
                               <%= form_for(@kra_rating, :remote =>
                                 true ) do |f|  %>
                                 <%= f.hidden_field :kra_sheet_id, :value =>
-                                  "#{@kra_rating.find_kra_sheet_manager(current_user.id)}" %>
+                                  "#{@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee_id)}" %>
                                   <%= f.hidden_field :kra_attr_id, :value =>
                                     "#{kra_attr.id}" %>
                                     <%= f.hidden_field :rated_by, :value =>
@@ -180,9 +180,7 @@
                                                                                        );
                                     </script>
                                     <%end%>
-                                      
                                     </tbody>
-                                    
                                   </table>
                                   <div class="clearfix">
                                     <div class="pull-right">
