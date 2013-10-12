@@ -57,7 +57,7 @@
           <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>
             <li class="accordion-group">
               <li class="active">
-              <%= link_to "Overall Performance", overall_performance_appraisal_cycles_path, :remote => true %>
+              <%= link_to "Overall Performance", total_performance_graph_appraisal_cycles_path, :remote => true %>
               </li>
             </li>
             <li class="accordion-group">
