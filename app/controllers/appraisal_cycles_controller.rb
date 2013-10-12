@@ -51,6 +51,8 @@ class AppraisalCyclesController < ApplicationController
     unless params[:appraisal_cycle].nil?
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
       @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id).last  
+      @appraiser=User.find(@kra_sheets.last.appraiser_id)
+      @appraisee=User.find(@kra_sheets.last.appraisee_id)
     end
   end
 

@@ -3,7 +3,18 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+ include Warden::Test::Helpers
+   module RequestHelpers
+      def create_logged_in_user
+        user = Factory(:user)
+        login(user)
+        user
+      end
 
+      def login(user)
+        login_as user, scope: :user
+      end
+    end
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -52,4 +63,6 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+
 end
