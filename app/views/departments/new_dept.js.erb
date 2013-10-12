@@ -1,1 +1,6 @@
 $("#body-content").html("<%= escape_javascript( render(:partial => "new_dept") ) %>");
+<% if flash[:error] -%>
+	$('#user_dept_errors').show(100)
+<% else -%>
+$('#user_dept_errors').hide(100)
+<% end -%>

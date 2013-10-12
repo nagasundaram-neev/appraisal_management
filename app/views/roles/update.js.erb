@@ -1,4 +1,7 @@
-$(":input:not(input[type=submit])").val("");
+<% if @role.errors.any? -%>
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+$('#role_errors').show()
+<% else -%>
 $("#body-content").html("<%= escape_javascript( render(:partial => "roles") ) %>");
-
-$("#roles_form").hide();
+$('#role_notice').show()
+<% end -%>

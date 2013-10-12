@@ -51,6 +51,8 @@ gem "css3-progress-bar-rails", "~> 0.5.0"
 
 
 
+gem "css3-progress-bar-rails", "~> 0.5.0"
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

@@ -9,20 +9,20 @@
               <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
                   <li><%= link_to "Appraisal Cycles", appraisal_cycles_path, :remote => true %></li>
                   <li><%= link_to "New Appraisal Cycle", new_appraisal_cycle_path, :remote => true %></li>                          
-              </ul>
+              </ul>            
             </li>
             <li class="accordion-group">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#roles-collapse"> <span class="name">Roles</span></a>
               <ul id="roles-collapse" class="accordion-body collapse">
                   <li><%= link_to "Roles", roles_path, :remote => true %></li>   <li><%= link_to "New Role", new_role_path, :remote => true %></li>                          
-              </ul>
+              </ul>            
             </li>
             <li class="accordion-group">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#users-collapse"> <span class="name">Users</span></a>
                 <ul id="users-collapse" class="accordion-body collapse">
                     <li><%= link_to "Add New User", new_user_registration_path, :remote => true %></li>
-                    <li><%= link_to "Update User's role", new_role_user_path, :remote => true %></li>
-                    <li><%= link_to "Update User's department", new_dept_path, :remote => true %></li>               
+                    <li><%= link_to "Specify User's role", new_role_user_path, :remote => true %></li>
+                    <li><%= link_to "Specify User's department", new_dept_path, :remote => true %></li>               
                 </ul>
             </li>
             <li class="accordion-group">
@@ -54,10 +54,10 @@
                   <li><a href="stat_realtime.html">Realtime</a></li>
               </ul>
             </li>
-          <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>
+          <% elsif current_user.role == "appraisee" then %>
             <li class="active">
-            <%= link_to "Overall Performance", overall_performance_appraisal_cycles_path %>
-            </li>
+            <%= link_to "Overall Performance", appraisal_cycles_overall_performance_path, :remote => true %>
+          </li>
             <li class="accordion-group">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisals </span></a>
               <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
@@ -65,14 +65,6 @@
                   <li><%= link_to "Current Appraisal", kra_ratings_path, :remote => true %></li>                          
               </ul>
             </li>
-          <% end %>
-          <% if current_user.role == "appraiser" then%>
-            <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraise Orhers</span></a>
-                <ul id="appraise-collapse" class="accordion-body collapse">
-                    <li><%= link_to "All Appraisees", get_appraisees_path, :remote => true %></li>
-                </ul>
-            </li>
-          <% end %>
+          <% end %>       
       </ul>
 </nav>

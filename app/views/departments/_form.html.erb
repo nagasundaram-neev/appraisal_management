@@ -10,13 +10,18 @@
             <section class="widget">
           <header>
             <h4>Department <small>Add new department.</small>
-              <button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#dept_form').hide()">x</button></h4>
+              <button type="button" class="btn btn-danger btn-mini icon-remove pull-right" onclick="$('#dept_form').hide()"></button></h4>
           </header>
           <div class="body">
             <%= form_for(@department, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
               
               <fieldset>
                 <legend class="section">Info </legend>
+                <div class="flash_notice" id='dept_errors'>
+                                    <div class="alert alert-error">
+                                        <%= notice %>
+                                     </div>
+                                    </div>
                   <div class="control-group">
                     <label for="name" class="control-label">Department Name <span class="required">*</label>
                       <div class="controls controls-row">
@@ -29,7 +34,7 @@
 
               <div class="form-actions">
                 <%= f.submit :class => "btn btn-primary"%>
-                <button type="button" class="btn btn-xs" onclick="$('#dept_form').hide()">Close</button>
+                <button type="button" class="btn btn-xs icon-remove-sign" onclick="$('#dept_form').hide()"> Close</button>
               </div>
             <% end %>
           </div>

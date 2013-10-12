@@ -26,14 +26,11 @@ before_action :check_selected_attributes, :only =>[:create, :update]
 
   def create
     @role = Role.new(role_params)
-    respond_to do |format|
       if @role.save
         @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
-        format.html
-        format.js
+        flash[:notice] = "A New Role has been Successfully Created."
       else
-        format.html {}
-      end
+        flash[:notice] = @role.errors.full_messages
     end
   end
 
@@ -42,11 +39,12 @@ before_action :check_selected_attributes, :only =>[:create, :update]
   end
 
   def update
-    @role = Role.find(params[:id])
-    if @role.update_attributes(role_params)
-       @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
-      flash[:notice] = "Successfully updated."
+  	  @role = Role.find(params[:id])
+  	  if @role.update_attributes(role_params)
+      flash[:notice] = "Role has been Successfully updated."
       @roles = Role.all
+    else
+    flash[:notice] = @role.errors.full_messages
     end
   end
 
@@ -54,13 +52,23 @@ before_action :check_selected_attributes, :only =>[:create, :update]
     @role = Role.find(params[:id])
     @role.destroy
     flash[:notice] = "Successfully destroyed."
-    @roles = role.all
+    @roles = Role.all
   end
 
   def add_role
+    unless params[:user_id][:id].eql?("")
     user  = User.find(params[:user_id][:id])
-    user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save
+    if user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save
+      flash[:notice] = "Role Successfully Assigned to User."
+      @roles = Role.all
+    else
+      flash[:error] = "Please Select the proper Role and Appraisal Cycle."
+    end
+  else
+    flash[:error] = "Please select the user"
+    render :action => "new_role"
   end
+end
 
   def new_role
   @role = Role.new
@@ -79,8 +87,10 @@ before_action :check_selected_attributes, :only =>[:create, :update]
         p total
       end
     end
-   if total >100 || total < 100 then    
-    raise "total weightage is #{total}"
+   if total >100 then 
+     
+     flash[:notice] = "Total weightage is #{total} (it should be less than 100)"
+      
    end 
   end
 end

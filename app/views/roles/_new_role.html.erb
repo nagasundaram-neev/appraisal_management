@@ -1,3 +1,4 @@
+<script type="text/javascript">$.validate();</script> 
 <div id="user_role">
 <div class="row-fluid">
           <div class="span12">
@@ -8,17 +9,22 @@
             <div class="span8">
             <section class="widget">
           <header>
-            <h4><small>Role of User.</small><button type="button" class="btn btn-xs btn-danger pull-right " onclick="$('#user_role').hide()">x</button></h4>
+            <h4><small>Role of User.</small><button type="button" class="btn btn-mini btn-danger icon-remove pull-right " onclick="$('#user_role').hide()"></button></h4>
           </header>
           <div class="body">
             
             <%= form_tag("/add_role", method: "post", :id => "new_role", :class => "new_role", :remote => true) do %>
               <fieldset>
                 <legend class="section">User </legend>
+                <div class="flash_notice" id='user_role_errors'>
+                    <div class="alert alert-error">
+                        <%= flash[:error] %>
+                  </div>
+                  </div>
                   <div class="control-group">
                     <label for="name" class="control-label">Select User <span class="required">*</label>
                       <div class="controls controls-row">
-                        <%= collection_select(:user_id, :id, User.all, :id, :first_name, :prompt => "select user") %>
+                        <%= collection_select(:user_id, :id, User.all, :id, :first_name, :prompt => "select user", :id => 'user-id',) %>
                         </select>
                       </div>
                   </div>
@@ -28,7 +34,7 @@
                   <div class="control-group">
                     <label for="name" class="control-label">Select Role <span class="required">*</label>
                       <div class="controls controls-row">
-                        <%= collection_select(:role_id, :id, Role.all, :id, :name, :prompt => "select role") %>
+                        <%= collection_select(:role_id, :id, Role.all, :id, :name, :prompt => "select role", 'data-validation' => "required") %>
                         
                         </select>
                       </div>
@@ -40,15 +46,18 @@
                   <div class="control-group">
                     <label for="name" class="control-label">Select Appraisal Cycle <span class="required">*</label>
                       <div class="controls controls-row">
-                        <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date, :prompt => "select appraisal cycle") %>
+                        <div class='selectpicker'>
+                        <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date, :prompt => "select appraisal cycle" ) %>
+                      </div>
                         </select>
+
                       </div>
                   </div>
               </fieldset>
 
               <div class="form-actions">
-                <input type="submit" value="add" class="btn btn-primary">
-                <button type="button" class="btn" onclick="$('#user_role').hide()">Cancel</button>
+                <input type="submit" value="Add" class="btn btn-primary">
+                <button type="button" class="btn icon-remove-sign" onclick="$('#user_role').hide()"> Close</button>
               </div>
 
             <% end %>
@@ -57,3 +66,16 @@
             </div>
           </div>
 </div>          
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('#new_role').validate({ // initialize the plugin
+        rules: {
+            user_id_id: {
+                required: true,
+            }
+        }
+    });
+
+});
+</script>

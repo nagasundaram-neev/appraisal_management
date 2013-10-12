@@ -1,1 +1,7 @@
+<% if @role.errors.any? -%>
+$('#role_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
 $("#body-content").html("<%= escape_javascript( render(:partial => "roles") ) %>");
+$('#role_notice').show()
+<% end -%>

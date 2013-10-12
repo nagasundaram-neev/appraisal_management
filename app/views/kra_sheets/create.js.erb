@@ -1,2 +1,8 @@
+<% if @kra_sheet.errors.any? -%>
+$('#sheet_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
 $(":input:not(input[type=submit])").val("");
 $("#body-content").html("<%= escape_javascript( render(:partial => "kra_sheet") ) %>");
+$('#sheet_notice').show()
+<% end -%>
