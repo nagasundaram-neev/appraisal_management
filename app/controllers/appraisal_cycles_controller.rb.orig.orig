@@ -1,5 +1,13 @@
 class AppraisalCyclesController < ApplicationController
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
   include AppraisalCyclesHelper
+>>>>>>> 5523de745007944e02b98738bc20437356c14798
+=======
+  include AppraisalCyclesHelper
+>>>>>>> c96717110d4484b9a621e2c4576dba18a6019921
   before_filter :authenticate_user!
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_appraisal_cycle, :only => [:new,:index]
@@ -15,16 +23,36 @@ class AppraisalCyclesController < ApplicationController
   def new
   end
 
+<<<<<<< HEAD
+
+  def index
+  end
+
+  
+
+  def create
+    @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
+    if @appraisal_cycle.save
+      flash[:notice] = "Successfully created."
+=======
   def index
   end
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
     if @appraisal_cycle.save
+<<<<<<< HEAD
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
       @appraisal_cycles = AppraisalCycle.all
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages
+||||||| merged common ancestors
+      flash[:notice] = "Successfully created."
+    
+=======
+      flash[:notice] = "Successfully created."
+>>>>>>> 33d08f490d1fdacf70a50e5e6b35b290c3c4398d
+>>>>>>> c96717110d4484b9a621e2c4576dba18a6019921
     end
   end
 
@@ -39,34 +67,57 @@ class AppraisalCyclesController < ApplicationController
   def update
     @appraisal_cycle = AppraisalCycle.find(params[:id])
     if @appraisal_cycle.update(appraisal_cycle_params)
+<<<<<<< HEAD
+      flash[:notice] = "Successfully updated."
+      @appraisal_cycles = AppraisalCycle.all
+=======
       flash[:notice] = "Appraisal Cycle has been successfully updated."
       @appraisal_cycles = AppraisalCycle.all
     else
       flash[:notice] = @appraisal_cycle.errors.full_messages
+>>>>>>> c96717110d4484b9a621e2c4576dba18a6019921
     end
   end
   def destroy
     @appraisal_cycle = AppraisalCycle.find(params[:id])
     @appraisal_cycle.destroy
+<<<<<<< HEAD
+    flash[:notice] = "Successfully destroyed post."
+    @appraisal_cycles = AppraisalCycle.all
+  end
+
+<<<<<<< HEAD
+  def overall_performance    
+    unless params[:appraisal_cycle].nil?
+      @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
+=======
+  def overall_performance
+    unless params[:appraisal_cycle].nil?
+      @appraisals=AppraisalCycle.find(params[:appraisal_cycle][:id]) unless params[:appraisal_cycle].nil?
+      @kra_sheets=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id)
+      @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => @appraisals.id, :appraisee_id => current_user.id).last    
+>>>>>>> 5523de745007944e02b98738bc20437356c14798
+=======
     flash[:notice] = "Successfully removed."
     @appraisal_cycles = AppraisalCycle.all
   end
 
-  def overall_performance
+  def overall_performance    
     unless params[:appraisal_cycle].nil?
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
       @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id).last  
+>>>>>>> c96717110d4484b9a621e2c4576dba18a6019921
     end
   end
 
   def total_performance_graph
-    @kra_sheets=current_user.kra_sheets
+    @kra_sheets=KraSheet.where(:appraisee_id=>current_user.id)
     @performance_manager_array=[]
     @performance_self_array=[]
     @kra_sheets.each do |kra_sheet|
-      @kra_sheet_temp = kra_sheet
-      @performance_manager_array << performance_sum
-      @performance_self_array << performance_sum_self
+      @kra_sheet_temp=kra_sheet
+      @performance_manager_array<<performance_sum
+      @performance_self_array<<performance_sum_self
     end
   end
 
@@ -88,4 +139,39 @@ class AppraisalCyclesController < ApplicationController
     params.require(:appraisal_cycle).permit(:start_date,:end_date)
   end
 
+
 end
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+>>>>>>> c96717110d4484b9a621e2c4576dba18a6019921

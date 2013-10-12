@@ -6,6 +6,7 @@ class AppraisalCyclesController < ApplicationController
 
   def load
     @appraisal_cycles = AppraisalCycle.all
+    
   end
 
   def create_new_appraisal_cycle
@@ -20,6 +21,7 @@ class AppraisalCyclesController < ApplicationController
 
   def create
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
+    
     if @appraisal_cycle.save
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
       @appraisal_cycles = AppraisalCycle.all
@@ -52,7 +54,7 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycles = AppraisalCycle.all
   end
 
-  def overall_performance
+  def overall_performance    
     unless params[:appraisal_cycle].nil?
       @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
       @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id).last  
@@ -87,5 +89,6 @@ class AppraisalCyclesController < ApplicationController
   def appraisal_cycle_params
     params.require(:appraisal_cycle).permit(:start_date,:end_date)
   end
+
 
 end

@@ -30,7 +30,7 @@ class DepartmentsController < ApplicationController
       end
   end
 
-  def edit 
+  def edit
   @department = Department.find(params[:id])
   end
 
@@ -43,10 +43,9 @@ class DepartmentsController < ApplicationController
     if @department.update_attributes(department_params)
       flash[:notice] = "Department has been Successfully Updated."
       @departments = Department.all
-      else
-        flash[:notice] = @department.errors.full_messages
-      end
-
+    else
+      flash[:notice] = @department.errors.full_messages
+    end
   end
 
   def destroy
@@ -71,8 +70,8 @@ class DepartmentsController < ApplicationController
   end
   def new_dept
   @dept = Department.new
-  end 
-  
+  end
+
   def department_params
     params.require(:department).permit(:name)
   end
