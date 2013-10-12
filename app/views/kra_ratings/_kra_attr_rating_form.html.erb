@@ -1,0 +1,63 @@
+
+<script>$.validate();
+function checkvalue(val)
+{if ( val > 10  )alert("Value should be less then or equal to 10");}
+</script>
+<div id='kra_attr_rating_form'>
+	
+<div class="popover" style="margin:0px 500px 100px -100px;width:500px; display:block;">
+<h3 class="popover-title">
+	<button type="button" class="pull-right btn btn-mini btn-danger icon-remove icon-large" onclick="$('#kra_attr_rating_form').hide()"></button>
+	<b>Update the Rating & comments</b>
+</h3>
+  
+<div class="popover-content">
+<%= form_for(@kra_rating, :remote => true, :id => "edit_form") do |f|  %>
+  <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.kra_sheet_id}" %>
+  <%= f.hidden_field :kra_attr_id, :value => "#{@kra_rating.kra_attr_id}" %>
+  <%= f.hidden_field :rated_by, :value => 0 %>
+<span id='<%= "self-rating_#{@kra_rating.kra_attr_id}" %>' >  </span>
+Rating:
+<%= f.text_field :rating,:style =>"width: 30px", :id => "self-result_#{@kra_rating.kra_attr_id}", 'data-validation'=> "number", 'data-validation-allowing'=> "float",:onblur => "checkvalue(this.value)"  %> 
+
+                                                                                                 
+<%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts",'data-validation'=> "required", :rows =>"5", :id =>"self-cmt_#{@kra_rating.kra_attr_id}"  %>
+                                
+<%= f.submit 'Save', :remote => true, :class => "btn btn-primary pull-right" %>
+
+<script type="text/javascript">
+                                      $('<%= "#self-rating_#{@kra_rating.kra_attr_id}" %>').raty({
+                                        path     : '/assets',
+                                        cancel   : false,
+                                        cancelPlace: 'right',
+                                        cancelOff: 'cancel-off-big.png',
+                                        cancelOn : 'cancel-on-big.png',
+                                        half     : true,
+                                        size     : 10,
+                                        starHalf : 'star-half-big.png',
+                                        starOff  : 'star-off-big.png',
+                                        starOn   : 'star-on-big.png',
+                                        target    : '<%= "#self-result_#{@kra_rating.kra_attr_id}" %>',
+                                        targetType: 'score',
+                                        targetKeep: true,
+                                        number: 10,
+                                        mouseover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@kra_rating.kra_attr_id}" %>').value=score;
+                                        }
+                                        ,
+                                        mousemove: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@kra_rating.kra_attr_id}" %>').value=score;
+                                        }
+                                        ,
+                                        hover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@kra_rating.kra_attr_id}" %>').value=score;
+                                        }
+                                      }     );
+   </script>
+   <% end %>
+</div>
+</div>
+</div>
+
+
+                                

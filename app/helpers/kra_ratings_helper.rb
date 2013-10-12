@@ -2,6 +2,14 @@ module KraRatingsHelper
 	def find_current_user
 		current_user.id
 	end
+  def kr_attr_rating_obj(kr_sheet_id, kr_attr_id, rated_by)
+    begin
+      @kr_atr_rating_obj =   KraRating.select("*").where(:kra_sheet_id => kr_sheet_id, :kra_attr_id => kr_attr_id, :rated_by => rated_by).first
+      return  @kr_atr_rating_obj
+    rescue NoMethodError
+      return nil
+    end
+  end
 
   def kr_attr_rating(kr_sheet_id, kr_attr_id, rated_by)
     begin
@@ -10,7 +18,6 @@ module KraRatingsHelper
     rescue NoMethodError
       return nil
     end
-
   end
 
   def kr_attr_comment(kr_sheet_id, kr_attr_id, rated_by)
