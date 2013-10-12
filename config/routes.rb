@@ -13,7 +13,7 @@ AppraisalManagement::Application.routes.draw do
   resources :appraisal_cycles do
     collection do
       get 'overall_performance'
-      post 'performance_graph'
+      get 'performance_graph'
       post 'total_performance_graph'
     end
   end

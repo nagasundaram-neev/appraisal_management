@@ -44,6 +44,7 @@ gem "less-rails", "~> 2.4.2"
 gem "font-awesome-rails", "~>3.2.1.3"
 gem "bootstrap-sass", "~> 2.3.2.2"
 gem 'bootstrap-datepicker-rails'
+gem "font-awesome-rails", "~> 3.2.1.3"
 #Progress bar for UI design
 gem "css3-progress-bar-rails", "~> 0.5.0"
 

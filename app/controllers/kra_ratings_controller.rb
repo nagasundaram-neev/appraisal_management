@@ -1,6 +1,6 @@
 class KraRatingsController < ApplicationController
 before_filter :authenticate_user!
-
+skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
 
   def load
@@ -12,19 +12,15 @@ before_filter :load, :only => [:new,:index]
   end
 
   def index
+    @flag = params[:appraisee_id][:flag]
+    @appraisee_id  = params[:appraisee_id][:id]
     @kra_ratings = KraRating.all
   end
 def create
     @kra_rating = KraRating.new(kra_rating_params)
-    respond_to do |format|
-      if @kra_rating.save
-        flash[:notice] = "Successfully created the KRA Attributes."
+    if @kra_rating.save
+        flash[:notice] = "Successfully saved the ratings."
         @kra_ratings=KraRating.all
-        format.html
-        format.js
-        else
-        format.html
-      end
     end
   end
 
@@ -39,9 +35,13 @@ def create
 
   def update
     @kra_rating= KraRating.find(params[:id])
-    if @kra_rating.update(kra_rating_params)
-      flash[:notice] = "Successfully updated."
-      @kra_ratings = KraAttr.all
+     respond_to do |format|
+     if @kra_rating.update(kra_rating_params)
+        format.js {}
+        format.html {}
+        flash[:notice] = "Successfully updated."
+        @kra_ratings=KraRating.all
+      end
     end
   end
   
@@ -49,8 +49,8 @@ def create
     @kra_rating = KraRating.find (params[:id])
     @kra_rating.destroy
     flash[:notice] = "Successfully destroyed."
-    @kra_ratings = KraAttr.all
-    #format.html
+    @kra_ratings = Krarating.all
+    render :action => 'index'
   end
 
 	def kra_rating_params
