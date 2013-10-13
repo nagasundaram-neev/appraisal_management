@@ -26,18 +26,8 @@ module AppraisalCyclesHelper
 		end
 		return (sum*10).round(2)
 	end
-=begin
-  def comp_performance
-    aprsl_cycles = AppraisalCycle.all
-    aprsl_cycles.each do |cycle|
-      cycle.kra_sheet.each do |sheet|
-        ratings
-
-      end
-    end
-  end
-=end
-	def performance_sum_self
+	
+  def performance_sum_self
 	  @kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => 0)
 		#@kra_ratings_by_self=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0)
 		@kra_attrs=KraAttr.all

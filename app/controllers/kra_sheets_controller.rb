@@ -13,7 +13,7 @@ before_filter :authenticate_user!
   end
 
   def index
-    @kra_sheets = KraSheet.all
+    @kra_sheets = KraSheet.all.order("appraisal_cycle_id DESC")
   end
   
   def create
