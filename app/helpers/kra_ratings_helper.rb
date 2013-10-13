@@ -1,31 +1,21 @@
 module KraRatingsHelper
-	def find_current_user
-		current_user.id
-	end
+	
   def kr_attr_rating_obj(kr_sheet_id, kr_attr_id, rated_by)
     begin
-      @kr_atr_rating_obj =   KraRating.select("*").where(:kra_sheet_id => kr_sheet_id, :kra_attr_id => kr_attr_id, :rated_by => rated_by).first
+      @kr_atr_rating_obj =   KraRating.where(:kra_sheet_id => kr_sheet_id, :kra_attr_id => kr_attr_id, :rated_by => rated_by).first
       return  @kr_atr_rating_obj
     rescue NoMethodError
       return nil
     end
   end
 
-  def kr_attr_rating(kr_sheet_id, kr_attr_id, rated_by)
-    begin
-      @kr_atr_rating =   KraRating.select("rating").where(:kra_sheet_id => kr_sheet_id, :kra_attr_id => kr_attr_id, :rated_by => rated_by).first.rating
-      return  @kr_atr_rating
-    rescue NoMethodError
-      return nil
-    end
+  def find_appraisee_details(kr_sheet_id)
+  	 @appraisee=User.where(:id => KraSheet.select(:appraisee_id).where(:id => 11).last.appraisee_id).last
+  	return @appraisee
   end
 
-  def kr_attr_comment(kr_sheet_id, kr_attr_id, rated_by)
-    begin
-    @kr_atr_comment = KraRating.select("comment").where(:kra_sheet_id => kr_sheet_id, :kra_attr_id => kr_attr_id, :rated_by => rated_by).first.comment
-    return @kr_atr_comment
-    rescue NoMethodError
-      return nil
-    end
+  def find_kra_sheet_details(id)
+  	return KraSheet.where(:id => id).last
   end
+  
 end
