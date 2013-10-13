@@ -1,7 +1,7 @@
 class AppraisalCyclesController < ApplicationController
   include AppraisalCyclesHelper
   before_filter :authenticate_user!
-  before_filter :load, :only => [:new,:index, :create, :update]
+  before_filter :load, :only => [:new,:create, :update]
   before_filter :create_new_appraisal_cycle, :only => [:new,:index]
 
   def load
@@ -9,13 +9,18 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def create_new_appraisal_cycle
-    @appraisal_cycle = AppraisalCycle.new    
+    @appraisal_cycle = AppraisalCycle.new
   end
 
   def new
   end
 
   def index
+    if current_user.role == "admin"
+      @appraisal_cycles = AppraisalCycle.all
+    else
+      @appraisal_cycles = current_user.kra_sheets.where(:appraiser_status => 1)
+    end
   end
 
   def create

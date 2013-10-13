@@ -33,14 +33,9 @@ input.error {
                 <ul id="account-menu" class="dropdown-menu account" role="menu">
                     <li role="presentation" class="account-picture">
                         
-                        <%= "#{current_user.first_name} #{current_user.last_name}" %>
+                     <%= "#{current_user.first_name} #{current_user.last_name}" %>
                     </li>
-                    <li role="presentation">
-                        <a href="form_account.html" class="link">
-                            <i class="icon-user"></i>
-                            Profile
-                        </a>
-                    </li>
+                    
                     
                 </ul>
               </li>
@@ -63,7 +58,9 @@ input.error {
           </div>
           <div class="row-fluid" id="body-content">
             <div class="span8">
-              
+              <section class="widget">
+                
+              </section>
             </div>
           </div>
   <% end %>

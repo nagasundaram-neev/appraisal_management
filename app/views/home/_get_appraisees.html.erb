@@ -5,7 +5,7 @@
 <ul class="nav nav-pills nav-stacked">
 <li class="active">
     <a href="#">
-      <span class="badge "><%= current_user.appraiser_kra_sheets.count %></span>
+      <span class="badge "><%= @appraisees.count %></span>
        Appraisal forms
     </a>
   </li>
@@ -14,7 +14,7 @@
 <table class="table table-hover">
   <tbody><tr>
     <th>Appraisee Name</th>
-    <th>Date Ended</th>
+    <th>End Date</th>
     <th></th>
     <th></th>
   </tr>
@@ -23,7 +23,10 @@
     <tr>
       <td><%= sheet.appraisee.first_name %></td>
       <td><%= sheet.appraisal_cycle.end_date %></td>
-      <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
+      <td>
+        <%if current_user.role == "appraiser" %>
+          <%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
+        <% end%>
       <td><%= sheet.appraisee.email %></td>
     </tr>
   <% end %>

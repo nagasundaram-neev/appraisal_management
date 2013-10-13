@@ -46,14 +46,6 @@
                     <li><%= link_to "New Sheet", new_kra_sheet_path, :remote => true%></li>
                 </ul>
             </li>
-            <li class="accordion-group">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
-              <ul id="stats-collapse" class="accordion-body collapse">
-                  <li><a href="stat_statistics.html">Stats</a></li>
-                  <li><a href="stat_charts.html">Charts</a></li>
-                  <li><a href="stat_realtime.html">Realtime</a></li>
-              </ul>
-            </li>
           <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>
             <li class="accordion-group">
               <li class="active">
@@ -68,11 +60,11 @@
               </ul>
             </li>
           <% end %>
-          <% if current_user.role == "appraiser" then%>
+          <% if current_user.role == "appraiser" || current_user.role == "admin" then%>
             <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraise Others</span></a>
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraisals</span></a>
                 <ul id="appraise-collapse" class="accordion-body collapse">
-                    <li><%= link_to "Pending Formss", get_appraisees_path, :remote => true %></li>
+                    <li><%= link_to "Pending Forms", get_appraisees_path, :remote => true %></li>
                     <li><%= link_to "Previous Appraisees", get_past_appraisees_path, :remote => true %></li>
                 </ul>
             </li>
