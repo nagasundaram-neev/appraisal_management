@@ -1,7 +1,7 @@
 
 <script>$.validate();
-function checkvalue(val)
-{if ( val > 10  )alert("Value should be less then or equal to 10");}
+function checkvalue(rating)
+{if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value=" ";}}
 </script>
 <div id='kra_attr_rating_form'>
 	
@@ -15,10 +15,10 @@ function checkvalue(val)
 <%= form_for(@kra_rating, :remote => true, :id => "edit_form") do |f|  %>
   <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.kra_sheet_id}" %>
   <%= f.hidden_field :kra_attr_id, :value => "#{@kra_rating.kra_attr_id}" %>
-  <%= f.hidden_field :rated_by, :value => 0 %>
+  
 <span id='<%= "self-rating_#{@kra_rating.kra_attr_id}" %>' >  </span>
 Rating:
-<%= f.text_field :rating,:style =>"width: 30px", :id => "self-result_#{@kra_rating.kra_attr_id}", 'data-validation'=> "number", 'data-validation-allowing'=> "float",:onblur => "checkvalue(this.value)"  %> 
+<%= f.text_field :rating,:style =>"width: 30px", :id => "self-result_#{@kra_rating.kra_attr_id}", 'data-validation'=> "number", 'data-validation-allowing'=> "float",:onblur => "checkvalue(this)"  %> 
 
                                                                                                  
 <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts",'data-validation'=> "required", :rows =>"5", :id =>"self-cmt_#{@kra_rating.kra_attr_id}"  %>

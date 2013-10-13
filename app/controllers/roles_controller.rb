@@ -26,11 +26,17 @@ before_action :check_selected_attributes, :only =>[:create, :update]
 
   def create
     @role = Role.new(role_params)
+      unless check_selected_attributes()==false
+      @weightage_err=0
       if @role.save
-        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
+        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
         flash[:notice] = "A New Role has been Successfully Created."
       else
         flash[:notice] = @role.errors.full_messages
+    end
+    else
+      @weightage_err=1
+      flash[:notice] = "Weightage should be less than or equal 100"
     end
   end
 
@@ -40,13 +46,21 @@ before_action :check_selected_attributes, :only =>[:create, :update]
 
   def update
   	  @role = Role.find(params[:id])
-  	  if @role.update_attributes(role_params)
-        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
-        flash[:notice] = "Role has been Successfully updated."
-        @roles = Role.all
-    else
-    flash[:notice] = @role.errors.full_messages
-    end
+      unless check_selected_attributes()==false
+        @weightage_err=0
+        if @role.update_attributes(role_params)
+          @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
+          flash[:notice] = "Role has been Successfully updated."
+          @roles = Role.all
+
+        else
+          
+          flash[:notice] = @role.errors.full_messages
+        end
+      else
+        @weightage_err=1
+        flash[:notice] = "Weightage should be less than or equal 100"
+      end
   end
 
   def destroy
@@ -70,27 +84,33 @@ before_action :check_selected_attributes, :only =>[:create, :update]
     else
       flash[:error] = "Please select the user"
       render :action => "new_role"
-    end
-  end
+      end
+end
 
   def new_role
   @role = Role.new
   end
 
+
   def role_params
     params.require(:role).permit(:name, :kra_attrs_id)
   end
 
-  def check_selected_attributes
-    total = 0
-    params[:kra_attrs_id][:id].each do |id|
-      if id != "" then
+def check_selected_attributes()
+
+  total = 0
+  params[:kra_attrs_id][:id].each do |id|
+      if id != "" 
         total += KraAttr.find(id).weightage
-        p total
-      end
-    end
-   if total >100 then
-     flash[:notice] = "Total weightage is #{total} (it should be less than 100)"
-   end
+       end
+  end
+   
+  if total >100 
+     
+     return false
+  else
+     return true
+  end 
+  
   end
 end
