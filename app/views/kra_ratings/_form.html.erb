@@ -172,12 +172,10 @@
                                     
                                   </table>
                                   <div class="clearfix">
-                                    
-
                               
 
 
-<%= link_to " Submit",  appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @appraisal_cycle_id, :flag => 0}), class: "btn btn-success icon-file icon-large  pull-right" %>
+  <%= link_to "Sumit to Manager", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @appraisal_cycle_id,:flag=> 0}),class: "btn icon-edit icon-large color-orange pull-right", :remote => true %>
 
 
 
