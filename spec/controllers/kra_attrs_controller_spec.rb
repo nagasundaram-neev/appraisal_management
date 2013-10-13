@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe KraAttrsController do
 
-  before(:each) do
+  include Devise::TestHelpers
+
+
+  before (:each) do
+    @admin = FactoryGirl.create(:admin)
+    sign_in @admin
     @kra_attr = FactoryGirl.create(:kra_attr)
   end
 

@@ -59,7 +59,7 @@ function checkvalue(rating)
               
               <section class="widget">
                 
-              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_self(current_user.id)).id  %>
+              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id)).id  %>
 
                 <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
                                 
@@ -122,9 +122,18 @@ function checkvalue(rating)
                         </table>
    
                       </section>
-                      <%= link_to " Submit", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}), class: "btn btn-success icon-file icon-large  pull-right" %>
+  
   
   <%= link_to "Modify the Ratings", kra_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
+
+  <%= link_to "Submit to HR", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn icon-edit icon-large color-orange pull-right", :remote => true %>
+
+
+</td>
+      <td>
+
+
+
                       <%end%>
                     </div>
                   <% end %>                            

@@ -12,12 +12,9 @@ FactoryGirl.define do
     phone_no '+919942354883'
     confirmed_at Time.now
   end
-end
 
-
-FactoryGirl.define do
-  factory :admin do
-    email 'test@neevtech.com'
+  factory :admin, class: User  do
+    email 'admin@neevtech.com'
     password '12345678'
     password_confirmation '12345678'
     first_name 'test'

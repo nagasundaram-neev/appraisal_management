@@ -18,6 +18,7 @@ class DepartmentsController < ApplicationController
 
 
   def index
+    
   end
 
   def create
@@ -30,7 +31,7 @@ class DepartmentsController < ApplicationController
       end
   end
 
-  def edit
+  def edit 
   @department = Department.find(params[:id])
   end
 

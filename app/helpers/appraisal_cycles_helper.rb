@@ -3,13 +3,21 @@ module AppraisalCyclesHelper
 	def progress_manager
 		@total_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 1).count
 		@empty_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id,:rating=>nil, :rated_by => 1).count
-		return ((@total_attributes-@empty_attributes)*100)/@total_attributes
+		if ((@total_attributes-@empty_attributes)==0) 
+			return 100 
+		else
+			return ((@total_attributes-@empty_attributes)*100)/@total_attributes
+	  end
 	end
 
 	def progress_user
 		@total_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0).count
 		@empty_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id,:rating=>nil, :rated_by => 0).count
-		return ((@total_attributes-@empty_attributes)*100)/@total_attributes
+		if ((@total_attributes-@empty_attributes)==0) 
+			return 100 
+		else
+			return ((@total_attributes-@empty_attributes)*100)/@total_attributes
+	  end
 	end
 
 	def performance_sum
@@ -43,7 +51,7 @@ module AppraisalCyclesHelper
 	end
   def user_appraisal_cycle
     @usr_aprsl_cycles = []
-    kr_sheets = current_user.kra_sheets.where("appraisee_status = (?) and appraiser_status = (?)", 1,1)
+    kr_sheets = current_user.kra_sheets.where("appraisee_status = (?) ", 1)
     kr_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
     @usr_aprsl_cycles
   end

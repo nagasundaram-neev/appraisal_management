@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe KraRoleAttr do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it { should belong_to(:kra_attr) }
+  it { should belong_to(:role) }
+  
 end
+

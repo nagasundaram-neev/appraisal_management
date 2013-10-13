@@ -1,7 +1,12 @@
 require 'spec_helper'
 
 describe AppraisalCyclesController do
- before(:each) do
+
+  include Devise::TestHelpers
+
+  before (:each) do
+    @admin = FactoryGirl.create(:admin)
+    sign_in @admin
     @appraisal_cycle= FactoryGirl.create(:appraisal_cycle)
   end
 
@@ -24,13 +29,6 @@ describe AppraisalCyclesController do
       end
     end
 
-    context "invalid attributes" do
-      it "does not save the object into db " do
-        expect{
-          post(:create, appraisal_cycle: FactoryGirl.attributes_for(:invalid_appraisal_cycle))
-        }.to_not change(AppraisalCycle,:count)
-      end
-    end
   end
 
   describe "GET #show" do
@@ -53,13 +51,6 @@ describe AppraisalCyclesController do
         @appraisal_cycle.reload
         @appraisal_cycle.start_date.should eq("2013-03-01".to_date)
       end 
-    end
-    context "invalid attributes" do
-      it "should not change the @appraisal_cycle attributes" do
-        put :update, id: @appraisal_cycle, appraisal_cycle: FactoryGirl.attributes_for(:appraisal_cycle, start_date: nil)
-        @appraisal_cycle.reload
-        @appraisal_cycle.start_date.should_not eq(nil)
-      end
     end
   end
 

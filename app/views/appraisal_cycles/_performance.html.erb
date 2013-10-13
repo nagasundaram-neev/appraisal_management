@@ -84,12 +84,17 @@
           </header>
           <div class="body">
             <br><br>
+            <%  unless performance_sum==0 %>
               <h4>
+
                 Overall Performance for KRA sheet : &nbsp<%= (performance_sum).round(2) %>
               </h4>
               <h4>
                 Overall Performance of KRA (KRA70% & DR 30 %) :&nbsp<%= (performance_sum*0.7).round(2) %>
               </h4>
+              <% else %>
+              <h4>Manager yet to Rate you</h4>
+              <% end %>
 
           </div>
       </section>
@@ -122,10 +127,7 @@
       </section>
     </div>          
   </div>
-
-
-
-                 <section class="widget large">
+                <section class="widget large">
                     
                     <header>
                         <h4>
@@ -135,7 +137,7 @@
                         </h4>
                     </header>
 
-                    <div class="body">
+                    <div class="body " style="overflow: hidden;overflow-y: auto;" >
                       <div id="chat" class="chat">
                             <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by)%>
                               <% flag=0 %>
@@ -182,3 +184,12 @@
                 </section>
 <% end %>
 
+<script>
+  (function($){
+    $(window).load(function(){
+      $(".chat").mCustomScrollbar(({
+
+                            theme:"light"
+    });
+  })(jQuery);
+</script>
