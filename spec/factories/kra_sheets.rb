@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :kra_sheet do
+     appraisal_cycle_id 1
+     appraisee_id 2
+     appraiser_id 3
   end
+
 end

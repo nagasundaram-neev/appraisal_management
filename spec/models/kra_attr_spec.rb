@@ -6,6 +6,8 @@ describe KraAttr do
     @kraattr = FactoryGirl.create(:kra_attr)
   end
 
+  it { should have_many(:kra_role_attrs) }
+
   it "should not be valid if name is missing" do
     @kraattr.name = ""
     @kraattr.should_not be_valid
