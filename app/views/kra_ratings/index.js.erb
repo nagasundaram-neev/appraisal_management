@@ -1,3 +1,6 @@
 
-
+<% if current_user.role=='appraisee' -%>
 $("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
+$("#body-content").html("<%= escape_javascript(render(:partial => "form_manager_rating.html"))%>");
+<% end -%>

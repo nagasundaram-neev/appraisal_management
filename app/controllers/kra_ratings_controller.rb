@@ -12,8 +12,16 @@ before_filter :load, :only => [:new,:index]
   end
 
   def index
-    @flag = params[:appraisee_id][:flag]
-    @appraisee_id  = params[:appraisee_id][:id]
+      unless params[:appraisee_id].nil? 
+      @flag = params[:appraisee_id][:flag].to_i
+      @appraisee_id  = params[:appraisee_id][:id].to_i
+      @appraisee= User.find(@appraisee_id)
+     else
+      @flag= 0
+    end
+    unless params[:overall_edit_flag].nil?
+      @flag = params[:overall_edit_flag].to_i
+    end
     @kra_ratings = KraRating.all
   end
 def create
@@ -27,6 +35,14 @@ def create
 
   def edit
     @kra_rating = KraRating.find(params[:id])
+    @@params_edit_flag= params[:editflag]
+
+    unless params[:appraisee].nil? 
+      @@params_appraisee = params[:appraisee]
+    else
+      @@params_appraisee = nil
+    end
+
   end
 
   def show
@@ -35,21 +51,27 @@ def create
 
   def update
     @kra_rating= KraRating.find(params[:id])
-     respond_to do |format|
+    
+     
+     @flag=@@params_edit_flag.to_i
+
+     unless @@params_appraisee.nil?
+     @appraisee= User.find(@@params_appraisee)
+     end
      if @kra_rating.update(kra_rating_params)
-        format.js {}
-        format.html {}
+       
         flash[:notice] = "Successfully updated."
         @kra_ratings=KraRating.all
       end
-    end
+
+    
   end
   
   def destroy
     @kra_rating = KraRating.find (params[:id])
     @kra_rating.destroy
     flash[:notice] = "Successfully destroyed."
-    @kra_ratings = Krarating.all
+    @kra_ratings = KraRating.all
     render :action => 'index'
   end
 

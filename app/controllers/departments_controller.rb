@@ -18,7 +18,7 @@ class DepartmentsController < ApplicationController
 
 
   def index
-    p @departments
+    
   end
 
   def create
@@ -44,10 +44,9 @@ class DepartmentsController < ApplicationController
     if @department.update_attributes(department_params)
       flash[:notice] = "Department has been Successfully Updated."
       @departments = Department.all
-      else
-        flash[:notice] = @department.errors.full_messages
-      end
-
+    else
+      flash[:notice] = @department.errors.full_messages
+    end
   end
 
   def destroy
@@ -59,21 +58,25 @@ class DepartmentsController < ApplicationController
 
   def add_dept
     unless params[:user_id][:id].eql?("")
-    if User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
-      flash[:notice]="Department Successfully assigned to the user"
+      user = User.find(params[:user_id][:id])
+    if user.department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
+      dept_user = user.department_users.where(:end_date => nil).first
+      #dept_role.end_date = params[:start_date]
+      dept_user.update_attributes(:end_date => params[:start_date])
+      flash[:notice]="New Department successfull added"
       @departments = Department.all
     else
       flash[:error] = "Please select the Department for user."
     end
-  else
-    flash[:error] = "Please select the user"
-    render :action => "new_dept"
-  end
+    else
+      flash[:error] = "Please select the user"
+      render :action => "new_dept"
+    end
   end
   def new_dept
   @dept = Department.new
-  end 
-  
+  end
+
   def department_params
     params.require(:department).permit(:name)
   end

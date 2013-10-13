@@ -1,3 +1,11 @@
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker();
+  })
+  $.validate();
+  </script>
+
 <div id="signup_form">
 <div class="row-fluid">
           <div class="span12">
@@ -126,16 +134,27 @@
                       <%= collection_select(:dept_id, :id, Department.all, :id, :name, :prompt => "select department") %>
                       </select>
                     </div>
-                </div>
+                  </div>
+                <fieldset>
+                  <legend class="section">Period</legend>
+                    <div class="control-group">
+                      <label for="name" class="control-label">Select Start Date <span class="required">*</label>
+                      <div class="controls controls-row">
+                        <div class="input-append span7">
+                          <i class=" add-on icon-calendar"></i>
+                          <%= text_field_tag :start_date, nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date", 'data-validation' => "required" %>
+                        </div>
+                      </div>
+                    </div>
+              </fieldset>
               </fieldset>
               <div class="form-actions">
                   <%= f.submit "Add" ,:class =>"btn btn-block btn-large btn-danger" %><button type="button" class="btn" onclick="$('#signup_form').hide()">Create Later </button>
                   <% end %>
-                  
               </div>
             </form>
           </div>
         </section>
             </div>
           </div>
-</div>          
+</div>

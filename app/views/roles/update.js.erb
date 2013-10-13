@@ -1,4 +1,4 @@
-<% if @role.errors.any? -%>
+<% if @role.errors.any? || @weightage_err==1 -%>
 $("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
 $('#role_errors').show()
 <% else -%>

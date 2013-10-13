@@ -1,0 +1,131 @@
+<script type="text/javascript">$.validate();
+function checkvalue(rating)
+{if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
+
+</script>
+
+<% if current_user.role== 'appraiser' %>
+   <div class="body">
+     <% if @flag == 0  %>
+      <div id='appraiser_self_form' class='widget'><%= render :partial => 'form' %></div>
+    <%end%>
+                         
+   <% if @flag==1 %>
+    <section class='widget'>
+    <h3 class='page-title'>KRA</h3>
+    <blockquote><p style="text-align:justify;font-size:100%" class="span12">
+    Please fill the 
+    <i class='icon-user btn btn-info'> <%= @appraisee.first_name.upcase %></i> Appraisal Form</p></blockquote>
+              
+    <table class="table table-striped table-images">
+      <thead>
+       <tr>
+         <th>KEY RESULT AREAS</th>
+         <th>Mangaer Rating &amp; COMMENTS for <%= @appraisee.first_name %> </th>
+       </tr>
+      </thead>
+
+      <tbody>
+       <% for kra_attr in @kra_rating.find_kra_attrs_for_role(@appraisee.id) do%>
+         <tr>
+           <td style="text-align:justify;font-size:80%">
+             <div id="accordion3" class="accordion">
+               <div class="accordion-group">
+                   <div class="accordion-heading">
+                       <a href=<%= "#collapse_#{kra_attr.id}" %> data-toggle="collapse" class="accordion-toggle">
+                            <strong><%= kra_attr.name %></strong>
+                            </a>
+                    </div>
+                    <span class="offset1">
+                      Weightage:<span class="btn btn-info badge">
+                       <%= kra_attr.weightage.round %> %
+                    </span>
+                       </span>
+                   <div id=<%= "collapse_#{kra_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
+                   <p class='page-title'>Description</p>
+                   <%= kra_attr.desc %>
+                   <p class='page-title'>Measures</p><small>
+                    <%= kra_attr.measures %></small></div>
+               </div>
+             </div>
+           </td>
+                      
+          <td>
+           <%= form_for(@kra_rating, :remote =>
+                              true ) do |f|  %>
+             <%= f.hidden_field :kra_sheet_id, :value =>"#{@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id)}" %>
+             <%= f.hidden_field :kra_attr_id, :value =>"#{kra_attr.id}" %>
+             <%= f.hidden_field :rated_by, :value => 1 %>
+              
+              <section class="widget">
+                
+              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_self(current_user.id)).id  %>
+
+                <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
+                                
+                <% unless rating_obj == nil then %>
+                 <small> Your rating is: </small>
+                  <h6 class='badge'><%= rating_obj.rating %></h6>
+                   <p>Comments</p><small><p> <%= rating_obj.comment %></p></small>
+                    
+                    <% appraisee = find_appraisee_details(rating_obj.kra_sheet_id) %>
+
+                  <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 1, :appraisee => appraisee ), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
+                              <div id='kra_attr_rating_form'>
+                                
+                              </div>
+
+
+
+                <% else %>
+                <span id='<%= "manager-rating_#{kra_attr.id}" %>'></span>
+                <%= f.text_field :rating,:style =>"width: 20px", :id => "manager-result_#{kra_attr.id}",  :value => 0, :class => " search-query", :onblur => "checkvalue(this)"  %>
+                
+                <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"man-cmt_#{kra_attr.id}"   %>
+                
+                <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#manager-rating_#{kra_attr.id}').hide();$('#man-cmt_#{kra_attr.id}').hide();   " %>
+                                   
+                <% end %>
+                </section>
+                                    <script type="text/javascript">
+                                     
+                                      $('<%= "#manager-rating_#{kra_attr.id}" %>').raty({
+                                        path     : '/assets',
+                                        cancel   : false,
+                                        cancelOff: 'cancel-off-big.png',
+                                        cancelOn : 'cancel-on-big.png',
+                                        half     : true,
+                                        size     : 24,
+                                        starHalf : 'star-half-big.png',
+                                        starOff  : 'star-off-big.png',
+                                        starOn   : 'star-on-big.png',
+                                        target    : '<%= "#manager-result_#{kra_attr.id}" %>',
+                                        targetType: 'score',
+                                        targetKeep: true,
+                                        number: 10,
+                                        mouseover: function(score, evt) {
+                                          document.getElementById('<%= "manager-result_#{kra_attr.id}" %>').value=score;
+                                        }
+                                        ,
+                                        mousemove: function(score, evt) {
+                                          document.getElementById('<%= "manager-result_#{kra_attr.id}" %>').value=score;
+                                        }
+                                      } );
+                                                                                       
+                                    </script>
+                                    
+                                  <%end%>
+                                  </td>
+                              <%end%>
+                            </tr>
+                          </tbody>
+                        </table>
+   
+                      </section>
+                      <%= link_to " Submit", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}), class: "btn btn-success icon-file icon-large  pull-right" %>
+  
+  <%= link_to "Modify the Ratings", kra_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
+                      <%end%>
+                    </div>
+                  <% end %>                            
+                            

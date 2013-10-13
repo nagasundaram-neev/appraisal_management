@@ -1,4 +1,5 @@
 class AppraisalCycle < ActiveRecord::Base
+  has_many :kra_sheets
   validates :start_date, :end_date, :presence => true
   validate :end_after_start
   def self.find_rating

@@ -1,21 +1,18 @@
 <script type="text/javascript">
   $.validate();
-  function checkvalue(rating)
-{if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
 </script>
-  <% if current_user.role == "appraisee" || @flag==0 %>
   <div class="row-fluid">
     <div class="span12">
       <h2 class="page-title">
         KRA
         <br>
         <small>
-          <blockquote>
+          <div class="search-result">
             <p style="text-align:justify;font-size:100%" class="span12">
               Goals should be SMARTER = Specific, Measurable, Achievable, Result-Oriented, Time-Bound, Engaging, Reaching.   Performance Planning is facilitated by first listing the Key Responsibilities of the position and then defining Objectives and Goals for each Key Responsibility.                                                          
             </p>
             <p> <br/></p>
-          </blockquote>
+          </div>
         </small>
       </h2>
     </div>
@@ -37,15 +34,21 @@
                 <th>
                   KEY RESULT AREAS
                 </th>
-                
+                <% if current_user.role == "appraisee" %>
                   <th>
                     SELF RATING &amp; COMMENTS
                     </th>
-                </tr>
+                    <% end %>
+                 <% if current_user.role == "appraiser" %>
+                   <th>
+                      MANAGER'S RATING
+                   </th>
+                   <% end %>
+                   <th>
+                   </th>
+                   </tr>
                    </thead>
-
                    <tbody>
-                    
                      <% for kra_attr in @kra_rating.find_kra_attrs_for_role(current_user.id) do%>
                        <tr>
                          <td style="text-align:justify;font-size:80%">
@@ -70,8 +73,12 @@
                          </div>
                          </div></div>
                          </td>
+<<<<<<< HEAD
+                         <% if (current_user.role == 'appraisee dnt wrk'|| current_user.role == 'appraiser dnt wrk') && @flag == nil %>
+=======
                          
-                         
+                         <% if current_user.role == 'appraisee' %>
+>>>>>>> 85f2905fac573a0b4c4c4d320dd86746ab47fa6b
                            <td>
                              <%= form_for(@kra_rating, :remote => true) do |f|  %>
                                <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.find_kra_sheet_self(current_user.id)}" %>
@@ -79,17 +86,19 @@
                                <%= f.hidden_field :rated_by, :value => 0 %>
                                <section class="widget">
                                  
-          <% @appraisal_cycle_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_self(current_user.id)).appraisal_cycle_id  %>
-              
-                                
                                  <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
 
-                                  <% unless rating_obj == nil then %>
+                                 <% rating_val = kr_attr_rating(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
+                                 
+                                 <% rating_comment = kr_attr_comment(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
+
+
+                                  <% if rating_val != nil then %>
                                    <small> Your rating is: </small>
-                                   <h6 class='badge'><%= rating_obj.rating %></h6>
-                                    <p>Your Comments</p><small> <%= rating_obj.comment %></small>
+                                   <h6 class='badge'><%= rating_val %></h6>
+                                    <p>Your Comments</p><small> <%= rating_comment %></small>
                         
-                          <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 0), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
+                          <%= link_to "", edit_kra_rating_path(rating_obj), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
                               <div id='kra_attr_rating_form'>
                                 
                               </div>
@@ -97,21 +106,43 @@
                                 <% else%>
                                 <span id=<%= "self-rating_#{kra_attr.id}" %> >
                                  </span>
-                                  <%= f.text_field :rating,:style =>"width: 20px", :id => "self-result_#{kra_attr.id}",  :value =>0,'data-validation'=> "number", 'data-validation-allowing'=> "float", :class => " search-query",:onblur => "checkvalue(this)"%>
+                                  <%= f.text_field :rating,:style =>"width: 20px", :id => "self-result_#{kra_attr.id}",  :value =>0,'data-validation'=> "number", 'data-validation-allowing'=> "float", :class => " search-query"%>
                                                                                                  
                                   <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"self-cmt_#{kra_attr.id}"  %>
                                 
                                  <%= f.submit "Save", :class => "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#self-rating_#{kra_attr.id}').hide(); $('#self-cmt_#{kra_attr.id}').hide(); " %>
-                                 
                                  <% end %>
-
                                </section>
- 
                              <% end %>
-
                            </td>
-                         </tr>
-
+                         <%end%>
+                         <% if current_user.role == "appraiser"  then  %>
+                            <td>
+                              <%= form_for(@kra_rating, :remote =>
+                                true ) do |f|  %>
+                                <%= f.hidden_field :kra_sheet_id, :value =>
+                                  "#{@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee_id)}" %>
+                                  <%= f.hidden_field :kra_attr_id, :value =>
+                                    "#{kra_attr.id}" %>
+                                    <%= f.hidden_field :rated_by, :value =>
+                                      1 %>
+                                      <section class="widget">
+                                        <span id='<%= "manager-rating_#{kra_attr.id}" %>'>
+                                  </span>
+                                  <%= f.text_field :rating,:style =>
+                                    "width: 20px", :id =>
+                                    "manager-result_#{kra_attr.id}",  :value =>
+                                    0, :class =>
+                                    "btn btn-success search-query" %>
+                                        <%= f.text_area :comment, :class =>
+                                          "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"man-cmt_#{kra_attr.id}"   %>
+                                    <%= f.submit "Save", class: "btn btn-primary", :onclick =>
+                                      "this.disabled=true; this.value='Saved'; $('#manager-rating_#{kra_attr.id}').hide();$('#man-cmt_#{kra_attr.id}').hide();   " %>
+                                    </section>
+                                  </td>
+                                  <%end%>
+                                    <%end%>
+                                    </tr>
                                     <script type="text/javascript">
                                       $('<%= "#self-rating_#{kra_attr.id}" %>').raty({
                                         path     : '/assets',
@@ -140,8 +171,6 @@
                                           document.getElementById('<%= "self-result_#{kra_attr.id}" %>').value=score;
                                         }
                                       }     );
-
-
                                       $('<%= "#manager-rating_#{kra_attr.id}" %>').raty({
                                         path     : '/assets',
                                         cancel   : false,
@@ -163,31 +192,27 @@
                                         mousemove: function(score, evt) {
                                           document.getElementById('<%= "manager-result_#{kra_attr.id}" %>').value=score;
                                         }
-                                      } );
+                                      }
+                                                                                       );
                                     </script>
-
                                     <%end%>
-                                   
                                     </tbody>
-                                    
                                   </table>
                                   <div class="clearfix">
                                     
-
-                              
-
-
-<%= link_to " Submit",  appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @appraisal_cycle_id, :flag => 0}), class: "btn btn-success icon-file icon-large  pull-right" %>
+<%= link_to " Submit", appraisal_cycles_overall_performance_path, class: "btn btn-success icon-file icon-large  pull-right" %>
+                              <div id='kra_attr_rating_form'>
 
 
 
- <%= link_to "Modify the Ratings", kra_ratings_path, :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
-                              
+                                     <%= link_to "Modify the Ratings", kra_ratings_path, :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
+                              <div id='kra_attr_rating_form'>
+                                    </div>
                                     
                                   </div>
                                   
                               </section>
                             </div>
                             </div>
-              <%end%>                 
+                            
                             
