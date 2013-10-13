@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :require_admin
+  #before_filter :authenticate_user!
+  #before_filter :require_admin
 
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_department, :only => [:new,:index]
@@ -18,6 +18,7 @@ class DepartmentsController < ApplicationController
 
 
   def index
+    
   end
 
   def create
@@ -30,7 +31,7 @@ class DepartmentsController < ApplicationController
       end
   end
 
-  def edit 
+  def edit
   @department = Department.find(params[:id])
   end
 
@@ -43,10 +44,9 @@ class DepartmentsController < ApplicationController
     if @department.update_attributes(department_params)
       flash[:notice] = "Department has been Successfully Updated."
       @departments = Department.all
-      else
-        flash[:notice] = @department.errors.full_messages
-      end
-
+    else
+      flash[:notice] = @department.errors.full_messages
+    end
   end
 
   def destroy
@@ -71,8 +71,8 @@ class DepartmentsController < ApplicationController
   end
   def new_dept
   @dept = Department.new
-  end 
-  
+  end
+
   def department_params
     params.require(:department).permit(:name)
   end

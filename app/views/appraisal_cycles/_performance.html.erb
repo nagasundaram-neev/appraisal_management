@@ -1,22 +1,23 @@
 <% @kra_sheets.each do |kra_sheet| %>
+
   <% if kra_sheet.appraisee_status==false %>
     <div class="alert alert-error">  
       <a class="close" data-dismiss="alert">×</a>  
       <strong>Warning!</strong>Your KRA sheet is not submitted  
     </div> 
   <% else %>
-    <div class="alert alert-success">  
+    <div class="alert alert-success span8">  
       <a class="close" data-dismiss="alert">×</a>  
       <strong>Success!</strong>Your KRA sheet is completed the assessing  
     </div>  
   <% end %>
   <div class="content container-fluid">
     <div class="row-fluid">
-        <div class="span12">
+          <div class="span8">
             <h2 class="page-title">Performance Rating recommended <small>by Supervisor / manager</small></h2>
-        </div>
+          </div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid span8">
       <div class="span4">
           <section class="widget-large">
             <header>
@@ -24,13 +25,14 @@
             </header>
             <div class="body">
               Rating 
-              <%= progress_bar(progress_user,:color => 'orange', :rounded => true, :tiny => true) %> 
+              <%= progress_bar(progress_user,:color => 'orange', :rounded => true, :tiny => true) %>
               <table class="table table-hover">
                 <tbody>
                   <tr>
                     <th>Attribute</th>
                     <th>Rating</th>
                   </tr>
+
                   <% @ratings=KraRating.where(:kra_sheet_id => kra_sheet.id,:rated_by => 0) %>
                   <% @ratings.each do |attr_rating| %>
                     <tr>
@@ -52,7 +54,7 @@
                   </header>
                   <div class="body">
                     Rating 
-                    <%= progress_bar(progress_manager, :color => 'orange', :rounded => true, :tiny => true) %> 
+                    <%= progress_bar(progress_manager,:color => 'orange', :rounded => true, :tiny => true) %>    
                     <table class="table table-hover">
                     <tbody><tr>
                       <th>Attribute</th>
@@ -70,10 +72,9 @@
                   </div>
               </section>
       </div>
-      <div class="span4">
-      </div>
+
     </div>
-    <div class="span4 offset2" align="center" >
+    <div class="span6 offset1" align="center" >
       <section class="widget tiny">
           <header>
               <h3>
@@ -93,24 +94,91 @@
           </div>
       </section>
     </div>
-    <div class="span4 offset3" >
+    <div class="span4 offset2" >
       <section class="widget tiny">
           <header>
               <h4>
                  <%= current_user.first_name %>
               </h4>
           </header>
-          <div class="body">
+          <div id="status" class="body">
               <blockquote>
                </textarea>
-               <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
-                 <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
-                 <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form</h4></strong>
+               <% if @flag=="0" %>
+                 <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
+                  <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for Manager</h4></strong>
                 <% end %>
+              <% else %>
+                 <% unless @status=kra_sheet.appraiser_status %>
+                  <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for HR</h4></strong>
+                <% end %>
+              <% end %>
               </blockquote>
           </div>
       </section>
     </div>          
   </div>
+
+
+
+                 <section class="widget large">
+                    
+                    <header>
+                        <h4>
+                            <i class="eicon-chat"></i>
+                        
+                            Comments
+                        </h4>
+                    </header>
+
+                    <div class="body">
+                      <div id="chat" class="chat">
+                            <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by)%>
+                              <% flag=0 %>
+                              <% comments_name.each do |comment_by| %>
+                              
+                              <div class="chat-message">
+                                <% if flag==0 %>
+                                <% flag=1 %>
+                                <div class="sender pull-left">
+                                  <div class="icon">
+                                        <img src="/assets/appraisal.gif" class="img-circle" alt="" />
+                                   </div>
+                              </div>
+                              <div class="chat-message-body">
+                                <% else %>
+                                <% flag=0 %>
+                                <div class="sender pull-right">
+                                      <div class="icon">
+                                      <img src="/assets/appraisal.gif" class="img-circle" alt="" />
+                                      </div>
+                                    </div>
+                              <div class="chat-message-body on-left">
+                                  <% end %>
+                                  <span class="arrow"></span>
+                                  <div class="sender">
+                                    <a href="#">
+                                      <% if comment_by.rated_by==false %>
+                                        <%= @appraisee.first_name%>
+                                        <%= @appraisee.email  %>
+                                      <% else %>
+                                        <%= @appraiser.first_name %>
+                                        <%= @appraiser.email  %>
+                                      <% end %>
+                                    </a></div>
+                                  <div class="text">
+                                    <%= comment_by.comment %>
+                                  </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                        </div>
+
+                </section>
 <% end %>
+

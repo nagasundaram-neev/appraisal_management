@@ -1,5 +1,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
+
 FactoryGirl.define do
   factory :user do
     email 'naga@gmail.com'
@@ -12,3 +13,19 @@ FactoryGirl.define do
     confirmed_at Time.now
   end
 end
+
+
+FactoryGirl.define do
+  factory :admin do
+    email 'test@neevtech.com'
+    password '12345678'
+    password_confirmation '12345678'
+    first_name 'test'
+    last_name 'neevtech'
+    gender 'M'
+    phone_no '+919942354883'
+    role 'admin'
+    confirmed_at Time.now
+  end
+end
+
