@@ -21,7 +21,8 @@
     <th>Appraisal Period</th>
     <th>Appraisee</th>
     <th>Appraiser</th>
-    <th>Role</th>
+    <th>Appraisee Role</th>
+    <th>Appraiser Role
     <th></th>
     <th></th>
   </tr>
@@ -31,7 +32,8 @@
       <td><strong><%= kra_sheet.find_cycle %></strong></td>
       <td><strong><%= kra_sheet.find_appraisee_name %></strong></td>
       <td><strong><%= kra_sheet.find_appraiser_name %></strong></td>
-
+      <td><strong><%= kra_sheet.appraisee.role_users.last.role.name %></strong></td>
+      <td><strong><%= kra_sheet.appraiser.role_users.last.role.name %></strong></td>
       <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_kra_sheet_path(kra_sheet), :remote => true %></td>
       <td><i class="icon-remove icon-large"></i><%= link_to "Destroy", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
