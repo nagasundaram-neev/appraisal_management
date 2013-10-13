@@ -5,6 +5,6 @@ class RoleUser < ActiveRecord::Base
   validates_presence_of :role_id
   belongs_to :appraisal_cycle
   validates_presence_of :appraisal_cycles_id
-  validates_uniqueness_of :appraisal_cycle, scope: [:user, :role]
+  validates_uniqueness_of :appraisal_cycles_id, scope: [:user_id, :role_id]
 
 end

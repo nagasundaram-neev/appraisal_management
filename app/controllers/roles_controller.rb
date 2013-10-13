@@ -27,7 +27,7 @@ before_action :check_selected_attributes, :only =>[:create, :update]
   def create
     @role = Role.new(role_params)
       if @role.save
-        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])        
+        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
         flash[:notice] = "A New Role has been Successfully Created."
       else
         flash[:notice] = @role.errors.full_messages
@@ -41,8 +41,9 @@ before_action :check_selected_attributes, :only =>[:create, :update]
   def update
   	  @role = Role.find(params[:id])
   	  if @role.update_attributes(role_params)
-      flash[:notice] = "Role has been Successfully updated."
-      @roles = Role.all
+        @role.kra_attrs = KraAttr.where("id in (?)" , params[:kra_attrs_id][:id])
+        flash[:notice] = "Role has been Successfully updated."
+        @roles = Role.all
     else
     flash[:notice] = @role.errors.full_messages
     end
@@ -57,23 +58,24 @@ before_action :check_selected_attributes, :only =>[:create, :update]
 
   def add_role
     unless params[:user_id][:id].eql?("")
-    user  = User.find(params[:user_id][:id])
-    if user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save
-      flash[:notice] = "Role Successfully Assigned to User."
-      @roles = Role.all
+      user  = User.find(params[:user_id][:id])
+      if !user.role_users.where(:appraisal_cycles_id => params[:aprsl_cycl_id][:id]).first.nil? then
+        flash[:error] = "you cant add two roles for one appraisal period"
+      elsif !user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save.nil?
+        flash[:notice] = "Role Successfully Assigned to User."
+        @roles = Role.all
+      else
+        flash[:error] = "Please Select the proper Role and Appraisal Cycle."
+      end
     else
-      flash[:error] = "Please Select the proper Role and Appraisal Cycle."
+      flash[:error] = "Please select the user"
+      render :action => "new_role"
     end
-  else
-    flash[:error] = "Please select the user"
-    render :action => "new_role"
   end
-end
 
   def new_role
   @role = Role.new
   end
-
 
   def role_params
     params.require(:role).permit(:name, :kra_attrs_id)
@@ -87,10 +89,8 @@ end
         p total
       end
     end
-   if total >100 then 
-     
+   if total >100 then
      flash[:notice] = "Total weightage is #{total} (it should be less than 100)"
-      
-   end 
+   end
   end
 end

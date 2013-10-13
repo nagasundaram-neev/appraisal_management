@@ -68,15 +68,16 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def total_performance_graph
-    @kra_sheets=current_user.kra_sheets
+
     @performance_manager_array=[]
     @performance_self_array=[]
-    @kra_sheets.each do |kra_sheet|
-      @kra_sheet_temp = kra_sheet
-      @performance_manager_array << performance_sum
-      @performance_self_array << performance_sum_self
+      @kra_sheets=current_user.kra_sheets
+      @kra_sheets.each do |kra_sheet|
+        @kra_sheet_temp = kra_sheet
+        @performance_manager_array << performance_sum
+        @performance_self_array << performance_sum_self
+      end
     end
-  end
 
   def performance_graph
     @kra_sheet=KraSheet.find_by_appraisee_id(current_user.id)

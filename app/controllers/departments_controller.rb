@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
-  #before_filter :authenticate_user!
-  #before_filter :require_admin
+  before_filter :authenticate_user!
+  before_filter :require_admin
 
   before_filter :load, :only => [:new,:index, :create, :update]
   before_filter :create_new_department, :only => [:new,:index]
@@ -18,7 +18,6 @@ class DepartmentsController < ApplicationController
 
 
   def index
-    
   end
 
   def create
@@ -58,16 +57,20 @@ class DepartmentsController < ApplicationController
 
   def add_dept
     unless params[:user_id][:id].eql?("")
-    if User.find(params[:user_id][:id]).department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
-      flash[:notice]="Department Successfully assigned to the user"
+      user = User.find(params[:user_id][:id])
+    if user.department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
+      dept_user = user.department_users.where(:end_date => nil).first
+      #dept_role.end_date = params[:start_date]
+      dept_user.update_attributes(:end_date => params[:start_date])
+      flash[:notice]="New Department successfull added"
       @departments = Department.all
     else
       flash[:error] = "Please select the Department for user."
     end
-  else
-    flash[:error] = "Please select the user"
-    render :action => "new_dept"
-  end
+    else
+      flash[:error] = "Please select the user"
+      render :action => "new_dept"
+    end
   end
   def new_dept
   @dept = Department.new
