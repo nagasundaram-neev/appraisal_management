@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+#Attributes
 atr= KraAttr.create!(name: 'a',weightage: '30',desc: 'fdasfasdf',measures: 'fadsfasf')
 a1= KraAttr.create!(name: 'a1',weightage: '40',desc: 'fdasfasdf',measures: 'fadsfasf')
 a2= KraAttr.create!(name: 'a2',weightage: '50',desc: 'fdasfasdf',measures: 'fadsfasf')
@@ -14,6 +16,9 @@ a4= KraAttr.create!(name: 'a4',weightage: '20',desc: 'fdasfasdf',measures: 'fads
 a5= KraAttr.create!(name: 'a5',weightage: '35',desc: 'fdasfasdf',measures: 'fadsfasf')
 a6= KraAttr.create!(name: 'a6',weightage: '25',desc: 'fdasfasdf',measures: 'fadsfasf')
 a7= KraAttr.create!(name: 'a7',weightage: '40',desc: 'fdasfasdf',measures: 'fadsfasf')
+
+
+#Appraisal Cycles
 
 apc1= AppraisalCycle.create!(start_date: '2008-1-01', end_date: '2008-5-30')
 apc2= AppraisalCycle.create!(start_date: '2008-6-01', end_date: '2008-12-31')
@@ -28,12 +33,15 @@ apc10= AppraisalCycle.create!(start_date: '2012-6-04', end_date: '2012-12-31')
 apc11= AppraisalCycle.create!(start_date: '2013-1-04', end_date: '2013-5-30')
 apc12= AppraisalCycle.create!(start_date: '2013-6-04', end_date: '2013-12-31')
 
+
+# Roles
 dev = Role.create!(name: 'dev')
 sdev = Role.create!(name: 'sdev')
 pmgr = Role.create!(name: 'pmgr')
 tlead = Role.create!(name: 'tlead')
 ceo = Role.create!(name: 'ceo')
 
+#Role's Attributes
 
 r_atr = KraRoleAttr.create!(kra_attr_id: a2.id, role_id: dev.id)
 r_atr1 = KraRoleAttr.create!(kra_attr_id: a4.id, role_id: dev.id)
@@ -55,13 +63,15 @@ r_atr12 = KraRoleAttr.create!(kra_attr_id: a1.id, role_id: ceo.id)
 r_atr13 = KraRoleAttr.create!(kra_attr_id: a5.id, role_id: ceo.id)
 r_atr14 = KraRoleAttr.create!(kra_attr_id: a6.id, role_id: ceo.id)
 
+# Departments
+
 dept = Department.create!(name: 'BU1')
 dept1 = Department.create!(name: 'BU3')
 dept2 = Department.create!(name: 'BU2')
 dept2 = Department.create!(name: 'BU4')
 dept2 = Department.create!(name: 'BU5')
 
-
+# Users
 
 admin= User.create!(email: 'admin@neevtech.com', password: '12345678', first_name: 'admin', last_name: 'neev', gender: 'M' ,phone_no: '+919999999999', role: 'admin')
 puru= User.create!(email: 'puru@neevtech.com', password: '12345678', first_name: 'puru_aprsr', last_name: 'neev', gender: 'M' ,phone_no: '+919999999999', role: 'appraiser')
@@ -74,7 +84,7 @@ sama= User.create!(email: 'sama@neevtech.com', password: '12345678', first_name:
 
 
 
-
+# User's Roles
 
 p_ru = RoleUser.create!(user_id: puru.id, role_id: dev.id, appraisal_cycles_id: apc1.id)
 p_ru1 = RoleUser.create!(user_id: puru.id, role_id: dev.id, appraisal_cycles_id: apc2.id)
@@ -109,7 +119,7 @@ s_ru2 = RoleUser.create!(user_id: sama.id, role_id: dev.id, appraisal_cycles_id:
 s_ru3 = RoleUser.create!(user_id: sama.id, role_id: dev.id, appraisal_cycles_id: apc12.id)
 
 
-
+# Kra Sheets
  
 sheet1 = KraSheet.create!(appraisal_cycle_id: apc1.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1')
 sheet2 = KraSheet.create!(appraisal_cycle_id: apc2.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
@@ -121,9 +131,14 @@ sheet7 = KraSheet.create!(appraisal_cycle_id: apc7.id,appraisee_id: puru.id,appr
 sheet8 = KraSheet.create!(appraisal_cycle_id: apc8.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
 sheet9 = KraSheet.create!(appraisal_cycle_id: apc9.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
 sheet10 = KraSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '0',appraisee_status: '0') 
-sheet11 = KraSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: sama.id,appraiser_id: puru.id,appraiser_status: '0',appraisee_status: '0')
+sheet11 = KraSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: sama.id,appraiser_id: puru.id,appraiser_status: '1',appraisee_status: '1')
 sheet12 = KraSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: kk.id,appraiser_id: naga.id,appraiser_status: '0',appraisee_status: '0')
 
+sheet13 = KraSheet.create!(appraisal_cycle_id: apc11.id,appraisee_id: sama.id,appraiser_id: puru.id,appraiser_status: '0',appraisee_status: '0')
+
+
+
+# KRA Ratings
 
 rating1 = KraRating.create!(kra_sheet_id: sheet1.id, kra_attr_id: a1.id, rating: '4',comment: 'ok', rated_by: '0')
 rating2 = KraRating.create!(kra_sheet_id: sheet1.id, kra_attr_id: a2.id, rating: '4',comment: 'ok', rated_by: '0')
@@ -187,6 +202,13 @@ rating51 = KraRating.create!(kra_sheet_id: sheet9.id, kra_attr_id: a3.id, rating
 rating52 = KraRating.create!(kra_sheet_id: sheet9.id, kra_attr_id: a1.id, rating: '9',comment: 'ok', rated_by: '1')
 rating53 = KraRating.create!(kra_sheet_id: sheet9.id, kra_attr_id: a2.id, rating: '9',comment: 'ok', rated_by: '1')
 rating54 = KraRating.create!(kra_sheet_id: sheet9.id, kra_attr_id: a3.id, rating: '9',comment: 'ok', rated_by: '1')
+
+rating55 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a1.id, rating: '9',comment: 'ok', rated_by: '1')
+rating56 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a2.id, rating: '9',comment: 'ok', rated_by: '1')
+rating57 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a3.id, rating: '9',comment: 'ok', rated_by: '1')
+rating58 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a1.id, rating: '8',comment: 'ok', rated_by: '0')
+rating59 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a2.id, rating: '8',comment: 'ok', rated_by: '0')
+rating60 = KraRating.create!(kra_sheet_id: sheet11.id, kra_attr_id: a3.id, rating: '8',comment: 'ok', rated_by: '0')
 
 
 

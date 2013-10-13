@@ -27,7 +27,7 @@
     <th></th>
   </tr>
       
-  <% KraSheet.all.each do |kra_sheet| %>
+  <% @kra_sheets.each do |kra_sheet| %>
     <tr>
       <td><strong><%= kra_sheet.find_cycle %></strong></td>
       <td><strong><%= kra_sheet.find_appraisee_name %></strong></td>

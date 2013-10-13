@@ -12,8 +12,7 @@
                   <li class="active">
                     <a href="#">                    
                       <span class="badge ">
-                      <% if current_user.role == "admin" then %>
-                      <%= AppraisalCycle.count %><% else %> <%= current_user.kra_sheets.count %> <% end %>
+                      <%= @appraisal_cycles.count %>
                       </span>       Appraisal Cycles    
                     </a>
                   </li>
@@ -37,7 +36,6 @@
                             <td><%= appraisal_cycle.end_date %></td>
                             <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %>
                             </td>
-                           
                           </tr>
                         <% end %>
                       <% else%>
