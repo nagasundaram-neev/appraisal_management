@@ -73,7 +73,6 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def total_performance_graph
-
     @performance_manager_array=[]
     @performance_self_array=[]
       @kra_sheets=current_user.kra_sheets
