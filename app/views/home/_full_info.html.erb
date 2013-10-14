@@ -81,7 +81,7 @@
                                                 <%= User.find(appraisee.appraisee_id).phone_no%>
                                             </button>
                                             <button class="btn btn-warning">
-                                                <i class="icon-envelope-alt"></i>
+                                                
                                                 <%= User.find(appraisee.appraisee_id).roles.last.name%>
                                             </button>
                                         </div>
@@ -105,7 +105,7 @@
                                                 <%= User.find(appraisee.appraisee_id).phone_no%>
                                             </button>
                                             <button class="btn btn-warning">
-                                                <i class="icon-envelope-alt"></i>
+                                                
                                                 <%= User.find(appraisee.appraisee_id).roles.last.name%>
                                             </button>
                                         </div>
@@ -124,7 +124,7 @@
                                     <div class="user-info">
                                         <div class="name"><a href="#"><%= User.find(appraiser.appraiser_id).first_name %></a></div>
                                         <div class="position">
-                                          From : <strong><%= appraiser.created_at.strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.created_at.strftime("%m/%d/%Y") %> </strong>
+                                          From : <strong><%= appraiser.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
                                         </div>
                                         <div class="options">
                                             <button class="btn  btn-success">
