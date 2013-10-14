@@ -17,7 +17,7 @@ class KraSheet < ActiveRecord::Base
   end
 
   def find_cycle
-  	@appraisal_cycle=AppraisalCycle.find(self.appraisal_cycle_id)
+    @appraisal_cycle=AppraisalCycle.find(self.appraisal_cycle_id)
   	@appraisal_cycle.start_date.to_s+" to " + @appraisal_cycle.end_date.to_s
   end
   

@@ -18,7 +18,7 @@ class Users::RegistrationsController < DeviseController
       user.department_users.build(:department_id => params[:dept_id][:id],:start_date => params[:start_date]).save
       #user.departments = Department.where("id in (?)", params[:dept_id][:id])
 
-      #UserMailer.welcome_email(user).deliver  
+      UserMailer.welcome_email(user).deliver  
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
