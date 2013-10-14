@@ -21,6 +21,9 @@ function checkvalue(rating)
       <thead>
        <tr>
          <th>KEY RESULT AREAS</th>
+         
+         <th> Ratings  &amp; COMMENTS by  <%= @appraisee.first_name %> </th>
+         
          <th>Mangaer Rating &amp; COMMENTS for <%= @appraisee.first_name %> </th>
        </tr>
       </thead>
@@ -49,7 +52,16 @@ function checkvalue(rating)
                </div>
              </div>
            </td>
-                      
+           <td>
+             <section class="widget">
+           <% rating_obj = kr_attr_rating_obj(@kra_rating.get_appraisee_kra_sheet(@appraisee.id),kra_attr.id,0)  %>
+                                  <% unless rating_obj == nil then %>
+                                   <small> Appraisee rating is: </small>
+                                   <h6 class='badge'><%= rating_obj.rating %></h6>
+                                   <p>Appraisee Comments</p><small> <%= rating_obj.comment %></small>
+                                 <% end %>
+          </section>
+           </td>
           <td>
            <%= form_for(@kra_rating, :remote =>
                               true ) do |f|  %>
