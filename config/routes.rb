@@ -30,6 +30,7 @@ AppraisalManagement::Application.routes.draw do
   post 'add_dept', to: 'departments#add_dept'
   get 'get_appraisees', to: 'home#get_appraisees'
   get 'get_past_appraisees', to: 'home#get_past_appraisees'
+  get 'total_performance_graph', to: 'home#total_performance_graph'
   root :to => 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

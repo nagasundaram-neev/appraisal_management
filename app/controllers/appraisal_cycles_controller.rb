@@ -79,8 +79,12 @@ class AppraisalCyclesController < ApplicationController
       @kra_sheets=current_user.kra_sheets
       @kra_sheets.each do |kra_sheet|
         @kra_sheet_temp = kra_sheet
-        @performance_manager_array << performance_sum
-        @performance_self_array << performance_sum_self
+        unless performance_sum == 0
+          @performance_manager_array << performance_sum
+        end
+        unless performance_sum_self == 0 
+          @performance_self_array << performance_sum_self  
+        end
       end
     end
 

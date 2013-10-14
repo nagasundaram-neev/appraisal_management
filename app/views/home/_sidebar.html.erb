@@ -53,7 +53,7 @@
               </li>
             </li>
             <li class="accordion-group">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisals </span></a>
+              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Self-Appraisals </span></a>
               <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
                   <li><%= link_to "Previous Appraisal", appraisal_cycles_path, :remote => true %></li>
                   <li><%= link_to "Current Appraisal", kra_ratings_path, :remote => true %></li>
@@ -62,7 +62,7 @@
           <% end %>
           <% if current_user.role == "appraiser" || current_user.role == "admin" then%>
             <li class="accordion-group">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraisals</span></a>
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraisee's Appraisals</span></a>
                 <ul id="appraise-collapse" class="accordion-body collapse">
                     <li><%= link_to "Pending Forms", get_appraisees_path, :remote => true %></li>
                     <li><%= link_to "Previous Appraisees", get_past_appraisees_path, :remote => true %></li>
