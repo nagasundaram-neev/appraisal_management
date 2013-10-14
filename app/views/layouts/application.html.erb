@@ -20,7 +20,7 @@ input.error {
 </head>
 <body class="background-dark">
   <% if user_signed_in?%>
-    <%= render partial: "/home/sidebar"  %>
+    <%= render partial: '/home/sidebar'  %>
     <div class="wrap">
       <header class="page-header">
         <div class="navbar">
@@ -35,7 +35,14 @@ input.error {
                         
                      <%= "#{current_user.first_name} #{current_user.last_name}" %>
                     </li>
-                    
+                    <% unless current_user.role=="admin" %>
+                    <li role="presentation" class="account-picture">
+                      Role: &nbsp<strong><%= current_user.roles.last.name %></strong>
+                     </li>
+                     <li role="presentation" class="account-picture">
+                      Department: &nbsp<strong> <%= current_user.departments.last.name %></strong>
+                     </li>
+                     <% end %>
                     
                 </ul>
               </li>
@@ -56,13 +63,7 @@ input.error {
               <h2 class="page-title">Dashboard </h2>
             </div>
           </div>
-          <div class="row-fluid" id="body-content">
-            <div class="span8">
-              <section class="widget">
-                
-              </section>
-            </div>
-          </div>
+         
   <% end %>
   <%= yield %>
 </body>

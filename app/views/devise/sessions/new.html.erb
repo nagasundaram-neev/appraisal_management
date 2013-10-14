@@ -1,8 +1,16 @@
 <script type="text/javascript">$.validate(); </script> 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
+ 
+
 <div class="single-widget-container">
     <section class="widget login-widget">
+        <% if flash[:notice] %>
+            <div class='alert alert-success'>
+            <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+            </div>
+        <% end %>
+
         <header class="text-align-center">
             <h4>Login to your account</h4>
         </header>
@@ -37,6 +45,21 @@
               
                    <%= f.submit "Sign in", :class => "btn btn-block btn-large btn-danger"%>
                    <% end %>
+
+<% if flash[:error] %>
+ <div class='btn btn-danger'>
+ <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+</div>
+<% end %>
+
+
+
+
+<% if flash[:alert] %>
+<div class='alert alert-error'>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+</div>
+<% end %>
 
 						<%= render "devise/shared/links" %>
                     

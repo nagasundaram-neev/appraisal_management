@@ -1,3 +1,4 @@
+<section class='widget span9'>
 <% @kra_sheets.each do |kra_sheet| %>
 
   <% if kra_sheet.appraisee_status==false %>
@@ -74,8 +75,9 @@
       </div>
 
     </div>
-    <div class="span6 offset1" align="center" >
-      <section class="widget tiny">
+
+    <div class="span8" align="center" >
+      <section class="widget">
           <header>
               <h3>
                 <br>
@@ -99,7 +101,7 @@
           </div>
       </section>
     </div>
-    <div class="span4 offset2" >
+    <div class="span8" >
       <section class="widget tiny">
           <header>
               <h4>
@@ -126,8 +128,8 @@
           </div>
       </section>
     </div>          
-  </div>
-                <section class="widget large">
+  </div>        <div class = 'span8' >
+                <section class="widget">
                     
                     <header>
                         <h4>
@@ -148,7 +150,7 @@
                                 <% flag=1 %>
                                 <div class="sender pull-left">
                                   <div class="icon">
-                                        <img src="/assets/appraisal.gif" class="img-circle" alt="" />
+                                        <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                    </div>
                               </div>
                               <div class="chat-message-body">
@@ -156,7 +158,7 @@
                                 <% flag=0 %>
                                 <div class="sender pull-right">
                                       <div class="icon">
-                                      <img src="/assets/appraisal.gif" class="img-circle" alt="" />
+                                      <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                       </div>
                                     </div>
                               <div class="chat-message-body on-left">
@@ -181,9 +183,9 @@
                         </div>
                         </div>
 
-                </section>
+                </section></div>
 <% end %>
-
+</section>
 <script>
   (function($){
     $(window).load(function(){

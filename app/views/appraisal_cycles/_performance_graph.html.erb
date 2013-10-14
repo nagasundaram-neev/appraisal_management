@@ -1,5 +1,6 @@
-<div id="container" style="width: 60%; height: 380px;"></div>
+<div id="graph2"></div>
 <%= hidden_field_tag "kra_attr_list", @kra_attr_list.to_a %>
+
     <script>
         $(function () {
 
@@ -7,7 +8,7 @@
             $(document).ready(function () {
                 chart = new Highcharts.Chart({
                     chart:{
-                        renderTo:'container',
+                        renderTo:'graph2',
                         type:'column',
                         defaultSeriesType: 'line',
                         backgroundColor: {
@@ -24,15 +25,19 @@
                         plotBorderWidth: 0
                       },
                     title:{
-                        text:'<%= current_user.first_name %> last appraisal Performance'  ,
-                        color: '#FFF',    
-                        font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+                        style: {color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'},
+                        text:'<%= "#{current_user.first_name}" %> last appraisal'
+                        
+                        
                     },
                     xAxis:{
                         
-                        title:{
-                            text:'Attributes'
-                        },
+                        title:{ text:'Attributes' },
+
+                        style: {
+                            color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                            },
+                        
                         categories: $("#kra_attr_list").val().split(" ")
 
                     }, 
@@ -40,14 +45,18 @@
                         min:0,
                         title:{
                             text:'Rating'
-                        }
+                        },
+                        style: {
+                            color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                            }
+
                     },
                     legend:{
                         layout:'vertical',
                         backgroundColor:'#FFFFFF',
                         align:'left',
                         verticalAlign:'top',
-                        x:500,
+                        x:50,
                         y:0,
                         floating:true,
                         shadow:true
@@ -69,13 +78,14 @@
                     series:[
                         {
                             name:'Rating By Manager',
-                            data:<%= @kra_ratings_by_manager_array %>
+                            data:<%= @kra_ratings_by_manager_array %>,
+                            color: '#0F0'
                         },
                         
                         {
                             name:'Rating by Employee',
                             data: <%= @kra_ratings_by_self_array %>,
-                            color:'#FE9D00'
+                            color:'#0FF'
                         }
                     ]
                 });

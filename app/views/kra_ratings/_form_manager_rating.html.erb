@@ -126,7 +126,7 @@ function checkvalue(rating)
   
   <%= link_to "Modify the Ratings", kra_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
 
-  <%= link_to "Submit to HR", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn icon-edit icon-large color-orange pull-right", :remote => true %>
+  <%= link_to "Submit to HR", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
 
 
 </td>
