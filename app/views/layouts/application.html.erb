@@ -49,7 +49,9 @@ input.error {
                       Department: &nbsp<strong> <%= current_user.departments.last.name %></strong>
                      </li>
                      <% end %>
-                    
+                  <li role="presentation" class="account-picture">
+                      <i class="icon-edit icon-large"></i><%= link_to "Edit Account", edit_user_registration_path %>
+                     </li>                    
                 </ul>
               </li>
               <li class="visible-phone">
