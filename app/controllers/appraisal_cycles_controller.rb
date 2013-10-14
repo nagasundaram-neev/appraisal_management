@@ -73,7 +73,6 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def total_performance_graph
-
     @performance_manager_array=[]
     @performance_self_array=[]
       @kra_sheets=current_user.kra_sheets
@@ -85,6 +84,7 @@ class AppraisalCyclesController < ApplicationController
         unless performance_sum_self == 0 
           @performance_self_array << performance_sum_self  
         end
+      @cycles=AppraisalCycle.where(:id=> current_user.kra_sheets.select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)).select(:start_date).collect(&:start_date)
       end
     end
 
@@ -95,7 +95,7 @@ class AppraisalCyclesController < ApplicationController
     @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
     @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
     @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
-    @kra_attr_list = KraAttr.all.collect(&:name)
+    @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
   end
 
   def performance_params

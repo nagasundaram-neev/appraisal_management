@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
+<<<<<<< HEAD
+=======
 include AppraisalCyclesHelper
+>>>>>>> 09f0daff0b6888a473eae62d7ea17b2a4c8f7260
   def index
     if !user_signed_in?
       redirect_to new_user_session_path
@@ -48,7 +51,6 @@ include AppraisalCyclesHelper
         unless performance_sum_self == 0 
           @performance_self_array << performance_sum_self  
         end
-      @cycles=AppraisalCycle.where(:id=> current_user.kra_sheets.select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)).select(:start_date).collect(&:start_date)
       end
     else
       flash[:notice]= "No Appraisal Published for you"
@@ -63,7 +65,7 @@ include AppraisalCyclesHelper
       @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
       @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
       @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
-      @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
+      @kra_attr_list = KraAttr.all.collect(&:name)
     else
       flash[:notice]= "No Appraisal Published for you"
     end
