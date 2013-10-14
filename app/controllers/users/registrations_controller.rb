@@ -13,7 +13,7 @@ class Users::RegistrationsController < DeviseController
     build_resource(sign_up_params)
     if resource.save
       user = User.find_by_email(params[:user][:email])
-      user.role_users.build(:role_id => params[:role][:id], :appraisal_cycle => params[:aprsl_cycl_id][:id]).save
+      user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save
       user.department_users.build(:department_id => params[:dept_id][:id],:start_date => params[:start_date]).save
       UserMailer.welcome_email(user).deliver
       if resource.active_for_authentication?

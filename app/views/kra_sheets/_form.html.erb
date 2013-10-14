@@ -1,3 +1,7 @@
+<script type="text/javascript">$.validate(); 
+
+</script> 
+ 
 <div id="sheets_form">
 <div class="row-fluid">
           <div class="span12">
@@ -34,7 +38,7 @@
                 </label>
                 <div class="controls">
                  
-                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee" %>
+                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
                   
                 </div>
                 <label class="control-label" for="appraiser_id">

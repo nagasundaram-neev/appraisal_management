@@ -17,14 +17,20 @@ input.error {
     color: #480000;
 }
 </style> 
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed&effect=shadow-multiple|emboss|3d' rel='stylesheet' type='text/css'>
 </head>
 <body class="background-dark">
+  <a class="add-on pull-left" href="http://www.neevtech.com">
+  <img alt="Neev" src="/assets/site_logo.png" style="margin-left:30px; margin-top:-20px"></a>
+  <h1 class='font-effect-3d' style="margin-left:500px; margin-top:-15px">Neev Information Technologies </h1>
+
   <% if user_signed_in?%>
     <%= render partial: '/home/sidebar'  %>
     <div class="wrap">
       <header class="page-header">
         <div class="navbar">
           <div class="navbar-inner">
+
             <ul class="nav pull-right">
              <li class="hidden-phone dropdown">
                 <a href="#" title="Account" id="account" class="dropdown-toggle" data-toggle="dropdown">
@@ -54,13 +60,15 @@ input.error {
               <li class="hidden-phone"><a href="/users/sign_out" data-method ="delete" ><i class="icon-signout"></i></a>
               </li>
             </ul>
+            
           </div>
         </div>
+      
       </header>
       <div class="content container-fluid" id="body-content">
         <div class="row-fluid">
           <div class="span12">
-              <h2 class="page-title">Dashboard </h2>
+             
             </div>
           </div>
          
