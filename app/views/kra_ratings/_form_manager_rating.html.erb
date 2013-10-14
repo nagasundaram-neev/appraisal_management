@@ -4,6 +4,7 @@ function checkvalue(rating)
 
 </script>
 
+<% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).first.nil? %>
 <% if current_user.role== 'appraiser' %>
    <div class="body">
      <% if @flag == 0  %>
@@ -149,4 +150,6 @@ function checkvalue(rating)
                       <%end%>
                     </div>
                   <% end %>                            
-                            
+                   <% else %>
+                   <h4> Appraisee has not filled the form yet.</h4>    
+                   <% end %>     

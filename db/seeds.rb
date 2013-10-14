@@ -15,6 +15,12 @@ a5= KraAttr.create!(name: 'a5',weightage: '35',desc: 'fdasfasdf',measures: 'fads
 a6= KraAttr.create!(name: 'a6',weightage: '25',desc: 'fdasfasdf',measures: 'fadsfasf')
 a7= KraAttr.create!(name: 'a7',weightage: '40',desc: 'fdasfasdf',measures: 'fadsfasf')
 
+dept1 = Department.create!(name: 'BU1')
+dept2 = Department.create!(name: 'BU3')
+dept3 = Department.create!(name: 'BU2')
+dept4 = Department.create!(name: 'BU4')
+dept5 = Department.create!(name: 'BU5')
+
 apc1= AppraisalCycle.create!(start_date: '2008-1-01', end_date: '2008-5-30')
 apc2= AppraisalCycle.create!(start_date: '2008-6-01', end_date: '2008-12-31')
 apc3= AppraisalCycle.create!(start_date: '2009-1-13', end_date: '2009-5-30')
@@ -55,11 +61,7 @@ r_atr12 = KraRoleAttr.create!(kra_attr_id: a1.id, role_id: ceo.id)
 r_atr13 = KraRoleAttr.create!(kra_attr_id: a5.id, role_id: ceo.id)
 r_atr14 = KraRoleAttr.create!(kra_attr_id: a6.id, role_id: ceo.id)
 
-dept = Department.create!(name: 'BU1')
-dept1 = Department.create!(name: 'BU3')
-dept2 = Department.create!(name: 'BU2')
-dept2 = Department.create!(name: 'BU4')
-dept2 = Department.create!(name: 'BU5')
+
 
 
 
@@ -72,7 +74,12 @@ ali= User.create!(email: 'ali@neevtech.com', password: '12345678', first_name: '
 kk= User.create!(email: 'kk@neevtech.com', password: '12345678', first_name: 'kk_appraisee', last_name: 'neev', gender: 'M' ,phone_no: '+919999999999', role: 'appraisee')
 sama= User.create!(email: 'sama@neevtech.com', password: '12345678', first_name: 'sama_appraisee', last_name: 'neev', gender: 'M' ,phone_no: '+919999999999', role: 'appraisee')
 
-
+p_d = DepartmentUser.create!(department_id: dept1.id, user_id: puru.id)
+n_d = DepartmentUser.create!(department_id: dept1.id, user_id: naga.id)
+r_d = DepartmentUser.create!(department_id: dept5.id, user_id: rama.id)
+a_d = DepartmentUser.create!(department_id: dept2.id, user_id: ali.id)
+k_d = DepartmentUser.create!(department_id: dept3.id, user_id: kk.id)
+s_d = DepartmentUser.create!(department_id: dept4.id, user_id: sama.id)
 
 
 
