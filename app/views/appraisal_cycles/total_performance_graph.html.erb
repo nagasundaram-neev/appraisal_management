@@ -1,4 +1,4 @@
-<div id="container" style="width: 60%; height: 380px;"></div>
+<div id="container" style="width: 60%; height: 300px;"></div>
 <%= hidden_field_tag "kra_attr_list", @kra_attr_list.to_a %>
     <script>
         $(function () {
@@ -31,7 +31,7 @@
                     xAxis:{
                         
                         title:{
-                            text:'Appraisal Cycles'
+                            text:'Attributes'
                         },
                         categories: $("#kra_attr_list").val().split(" ")
 
@@ -47,8 +47,8 @@
                         backgroundColor:'#FFFFFF',
                         align:'left',
                         verticalAlign:'top',
-                        x:100,
-                        y:70,
+                        x:400,
+                        y:0,
                         floating:true,
                         shadow:true
                     },
@@ -68,12 +68,12 @@
 
                     series:[
                         {
-                            name:'Overall Perforamnce Rating By Manager',
+                            name:' Rating By Manager',
                             data:<%= @performance_manager_array %>
                         },
                         
                         {
-                            name:'Overall Perforamnce Rating by Employee',
+                            name:' Rating by Employee',
                             data: <%= @performance_self_array %>,
                             color:'#FE9D00'
                         }
@@ -84,3 +84,11 @@
         });
     </script>
    
+                </div>
+                  
+              </section>                
+            </div>
+
+
+
+

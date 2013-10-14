@@ -9,7 +9,6 @@ before_filter :authenticate_user!
     @kra_sheet = KraSheet.new
   end
   def new
-    
   end
 
   def index
@@ -25,7 +24,6 @@ before_filter :authenticate_user!
       else
         flash[:notice] = @kra_sheet.errors.full_messages
       end
-    
   end
 
   def edit
@@ -49,7 +47,6 @@ before_filter :authenticate_user!
     @kra_sheet.destroy
     flash[:notice] = "Successfully destroyed."
     @kra_sheets = KraSheet.all
-    #format.html
   end
 
   def kra_status_update

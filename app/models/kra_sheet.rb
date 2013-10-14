@@ -23,7 +23,7 @@ class KraSheet < ActiveRecord::Base
   
   def alert_user(id)
     user = User.find(id)
-    #UserMailer.new_aprsl_email(user).deliver
+    UserMailer.new_aprsl_email(user).deliver
   end
   
   
