@@ -3,6 +3,7 @@
   function checkvalue(rating)
 {if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
 </script>
+<% unless current_user.kra_sheets.where(:appraisee_status => 0).first.nil? %>
   <% if current_user.role == "appraisee" || @flag==0 %>
   <div class="row-fluid">
     <div class="span12">
@@ -187,5 +188,7 @@
                               </section>
                             </div>
                             </div>
-              <%end%>                 
-                            
+                          <%end%>
+                        <% else %>
+                          <h4>Currently there is no appraisal or you have signed off the form. </h4>
+                        <% end %>
