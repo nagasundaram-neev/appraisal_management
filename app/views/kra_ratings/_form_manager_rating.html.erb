@@ -4,14 +4,15 @@ function checkvalue(rating)
 
 </script>
 
-<% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).first.nil? %>
 <% if current_user.role== 'appraiser' %>
    <div class="body">
      <% if @flag == 0  %>
       <div id='appraiser_self_form' class='widget'><%= render :partial => 'form' %></div>
     <%end%>
-                         
+    
+                     
    <% if @flag==1 %>
+   <% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).first.nil? %>
     <section class='widget'>
     <h3 class='page-title'>KRA</h3>
     <blockquote><p style="text-align:justify;font-size:100%" class="span12">
@@ -145,11 +146,12 @@ function checkvalue(rating)
 </td>
       <td>
 
-
+<% else %>
+                   <h4> Appraisee has not filled the form yet.</h4>    
+                   <% end %>   
 
                       <%end%>
                     </div>
+                     
                   <% end %>                            
-                   <% else %>
-                   <h4> Appraisee has not filled the form yet.</h4>    
-                   <% end %>     
+                    

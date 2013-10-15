@@ -14,7 +14,8 @@ include AppraisalCyclesHelper
   def get_appraisees
     begin
       if current_user.role == "admin" then
-        @appraisees = KraSheet.where(:appraiser_status => 0)
+        @appraisees = KraSheet.where("appraiser_status = 0 or appraisee_status = 0")
+        
       else
       @appraisees = current_user.appraiser_kra_sheets.where(:appraiser_status => 0)
       end
