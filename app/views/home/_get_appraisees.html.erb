@@ -25,7 +25,6 @@
         </div>
       <!-- Notification Area End-->
 
-
       <!-- Counting Area Start-->
         <div class='row'>
           <div class='span8 offset2'>
@@ -53,6 +52,7 @@
                       <tr style="border-bottom:solid 1px;">
                       <th>Appraisee Name</th>
                       <th>Date Ended</th>
+					  <th>Status</th>
                       <th><i class='icon-star icon-large'></i> Appraise</th>
                       <th><i class="icon-envelope icon-large"></i> Email</th>
                       </tr>
@@ -62,7 +62,13 @@
                         <tr>
                           <td><%= sheet.appraisee.first_name %></td>
                           <td><%= sheet.appraisal_cycle.end_date %></td>
-                          <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
+						  <td><% if !sheet.appraisee_status %>
+	        Appraisee has not filled the form yet.
+        <% else %>
+        <h5>Appraisee has filled the form. </h5>
+        <% end %>
+      </td>                          
+<td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
                           <td><%= sheet.appraisee.email %></td>
                         </tr>
                       <% end %>

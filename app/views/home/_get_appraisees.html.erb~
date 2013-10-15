@@ -1,0 +1,40 @@
+
+
+<div class="flash_notice"><div class="alert alert-success"> <%= notice %> </div></div>
+ 
+<ul class="nav nav-pills nav-stacked">
+<li class="active">
+    <a href="#">
+      <span class="badge "><%= current_user.appraiser_kra_sheets.where(:appraiser_status => 0).count %></span>
+       Appraisal forms
+    </a>
+  </li>
+</ul>
+<% if AppraisalCycle.count > 0 %>
+<table class="table table-hover">
+  <tbody><tr>
+    <th>Appraisee Name</th>
+    <th>Date Ended</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @appraisees.each do |sheet| %>
+    <tr>
+      <td><%= sheet.appraisee.first_name %></td>
+      <td><%= sheet.appraisal_cycle.end_date %></td>
+      <td>
+        <% if !sheet.appraisee_status %>
+        Appraisee has not filled the form yet.
+        <% else %>
+        <h5>Appraisee has filled the form. </h5>
+        <% end %>
+      </td>
+      <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
+      <td><%= sheet.appraisee.email %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
