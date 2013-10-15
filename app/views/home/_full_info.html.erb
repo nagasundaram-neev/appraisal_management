@@ -68,7 +68,7 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="report">
-                            <h5 class="tab-header"><i class="icon-group"></i>Appraisee's for <%= current_user.first_name %></h5>
+                            <h5 class="tab-header"><i class="icon-group"></i>Appraise's for <%= current_user.first_name %></h5>
                             <ul class="users-list user-list-no-hover">
                               <% KraSheet.where(:appraiser_id=>current_user.id).each do |appraisee| %>
                                 <li>
@@ -92,7 +92,7 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="report">
-                            <h5 class="tab-header"><i class="icon-group"></i>Appraisee's for <%= current_user.first_name %></h5>
+                            <h5 class="tab-header"><i class="icon-group"></i>Appraiser's for <%= current_user.first_name %></h5>
                             <ul class="users-list user-list-no-hover">
                               <% KraSheet.where(:appraiser_id=>current_user.id).each do |appraisee| %>
                                 <li>
@@ -116,7 +116,7 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="dropdown1">
-                            <h5 class="tab-header"><i class="icon-comments"></i>Appraisee's for <%= current_user.first_name %></h5>
+                            <h5 class="tab-header"><i class="icon-comments"></i>Appraiser's for <%= current_user.first_name %></h5>
                             <ul class="users-list">
                                 <% KraSheet.where(:appraisee_id=>current_user.id).each do |appraiser| %>
                                 <li>
@@ -127,10 +127,10 @@
                                           From : <strong><%= appraiser.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
                                         </div>
                                         <div class="options">
-                                            <button class="btn  btn-success">
+                                            
                                                 <i class="icon-phone"></i>
                                                 <%= User.find(appraiser.appraiser_id).phone_no%>
-                                            </button>
+                                            
 
                                         </div>
                                     </div>
