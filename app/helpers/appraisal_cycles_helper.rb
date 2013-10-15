@@ -1,6 +1,7 @@
 module AppraisalCyclesHelper
 
 	def progress_manager
+		user=User.find(@kra_sheet_temp.appraisee_id)
 		@total_attributes=user.roles.last.kra_role_attrs.count
 		@empty_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id,:rating=>nil, :rated_by => 1).count
 		if ((@total_attributes-@empty_attributes)==0) 
