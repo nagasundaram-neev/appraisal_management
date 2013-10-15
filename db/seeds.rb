@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+# Attributes
+
+
+
 a1= KraAttr.create!(name: 'Drive Project Effectiveness',weightage: '30',desc: '
 a) Effectively estimate each project to ensure effective project planning in consultation with Project Manager
 b) Effectively design the architecture for the project to give direction to team members

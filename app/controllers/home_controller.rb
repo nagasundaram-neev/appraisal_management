@@ -27,6 +27,7 @@ include AppraisalCyclesHelper
       return nil
     end
   end
+
   def get_past_appraisees
     if current_user.role == "appraiser" then
     @kra_sheets=KraSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1).order("appraisal_cycle_id DESC") 

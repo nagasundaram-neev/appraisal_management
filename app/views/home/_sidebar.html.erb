@@ -57,8 +57,12 @@
             <li class="accordion-group">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Self-Appraisals </span></a>
               <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
-                  <li><%= link_to "Previous Appraisal", appraisal_cycles_path, :remote => true %></li>
-                  <li><%= link_to "Current Appraisal", kra_ratings_path, :remote => true %></li>
+                <li>
+                  <%= link_to "Previous Appraisal", appraisal_cycles_path, :remote => true %>
+                </li>
+                <li>
+                  <%= link_to "Current Appraisal", kra_ratings_path(:flag => 0), :remote => true %>
+                </li>
               </ul>
             </li>
           <% end %>
