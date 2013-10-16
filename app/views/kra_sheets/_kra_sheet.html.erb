@@ -1,40 +1,80 @@
-<div class="row-fluid">
-  <div class="span12">
-      <h2 class="page-title">Kra Sheets </h2>
-  </div>
-  </div>
-    <div class="row-fluid" >
-      <div class="span8">
-        <div class="flash_notice" id='sheet_notice'>
-          <div class="alert alert-success"> <%= notice %>
+<div class='span10 offset1'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span10 offset2">
+           <h2 class="page-title">Kra Sheets <small></small></h2>
+          </div>
         </div>
-    </div> 
-    <ul class="nav nav-pills nav-stacked">
-      <li class="active">
-    <a href="#">
-      <span class="badge "><%= KraSheet.count %></span>
-       KRA Assigned List are
-    </a>
-      </li>
-    </ul>
-    <% if KraSheet.count > 0 %>
-    <section class="widget">
-      <% @distinct_appraisals.each do |id| %>
-        <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
-        <li class="accordion-group">
-          <a class="accordion-toggle collapsed" data-toggle="collapse"  href=<%= "#appraisal-collapse#{appraisal.id}" %> > <span class="name"><h4><%= "#{appraisal.start_date} to #{appraisal.end_date}"%></h4></span></a>
-          <ul id= <%= "appraisal-collapse#{appraisal.id}" %> class="accordion-body collapse">
-            <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id).each do |kra_sheet| %>
-              <li>
-                <strong><%= kra_sheet.find_cycle %></strong>
-                <strong><%= kra_sheet.find_appraisee_name %></strong>    
-                <strong><%= kra_sheet.find_appraiser_name %></strong>
-              </li>
-            <% end %>        
-          </ul>
-        </li>
-      <% end %>
-    </section>
-    <% end %>
-  </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span10 offset1">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='sheet_notice'>
+                <div class="alert alert-success">
+                 <%= notice %>
+                 <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+              <%end%>
+            </div>
+          </div>
+      <!-- Notification Area End -->
+        
+        <!-- Counting Area Start-->
+          <div class='row'>
+            <div class='span10 offset1'>
+              <section class="widget">
+                <span class="badge label-success">
+                  <%= KraSheet.count %>
+                </span>
+                <strong>
+                   KRA Assigned List are
+                </strong>
+              </section>
+            </div>
+          </div>
+        <!-- Counting Area End-->
+
+
+        <!-- List Start -->
+          <div class='row'>
+            <% if KraSheet.count > 0 %>
+               <div class='span10 offset1'>
+                <section class="widget" id='kra-sheets-all'>
+                  <% @distinct_appraisals.each do |id| %>
+                    <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
+                      <div class="accordion-group">
+                        <blockquote>
+                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets-all'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                        <span class="name">
+                          <h4>
+                            <%= "#{appraisal.start_date} to #{appraisal.end_date}"%>
+                          </h4>
+                        </span>
+                        </a>
+                        </blockquote>
+                        <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
+                        
+                          <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id).each do |kra_sheet| %>
+                            <div class=widget>
+                              <%= kra_sheet.find_cycle %>
+                              <%= kra_sheet.find_appraisee_name %>
+                              <%= kra_sheet.find_appraiser_name %>
+                            </div>
+                          <% end %>        
+                        </div>
+                      </div>
+                    <% end %>
+                </section>
+            </div>
+            <% end %>
+          </div>
+        <!-- List Area End -->  
+    </div>
+  </section>        
 </div>

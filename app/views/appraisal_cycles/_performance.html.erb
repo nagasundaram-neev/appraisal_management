@@ -115,13 +115,17 @@
                  <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
                   <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for Manager</h4></strong>
+                  <strong ><h4 class="btn btn-success">Submitted the KRA form for Manager</h4></strong>
                 <% end %>
               <% else %>
                  <% unless @status=kra_sheet.appraiser_status %>
                   <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
+                  <%if current_user.role=='admin' %>
+                  <strong ><h4 class="btn btn-success">KRA sheet completed the assessing </h4></strong>
+                  <% else %>
                   <strong ><h4 class="btn btn-success">You have submitted the KRA form for HR</h4></strong>
+                  <% end %>
                 <% end %>
               <% end %>
               </blockquote>

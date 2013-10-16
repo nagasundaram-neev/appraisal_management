@@ -1,0 +1,25 @@
+<section class='widget'>
+<strong>
+
+
+<table class='table table-bordered table-hover table-srtiped'>
+  <thead>
+    <tr>
+      <th><i class='icon-user icon-4x'></i></th>
+      <th><i class='icon-envelope icon-4x'></i></th>
+      <th><i class='icon-mobile-phone icon-4x'></i></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.first_name %></td>
+    <td><a href=#><%= user.email %></a></td>
+    <td><%= user.phone_no %></td>
+  </tr>
+  <% end %>
+
+</tbody>
+</table>
+</strong>
+</section>

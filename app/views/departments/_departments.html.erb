@@ -1,41 +1,75 @@
-<div class="row-fluid">
-          <div class="span12">
+<div class='span6 offset2'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset2">
               <h2 class="page-title">Departments <small>All departments listed.</small></h2>
           </div>
         </div>
-          <div class="row-fluid" >
-            <div class="span8">
-            <div class="flash_notice" id='dept_notice'><div class="alert alert-success"> <a class="close" data-dismiss="alert">×</a> <%= notice %> </div></div>
- 
-<ul class="nav nav-pills nav-stacked">
-<li class="active">
-    <a href="#">
-      <span class="badge "><%= Department.count %></span>
-       Departments
-    </a>
-  </li>
-</ul>
-<% if Department.count > 0 %>
-<table class="table table-hover">
-  <tbody><tr>
-    <th>Departments</th>
-    
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @departments.each do |department| %>
-    <tr>
-      <td><%= department.name %></td>
+      <!-- Heading End -->
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span8 offset2">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='dept_notice'>
+                <div class="alert alert-success">
+                 <a class="close" data-dismiss="alert">×</a>
+                 <%= notice %> 
+                </div>
+              </div>
+            <%end%>
+         </div>
+       </div>
+      <!-- Notification Area End -->
       
-      <td><%= link_to "", edit_department_path(department), :remote => true, class: "icon-edit icon-large color-orange" %></td>
-      <td><%= link_to "", department, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
-                       
-            </div>
+      <!-- Counting Area Start-->
+        <div class='row'>
+          <div class='span8 offset2'>
+            <section class="widget">
+              <span class="badge label-success">
+                <%= Department.count %>
+              </span>
+              <strong>
+                Departments
+              </strong>
+            </section>  
           </div>
-      </div>
+        </div>
+      <!-- Counting Area End -->
+    
+      <!-- List Start -->
+        <div class='row'>
+          <% if Department.count > 0 %>
+            <div class='span8 offset2'>
+              <strong>
+                <section class="widget">
+                  <table class="table table-hover">
+                    <thead >
+                      <tr style="border-bottom:solid 1px;">
+                        <th>Departments</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <% @departments.each do |department| %>
+                        <tr>
+                          <td><%= department.name %></td>
+                          <td><%= link_to "", edit_department_path(department), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+                          <td><%= link_to "", department, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </section>
+              </strong>
+            </div>
+          <% end %>
+        </div>               
+      <!-- List Area End -->
+    </div>
+  </section>
+</div>

@@ -1,24 +1,20 @@
-<script type="text/javascript">$.validate(); 
-
-</script> 
- 
 <div id="sheets_form">
 <div class="row-fluid">
-          <div class="span10 offset2">
-              <h2 class="page-title">KRA </small></h2>
+          <div class="span12">
+              <h2 class="page-title">DR </small></h2>
           </div>
         </div>
           <div class="row-fluid" >
-            <div class="span4 offset2">
+            <div class="span8">
             <section class="widget">
           <header>
-            <h4><small>Generate the KRA for Employee</small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#sheets_form').hide()">x</button></h4>
+            <h4><small>Generate the DR for Employee</small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#sheets_form').hide()">x</button></h4>
             </header>
         <div class="body">              
-          <%= form_for(@kra_sheet, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
+          <%= form_for(@dr_sheet, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
                
           <fieldset>
-            <legend>Fill the Details for KRA</legend>
+            <legend>Fill the Details for DR</legend>
             <div class="flash_notice" id='sheet_errors'>
                                     <div class="alert alert-error">
                                       <a class="close" data-dismiss="alert">×</a> 
@@ -38,7 +34,7 @@
                 </label>
                 <div class="controls">
                  
-                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
+                 <%= f.collection_select :dr_appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
                   
                 </div>
                 <label class="control-label" for="appraiser_id">
@@ -46,7 +42,7 @@
                 </label>
                 <div class="controls">
 
-                  <%= f.collection_select :appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
+                  <%= f.collection_select :dr_appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>

@@ -1,11 +1,9 @@
-<% unless @kra_attr.nil? %>
-<% if @kra_attr.errors.any? -%>
+<% if @dr_attr.errors.any? -%>
 $("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
 $('#sheet_errors').show()
-<% end -%>
 <% else -%>
 $(":input:not(input[type=submit])").val("");
-$("#kra_sheet_form").hide(100)
-$("#body-content").html("<%= escape_javascript( render(:partial => "kra_sheet") ) %>");
+$("#dr_sheet_form").hide(100)
+$("#body-content").html("<%= escape_javascript( render(:partial => "dr_sheet") ) %>");
 $('#sheet_notice').show()
 <% end -%>

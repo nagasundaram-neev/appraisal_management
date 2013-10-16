@@ -12,7 +12,7 @@ function checkvalue(rating)
     
                      
    <% if @flag==1 %>
-   <% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).first.nil? %>
+   <% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).last.nil? %>
     <section class='widget'>
     <h3 class='page-title'>KRA</h3>
     <blockquote><p style="text-align:justify;font-size:100%" class="span12">
@@ -32,6 +32,7 @@ function checkvalue(rating)
 
       <tbody>
        <% for kra_attr in @kra_rating.find_kra_attrs_for_role(@appraisee.id) do%>
+         
          <tr>
            <td style="text-align:justify;font-size:80%">
              <div id="accordion3" class="accordion">
@@ -65,15 +66,22 @@ function checkvalue(rating)
           </section>
            </td>
           <td>
-           <%= form_for(@kra_rating, :remote =>
-                              true ) do |f|  %>
+           <%= form_for(@kra_rating, :remote =>  true ) do |f|  %>
+            
+
              <%= f.hidden_field :kra_sheet_id, :value =>"#{@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id)}" %>
              <%= f.hidden_field :kra_attr_id, :value =>"#{kra_attr.id}" %>
              <%= f.hidden_field :rated_by, :value => 1 %>
               
+             
+
               <section class="widget">
                 
-              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id)).id  %>
+              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id))  %>
+ 
+            
+            
+              
 
                 <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
                                 
