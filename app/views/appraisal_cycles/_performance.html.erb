@@ -22,7 +22,7 @@
       <div class="span5">
           <section class="widget-large">
             <header>
-                <h4>KRA Assessment by You </h4>
+                <h4>KRA Assessment by <%= @appraisee.first_name %> </h4>
             </header>
             <div class="body">
               Rating 
@@ -50,7 +50,7 @@
               <section class="widget-large">
                   <header>
                       <h4>
-                         KRA Assessment by KRA manager
+                         KRA Assessment by KRA manager <%= @appraiser.first_name %>
                       </h4>
                   </header>
                   <div class="body">
@@ -102,12 +102,8 @@
       </section>
     </div>
     <div class="span8" >
-      <section class="widget tiny">
-          <header>
-              <h4>
-                 <%= current_user.first_name %>
-              </h4>
-          </header>
+      <section class="widget">
+          
           <div id="status" class="body">
               <blockquote>
                </textarea>
@@ -121,18 +117,19 @@
                  <% unless @status=kra_sheet.appraiser_status %>
                   <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
-                  <%if current_user.role=='admin' %>
-                  <strong ><h4 class="btn btn-success">KRA sheet completed the assessing </h4></strong>
-                  <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for HR</h4></strong>
-                  <% end %>
+                  <% unless current_user.role == 'admin' %>
+                    <strong ><h3 class="text-success">Submitted the KRA form for HR</h3></strong>
+                    <%else%>
+                    <strong ><h3 class="text-success">KRA sheet is completed the assessing </h3></strong>
+                  <%end%>
+
                 <% end %>
               <% end %>
               </blockquote>
           </div>
       </section>
     </div>          
-  </div>        <div class = 'span8' >
+        <div class = 'span8' >
                 <section class="widget">
                     
                     <header>
@@ -145,27 +142,27 @@
 
                     <div class="body " style="overflow: hidden;overflow-y: auto;" >
                       <div id="chat" class="chat">
-                            <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by)%>
+                            <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by,:kra_attr_id).order("kra_attr_id DESC")%>
                               <% flag=0 %>
                               <% comments_name.each do |comment_by| %>
                               
                               <div class="chat-message">
-                                <% if flag==0 %>
-                                <% flag=1 %>
+                                <% unless comment_by.rated_by %>
+                              
                                 <div class="sender pull-left">
                                   <div class="icon">
                                         <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                    </div>
                               </div>
-                              <div class="chat-message-body">
+                              <div class="chat-message-body ">
                                 <% else %>
-                                <% flag=0 %>
+                              
                                 <div class="sender pull-right">
                                       <div class="icon">
                                       <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                       </div>
                                     </div>
-                              <div class="chat-message-body on-left">
+                              <div class=" chat-message-body on-left">
                                   <% end %>
                                   <span class="arrow"></span>
                                   <div class="sender">
@@ -179,16 +176,21 @@
                                       <% end %>
                                     </a></div>
                                   <div class="text">
+                                    <strong><font color="#0ca961">Attribue Name:</font></strong>
+                                    <%= comment_by.kra_attr.name %><br> 
+                                    <strong><font color="#8ac90c">Comment:</font></strong>
                                     <%= comment_by.comment %>
+
                                   </div>
                               </div>
                             </div>
                           <% end %>
                         </div>
                         </div>
-
-                </section></div>
+                </section>
+              </div>
 <% end %>
+  </div>
 </section>
 <script>
   (function($){

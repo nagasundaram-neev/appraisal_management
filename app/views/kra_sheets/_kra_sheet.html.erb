@@ -61,12 +61,18 @@
                         <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
                         
                           <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id).each do |kra_sheet| %>
-                            <div class=widget>
-                              <%= kra_sheet.find_cycle %>
-                              <%= kra_sheet.find_appraisee_name %>
-                              <%= kra_sheet.find_appraiser_name %>
+                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                             
+                              <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                              <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
+                              <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit icon-large color-orange" %></span>
+                              <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-remove icon-large color-red" %>
+                              </span>
+
                             </div>
-                          <% end %>        
+                             
+                              <% end %> 
+                                 
                         </div>
                       </div>
                     <% end %>
