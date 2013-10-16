@@ -11,8 +11,6 @@ gem 'cancan'
 # Use rspec-rails for Testing
 gem  "rspec-rails", "~> 2.14.0"
 gem "shoulda-matchers", "~> 2.4.0"
-
-
 # Use factory_girl_rails for test data creation
 gem "factory_girl_rails", "~> 4.2.1"
 
@@ -21,7 +19,7 @@ gem "devise", "~> 3.1.1"
 
 # Use for clean database when testing
 gem "database_cleaner", :group => :test
-
+gem 'cucumber-rails', :group => :test, :require => false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

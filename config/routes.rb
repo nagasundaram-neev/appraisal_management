@@ -23,6 +23,7 @@ AppraisalManagement::Application.routes.draw do
       get 'kra_manager_status_update'
     end
   end
+  resources :dr_sheets
   resources :kra_ratings
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'

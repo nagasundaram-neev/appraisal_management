@@ -115,13 +115,13 @@
                  <% unless @status=KraSheet.where(:id => kra_sheet.id).first.appraisee_status %>
                   <%= link_to "SignOff",kra_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for Manager</h4></strong>
+                  <strong ><h4 class="btn btn-success">Submitted the KRA form for Manager</h4></strong>
                 <% end %>
               <% else %>
                  <% unless @status=kra_sheet.appraiser_status %>
                   <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
-                  <strong ><h4 class="btn btn-success">You have submitted the KRA form for HR</h4></strong>
+                  <strong ><h4 class="btn btn-success">Submitted the KRA form for HR</h4></strong>
                 <% end %>
               <% end %>
               </blockquote>
@@ -141,13 +141,13 @@
 
                     <div class="body " style="overflow: hidden;overflow-y: auto;" >
                       <div id="chat" class="chat">
-                            <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by)%>
+                            <% comments_name=KraRating.where(:kra_sheet_id=>kra_sheet.id).select(:comment,:rated_by,:kra_attr_id).order("kra_attr_id DESC")%>
                               <% flag=0 %>
                               <% comments_name.each do |comment_by| %>
                               
                               <div class="chat-message">
-                                <% if flag==0 %>
-                                <% flag=1 %>
+                                <% unless comment_by.rated_by %>
+                              
                                 <div class="sender pull-left">
                                   <div class="icon">
                                         <img src="/assets/appraisal.png" class="img-circle" alt="" />
@@ -155,7 +155,7 @@
                               </div>
                               <div class="chat-message-body">
                                 <% else %>
-                                <% flag=0 %>
+                              
                                 <div class="sender pull-right">
                                       <div class="icon">
                                       <img src="/assets/appraisal.png" class="img-circle" alt="" />
@@ -175,15 +175,19 @@
                                       <% end %>
                                     </a></div>
                                   <div class="text">
+                                    <strong><font color="#0ca961">Attribue Name:</font></strong>
+                                    <%= comment_by.kra_attr.name %><br> 
+                                    <strong><font color="#8ac90c">Comment:</font></strong>
                                     <%= comment_by.comment %>
+
                                   </div>
                               </div>
                             </div>
                           <% end %>
                         </div>
                         </div>
-
-                </section></div>
+                </section>
+              </div>
 <% end %>
 </section>
 <script>

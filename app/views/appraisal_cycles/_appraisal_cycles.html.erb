@@ -12,7 +12,9 @@
                     <a href="#">
                       <span class="badge ">
                       <% if current_user.role == "admin" then %>
-                      <%= AppraisalCycle.count %><% else %> <%= current_user.kra_sheets.count %> <% end %>
+                      <%= AppraisalCycle.count %>
+                      <% else %>
+                      <%= current_user.kra_sheets.count %> <% end %>
                       </span>       Appraisal Cycles    
                     </a>
                   </li>
