@@ -13,6 +13,9 @@ before_filter :authenticate_user!
 
   def index
     @kra_sheets = KraSheet.all.order("appraisal_cycle_id DESC")
+    
+    @distinct_appraisals = KraSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")
+    p @distinct_appraisals
   end
   
   def create

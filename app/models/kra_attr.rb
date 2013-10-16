@@ -6,6 +6,6 @@ class KraAttr < ActiveRecord::Base
   has_many :kra_role_attrs, dependent: :destroy
 
    def name_and_weightage
-    "#{self.name}: #{self.weightage} %"
+    "#{self.weightage}%: #{self.name} "
   end
 end

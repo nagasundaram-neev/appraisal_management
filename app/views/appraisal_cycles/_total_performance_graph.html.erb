@@ -1,5 +1,6 @@
-<div id="graph"></div>
-
+<% unless @performance_self_array.nil? %>
+  <div id="graph"></div>
+<% end %>
 <%= hidden_field_tag "cycles", @cycles.to_a %>
     <script>
         $(function () {

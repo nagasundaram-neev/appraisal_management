@@ -1,32 +1,85 @@
+<div class='span10'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset2">
+           <h2 class="page-title">Pending Forms<br/></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span8 offset2">
+            <% if flash[:notice] %>
+              <div class="flash_notice">
+                <div class="alert alert-success">
+                  <%= notice %>
+                  <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+            <%end%>
+          </div>
+        </div>
+      <!-- Notification Area End-->
+
+      <!-- Counting Area Start-->
+        <div class='row'>
+          <div class='span8 offset2'>
+            <section class="widget">
+              <span class="badge label-success">
+                <%= @appraisees.count %>
+              </span>
+              <strong>
+                Appraisal forms
+              </strong>
+            </section>
+          </div>
+        </div>
+      <!-- Counting Area End-->
 
 
-<div class="flash_notice"><div class="alert alert-success"> <%= notice %> </div></div>
- 
-<ul class="nav nav-pills nav-stacked">
-<li class="active">
-    <a href="#">
-      <span class="badge "><%= current_user.appraiser_kra_sheets.where(:appraiser_status => 0).count %></span>
-       Appraisal forms
-    </a>
-  </li>
-</ul>
-<% if AppraisalCycle.count > 0 %>
-<table class="table table-hover">
-  <tbody><tr>
-    <th>Appraisee Name</th>
-    <th>Date Ended</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @appraisees.each do |sheet| %>
-    <tr>
-      <td><%= sheet.appraisee.first_name %></td>
-      <td><%= sheet.appraisal_cycle.end_date %></td>
-      <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
-      <td><%= sheet.appraisee.email %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
+      <!-- List Start -->
+        <div class='row'>
+          <% if @appraisees.count > 0 %>
+            <div class='span8 offset2'>
+              <strong>
+                <section class="widget">
+                  <table class="table table-hover">
+                    <thead >
+                      <tr style="border-bottom:solid 1px;">
+                      <th>Appraisee Name</th>
+                      <th>Date Ended</th>
+					  <th>Status</th>
+                      <th><i class='icon-star icon-large'></i> Appraise</th>
+                      <th><i class="icon-envelope icon-large"></i> Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @appraisees.each do |sheet| %>
+                        <tr>
+                          <td><%= sheet.appraisee.first_name %></td>
+                          <td><%= sheet.appraisal_cycle.end_date %></td>
+						  <td><% if !sheet.appraisee_status %>
+	        Appraisee has not filled the form yet.
+        <% else %>
+        <h5>Appraisee has filled the form. </h5>
+        <% end %>
+      </td>                          
+<td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
+                          <td><%= sheet.appraisee.email %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </section>
+              </strong>
+            </div>
+          <% end %>
+        </div>
+      <!-- List End -->
+    </div>
+  </section>
+</div>

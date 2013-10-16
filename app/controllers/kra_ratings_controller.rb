@@ -22,16 +22,20 @@ before_filter :load, :only => [:new,:index]
     unless params[:overall_edit_flag].nil?
       @flag = params[:overall_edit_flag].to_i
     end
+    unless params[:flag].nil?
+      @flag=params[:flag].to_i
+    end
+
     @kra_ratings = KraRating.all
   end
-def create
+
+  def create
     @kra_rating = KraRating.new(kra_rating_params)
     if @kra_rating.save
         flash[:notice] = "Successfully saved the ratings."
         @kra_ratings=KraRating.all
     end
   end
-
 
   def edit
     @kra_rating = KraRating.find(params[:id])
@@ -42,7 +46,6 @@ def create
     else
       @@params_appraisee = nil
     end
-
   end
 
   def show
@@ -51,22 +54,17 @@ def create
 
   def update
     @kra_rating= KraRating.find(params[:id])
-    
-     
      @flag=@@params_edit_flag.to_i
 
      unless @@params_appraisee.nil?
      @appraisee= User.find(@@params_appraisee)
      end
      if @kra_rating.update(kra_rating_params)
-       
         flash[:notice] = "Successfully updated."
         @kra_ratings=KraRating.all
       end
-
-    
   end
-  
+
   def destroy
     @kra_rating = KraRating.find (params[:id])
     @kra_rating.destroy
@@ -75,7 +73,16 @@ def create
     render :action => 'index'
   end
 
-	def kra_rating_params
+  def kra_rating_params
     params.require(:kra_rating).permit(:kra_sheet_id, :kra_attr_id, :rating, :comment, :rated_by)
   end
+
+  def revert_signoff
+    require_appraiser
+    kr_sheet = KraSheet.find(params[:kra_sheet_id])
+    kr_sheet.update_attributes(:appraisee_status => 0)
+    flash[:notice] = "Appraisee  notified."
+    #notify appraisee
+  end
+
 end
