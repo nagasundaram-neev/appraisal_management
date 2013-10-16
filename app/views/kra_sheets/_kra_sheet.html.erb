@@ -1,43 +1,78 @@
-<div class="row-fluid">
-          <div class="span12">
-              <h2 class="page-title">Kra Sheets <small></small></h2>
+<div class='span10 offset1'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span10 offset2">
+           <h2 class="page-title">Kra Sheets <small></small></h2>
           </div>
         </div>
-          <div class="row-fluid" >
-            <div class="span8">
-            <div class="flash_notice" id='sheet_notice'><div class="alert alert-success"> <%= notice %> </div></div>
- 
-<ul class="nav nav-pills nav-stacked">
-<li class="active">
-    <a href="#">
-      <span class="badge "><%= KraSheet.count %></span>
-       KRA Assigned List are
-    </a>
-  </li>
-</ul>
-<% if KraSheet.count > 0 %>
-<table class="table table-hover">
-  <tbody><tr>
-    <th>Appraisal Period</th>
-    <th>Appraisee</th>
-    <th>Appraiser</th>
-    
-    <th></th>
-    <th></th>
-  </tr>
-      
-  <% @kra_sheets.each do |kra_sheet| %>
-    <tr>
-      <td><strong><%= kra_sheet.find_cycle %></strong></td>
-      <td><strong><%= kra_sheet.find_appraisee_name %></strong></td>
-      <td><strong><%= kra_sheet.find_appraiser_name %></strong></td>
-      
-      <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_kra_sheet_path(kra_sheet), :remote => true %></td>
-      <td><i class="icon-remove icon-large"></i><%= link_to "Destroy", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span10 offset1">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='sheet_notice'>
+                <div class="alert alert-success">
+                 <%= notice %>
+                 <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+              <%end%>
             </div>
           </div>
+        <!-- Notification Area End -->
+        
+        <!-- Counting Area Start-->
+          <div class='row'>
+            <div class='span10 offset1'>
+              <section class="widget">
+                <span class="badge label-success">
+                  <%= KraSheet.count %>
+                </span>
+                <strong>
+                   KRA Assigned List are
+                </strong>
+              </section>
+            </div>
+          </div>
+        <!-- Counting Area End-->
+
+        <!-- List Start -->
+          <div class='row'>
+            <% if KraSheet.count > 0 %>
+              <div class='span10 offset1'>
+                  <section class="widget">
+                    <table class="table table-hover">
+                      <thead >
+                        <tr style="border-bottom:solid 1px;">
+                          <strong>
+                          <th>Appraisal Period</th>
+                          <th>Appraisee</th>
+                          <th>Appraiser</th>
+                          <th></th>
+                          <th></th>
+                          </strong>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @kra_sheets.each do |kra_sheet| %>
+                          <tr>
+                            <td><strong><%= kra_sheet.find_cycle %></strong></td>
+                            <td><strong><%= kra_sheet.find_appraisee_name %></strong></td>
+                            <td><strong><%= kra_sheet.find_appraiser_name %></strong></td>
+        
+                            <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_kra_sheet_path(kra_sheet), :remote => true %></td>
+                            <td><i class="icon-remove icon-large"></i><%= link_to "Destroy", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
+                          
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  </section>
+                </div>
+              <% end %>
+            </div>
+          <!-- List Area End -->

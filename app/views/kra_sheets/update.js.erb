@@ -1,6 +1,8 @@
+<% unless @kra_attr.nil? %>
 <% if @kra_attr.errors.any? -%>
 $("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
 $('#sheet_errors').show()
+<% end -%>
 <% else -%>
 $(":input:not(input[type=submit])").val("");
 $("#kra_sheet_form").hide(100)

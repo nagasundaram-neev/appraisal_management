@@ -10,7 +10,8 @@ module KraRatingsHelper
   end
 
   def find_appraisee_details(kr_sheet_id)
-  	 @appraisee=User.where(:id => KraSheet.select(:appraisee_id).where(:id => 11).last.appraisee_id).last
+
+  	 @appraisee=User.where(:id => KraSheet.select(:appraisee_id).where(:id => kr_sheet_id).last.appraisee_id).last
   	return @appraisee
   end
 
