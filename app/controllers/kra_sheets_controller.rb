@@ -44,7 +44,7 @@ before_filter :authenticate_user!
       @kra_sheets = KraSheet.all
     end
   end
-  
+
   def destroy
     @kra_sheet = KraSheet.find(params[:id])
     @kra_sheet.destroy
@@ -61,7 +61,7 @@ before_filter :authenticate_user!
     @kra_sheet = KraSheet.find(params[:id])
     @kra_sheet.update_attributes!(:appraiser_status => true)
   end
-  
+
   def kra_sheet_params
     params.require(:kra_sheet).permit(:appraisal_cycle_id, :appraisee_id, :appraiser_id)
   end

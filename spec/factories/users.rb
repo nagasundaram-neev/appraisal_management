@@ -13,6 +13,17 @@ FactoryGirl.define do
     confirmed_at Time.now
   end
 
+  factory :appraiser, class: User  do
+    email 'rama@neevtech.com'
+    password '12345678'
+    password_confirmation '12345678'
+    first_name 'test'
+    last_name 'neevtech'
+    gender 'M'
+    phone_no '+919942354883'
+    role 'appraiser'
+    confirmed_at Time.now
+  end
   factory :admin, class: User  do
     email 'admin@neevtech.com'
     password '12345678'
