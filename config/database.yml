@@ -30,7 +30,7 @@ test:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: appraisal_management_production
   pool: 5

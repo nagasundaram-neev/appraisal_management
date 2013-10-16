@@ -39,40 +39,24 @@
             </div>
           </div>
         <!-- Counting Area End-->
-
-        <!-- List Start -->
-          <div class='row'>
-            <% if KraSheet.count > 0 %>
-              <div class='span10 offset1'>
-                  <section class="widget">
-                    <table class="table table-hover">
-                      <thead >
-                        <tr style="border-bottom:solid 1px;">
-                          <strong>
-                          <th>Appraisal Period</th>
-                          <th>Appraisee</th>
-                          <th>Appraiser</th>
-                          <th></th>
-                          <th></th>
-                          </strong>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% @kra_sheets.each do |kra_sheet| %>
-                          <tr>
-                            <td><strong><%= kra_sheet.find_cycle %></strong></td>
-                            <td><strong><%= kra_sheet.find_appraisee_name %></strong></td>
-                            <td><strong><%= kra_sheet.find_appraiser_name %></strong></td>
-        
-                            <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_kra_sheet_path(kra_sheet), :remote => true %></td>
-                            <td><i class="icon-remove icon-large"></i><%= link_to "Destroy", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
-                          
-                          </tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                  </section>
-                </div>
-              <% end %>
-            </div>
-          <!-- List Area End -->
+         <% if KraSheet.count > 0 %>
+    <section class="widget">
+      <% @distinct_appraisals.each do |id| %>
+        <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
+        <li class="accordion-group">
+          <a class="accordion-toggle collapsed" data-toggle="collapse"  href=<%= "#appraisal-collapse#{appraisal.id}" %> > <span class="name"><h4><%= "#{appraisal.start_date} to #{appraisal.end_date}"%></h4></span></a>
+          <ul id= <%= "appraisal-collapse#{appraisal.id}" %> class="accordion-body collapse">
+            <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id).each do |kra_sheet| %>
+              <li>
+                <strong><%= kra_sheet.find_cycle %></strong>
+                <strong><%= kra_sheet.find_appraisee_name %></strong>    
+                <strong><%= kra_sheet.find_appraiser_name %></strong>
+              </li>
+            <% end %>        
+          </ul>
+        </li>
+      <% end %>
+    </section>
+    <% end %>
+  </div>
+</div>

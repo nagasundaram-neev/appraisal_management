@@ -33,6 +33,8 @@ AppraisalManagement::Application.routes.draw do
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
   root :to => 'home#index'
+
+  get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

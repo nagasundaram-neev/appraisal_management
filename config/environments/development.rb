@@ -36,8 +36,8 @@ AppraisalManagement::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'localhost:3000',
-    user_name:            'prashantsingla01',
-    password:             'gmaillogin1',
+    user_name:            'rorappraisal',
+    password:             'neev_ror',
     authentication:       'plain',
     enable_starttls_auto: true  }
 end
