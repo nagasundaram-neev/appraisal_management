@@ -27,6 +27,7 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
     if @appraisal_cycle.save
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
+      @appraisal_cycle.create_kra_sheets
       @appraisal_cycles = AppraisalCycle.all
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages
@@ -62,10 +63,10 @@ class AppraisalCyclesController < ApplicationController
       @flag=params[:appraisal_cycle][:flag]
       if params[:appraisal_cycle][:flag]=="0"# appraisee is loged in 
         @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
-        @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id).last
+        @kra_sheet_temp = @kra_sheets.last
       else
-        @kra_sheets=KraSheet.where(:id => params[:appraisal_cycle][:id])
-        @kra_sheet_temp=KraSheet.find(params[:appraisal_cycle][:id])
+        @kra_sheets = KraSheet.where(:id => params[:appraisal_cycle][:id])
+        @kra_sheet_temp = @kra_sheets.last
       end
         @appraiser=User.find(@kra_sheets.last.appraiser_id)
         @appraisee=User.find(@kra_sheets.last.appraisee_id)

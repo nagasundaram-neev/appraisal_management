@@ -1,15 +1,15 @@
-class KraRatingsController < ApplicationController
+class DrRatingsController < ApplicationController
 before_filter :authenticate_user!
 skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
 before_filter :require_appraiser, :only => [:revert_signoff]
 
   def load
-    @kra_ratings = KraRating.all
-    @kra_rating = KraRating.new
+    @dr_ratings = DrRating.all
+    @dr_rating = DrRating.new
   end
   def new
-    @kra_rating = KraRating.new
+    @dr_rating = DrRating.new
   end
 
   def index
@@ -27,19 +27,19 @@ before_filter :require_appraiser, :only => [:revert_signoff]
       @flag=params[:flag].to_i
     end
 
-    @kra_ratings = KraRating.all
+    @dr_ratings = DrRating.all
   end
 
   def create
-    @kra_rating = KraRating.new(kra_rating_params)
-    if @kra_rating.save
+    @dr_rating = DrRating.new(dr_rating_params)
+    if @dr_rating.save
         flash[:notice] = "Successfully saved the ratings."
-        @kra_ratings=KraRating.all
+        @dr_ratings=DrRating.all
     end
   end
 
   def edit
-    @kra_rating = KraRating.find(params[:id])
+    @dr_rating = DrRating.find(params[:id])
     @@params_edit_flag= params[:editflag]
 
     unless params[:appraisee].nil? 
@@ -50,37 +50,37 @@ before_filter :require_appraiser, :only => [:revert_signoff]
   end
 
   def show
-     @kra_rating = KraRating.find(params[:id])
+     @dr_rating = DrRating.find(params[:id])
   end
 
   def update
-    @kra_rating= KraRating.find(params[:id])
+    @dr_rating= DrRating.find(params[:id])
      @flag=@@params_edit_flag.to_i
 
      unless @@params_appraisee.nil?
      @appraisee= User.find(@@params_appraisee)
      end
-     if @kra_rating.update(kra_rating_params)
+     if @dr_rating.update(dr_rating_params)
         flash[:notice] = "Successfully updated."
-        @kra_ratings=KraRating.all
+        @dr_ratings=DrRating.all
       end
   end
 
   def destroy
-    @kra_rating = KraRating.find (params[:id])
-    @kra_rating.destroy
+    @dr_rating = DrRating.find (params[:id])
+    @dr_rating.destroy
     flash[:notice] = "Successfully destroyed."
-    @kra_ratings = KraRating.all
+    @dr_ratings = DrRating.all
     render :action => 'index'
   end
 
-  def kra_rating_params
-    params.require(:kra_rating).permit(:kra_sheet_id, :kra_attr_id, :rating, :comment, :rated_by)
+  def dr_rating_params
+    params.require(:dr_rating).permit(:dr_sheet_id, :dr_attr_id, :rating, :comment, :rated_by)
   end
 
   def revert_signoff
-    kr_sheet = KraSheet.find(params[:kra_sheet_id])
-    kr_sheet.update_attributes(:appraisee_status => 0)
+    dr_sheet = DrSheet.find(params[:dr_sheet_id])
+    dr_sheet.update_attributes(:appraisee_status => 0)
     flash[:notice] = "Appraisee  notified."
     #notify appraisee
   end

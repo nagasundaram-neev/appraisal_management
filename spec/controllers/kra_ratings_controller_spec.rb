@@ -5,15 +5,16 @@ describe KraRatingsController do
 include Devise::TestHelpers
 
 before (:each) do
-  @admin = FactoryGirl.create(:admin)
-  sign_in @admin
+  @appraiser = FactoryGirl.create(:appraiser)
+  sign_in @appraiser
   @kra_rating = FactoryGirl.create(:kra_rating)
+  @kra_sheet = FactoryGirl.create(:kra_sheet)
 end
 
 describe "GET #revert_signoff" do
   it "should change the appraisee_status of the kra_sheet which id is sent by user" do
-    get :revert_signoff, {:kra_sheet_id => '12'}
-    KraSheet.find(12).appraisee_status.should eq(0)
+    xhr :get, :revert_signoff, {:kra_sheet_id => @kra_sheet.id}
+    KraSheet.find(@kra_sheet.id).appraisee_status.should eq(false)
   end
 end
 

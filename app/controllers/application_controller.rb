@@ -22,11 +22,17 @@ class ApplicationController < ActionController::Base
     stored_location_for(:user) || new_user_session_path
   end
   
+  def require_appraiser
+    unless current_user && current_user.role == 'appraiser'
+      flash[:error] = "You are not authorised."
+      redirect_to root_path
+    end
+  end
   def require_admin
     unless current_user && current_user.role == 'admin'
-      flash[:error] = "You are not an admin"
+      flash[:error] = "You are not an authorised."
       redirect_to root_path
-    end        
+    end
   end
 end
 
