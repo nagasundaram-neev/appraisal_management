@@ -22,6 +22,10 @@ before_filter :load, :only => [:new,:index]
     unless params[:overall_edit_flag].nil?
       @flag = params[:overall_edit_flag].to_i
     end
+    unless params[:flag].nil?
+      @flag=params[:flag].to_i
+    end
+
     @kra_ratings = KraRating.all
   end
 
