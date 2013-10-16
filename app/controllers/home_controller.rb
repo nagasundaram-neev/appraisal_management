@@ -7,6 +7,8 @@ include AppraisalCyclesHelper
       unless current_user.role == 'admin'
         total_performance_graph
         performance_graph
+      else
+        @users=User.where('first_name LIKE ? OR email LIKE ? OR phone_no LIKE ? ','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%')
       end
     end
 

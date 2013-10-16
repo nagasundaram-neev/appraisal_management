@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007114244) do
+ActiveRecord::Schema.define(version: 20131016053159) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 20131007114244) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dr_sheets", force: true do |t|
+    t.integer  "appraisal_cycle_id"
+    t.integer  "dr_appraisee_id"
+    t.integer  "dr_appraiser_id"
+    t.boolean  "appraisee_status",   default: false
+    t.boolean  "appraiser_status",   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

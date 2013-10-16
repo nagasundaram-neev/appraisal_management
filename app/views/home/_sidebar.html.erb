@@ -37,15 +37,25 @@
             <li class="accordion-group">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#attrs-collapse"> <span class="name">Attributes</span></a>
                 <ul id="attrs-collapse" class="accordion-body collapse">
-                    <li><%= link_to "Attributes", kra_attrs_path, :remote => true %></li>
-                    <li><%= link_to "New Attribute", new_kra_attr_path, :remote => true%></li>
+                    <li><%= link_to "KRA Attributes", kra_attrs_path, :remote => true %></li>
+                    <li><%= link_to "New KRA Attribute", new_kra_attr_path, :remote => true%></li>
+                    <li><%= link_to "DR Attributes", kra_attrs_path, :remote => true %></li>
+                    <li><%= link_to "New DR Attribute", new_kra_attr_path, :remote => true%></li>
                 </ul>
             </li>
+
             <li class="accordion-group">
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#kr-sheets-collapse"> <span class="name">KRA Sheets</span></a>
                 <ul id="kr-sheets-collapse" class="accordion-body collapse">
                     <li><%= link_to "KRA Sheets", kra_sheets_path, :remote => true %></li>
                     <li><%= link_to "New Sheet", new_kra_sheet_path, :remote => true%></li>
+                </ul>
+            </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#dr-sheets-collapse"> <span class="name">DR Sheets</span></a>
+                <ul id="dr-sheets-collapse" class="accordion-body collapse">
+                    <li><%= link_to "DR Sheets", dr_sheets_path, :remote => true %></li>
+                    <li><%= link_to "New Sheet", new_dr_sheet_path, :remote => true%></li>
                 </ul>
             </li>
           <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>

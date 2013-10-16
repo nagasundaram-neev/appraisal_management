@@ -8,12 +8,13 @@ class User < ActiveRecord::Base
 
   has_many :kra_sheets, :foreign_key => "appraisee_id", :class_name => "KraSheet"
   has_many :appraiser_kra_sheets, :foreign_key => "appraiser_id", :class_name => "KraSheet"
+  has_many :dr_sheets, :foreign_key => "dr_appraisee_id", :class_name => "DrSheet"
+  has_many :dr_appraiser_kra_sheets, :foreign_key => "dr_appraiser_id", :class_name => "DrSheet"
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :trackable, :validatable
-
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,message: 'The format of Email is invalid'}
   validates :password, presence: true, length: { minimum: 8 }
