@@ -39,6 +39,7 @@ include AppraisalCyclesHelper
   end
 
   def total_performance_graph
+    @graph_belongs_to=current_user
     @kra_sheets=current_user.kra_sheets
     unless @kra_sheets.empty?
       @performance_manager_array=[]
@@ -59,7 +60,7 @@ include AppraisalCyclesHelper
   end
 
     def performance_graph
-    @kra_sheet=KraSheet.find_by_appraisee_id(current_user.id)
+    @kra_sheet=KraSheet.where(:appraisee_id => current_user.id,:appraisee_status=>1,:appraiser_status=>1).last
     unless @kra_sheet.nil?
       @kra_ratings_by_manager_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1).select(:rating).map(&:rating)
       @kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 0).select(:rating).map(&:rating)
