@@ -59,7 +59,7 @@
                         <tr>
                           <td><%= department.name %></td>
                           <td><%= link_to "", edit_department_path(department), :remote => true, class: "icon-edit icon-large color-orange" %></td>
-                          <td><%= link_to "", department, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
+                          <td><%= link_to "", department, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-trash icon-large color-red"  %></td>
                         </tr>
                       <% end %>
                     </tbody>

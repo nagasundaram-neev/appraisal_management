@@ -34,8 +34,19 @@
 <div id="body-content">
   <div class='row-fluid' >
 
-    <%= submit_tag "Search", :name => nil , :class=> "btn btn-success pull-right badge" %>
-    <%= text_field_tag :search, params[:search], :class=>"search-query pull-right", :placeholder=>"search user" %> 
+    
+                
+                  <div class="input-prepend input-padding-increased pull-right">
+                   
+                     <%= text_field_tag :search, params[:search], :placeholder=>"search user", :style => "background-color: rgba(0,0,0,.20); color:white;" %> 
+                      <span class="add-on">
+                      <i class="icon-search"></i>
+                    </span>
+                  </div>
+                
+              
+   
+    <%= submit_tag "Search", :name => nil , :class=> "btn btn-success pull-right", :style => "visibility:hidden;" %>
   </div>
   <div id="users" class="row-fluid">
     <%= render 'users' %>

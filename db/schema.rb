@@ -43,6 +43,11 @@ ActiveRecord::Schema.define(version: 20131016083500) do
   end
 
   create_table "dr_ratings", force: true do |t|
+    t.integer  "dr_sheet_id"
+    t.integer  "dr_attr_id"
+    t.float    "rating"
+    t.text     "comment"
+    t.boolean  "rated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

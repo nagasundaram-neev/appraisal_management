@@ -33,7 +33,7 @@
       <td><strong><%= dr_sheet.find_appraiser_name %></strong></td>
       
       <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_dr_sheet_path(dr_sheet), :remote => true %></td>
-      <td><i class="icon-remove icon-large"></i><%= link_to "Destroy", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><i class="icon-trash icon-large"></i><%= link_to "Destroy", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
   </tbody>
