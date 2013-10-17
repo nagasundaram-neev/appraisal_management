@@ -1,43 +1,132 @@
-<div class="row-fluid">
-          <div class="span12">
-              <h2 class="page-title">DR sheets<small>List of DR sheets</small></h2>
+<div class='span10 offset1'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span10 offset2">
+           <h2 class="page-title">Dr Sheets <small></small></h2>
           </div>
         </div>
-          <div class="row-fluid" >
-            <div class="span8">
-            <div class="flash_notice" id='sheet_notice'><div class="alert alert-success"> <%= notice %> </div></div>
- 
-<ul class="nav nav-pills nav-stacked">
-<li class="active">
-    <a href="#">
-      <span class="badge "><%= DrSheet.count %></span>
-       DR Assigned List are
-    </a>
-  </li>
-</ul>
-<% if DrSheet.count > 0 %>
-<table class="table table-hover">
-  <tbody><tr>
-    <th>Appraisal Period</th>
-    <th>DR Appraisee</th>
-    <th>DR Appraiser</th>
-    
-    <th></th>
-    <th></th>
-  </tr>
-      <% p @dr_sheets %>
-  <% @dr_sheets.each do |dr_sheet| %>
-    <tr>
-      <td><strong><%= dr_sheet.find_cycle %></strong></td>
-      <td><strong><%= dr_sheet.find_appraisee_name %></strong></td>
-      <td><strong><%= dr_sheet.find_appraiser_name %></strong></td>
-      
-      <td><i class="icon-edit icon-large"></i><%= link_to "Edit", edit_dr_sheet_path(dr_sheet), :remote => true %></td>
-      <td><i class="icon-trash icon-large"></i><%= link_to "Destroy", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span10 offset1">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='sheet_notice'>
+                <div class="alert alert-success">
+                 <%= notice %>
+                 <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+              <%end%>
             </div>
           </div>
+      <!-- Notification Area End -->
+
+      <!-- Counting Area Start-->
+          <div class='row'>
+            <div class='span10 offset1'>
+              <section class="widget">
+                <span class="badge label-success">
+                  <%= DrSheet.count %>
+                </span>
+                <strong>
+                   DR Assigned List are
+                </strong>
+              </section>
+            </div>
+          </div>
+        <!-- Counting Area End-->
+
+
+        <!-- List Start -->
+          <div class='row'>
+            <% if DrSheet.count > 0 %>
+               <div class='span10 offset1'>
+                <section class="widget" id="dr-sheets">
+                
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#pending-appraisals' >
+                        <span class="name">
+                          <h4>
+                            Pending Appraisals
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+                      <div id= 'pending-appraisals' class="accordion-body collapse">
+                        <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
+                          <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                            <span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
+                            <span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                            <span class='label btn-info'>
+                              <% if dr_sheet.appraisee_status %>
+                              Appraisee has Signed Off the form.
+                              <% else %>
+                                Appraisee has not Signed Off the form yet.
+                              <% end %>
+                            </span>
+                            <span><%= link_to "", edit_dr_sheet_path(dr_sheet), :remote => true,:class => "icon-edit icon-large color-orange" %></span>
+                            <span><%= link_to "", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-remove icon-large color-red" %>
+                            </span>
+                          </div>
+                        <% end %>                                  
+                      </div>
+                  </div>
+               
+               
+                  <div class="accordion-group" id= "abcdef">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#completed-appraisals' >
+                        <span class="name">
+                          <h4>
+                            Completed Appraisals
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+                    <div id= 'completed-appraisals' class="accordion-body collapse">
+                    <% @distinct_appraisals.each do |id| %>
+                      <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
+                      <% unless appraisal.dr_sheets.where(:appraiser_status => 1).first.nil? %>
+                      <div class="accordion-group">
+                        <blockquote>
+                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                            <span class="name">
+                              <h5>
+                              <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
+                              </h5>
+                            </span>
+                          </a>
+                        </blockquote>
+                        <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
+                        
+                          <% @dr_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |dr_sheet| %>
+                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                             
+                              <span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
+                              <span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                              
+
+                            </div>
+                             
+                              <% end %> 
+                                 
+                        </div>
+                      </div>
+                      <% end %>
+                    <% end %>                      
+                  </div>
+                
+            </div>
+            <% end %>
+          </div>
+        <!-- List Area End -->  
+    </div>
+              </div>
+            </section>
+            </section>        
+</div>

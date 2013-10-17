@@ -1,9 +1,10 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Reat
+# about factories at https://github.com/thoughtbot/factory_girl
 
 
 FactoryGirl.define do
   factory :user do
-    email 'naga@gmail.com'
+    email 'abc@gmail.com'
     password 'foobar123'
     password_confirmation 'foobar123'
     first_name 'naga'
@@ -12,9 +13,10 @@ FactoryGirl.define do
     phone_no '+919942354883'
     confirmed_at Time.now
   end
-
+end
+FactoryGirl.define do
   factory :appraiser, class: User  do
-    email 'rama@neevtech.com'
+    email 'def@neevtech.com'
     password '12345678'
     password_confirmation '12345678'
     first_name 'test'
@@ -24,8 +26,11 @@ FactoryGirl.define do
     role 'appraiser'
     confirmed_at Time.now
   end
+end
+
+FactoryGirl.define do
   factory :admin, class: User  do
-    email 'admin@neevtech.com'
+    email 'ghi@neevtech.com'
     password '12345678'
     password_confirmation '12345678'
     first_name 'test'

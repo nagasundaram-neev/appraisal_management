@@ -55,7 +55,7 @@
                   <div class="controls controls-row">
                     <div class="input-append span7">
                       <i class=" add-on icon-calendar"></i>
-                      <%= text_field_tag :start_date, nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date", 'data-validation' => "required" %>
+                      <%= text_field_tag :start_date.strftime('%B %Y'), nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date.strftime('%B %Y')", 'data-validation' => "required" %>
                     </div>
                   </div>
               </div>

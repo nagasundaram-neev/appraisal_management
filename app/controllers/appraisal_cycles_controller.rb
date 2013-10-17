@@ -28,6 +28,7 @@ class AppraisalCyclesController < ApplicationController
     if @appraisal_cycle.save
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
       @appraisal_cycle.create_kra_sheets
+      @appraisal_cycle.create_dr_sheets
       @appraisal_cycles = AppraisalCycle.all
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages

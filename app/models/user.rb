@@ -22,4 +22,8 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :phone_no, presence: true, format: {with: /\A(([+][9][1])(\d{10}))\Z/, message: 'The format of Phone number is invalid'}
   validates_inclusion_of :gender, in: %w(M F)
+
+  def self.appraiser_list(appraisee)
+    (User.where(:role => "appraiser") - [appraisee])
+  end
 end
