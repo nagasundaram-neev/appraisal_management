@@ -163,7 +163,7 @@
             <!-- Appraisal Cycle -->
               <div class="control-group">
                 <label  class="control-label">Select Appraisal Cycle for the Role </label>
-                <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all.order("start_date DESC"), :id, :start_date,{:prompt => ""},{:data => {},:class => "input widget", :style => "width:206px; height:38px;",'data-validation' => "required"}) %>
+                <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all.order("start_date.strftime('%B %Y') DESC"), :id, :start_date.strftime('%B %Y'),{:prompt => ""},{:data => {},:class => "input widget", :style => "width:206px; height:38px;",'data-validation' => "required"}) %>
                 </select>
               </div>
             <!-- Appraisal Cycle -->
@@ -183,7 +183,7 @@
                 </label>
                 <div class="input-append">
                   <i class=" add-on icon-calendar"></i>
-                  <%= text_field_tag :start_date, nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date", 'data-validation' => "required" %>
+                  <%= text_field_tag :start_date.strftime('%B %Y'), nil,'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd",'placeholder' => "Select the start_date.strftime('%B %Y')", 'data-validation' => "required" %>
                 </div>
               </div>
             <!-- Period -->

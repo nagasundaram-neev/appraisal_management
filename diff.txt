@@ -1470,7 +1470,7 @@ index 5b49d91..d020917 100644
 -      <td><%= sheet.appraisal_cycle.end_date %></td>
 -      <td>
 -        <% if !sheet.appraisee_status %>
--        Appraisee has not filled the form yet.
+-        Appraisee has not signed off the form yet.
 +      <!-- Counting Area Start-->
 +        <div class='row'>
 +          <div class='span8 offset2'>
@@ -1509,9 +1509,9 @@ index 5b49d91..d020917 100644
 +                          <td><%= sheet.appraisee.first_name %></td>
 +                          <td><%= sheet.appraisal_cycle.end_date %></td>
 +						  <td><% if !sheet.appraisee_status %>
-+	        Appraisee has not filled the form yet.
++	        Appraisee has not signed off the form yet.
          <% else %>
-         <h5>Appraisee has filled the form. </h5>
+         <h5>Appraisee has signed off the form. </h5>
          <% end %>
 -      </td>
 -      <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
@@ -1571,9 +1571,9 @@ index 5b49d91..0000000
 -      <td><%= sheet.appraisal_cycle.end_date %></td>
 -      <td>
 -        <% if !sheet.appraisee_status %>
--        Appraisee has not filled the form yet.
+-        Appraisee has not signed off the form yet.
 -        <% else %>
--        <h5>Appraisee has filled the form. </h5>
+-        <h5>Appraisee has signed off the form. </h5>
 -        <% end %>
 -      </td>
 -      <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li></td>
@@ -2373,9 +2373,9 @@ index d34d77b..37b965f 100644
 +      <td>
 +
  <% else %>
--  <h4> Appraisee has not filled the form yet.</h4>
+-  <h4> Appraisee has not signed off the form yet.</h4>
 -<% end %>
-+                   <h4> Appraisee has not filled the form yet.</h4>    
++                   <h4> Appraisee has not signed off the form yet.</h4>    
 +                   <% end %>   
 +
 +                      <%end%>

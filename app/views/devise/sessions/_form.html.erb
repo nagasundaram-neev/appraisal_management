@@ -114,7 +114,7 @@
               <div class="control-group no-margin">
                     <label  class="control-label">Select Appraisal Cycle </label>
                       <div class="control controls-row">
-                        <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date, {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
+                        <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date.strftime('%B %Y'), {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1"}) %>
                         </select>
                       </div>
                   </div>

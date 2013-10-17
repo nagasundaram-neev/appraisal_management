@@ -119,22 +119,21 @@
                             <h5 class="tab-header"><i class="icon-comments"></i>Appraiser's for <%= current_user.first_name %></h5>
                             <ul class="users-list">
                                 <% KraSheet.where(:appraisee_id=>current_user.id).each do |appraiser| %>
+                                <% unless appraiser.appraiser.nil? %>
                                 <li>
                                     <i class="pull-left icon-user icon-3x"></i>
                                     <div class="user-info">
-                                        <div class="name"><a href="#"><%= User.find(appraiser.appraiser_id).first_name %></a></div>
+                                        <div class="name"><a href="#">
+                                            <%= User.find(appraiser.appraiser_id).first_name %></a></div>
                                         <div class="position">
-                                          From : <strong><%= appraiser.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
+                                          From : <strong><%= appraiser.appraisal_cycle.start_date.strftime('%B %Y').strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.appraisal_cycle.end_date.strftime('%B %Y').strftime("%m/%d/%Y") %> </strong>
                                         </div>
                                         <div class="options">
-                                            
-                                                <i class="icon-phone"></i>
-                                                <%= User.find(appraiser.appraiser_id).phone_no%>
-                                            
-
+                                          <i class="icon-phone"></i><%= User.find(appraiser.appraiser_id).phone_no %>
                                         </div>
                                     </div>
                                 </li>
+                                <% end %>
                                 <% end %>
                             </ul>
                         </div>

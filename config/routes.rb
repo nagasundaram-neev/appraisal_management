@@ -20,6 +20,8 @@ AppraisalManagement::Application.routes.draw do
   post 'add_dept', to: 'departments#add_dept'
   get 'get_appraisees', to: 'home#get_appraisees'
   get 'get_past_appraisees', to: 'home#get_past_appraisees'
+  get 'get_dr_appraisees', to: 'home#get_dr_appraisees'
+  get 'get_past_dr_appraisees', to: 'home#get_past_dr_appraisees'
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
   root :to => 'home#index'

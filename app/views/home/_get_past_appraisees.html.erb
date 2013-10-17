@@ -58,7 +58,7 @@
                       <% @kra_sheets.each do |sheet| %>
                         <tr>
                           <td><%= User.find(sheet.appraisee_id).first_name %></td>
-                          <td><%= AppraisalCycle.find(sheet.appraisal_cycle_id).start_date %> to <%= AppraisalCycle.find(sheet.appraisal_cycle_id).end_date %>  </td>
+                          <td><%= AppraisalCycle.find(sheet.appraisal_cycle_id).start_date.strftime('%B %Y') %> to <%= AppraisalCycle.find(sheet.appraisal_cycle_id).end_date.strftime('%B %Y') %>  </td>
                           <td><%= link_to "View Appraisal", overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => sheet.id,:flag=> 1}), :remote => true %></td>
                           <td><%= sheet.appraisee.email %></td>
                         </tr>

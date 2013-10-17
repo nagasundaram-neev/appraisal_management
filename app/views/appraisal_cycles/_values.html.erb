@@ -11,8 +11,8 @@
 
   <% @appraisals.each do |appraisal| %>
     <tr>
-      <td><%= appraisal.start_date %></td>
-      <td><%= appraisal.end_date %></td>
+      <td><%= appraisal.start_date.strftime('%B %Y') %></td>
+      <td><%= appraisal.end_date.strftime('%B %Y') %></td>
       
     </tr>
   <% end %>

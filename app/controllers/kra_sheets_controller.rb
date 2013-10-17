@@ -30,6 +30,7 @@ before_filter :authenticate_user!
 
   def edit
     @kra_sheet = KraSheet.find(params[:id])
+    @appraiser_list = User.where("role == 'appraiser' and email != #{@kra_sheet.appraisee.email}")
   end
 
   def show

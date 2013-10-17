@@ -63,12 +63,12 @@
                       <% @appraisees.each do |sheet| %>
                         <tr>
                           <td><%= sheet.appraisee.first_name %></td>
-                          <td><%= sheet.appraisal_cycle.end_date %></td>
+                          <td><%= sheet.appraisal_cycle.end_date.strftime('%B %Y') %></td>
 						              <td>
                             <% if !sheet.appraisee_status %>
-	                             Appraisee has not filled the form yet.
+	                             Appraisee has not signed off the form yet.
                             <% else %>
-                              <h5>Appraisee has filled the form. </h5>
+                              <h5>Appraisee has signed off the form. </h5>
                             <% end %>
                           </td>                          
                           <%unless current_user.role=='admin' %>

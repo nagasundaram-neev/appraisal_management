@@ -35,7 +35,7 @@
                 <div class="controls controls-row">
                   <div class="input-append span7">
                     <i class=" add-on icon-calendar"></i>
-                    <%= f.text_field :start_date, 'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd", 'data-validation' => "required"%>
+                    <%= f.text_field :start_date.strftime('%B %Y'), 'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd", 'data-validation' => "required"%>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
                 <div class="controls controls-row">
                   <div class="input-append span7">
                     <i class=" add-on icon-calendar"></i>
-                    <%= f.text_field :end_date, 'data-behaviour' => 'datepicker','data-date-format' => "yyyy-mm-dd", 'data-validation' => "required" %>
+                    <%= f.text_field :end_date.strftime('%B %Y'), 'data-behaviour' => 'datepicker','data-date-format' => "yyyy-mm-dd", 'data-validation' => "required" %>
                   </div>
                 </div>
               </div>

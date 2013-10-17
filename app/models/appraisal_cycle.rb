@@ -13,9 +13,17 @@ class AppraisalCycle < ActiveRecord::Base
         appraiser_id = user.kra_sheets.last.appraiser_id
       end
         user.kra_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save
-        p "@@@@@@saved@@@@@@@@222"
     end
-    p "---------------------kra sheets created--------------"
+  end
+
+  def create_dr_sheets
+    User.where("role != 'admin'").each do |user|
+      appraiser_id = nil
+      unless user.dr_sheets.last.nil?
+        appraiser_id = user.dr_sheets.last.appraiser_id
+      end
+        user.dr_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save
+    end
   end
 
   private

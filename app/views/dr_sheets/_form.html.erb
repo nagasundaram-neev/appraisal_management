@@ -10,45 +10,32 @@
           <header>
             <h4><small>Generate the DR for Employee</small><button type="button" class="btn btn-danger btn-xs pull-right" onclick="$('#sheets_form').hide()">x</button></h4>
             </header>
-        <div class="body">              
-          <%= form_for(@dr_sheet, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
-               
+            <div class="body">
+              <%= form_for(@dr_sheet, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
           <fieldset>
             <legend>Fill the Details for DR</legend>
-            <div class="flash_notice" id='sheet_errors'>
-                                    <div class="alert alert-error">
-                                      <a class="close" data-dismiss="alert">×</a> 
-                                        <%= notice %>
-                                     </div>
-                                    </div>
-              <div class="control-group">
-                <label class="control-label" for="appraisal_cycle_id">
-                    Cycle list
-                </label>
-                <div class="controls">
-                  <%= f.collection_select :appraisal_cycle_id, AppraisalCycle.all, :id, :start_date, :prompt => "Select appraisal cycle" %>
-                  </select>
+              <div class="flash_notice" id='sheet_errors'>
+                <div class="alert alert-error">
+                  <a class="close" data-dismiss="alert">×</a> 
+                  <%= notice %>
                 </div>
-                <label class="control-label" for="appraisee_id">
-                    Appraisee
-                </label>
-                <div class="controls">
-                 
-                 <%= f.collection_select :dr_appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
-                  
-                </div>
+              </div>
+              <div >
+                <span class="label label-info"><%= " From #{@kra_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@kra_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
+              </div>
+              <div>
+                <span class="label label-info"><%= " For #{@kra_sheet.appraisee.first_name} "%></span>
+              </div>
+              <div>
                 <label class="control-label" for="appraiser_id">
                     Appraiser 
                 </label>
                 <div class="controls">
-
-                  <%= f.collection_select :dr_appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
+                  <%= f.collection_select :appraiser_id, User.appraiser_list(@kra_sheet.appraisee), :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>
         </fieldset>
-
-                                                        
       <div class="form-actions">
         <%= f.submit class: "btn btn-primary" %>   
         <button type="button" class="btn  btn-xs icon-remove sign " onclick="$('#sheets_form').hide()"> Close</button>                       
@@ -56,7 +43,6 @@
     <% end %>
   </div>
  </section>
-            
             </div>
           </div>
-</div>          
+</div>
