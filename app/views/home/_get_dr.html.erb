@@ -72,7 +72,7 @@
                             <% end %>
                           </td>                          
                           <%unless current_user.role=='admin' %>
-                          <td><%= link_to "Appraise", kra_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li>
+                          <td><%= link_to "Appraise", dr_ratings_path(:appraisee_id => {:id => sheet.appraisee.id, :flag => 1}), :remote => true %></li>
                           </td>
                           <%end%>
                           <td><%= sheet.appraisee.email %></td>
