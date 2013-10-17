@@ -73,6 +73,12 @@ class AppraisalCyclesController < ApplicationController
     end
   end
 
+  def dr_overall_performance
+    @flag=params[:dr_sheet][:flag]
+    @dr_sheet=DrSheet.find(params[:dr_sheet][:id])
+    @dr_ratings=DrRating.where(:dr_sheet_id=>params[:dr_sheet][:id])
+  end
+
   def total_performance_graph
     @performance_manager_array=[]
     @performance_self_array=[]

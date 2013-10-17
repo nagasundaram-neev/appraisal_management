@@ -84,7 +84,9 @@
                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"> <span class="name">Appraisee's Appraisals</span></a>
                 <ul id="appraise-collapse" class="accordion-body collapse">
                     <li><%= link_to "Pending Forms", get_appraisees_path, :remote => true %></li>
+                    <li><%= link_to "Pending DR ", get_dr_path, :remote => true %></li>
                     <li><%= link_to "Past Appraisals", get_past_appraisees_path, :remote => true %></li>
+                    <li><%= link_to "Past DR Appraisals", get_past_dr_path, :remote => true %></li>
                 </ul>
             </li>
           <% end %>

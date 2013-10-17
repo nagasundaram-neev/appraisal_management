@@ -30,11 +30,32 @@ include AppraisalCyclesHelper
     end
   end
 
+  def get_dr
+    if current_user.role == "admin" then
+      @appraisees = DrSheet.where("appraiser_status = 0 or appraisee_status = 0")
+    else
+      @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
+    end
+    if @appraisees.first.nil? then
+      return nil
+    else
+      return @appraisees
+    end
+  end
+
   def get_past_appraisees
     if current_user.role == "appraiser" then
     @kra_sheets=KraSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
     elsif current_user.role == "admin" then
       @kra_sheets = KraSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
+    end
+  end
+
+  def get_past_dr
+    if current_user.role == "appraiser" then
+    @dr_sheets=DrSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
+    elsif current_user.role == "admin" then
+      @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
     end
   end
 
