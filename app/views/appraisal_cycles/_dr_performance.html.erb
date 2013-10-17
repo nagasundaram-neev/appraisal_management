@@ -1,0 +1,200 @@
+<section class='widget span9'>
+  <% if @dr_sheet.appraisee_status==false || @dr_sheet.appraiser_status==false %>
+    <div class="alert alert-error">  
+      <a class="close" data-dismiss="alert">×</a>  
+      <strong>Warning!</strong> DR sheet is not completed the Assessing 
+    </div> 
+  <% else %>
+    <div class="alert alert-success span8">  
+      <a class="close" data-dismiss="alert">×</a>  
+      <strong>Success!</strong>DR sheet is completed the assessing  
+    </div>  
+  <% end %>
+  <div class="content container-fluid">
+    <div class="row-fluid">
+          <div class="span8">
+            <h2 class="page-title">Performance Rating recommended <small>by DR manager</small></h2>
+          </div>
+    </div>
+    <div class="row-fluid span8">
+      <div class="span5">
+          <section class="widget-large">
+            <header>
+                <h4>DR Assessment by <%= User.find(@dr_sheet.appraisee_id).first_name %> </h4>
+            </header>
+            <div class="body">
+              Rating 
+              <%= progress_bar(dr_progress_user,:color => 'orange', :rounded => true, :tiny => true) %> 
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th>Attribute</th>
+                    <th>Rating</th>
+                  </tr>
+
+                  <% @ratings=@dr_ratings.where(:rated_by => 0) %>
+                  <% @ratings.each do |attr_rating| %>
+                    <tr>
+                      <td><%= DrAttr.find(attr_rating.dr_attr_id).name %></td>
+                      <td><%= attr_rating.rating %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </section>
+      </div>
+      <div class="span5 offset1" style="overflow-y:auto;overflow-x: hidden;">
+              <section class="widget-large">
+                  <header>
+                      <h4>
+                        DR Assessment by DR manager <%= User.find(@dr_sheet.appraiser_id).first_name %>
+                      </h4>
+                  </header>
+                  <div class="body">
+                    Rating  
+                    <%= progress_bar(dr_progress_manager,:color => 'orange', :rounded => true, :tiny => true) %> 
+                    <table class="table table-hover">
+                    <tbody><tr>
+                      <th>Attribute</th>
+                      <th>Rating</th>
+                    </tr>
+                    <% @ratings=@dr_ratings.where(:rated_by => 1) %>
+                    <% @ratings.each do |attr_rating| %>
+                       <tr>
+                          <td><%= DrAttr.find(attr_rating.dr_attr_id).name %></td>
+                          <td><%= attr_rating.rating %></td>
+                        </tr>
+                    <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+              </section>
+      </div>
+
+    </div>
+
+    <div class="span8" align="center" >
+      <section class="widget">
+          <header>
+              <h3>
+                <br>
+                Overall Performance
+              </h3>
+          </header>
+          <div class="body">
+            <br><br>
+            <%  unless dr_performance==0 %>
+              <h4>
+
+                Overall Performance for DR sheet : &nbsp <%= (dr_performance).round(2) %>
+              </h4>
+              <h4>
+                Overall Performance of DR (KRA70% & DR 30 %) :&nbsp <%= (dr_performance*0.3).round(2) %>
+              </h4>
+              <% else %>
+              <h4>Manager yet to Rate you</h4>
+              <% end %>
+
+          </div>
+      </section>
+    </div>
+    <div class="span8" >
+      <section class="widget">
+          
+          <div id="status" class="body">
+              <blockquote>
+               </textarea>
+               <% if @flag=="0" %>
+                 <% unless @status=@dr_sheet.appraisee_status %>
+                  <%= link_to "SignOff",dr_status_update_dr_sheets_path(:id => @dr_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <strong ><h4 class="btn btn-success">Submitted the DR form for Manager</h4></strong>
+                <% end %>
+              <% else %>
+                 <% unless @status=@dr_sheet.appraiser_status %>
+                  <%= link_to "SignOff",dr_manager_status_update_dr_sheets_path(:id => @dr_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
+                  <% else %>
+                  <% unless current_user.role == 'admin' %>
+                    <strong ><h3 class="text-success">Submitted the DR form for HR</h3></strong>
+                    <%else%>
+                    <strong ><h3 class="text-success">DR sheet is completed the assessing </h3></strong>
+                  <%end%>
+
+                <% end %>
+              <% end %>
+              </blockquote>
+          </div>
+      </section>
+    </div>          
+        <div class = 'span8' >
+                <section class="widget">
+                    
+                    <header>
+                        <h4>
+                            <i class="eicon-chat"></i>
+                        
+                            Comments
+                        </h4>
+                    </header>
+
+                    <div class="body " style="overflow: hidden;overflow-y: auto;" >
+                      <div id="chat" class="chat">
+                            <% comments_name=@dr_ratings.select(:comment,:rated_by,:dr_attr_id).order("dr_attr_id DESC")%>
+                              <% flag=0 %>
+                              <% comments_name.each do |comment_by| %>
+                              
+                              <div class="chat-message">
+                                <% unless comment_by.rated_by %>
+                              
+                                <div class="sender pull-left">
+                                  <div class="icon">
+                                        <img src="/assets/appraisal.png" class="img-circle" alt="" />
+                                   </div>
+                              </div>
+                              <div class="chat-message-body ">
+                                <% else %>
+                              
+                                <div class="sender pull-right">
+                                      <div class="icon">
+                                      <img src="/assets/appraisal.png" class="img-circle" alt="" />
+                                      </div>
+                                    </div>
+                              <div class=" chat-message-body on-left">
+                                  <% end %>
+                                  <span class="arrow"></span>
+                                  <div class="sender">
+                                    <a href="#">
+                                      <% if comment_by.rated_by==false %>
+                                        <%= User.find(@dr_sheet.appraisee_id).first_name %>
+                                        <%= User.find(@dr_sheet.appraisee_id).email  %>
+                                      <% else %>
+                                        <%= User.find(@dr_sheet.appraiser_id).first_name %>
+                                        <%= User.find(@dr_sheet.appraiser_id).email  %>
+                                      <% end %>
+                                    </a></div>
+                                  <div class="text">
+                                    <strong><font color="#0ca961">Attribue Name:</font></strong>
+                                    <%= comment_by.dr_attr.name %><br> 
+                                    <strong><font color="#8ac90c">Comment:</font></strong>
+                                    <%= comment_by.comment %>
+
+                                  </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                        </div>
+                </section>
+              </div>
+  </div>
+</section>
+<script>
+  (function($){
+    $(window).load(function(){
+      $(".chat").mCustomScrollbar(({
+
+                            theme:"light"
+    });
+  })(jQuery);
+</script>

@@ -48,6 +48,16 @@ class DrSheetsController < ApplicationController
     @dr_sheets = DrSheet.all
   end
 
+  def dr_status_update
+    @dr_sheet = DrSheet.find(params[:id])
+    @dr_sheet.update_attributes!(:appraisee_status => true)
+  end
+
+  def dr_manager_status_update
+    @dr_sheet = DrSheet.find(params[:id])
+    @dr_sheet.update_attributes!(:appraiser_status => true)
+  end
+
   def dr_sheet_params
     params.require(:dr_sheet).permit(:appraisal_cycle_id, :appraisee_id, :appraiser_id)
   end
