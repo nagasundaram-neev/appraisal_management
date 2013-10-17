@@ -12,8 +12,8 @@
         <br>
         <small>
           <blockquote>
-            <p style="text-align:justify;font-size:100%" class="span12">
-              Goals should be SMARTER = Specific, Measurable, Achievable, Result-Oriented, Time-Bound, Engaging, Reaching.   Performance Planning is facilitated by first listing the Key Responsibilities of the position and then defining Objectives and Goals for each Key Responsibility.                                                          
+            <p style="text-align:justify;font-size:100%" class="span12"><strong>
+              Goals should be SMARTER = Specific, Measurable, Achievable, Result-Oriented, Time-Bound, Engaging, Reaching.   Performance Planning is facilitated by first listing the Key Responsibilities of the position and then defining Objectives and Goals for each Key Responsibility.</strong>                                                          
             </p>
             <p> <br/></p>
           </blockquote>
@@ -26,13 +26,13 @@
       <section class="widget">
         <header>
           <h4>
-            <i class="eicon-lamp">
+            <i class="icon-star">
             </i>
             Key Result Areas Rating &amp; Comments
           </h4>
         </header>
         <div class="body">
-          <table class="table table-striped table-images">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th>
@@ -45,30 +45,33 @@
                 </tr>
                    </thead>
 
-                   <tbody>
+                   <tbody >
                     
                      <% for kra_attr in @kra_rating.find_kra_attrs_for_role(current_user.id) do%>
-                       <tr>
-                         <td style="text-align:justify;font-size:80%">
-                           <div id="accordion3" class="accordion">
+                       <tr >
+                         <td style="text-align:justify;font-size:80%;" class='span12' >
+                           <div id="accordion2" class="accordion" style="border-bottom:dotted 2px;border-top:dotted 2px;">
                             <div class="accordion-group">
                              <div class="accordion-heading">
-                              <a href=<%= "#collapse_#{kra_attr.id}" %> data-toggle="collapse" class="accordion-toggle">
-                              <strong><%= kra_attr.name %></strong></a>
+                              <a href=<%= "#collapse_#{kra_attr.id}" %> data-toggle="collapse" class="accordion-toggle" d>
+                              <strong  style=font-size:30px><%= kra_attr.name %></strong></a>
                             </div>
                             <span class="offset1">
-                                    Weightage:<span class="btn btn-info badge">
-                                    <%= kra_attr.weightage.round %> %
+                                    <b>Weightage: </b><span class="btn btn-info badge">
+                                    <strong><%= kra_attr.weightage.round %> %</strong>
                                        </span>
                                     </span>
                            <div id=<%= "collapse_#{kra_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
+                            <strong>
                            <p class='page-title'>Description</p>
-                           <%= kra_attr.desc %>
+                           <pre class=widget style='font-size:15px;'><%= kra_attr.desc %></pre>
                           <p class='page-title'>Measures</p>
-                          <small>
-                             <%= kra_attr.measures %>
-                           </small>                           
+                          <small class='offset1'>
+                           <pre class=widget style='font-size:15px;'><%= kra_attr.measures %></pre>
+                           </small> 
+                           </strong>                          
                          </div>
+                         
                          </div></div>
                          </td>
                          
@@ -86,15 +89,17 @@
                                  <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
 
                                   <% unless rating_obj == nil then %>
-                                   <small> Your rating is: </small>
+                                   <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 0), :remote => true, class: "icon-edit icon-2x color-orange pull-right" %>
+                                     <small> Your rating is: </small>
                                    <h6 class='badge'><%= rating_obj.rating %></h6>
-                                    <p>Your Comments</p><small> <%= rating_obj.comment %></small>
+                                    <p>Your Comments</p><pre class=widget style='font-size:15px;'> <%= rating_obj.comment %></pre>
                         
-                          <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 0), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
-                              <div id='kra_attr_rating_form'>
+                                  
+                                  <div id='kra_attr_rating_form'>
+                                    
+                                  
+                                  </div>
                                 
-                              </div>
-
                                 <% else%>
                                 <span id=<%= "self-rating_#{kra_attr.id}" %> >
                                  </span>
@@ -176,7 +181,7 @@
                               
 
 
-  <%= link_to "Sumit to Manager", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @appraisal_cycle_id,:flag=> 0}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
+  <%= link_to "Sumit to Manager", overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => @appraisal_cycle_id,:flag=> 0}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
 
 
 

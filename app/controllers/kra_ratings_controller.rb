@@ -2,6 +2,7 @@ class KraRatingsController < ApplicationController
 before_filter :authenticate_user!
 skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
+before_filter :require_appraiser, :only => [:revert_signoff]
 
   def load
     @kra_ratings = KraRating.all
@@ -78,7 +79,6 @@ before_filter :load, :only => [:new,:index]
   end
 
   def revert_signoff
-    require_appraiser
     kr_sheet = KraSheet.find(params[:kra_sheet_id])
     kr_sheet.update_attributes(:appraisee_status => 0)
     flash[:notice] = "Appraisee  notified."

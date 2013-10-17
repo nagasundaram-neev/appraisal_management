@@ -73,7 +73,7 @@
                       <% user_appraisal_cycle.each do |appraisal_cycle| %>
                         <tr>
                         <td>
-                        <%= link_to " " + appraisal_cycle.start_date.to_s+"  to  " + appraisal_cycle.end_date.to_s, appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => appraisal_cycle.id, :flag => 0}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
+                        <%= link_to " " + appraisal_cycle.start_date.to_s+"  to  " + appraisal_cycle.end_date.to_s, overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => appraisal_cycle.id, :flag => 0}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
                         </td>
                         </tr>
                       <% end %>

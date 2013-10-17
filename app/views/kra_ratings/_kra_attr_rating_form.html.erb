@@ -3,6 +3,12 @@
 function checkvalue(rating)
 {if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value=" ";}}
 </script>
+<style type="text/css">
+   .popover {
+        top: 10px !important;
+        left: -300px !important;
+    }
+</style>
 <div id='kra_attr_rating_form'>
 	
 <div class="popover" style="margin:0px 500px 100px -100px;width:500px; display:block;">
@@ -12,7 +18,7 @@ function checkvalue(rating)
 </h3>
   
 <div class="popover-content">
-<%= form_for(@kra_rating, :remote => true, :id => "edit_form") do |f|  %>
+<%= form_for(@kra_rating, :remote => true, :id => "edit_form", :method => "put") do |f|  %>
   <%= f.hidden_field :kra_sheet_id, :value => "#{@kra_rating.kra_sheet_id}" %>
   <%= f.hidden_field :kra_attr_id, :value => "#{@kra_rating.kra_attr_id}" %>
   
@@ -41,6 +47,7 @@ Rating:
                                         targetType: 'score',
                                         targetKeep: true,
                                         number: 10,
+                                        score: '<%= @kra_rating.rating %>',
                                         mouseover: function(score, evt) {
                                           document.getElementById('<%= "self-result_#{@kra_rating.kra_attr_id}" %>').value=score;
                                         }

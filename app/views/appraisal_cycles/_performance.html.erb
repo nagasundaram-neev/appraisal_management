@@ -22,7 +22,7 @@
       <div class="span5">
           <section class="widget-large">
             <header>
-                <h4>KRA Assessment by You </h4>
+                <h4>KRA Assessment by <%= @appraisee.first_name %> </h4>
             </header>
             <div class="body">
               Rating 
@@ -50,7 +50,7 @@
               <section class="widget-large">
                   <header>
                       <h4>
-                         KRA Assessment by KRA manager
+                         KRA Assessment by KRA manager <%= @appraiser.first_name %>
                       </h4>
                   </header>
                   <div class="body">
@@ -102,12 +102,8 @@
       </section>
     </div>
     <div class="span8" >
-      <section class="widget tiny">
-          <header>
-              <h4>
-                 <%= current_user.first_name %>
-              </h4>
-          </header>
+      <section class="widget">
+          
           <div id="status" class="body">
               <blockquote>
                </textarea>
@@ -121,14 +117,19 @@
                  <% unless @status=kra_sheet.appraiser_status %>
                   <%= link_to "SignOff",kra_manager_status_update_kra_sheets_path(:id => kra_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
-                  <strong ><h4 class="btn btn-success">Submitted the KRA form for HR</h4></strong>
+                  <% unless current_user.role == 'admin' %>
+                    <strong ><h3 class="text-success">Submitted the KRA form for HR</h3></strong>
+                    <%else%>
+                    <strong ><h3 class="text-success">KRA sheet is completed the assessing </h3></strong>
+                  <%end%>
+
                 <% end %>
               <% end %>
               </blockquote>
           </div>
       </section>
     </div>          
-  </div>        <div class = 'span8' >
+        <div class = 'span8' >
                 <section class="widget">
                     
                     <header>
@@ -153,7 +154,7 @@
                                         <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                    </div>
                               </div>
-                              <div class="chat-message-body">
+                              <div class="chat-message-body ">
                                 <% else %>
                               
                                 <div class="sender pull-right">
@@ -161,7 +162,7 @@
                                       <img src="/assets/appraisal.png" class="img-circle" alt="" />
                                       </div>
                                     </div>
-                              <div class="chat-message-body on-left">
+                              <div class=" chat-message-body on-left">
                                   <% end %>
                                   <span class="arrow"></span>
                                   <div class="sender">
@@ -189,6 +190,7 @@
                 </section>
               </div>
 <% end %>
+  </div>
 </section>
 <script>
   (function($){

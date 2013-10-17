@@ -1,14 +1,14 @@
 module AppraisalCyclesHelper
 
 	def progress_manager
-		user=User.find(@kra_sheet_temp.appraisee_id)
+		user=@kra_sheet_temp.appraisee
 		@total_attributes=user.roles.last.kra_role_attrs.count
 		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 1).count
 		return ((@rated_attributes)*100)/@total_attributes
 	end
 
 	def progress_user
-		user=User.find(@kra_sheet_temp.appraisee_id)
+		user=@kra_sheet_temp.appraisee
 		@total_attributes=user.roles.last.kra_role_attrs.count
 		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0).count
 		return p ((@rated_attributes)*100)/@total_attributes
