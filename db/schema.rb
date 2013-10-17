@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016083500) do
+ActiveRecord::Schema.define(version: 20131017055705) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20131016083500) do
     t.string   "name"
     t.float    "weightage"
     t.text     "desc"
-    t.text     "measures"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,8 +62,8 @@ ActiveRecord::Schema.define(version: 20131016083500) do
 
   create_table "dr_sheets", force: true do |t|
     t.integer  "appraisal_cycle_id"
-    t.integer  "dr_appraisee_id"
-    t.integer  "dr_appraiser_id"
+    t.integer  "appraisee_id"
+    t.integer  "appraiser_id"
     t.boolean  "appraisee_status",   default: false
     t.boolean  "appraiser_status",   default: false
     t.datetime "created_at"

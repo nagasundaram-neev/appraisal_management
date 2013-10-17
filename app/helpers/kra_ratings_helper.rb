@@ -18,5 +18,7 @@ module KraRatingsHelper
   def find_kra_sheet_details(id)
   	return KraSheet.where(:id => id).last
   end
-  
+
+ 
+
 end

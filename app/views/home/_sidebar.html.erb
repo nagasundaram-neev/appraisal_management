@@ -71,7 +71,10 @@
                   <%= link_to "Previous Appraisal", appraisal_cycles_path, :remote => true %>
                 </li>
                 <li>
-                  <%= link_to "Current Appraisal", kra_ratings_path(:flag => 0), :remote => true %>
+                  <%= link_to "Current  KRA Appraisal", kra_ratings_path(:flag => 0), :remote => true %>
+                </li>
+                <li>
+                  <%= link_to "Current  DR Appraisal", dr_ratings_path(:flag => 0), :remote => true %>
                 </li>
               </ul>
             </li>

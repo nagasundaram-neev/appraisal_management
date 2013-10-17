@@ -40,7 +40,8 @@ before_filter :authenticate_user!
     @kra_sheet = KraSheet.find(params[:id])
     if @kra_sheet.update(kra_sheet_params)
       flash[:notice] = "Successfully updated KRA sheets."
-      @kra_sheets = KraSheet.all
+      @kra_sheets = KraSheet.all.order("appraisal_cycle_id DESC")
+      @distinct_appraisals = KraSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")
     end
   end
 

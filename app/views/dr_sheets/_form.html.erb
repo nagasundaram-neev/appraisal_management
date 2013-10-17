@@ -34,7 +34,7 @@
                 </label>
                 <div class="controls">
                  
-                 <%= f.collection_select :dr_appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
+                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
                   
                 </div>
                 <label class="control-label" for="appraiser_id">
@@ -42,7 +42,7 @@
                 </label>
                 <div class="controls">
 
-                  <%= f.collection_select :dr_appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
+                  <%= f.collection_select :appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>

@@ -8,3 +8,4 @@ class DrAttr < ActiveRecord::Base
   end
 
 end
+	

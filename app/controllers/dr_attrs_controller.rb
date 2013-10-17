@@ -50,6 +50,6 @@ class DrAttrsController < ApplicationController
   end
   
   def dr_attr_params
-    params.require(:dr_attr).permit(:name, :weightage, :desc, :measures)
+    params.require(:dr_attr).permit(:name, :weightage, :desc)
   end
 end
