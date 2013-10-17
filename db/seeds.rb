@@ -7,8 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# Attributes
+#  Attributes
 
+#  KRA
 
 
 a1= KraAttr.create!(name: 'Drive Project Effectiveness',weightage: '30',desc: '
@@ -39,12 +40,24 @@ b) Report to submitted every (2) days during the project
 c) Report on project learning to be developed within (3) days of project completion
 d) (2) sessions to be conducted per (quarter); (2) articles / write ups to be contributed per (quarter)')
 
-
 a4= KraAttr.create!(name: 'Employee Engagement',weightage: '15',desc: 'a) Enhance knowledge and capability (technical and behavioural competence) of self to deliver business results 
 b) Mentor Senior Software Developers and Software Developers
 c) Drive a performance oriented culture within the department',measures: 'a) (100%) attendance for trainings that are organised
 b) (2) team members to be mentored every (quarter)
 c) (Zero) delays in conducting PPRs and DRs of team members ')
+
+
+
+# DR
+
+dr1=DrAttr.create!(name: 'Self Development', weightage: '10', desc: 'Demonstrating personal responsibility for career management, learning and development – Taking personal responsibility for setting own performance / developmental objectives, meeting training and self-developmental goals.  Actively seeking feedback – Ensuring that all reviews are conducted in time, actively seeking feedback from superiors/colleagues/customers.						')
+dr2=DrAttr.create!(name: 'Building Team Value', weightage: '20', desc: 'Actively participates and contributes in achieving group goals. Takes bottom-line responsibility for his/her role in the team and the tasks assigned. Facilitates and contributes to group functioning and group goals. Promotes and demonstrates trust, mutual respect and a cooperative work environment.						')
+dr3=DrAttr.create!(name: 'Initiative ', weightage: '10', desc: 'Takes appropriate action before being asked or being forced by circumstance, for the benefit of team or organization. Acts on opportunities to improve work processes and demonstrates creative and innovative thinking to contribute to organizational and individual objectives. Takes a proactive, self-reliant approach, identifying and seizing opportunities and takes decisive action.						')
+dr4=DrAttr.create!(name: 'Fostering a Learning Culture', weightage: '20', desc: 'Sharing professional and technical knowledge within his/her team and outside team. Participation in learning forums. Adding to and drawing from the company’s knowledge databases to improve business performance.						')
+dr5=DrAttr.create!(name: 'Communication Effectiveness', weightage: '20', desc: 'Able to articulate the concepts and procedures required to perform the job. Adequate communication skills to contribute effectively in team meetings. Ability to write clear and concise concept notes, official documents and project documents to explain complex ideas. Guides team members by explaining complex ideas in simple terms.						')
+dr6=DrAttr.create!(name: 'Problem Solving', weightage: '20', desc: 'Identifies and determines the criticality of a problem. Gathers all relevant and accurate information about the problem and systematically breaks down problems into parts. Analyses relationships among parts and recognizes likely underlying causes. Following from these analysis, should be able to draw logical conclusions and sound inferences.						')
+
+
 
 dept1 = Department.create!(name: 'BU1')
 dept2 = Department.create!(name: 'BU3')
@@ -235,3 +248,15 @@ rating54 = KraRating.create!(kra_sheet_id: sheet9.id, kra_attr_id: a3.id, rating
 
 
 
+dr_sheet1 = DrSheet.create!(appraisal_cycle_id: apc1.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1')
+dr_sheet2 = DrSheet.create!(appraisal_cycle_id: apc2.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet3 = DrSheet.create!(appraisal_cycle_id: apc3.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet4 = DrSheet.create!(appraisal_cycle_id: apc4.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet5 = DrSheet.create!(appraisal_cycle_id: apc5.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet6 = DrSheet.create!(appraisal_cycle_id: apc6.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet7 = DrSheet.create!(appraisal_cycle_id: apc7.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet8 = DrSheet.create!(appraisal_cycle_id: apc8.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet9 = DrSheet.create!(appraisal_cycle_id: apc9.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '1',appraisee_status: '1') 
+dr_sheet10 = DrSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: puru.id,appraiser_id: rama.id,appraiser_status: '0',appraisee_status: '0') 
+dr_sheet11 = DrSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: sama.id,appraiser_id: puru.id,appraiser_status: '0',appraisee_status: '0')
+dr_sheet12 = DrSheet.create!(appraisal_cycle_id: apc10.id,appraisee_id: kk.id,appraiser_id: naga.id,appraiser_status: '0',appraisee_status: '0')

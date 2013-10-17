@@ -7,14 +7,14 @@ function checkvalue(rating)
 <% if current_user.role== 'appraiser' %>
    <div class="body">
      <% if @flag == 0  %>
-      <div id='appraiser_self_form' class='widget'><%= render :partial => 'form' %></div>
+      <div id='appraiser_self_form' class='widget'><%= render :partial => 'form_dr_appraisee' %></div>
     <%end%>
     
                      
    <% if @flag==1 %>
-   <% unless @appraisee.kra_sheets.where(:appraisee_status => 1, :appraiser_status => 0).last.nil? %>
+   <% unless @appraisee.dr_sheets.where(:appraisee_status => 1, :appraiser_status => 0).last.nil? %>
     <section class='widget'>
-    <h3 class='page-title'>KRA</h3>
+    <h3 class='page-title'>Development Review</h3>
     <p style="text-align:justify;font-size:30px" class="span12">
     <blockquote><strong style="text-align:justify;font-size:30px">Please fill the 
     <i class='icon-user btn btn-info'> <%= @appraisee.first_name.upcase %></i> Appraisal Form</strong></blockquote></p>
@@ -22,7 +22,7 @@ function checkvalue(rating)
     <table class="table table-hover table-srtiped">
       <thead>
        <tr>
-         <th>KEY RESULT AREAS</th>
+         <th>Development Review</th>
          
          <th> Ratings  &amp; COMMENTS by  <%= @appraisee.first_name %> </th>
          
@@ -31,34 +31,33 @@ function checkvalue(rating)
       </thead>
 
       <tbody>
-       <% for kra_attr in @kra_rating.find_kra_attrs_for_role(@appraisee.id) do%>
+       <% for dr_attr in DrAttr.all do%>
          
          <tr>
            <td style="text-align:justify;font-size:80%;" class='span9'>
              <div id="accordion3" class="accordion" style="border-bottom:dotted 2px;border-top:dotted 2px;">
                <div class="accordion-group">
                    <div class="accordion-heading">
-                       <a href=<%= "#collapse_#{kra_attr.id}" %> data-toggle="collapse" class="accordion-toggle">
-                            <strong  style=font-size:30px><%= kra_attr.name %></strong>
+                       <a href=<%= "#collapse_#{dr_attr.id}" %> data-toggle="collapse" class="accordion-toggle">
+                            <strong  style=font-size:30px><%= dr_attr.name %></strong>
                             </a>
                     </div>
                     <span class="offset1">
                       <b>Weightage: </b><span class="btn btn-info badge">
-                       <strong><%= kra_attr.weightage.round %> %</strong>
+                       <strong><%= dr_attr.weightage.round %> %</strong>
                     </span>
                        </span>
-                   <div id=<%= "collapse_#{kra_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
+                   <div id=<%= "collapse_#{dr_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
                     <strong>
                    <p class='page-title'>Description</p><pre class='widget' style="font-size:18px; font-weighgt:bold;">
-                   <%= kra_attr.desc %></pre>
-                   <p class='page-title'>Measures</p><small><pre class=widget style='font-size:15px;'>
-                    <%= kra_attr.measures %></pre></small></strong> </div>
+                   <%= dr_attr.desc %></pre>
+                   </strong> </div>
                </div>
              </div>
            </td>
            <td>
              <section class="widget">
-           <% rating_obj = kr_attr_rating_obj(@kra_rating.get_appraisee_kra_sheet(@appraisee.id),kra_attr.id,0)  %>
+           <% rating_obj = dr_attr_rating_obj(@dr_rating.get_appraisee_dr_sheet(@appraisee.id),dr_attr.id,0)  %>
                                   <% unless rating_obj == nil then %>
                                    <small><strong> Appraisee rating is: </small>
                                    <h6 class='badge'><%= rating_obj.rating %></h6>
@@ -67,57 +66,57 @@ function checkvalue(rating)
           </section>
            </td>
           <td>
-           <%= form_for(@kra_rating, :remote =>  true ) do |f|  %>
+           <%= form_for(@dr_rating, :remote =>  true ) do |f|  %>
             
 
-             <%= f.hidden_field :kra_sheet_id, :value =>"#{@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id)}" %>
-             <%= f.hidden_field :kra_attr_id, :value =>"#{kra_attr.id}" %>
+             <%= f.hidden_field :dr_sheet_id, :value =>"#{@dr_rating.find_dr_sheet_manager(current_user.id,@appraisee.id)}" %>
+             <%= f.hidden_field :dr_attr_id, :value =>"#{dr_attr.id}" %>
              <%= f.hidden_field :rated_by, :value => 1 %>
               
              
 
               <section class="widget">
                 
-              <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id))  %>
+              <% @sheet_id = find_dr_sheet_details(@dr_rating.find_dr_sheet_manager(current_user.id,@appraisee.id))  %>
  
             
             
               
 
-                <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
+                <% rating_obj = dr_attr_rating_obj(@dr_rating.find_dr_sheet_manager(current_user.id,@appraisee.id),dr_attr.id,1)  %>
                                 
                 <% unless rating_obj == nil then %>
                  
-                 <% appraisee = find_appraisee_details(rating_obj.kra_sheet_id) %>
+                 <% appraisee = find_appraisee_details(rating_obj.dr_sheet_id) %>
 
-                <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 1, :appraisee => appraisee ), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
+                <%= link_to "", edit_dr_rating_path(rating_obj, :editflag => 1, :appraisee => appraisee ), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
                               
                   <strong>
-                 <small> Your rating is: </small>
+                 <small> Manager rating is: </small>
                   <h6 class='badge'><%= rating_obj.rating %></h6>
                    <p>Comments</p><small><p><pre class=widget style='font-size:15px;'>  <%= rating_obj.comment %></pre></p></small>
                     </strong>
                     
 
-                  <div id='kra_attr_rating_form'>
+                  <div id='dr_attr_edit_rating_form'>
                                 
                     </div>
 
 
 
                 <% else %>
-                <span id='<%= "manager-rating_#{kra_attr.id}" %>'></span>
-                <%= f.text_field :rating,:style =>"width: 20px", :id => "manager-result_#{kra_attr.id}",  :value => 0, :class => " search-query", :onblur => "checkvalue(this)"  %>
+                <span id='<%= "manager-rating_#{dr_attr.id}" %>'></span>
+                <%= f.text_field :rating,:style =>"width: 20px", :id => "manager-result_#{dr_attr.id}",  :value => 0, :class => " search-query", :onblur => "checkvalue(this)"  %>
                 
-                <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"man-cmt_#{kra_attr.id}"   %>
+                <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"man-cmt_#{dr_attr.id}"   %>
                 
-                <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#manager-rating_#{kra_attr.id}').hide();$('#man-cmt_#{kra_attr.id}').hide();   " %>
+                <%= f.submit "Save", class: "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#manager-rating_#{dr_attr.id}').hide();$('#man-cmt_#{dr_attr.id}').hide();   " %>
                                    
                 <% end %>
                 </section>
                                     <script type="text/javascript">
                                      
-                                      $('<%= "#manager-rating_#{kra_attr.id}" %>').raty({
+                                      $('<%= "#manager-rating_#{dr_attr.id}" %>').raty({
                                         path     : '/assets',
                                         cancel   : false,
                                         cancelOff: 'cancel-off-big.png',
@@ -127,16 +126,16 @@ function checkvalue(rating)
                                         starHalf : 'star-half-big.png',
                                         starOff  : 'star-off-big.png',
                                         starOn   : 'star-on-big.png',
-                                        target    : '<%= "#manager-result_#{kra_attr.id}" %>',
+                                        target    : '<%= "#manager-result_#{dr_attr.id}" %>',
                                         targetType: 'score',
                                         targetKeep: true,
                                         number: 10,
                                         mouseover: function(score, evt) {
-                                          document.getElementById('<%= "manager-result_#{kra_attr.id}" %>').value=score;
+                                          document.getElementById('<%= "manager-result_#{dr_attr.id}" %>').value=score;
                                         }
                                         ,
                                         mousemove: function(score, evt) {
-                                          document.getElementById('<%= "manager-result_#{kra_attr.id}" %>').value=score;
+                                          document.getElementById('<%= "manager-result_#{dr_attr.id}" %>').value=score;
                                         }
                                       } );
                                                                                        
@@ -154,15 +153,9 @@ function checkvalue(rating)
   
   
 
-<<<<<<< HEAD
-  <%= link_to "Submit to HR", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
-  <%= link_to "Modify the Ratings", kra_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
-||||||| merged common ancestors
-  <%= link_to "Submit to HR", appraisal_cycles_overall_performance_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
-=======
   <%= link_to "Submit to HR", overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => @sheet_id,:flag=> 1}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
-  <%= link_to "Disagree", revert_signoff_path( :kra_sheet_id => @sheet_id ), :remote => true, class: "btn btn-danger" %>
->>>>>>> 625a04b66584f6ed87aaecf47cb1cde0a4a1e62d
+  <%= link_to "Disagree", revert_signoff_path( :dr_sheet_id => @sheet_id ), :remote => true, class: "btn btn-danger" %>
+  <%= link_to "Modify the Ratings", dr_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
 
 
 </td>

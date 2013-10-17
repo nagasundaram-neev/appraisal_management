@@ -3,23 +3,25 @@
   function checkvalue(rating)
 {if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
 </script>
-<h6><%= DrAttr.all.inspect %></h6>
+
 <% unless current_user.dr_sheets.where(:appraisee_status => 0).first.nil? %>
   <% if current_user.role == "appraisee" || @flag==0 %>
   <div class="row-fluid">
     <div class="span12">
       <h2 class="page-title">
         DEVELOPMENT REVIEW
-        <br>
+        <br/>
         <small>
+          <legend></legend>
           <blockquote>
             <p style="text-align:justify;font-size:100%" class="span12"><strong>
+              
               Please assess yourself as per the rating scale (1 - 10) along the different attributes and provide supporting comments, as appropriate.</strong>
             </p>
             <p> <br/></p>
           </blockquote>
         </small>
-      </h2>
+      </h2><br/><legend></legend>
     </div>
   </div>
   <div class="row-fluid">
@@ -92,7 +94,7 @@
                                     <p>Your Comments</p><pre class=widget style='font-size:15px;'> <%= rating_obj.comment %></pre>
                         
                                   
-                                  <div id='dr_attr_rating_form'>
+                                  <div id='dr_attr_edit_rating_form'>
                                     
                                   
                                   </div>

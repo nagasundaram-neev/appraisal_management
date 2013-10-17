@@ -1,7 +1,7 @@
 class DrSheet < ActiveRecord::Base
 
-	belongs_to :dr_appraisee, :foreign_key => "appraisee_id", :class_name => "User"
-  belongs_to :dr_appraiser, :foreign_key => "appraiser_id", :class_name => "User"
+	belongs_to :appraisee, :foreign_key => "appraisee_id", :class_name => "User"
+  belongs_to :appraiser, :foreign_key => "appraiser_id", :class_name => "User"
   belongs_to :appraisal_cycle
 
   def find_appraisee_name
