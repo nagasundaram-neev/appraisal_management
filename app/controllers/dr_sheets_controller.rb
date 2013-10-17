@@ -17,7 +17,7 @@ class DrSheetsController < ApplicationController
   def create
     @dr_sheet = DrSheet.new(dr_sheet_params)
       if @dr_sheet.save
-        @dr_sheet.alert_user(@dr_sheet.dr_appraisee_id)
+        @dr_sheet.alert_user(@dr_sheet.appraisee_id)
         flash[:notice] = "Successfully created the DR sheets."
         @dr_sheets=DrSheet.all
       else
@@ -49,7 +49,7 @@ class DrSheetsController < ApplicationController
   end
 
   def dr_sheet_params
-    params.require(:dr_sheet).permit(:appraisal_cycle_id, :dr_appraisee_id, :dr_appraiser_id)
+    params.require(:dr_sheet).permit(:appraisal_cycle_id, :appraisee_id, :appraiser_id)
   end
 
 end

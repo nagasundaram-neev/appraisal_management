@@ -1,0 +1,175 @@
+<script type="text/javascript">
+  $.validate();
+  function checkvalue(rating)
+{if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
+</script>
+<h6><%= DrAttr.all.inspect %></h6>
+<% unless current_user.dr_sheets.where(:appraisee_status => 0).first.nil? %>
+  <% if current_user.role == "appraisee" || @flag==0 %>
+  <div class="row-fluid">
+    <div class="span12">
+      <h2 class="page-title">
+        DEVELOPMENT REVIEW
+        <br>
+        <small>
+          <blockquote>
+            <p style="text-align:justify;font-size:100%" class="span12"><strong>
+              Please assess yourself as per the rating scale (1 - 10) along the different attributes and provide supporting comments, as appropriate.</strong>
+            </p>
+            <p> <br/></p>
+          </blockquote>
+        </small>
+      </h2>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <section class="widget">
+        <header>
+          <h4>
+            <i class="icon-star">
+            </i>
+            Development Review Ratings &amp; Comments
+          </h4>
+        </header>
+        <div class="body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>
+                  KEY RESULT AREAS
+                </th>
+                
+                  <th>
+                    SELF RATING &amp; COMMENTS
+                    </th>
+                </tr>
+                   </thead>
+
+                   <tbody >
+                    
+                     <% for dr_attr in DrAttr.all do%>
+                       <tr >
+                         <td style="text-align:justify;font-size:80%;" class='span12' >
+                           <div id="accordion2" class="accordion" style="border-bottom:dotted 2px;border-top:dotted 2px;">
+                            <div class="accordion-group">
+                             <div class="accordion-heading">
+                              <a href=<%= "#collapse_#{dr_attr.id}" %> data-toggle="collapse" class="accordion-toggle" d>
+                              <strong  style=font-size:30px><%= dr_attr.name %></strong></a>
+                            </div>
+                            <span class="offset1">
+                                    <b>Weightage: </b><span class="btn btn-info badge">
+                                    <strong><%= dr_attr.weightage.round %> %</strong>
+                                       </span>
+                                    </span>
+                           <div id=<%= "collapse_#{dr_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
+                            <strong>
+                           <p class='page-title'>Description</p>
+                           <pre class=widget style='font-size:15px;'><%= dr_attr.desc %></pre>
+                          </strong>                          
+                         </div>
+                         
+                         </div></div>
+                         </td>
+                         
+                         
+                           <td>
+                             <%= form_for(@dr_rating, :remote => true) do |f|  %>
+                               <%= f.hidden_field :dr_sheet_id, :value => "#{@dr_rating.find_dr_sheet_self(current_user.id)}" %>
+                               <%= f.hidden_field :dr_attr_id, :value => "#{dr_attr.id}" %>
+                               <%= f.hidden_field :rated_by, :value => 0 %>
+                               <section class="widget">
+                                 
+          											<% @appraisal_cycle_id = find_dr_sheet_details(@dr_rating.find_dr_sheet_self(current_user.id)).appraisal_cycle_id  %>
+              
+                                
+                                 <% rating_obj = dr_attr_rating_obj(@dr_rating.find_dr_sheet_self(current_user.id),dr_attr.id,0)  %>
+
+                                  <% unless rating_obj == nil then %>
+                                   <%= link_to "", edit_dr_rating_path(rating_obj, :editflag => 0), :remote => true, class: "icon-edit icon-2x color-orange pull-right" %>
+                                     <small> Your rating is: </small>
+                                   <h6 class='badge'><%= rating_obj.rating %></h6>
+                                    <p>Your Comments</p><pre class=widget style='font-size:15px;'> <%= rating_obj.comment %></pre>
+                        
+                                  
+                                  <div id='dr_attr_rating_form'>
+                                    
+                                  
+                                  </div>
+                                
+                                <% else%>
+                                <span id=<%= "self-rating_#{dr_attr.id}" %> >
+                                 </span>
+                                  <%= f.text_field :rating,:style =>"width: 20px", :id => "self-result_#{dr_attr.id}",  :value =>0,'data-validation'=> "number", 'data-validation-allowing'=> "float", :class => " search-query",:onblur => "checkvalue(this)"%>
+                                                                                                 
+                                  <%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts", :rows =>"5", :id =>"self-cmt_#{dr_attr.id}"  %>
+                                
+                                 <%= f.submit "Save", :class => "btn btn-primary", :onclick => "this.disabled=true; this.value='Saved'; $('#self-rating_#{dr_attr.id}').hide(); $('#self-cmt_#{dr_attr.id}').hide(); " %>
+                                 
+                                 <% end %>
+
+                               </section>
+ 
+                             <% end %>
+
+                           </td>
+                         </tr>
+
+                                    <script type="text/javascript">
+                                      $('<%= "#self-rating_#{dr_attr.id}" %>').raty({
+                                        path     : '/assets',
+                                        cancel   : false,
+                                        cancelPlace: 'right',
+                                        cancelOff: 'cancel-off-big.png',
+                                        cancelOn : 'cancel-on-big.png',
+                                        half     : true,
+                                        size     : 10,
+                                        starHalf : 'star-half-big.png',
+                                        starOff  : 'star-off-big.png',
+                                        starOn   : 'star-on-big.png',
+                                        target    : '<%= "#self-result_#{dr_attr.id}" %>',
+                                        targetType: 'score',
+                                        targetKeep: true,
+                                        number: 10,
+                                        mouseover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{dr_attr.id}" %>').value=score;
+                                        }
+                                        ,
+                                        mousemove: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{dr_attr.id}" %>').value=score;
+                                        }
+                                        ,
+                                        hover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{dr_attr.id}" %>').value=score;
+                                        }
+                                      }     );
+
+
+                                     
+                                    </script>
+
+                                    <%end%>
+                                   
+                                    </tbody>
+                                    
+                                  </table>
+                                  <div class="clearfix">
+                              
+
+
+  <%= link_to "Sumit to Manager", overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => @appraisal_cycle_id,:flag=> 0}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
+
+
+
+ <%= link_to "Modify the Ratings", dr_ratings_path, :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
+                              
+                                    
+                                  </div>
+                                  
+                              </section>
+                            </div>
+                            </div>
+                          <%end%>
+                        <% else %>
+                          <h4>Currently there is no DR appraisal or you have signed off the form. </h4>
+                        <% end %>

@@ -26,6 +26,7 @@ AppraisalManagement::Application.routes.draw do
   end
   resources :dr_sheets
   resources :kra_ratings
+  resources :dr_ratings
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'
   get 'new_dept', to: 'departments#new_dept'

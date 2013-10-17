@@ -1,5 +1,5 @@
-class DrRatings < ActiveRecord::Base
-  belongs_to :dr_attr
+class DrRating < ActiveRecord::Base
+	belongs_to :dr_attr
   belongs_to :dr_sheet
   validates_uniqueness_of :dr_sheet_id, scope: [:dr_attr_id, :rated_by]
 	
@@ -19,5 +19,5 @@ class DrRatings < ActiveRecord::Base
 	def find_dr_sheet_manager(id,appraisee_id) 
 	  @dr_sheet=DrSheet.where(:appraiser_status => 0,:appraiser_id => id, :appraisee_id => appraisee_id).first.id
 	end
-
+	
 end
