@@ -1,5 +1,5 @@
 class DrRatingsController < ApplicationController
-before_filter :authenticate_user!
+	before_filter :authenticate_user!
 skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
 before_filter :require_appraiser, :only => [:revert_signoff]
@@ -84,5 +84,4 @@ before_filter :require_appraiser, :only => [:revert_signoff]
     flash[:notice] = "Appraisee  notified."
     #notify appraisee
   end
-
 end

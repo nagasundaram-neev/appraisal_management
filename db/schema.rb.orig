@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017055705) do
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20131016082816) do
+=======
+ActiveRecord::Schema.define(version: 20131016083500) do
+>>>>>>> 708f99c0c13a1714024a7eb0d0fbe5dc457540c5
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -42,28 +46,23 @@ ActiveRecord::Schema.define(version: 20131017055705) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "dr_attrs", force: true do |t|
     t.string   "name"
     t.float    "weightage"
     t.text     "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
+    t.text     "measures"
+=======
   create_table "dr_ratings", force: true do |t|
-    t.integer  "dr_sheet_id"
-    t.integer  "dr_attr_id"
-    t.float    "rating"
-    t.text     "comment"
-    t.boolean  "rated_by"
+>>>>>>> 708f99c0c13a1714024a7eb0d0fbe5dc457540c5
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "dr_sheets", force: true do |t|
     t.integer  "appraisal_cycle_id"
-    t.integer  "appraisee_id"
-    t.integer  "appraiser_id"
+    t.integer  "dr_appraisee_id"
+    t.integer  "dr_appraiser_id"
     t.boolean  "appraisee_status",   default: false
     t.boolean  "appraiser_status",   default: false
     t.datetime "created_at"

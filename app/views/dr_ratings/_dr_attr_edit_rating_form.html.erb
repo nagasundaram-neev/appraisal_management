@@ -1,0 +1,70 @@
+
+<script>$.validate();
+function checkvalue(rating)
+{if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value=" ";}}
+</script>
+<style type="text/css">
+   .popover {
+        top: 10px !important;
+        left: -300px !important;
+    }
+</style>
+<div id='dr_attr_edit_rating_form'>
+	
+<div class="popover" style="margin:0px 500px 100px -100px;width:500px; display:block;">
+<h3 class="popover-title">
+	<button type="button" class="pull-right btn btn-mini btn-danger icon-remove icon-large" onclick="$('#dr_attr_edit_rating_form').hide()"></button>
+	<b>Update the Rating & comments</b>
+</h3>
+  
+<div class="popover-content">
+<%= form_for(@dr_rating, :remote => true, :id => "edit_form", :method => "put") do |f|  %>
+  <%= f.hidden_field :dr_sheet_id, :value => "#{@dr_rating.dr_sheet_id}" %>
+  <%= f.hidden_field :dr_attr_id, :value => "#{@dr_rating.dr_attr_id}" %>
+  
+<span id='<%= "self-rating_#{@dr_rating.dr_attr_id}" %>' >  </span>
+Rating:
+<%= f.text_field :rating,:style =>"width: 30px", :id => "self-result_#{@dr_rating.dr_attr_id}", 'data-validation'=> "number", 'data-validation-allowing'=> "float",:onblur => "checkvalue(this)"  %> 
+
+                                                                                                 
+<%= f.text_area :comment, :class => "elastic-textarea autogrow input-block-level", :placeholder => "Commetnts",'data-validation'=> "required", :rows =>"5", :id =>"self-cmt_#{@dr_rating.dr_attr_id}"  %>
+                                
+<%= f.submit 'Save', :remote => true, :class => "btn btn-primary pull-right" %>
+
+<script type="text/javascript">
+                                      $('<%= "#self-rating_#{@dr_rating.dr_attr_id}" %>').raty({
+                                        path     : '/assets',
+                                        cancel   : false,
+                                        cancelPlace: 'right',
+                                        cancelOff: 'cancel-off-big.png',
+                                        cancelOn : 'cancel-on-big.png',
+                                        half     : true,
+                                        size     : 10,
+                                        starHalf : 'star-half-big.png',
+                                        starOff  : 'star-off-big.png',
+                                        starOn   : 'star-on-big.png',
+                                        target    : '<%= "#self-result_#{@dr_rating.dr_attr_id}" %>',
+                                        targetType: 'score',
+                                        targetKeep: true,
+                                        number: 10,
+                                        score: '<%= @dr_rating.rating %>',
+                                        mouseover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@dr_rating.dr_attr_id}" %>').value=score;
+                                        }
+                                        ,
+                                        mousemove: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@dr_rating.dr_attr_id}" %>').value=score;
+                                        }
+                                        ,
+                                        hover: function(score, evt) {
+                                          document.getElementById('<%= "self-result_#{@dr_rating.dr_attr_id}" %>').value=score;
+                                        }
+                                      }     );
+   </script>
+   <% end %>
+</div>
+</div>
+</div>
+
+
+                                

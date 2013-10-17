@@ -1,4 +1,12 @@
 AppraisalManagement::Application.routes.draw do
+  get "static_pages/home"
+  get "static_pages/help"
+  match 'appraisal_cycles/overall_performance' => 'appraisal_cycles#overall_performance', as: :appraisal_cycles_overall_performance, via: [:get, :post]
+  match 'appraisal_cycles/dr_overall_performance' => 'appraisal_cycles#dr_overall_performance', as: :appraisal_cycles_dr_overall_performance, via: [:get, :post]
+  match 'kra_sheets/kra_status_update' => 'kra_sheets#kra_status_update', as: :kra_sheets_kra_status_update, via: [:get, :post]
+  match 'kra_sheets/kra_manager_status_update' => 'kra_sheets#kra_manager_status_update', as: :kra_sheets_kra_manager_status_update, via: [:get, :post]
+  match 'appraisal_cycles/performance_graph' => 'appraisal_cycles#performance_graph', as: :appraisal_cycles_performance_graph, via: [:get, :post]
+  match 'appraisal_cycles/total_performance_graph' => 'appraisal_cycles#total_performance_graph', as: :appraisal_cycles_total_performance_graph, via: [:get, :post]
   devise_for :users, :controllers => { registrations: 'users/registrations'}
   resources :kra_attrs
   resources :dr_attrs
@@ -8,12 +16,24 @@ AppraisalManagement::Application.routes.draw do
     collection do
       get 'overall_performance'
       get 'performance_graph'
-      get 'total_performance_graph'
+      post 'total_performance_graph'
+      get 'dr_overall_performance'
     end
   end
-  resources :kra_sheets
-  resources :dr_sheets
+  resources :kra_sheets do
+    collection do
+      get 'kra_status_update'
+      get 'kra_manager_status_update'
+    end
+  end
+  resources :dr_sheets do
+    collection do
+      get 'dr_status_update'
+      get 'dr_manager_status_update'
+    end
+  end
   resources :kra_ratings
+  resources :dr_ratings
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'
   get 'new_dept', to: 'departments#new_dept'
@@ -26,6 +46,7 @@ AppraisalManagement::Application.routes.draw do
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
   root :to => 'home#index'
 
+  get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

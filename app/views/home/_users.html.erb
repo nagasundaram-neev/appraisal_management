@@ -13,8 +13,10 @@
   <tbody>
   <% @users.each do |user| %>
   <tr>
-    <td><%= user.first_name %></td>
-    <td><a href=#><%= user.email %></a></td>
+    <td>
+      <%= link_to user.first_name, total_performance_graph_appraisal_cycles_path(:user => user),  class: "icon-large", :remote=>true %>
+    </td>
+    <td><%= user.email %></td>
     <td><%= user.phone_no %></td>
   </tr>
   <% end %>

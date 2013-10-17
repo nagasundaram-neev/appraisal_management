@@ -24,8 +24,8 @@
             </div>
           </div>
       <!-- Notification Area End -->
-
-      <!-- Counting Area Start-->
+        
+        <!-- Counting Area Start-->
           <div class='row'>
             <div class='span10 offset1'>
               <section class="widget">
@@ -106,10 +106,13 @@
                         
                           <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |kra_sheet| %>
                             <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
-                             
+                             Appraisee:
                               <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                              Appraiser: 
                               <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
-                              
+                              <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash icon-2x icon-2x color-red pull-right" %>
+                                <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit icon-2x color-orange pull-right" %></span>
+                              </span>
 
                             </div>
                              
@@ -117,10 +120,8 @@
                                  
                         </div>
                       </div>
-                      <% end %>
-                    <% end %>                      
-                  </div>
-                
+                    <% end %>
+                </section>
             </div>
             <% end %>
           </div>

@@ -1,19 +1,19 @@
-<section class="widget widget-tabs">
+                <section class="widget widget-tabs">
                     <header>
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a data-toggle="tab" href="#stats">Profile</a>
+                                <a data-toggle="tab" href="#profile">Profile</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#report">Appraisee's</a>
+                                <a data-toggle="tab" href="#appraisees">Appraisee's</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#dropdown1">Appraiser's</a>
+                                <a data-toggle="tab" href="#appraisers">Appraiser's</a>
                             </li>
                         </ul>
                     </header>
                     <div class="body tab-content">
-                        <div class="tab-pane active clearfix" id="stats">
+                        <div class="tab-pane active clearfix" id="profile">
                             <h5 class="tab-header"><i class="icon-group"></i> Personal info for the user</h5>
                             <ul class="users-list">
 
@@ -67,75 +67,132 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="tab-pane" id="report">
+
+
+                        <div class="tab-pane" id="appraisees">
                             <h5 class="tab-header"><i class="icon-group"></i>Appraise's for <%= current_user.first_name %></h5>
-                            <ul class="users-list user-list-no-hover">
-                              <% KraSheet.where(:appraiser_id=>current_user.id).each do |appraisee| %>
-                                <li>
-                                    <i class="pull-left icon-mobile-phone icon-3x"></i>
-                                    <div class="user-info">
-                                        <div class="name"><a href="#"><%= User.find(appraisee.appraisee_id).first_name %></a></div>
-                                        <div class="options">
-                                            <button class="btn  btn-success">
-                                                <i class="icon-phone"></i>
-                                                <%= User.find(appraisee.appraisee_id).phone_no%>
-                                            </button>
-                                            <button class="btn btn-warning">
-                                                
-                                                <%= User.find(appraisee.appraisee_id).roles.last.name%>
-                                            </button>
+                                 <section class="widget widget-tabs">
+                                    <header>
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#kra_appraisee">KRA</a>
+                                            </li>
+                                             <li>
+                                               <a data-toggle="tab" href="#dr_appraisee">DR</a>
+                                            </li>
+                                        </ul>
+                                    </header>                             
+                                     <div class="body tab-content">
+                                        <div class="tab-pane active" id="kra_appraisee">
+                                            <ul class="users-list user-list-no-hover">
+                                                <% KraSheet.where(:appraiser_id=>current_user.id).each do |krasheet_appraisee| %>
+                                                    <li>
+                                                        <i class="pull-left icon-mobile-phone icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name"><a href="#"><%= User.find(krasheet_appraisee.appraisee_id).first_name %></a></div>
+                                                            <div class="options">
+                                                                <button class="btn  btn-success">
+                                                                    <i class="icon-phone"></i>
+                                                                    <%= User.find(krasheet_appraisee.appraisee_id).phone_no%>
+                                                                </button>
+                                                                <button class="btn btn-warning">
+                                                                <%= User.find(krasheet_appraisee.appraisee_id).roles.last.name%>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
+                                        </div>
+                                    
+
+                                        <div class="tab-pane" id="dr_appraisee">
+                                            <ul class="users-list user-list-no-hover">
+                                                <% DrSheet.where(:appraiser_id=>current_user.id).each do |drsheet_appraisee| %>
+                                                    <li>
+                                                        <i class="pull-left icon-mobile-phone icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name"><a href="#"><%= User.find(drsheet_appraisee.appraisee_id).first_name %></a></div>
+                                                            <div class="options">
+                                                                <button class="btn  btn-success">
+                                                                    <i class="icon-phone"></i>
+                                                                    <%= User.find(drsheet_appraisee.appraisee_id).phone_no%>
+                                                                </button>
+                                                                <button class="btn btn-warning">
+                                                                <%= User.find(drsheet_appraisee.appraisee_id).roles.last.name%>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
                                         </div>
                                     </div>
-                                </li>
-                                <% end %>
-
-                            </ul>
+                                </section>
                         </div>
-                        <div class="tab-pane" id="report">
-                            <h5 class="tab-header"><i class="icon-group"></i>Appraiser's for <%= current_user.first_name %></h5>
-                            <ul class="users-list user-list-no-hover">
-                              <% KraSheet.where(:appraiser_id=>current_user.id).each do |appraisee| %>
-                                <li>
-                                    <i class="pull-left icon-mobile-phone icon-3x"></i>
-                                    <div class="user-info">
-                                        <div class="name"><a href="#"><%= User.find(appraisee.appraisee_id).first_name %></a></div>
-                                        <div class="options">
-                                            <button class="btn  btn-success">
-                                                <i class="icon-phone"></i>
-                                                <%= User.find(appraisee.appraisee_id).phone_no%>
-                                            </button>
-                                            <button class="btn btn-warning">
-                                                
-                                                <%= User.find(appraisee.appraisee_id).roles.last.name%>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                                <% end %>
 
-                            </ul>
-                        </div>
-                        <div class="tab-pane" id="dropdown1">
+
+
+
+                       
+
+                        <div class="tab-pane" id="appraisers">
                             <h5 class="tab-header"><i class="icon-comments"></i>Appraiser's for <%= current_user.first_name %></h5>
-                            <ul class="users-list">
-                                <% KraSheet.where(:appraisee_id=>current_user.id).each do |appraiser| %>
-                                <% unless appraiser.appraiser.nil? %>
-                                <li>
-                                    <i class="pull-left icon-user icon-3x"></i>
-                                    <div class="user-info">
-                                        <div class="name"><a href="#">
-                                            <%= User.find(appraiser.appraiser_id).first_name %></a></div>
-                                        <div class="position">
-                                          From : <strong><%= appraiser.appraisal_cycle.start_date.strftime('%B %Y').strftime("%m/%d/%Y") %>&nbsp TO: &nbsp<%= appraiser.appraisal_cycle.end_date.strftime('%B %Y').strftime("%m/%d/%Y") %> </strong>
+                                <section class="widget widget-tabs">
+                                    <header>
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#kra">KRA</a>
+                                            </li>
+                                             <li>
+                                               <a data-toggle="tab" href="#dr">DR</a>
+                                            </li>
+                                        </ul>
+                                    </header>                             
+                                    
+                                    <div class="body tab-content">
+                                        <div class="tab-pane active" id="kra">
+                                            <ul class="users-list">
+                                                <% KraSheet.where(:appraisee_id=>current_user.id).each do |krasheet| %>
+                                                    <li>
+                                                      <i class="pull-left icon-user icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name">
+                                                                <a href="#"><%= User.find(krasheet.appraiser_id).first_name %></a>
+                                                            </div>
+                                                            <div class="position">
+                                                              From : <strong><%= krasheet.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp To: &nbsp<%= krasheet.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
+                                                            </div>
+                                                            <div class="options">
+                                                              <i class="icon-phone"></i><%= User.find(krasheet.appraiser_id).phone_no %>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
                                         </div>
-                                        <div class="options">
-                                          <i class="icon-phone"></i><%= User.find(appraiser.appraiser_id).phone_no %>
+                                        <div class="tab-pane" id="dr">
+                                            <ul class="users-list">
+                                                <% DrSheet.where(:appraisee_id=>current_user.id).each do |drsheet| %>
+                                                    <li>
+                                                      <i class="pull-left icon-user icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name">
+                                                                <a href="#"><%= User.find(drsheet.appraiser_id).first_name %></a>
+                                                            </div>
+                                                            <div class="position">
+                                                              From : <strong><%= drsheet.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp To: &nbsp<%= drsheet.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
+                                                            </div>
+                                                            <div class="options">
+                                                              <i class="icon-phone"></i><%= User.find(drsheet.appraiser_id).phone_no %>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
                                         </div>
                                     </div>
-                                </li>
-                                <% end %>
-                                <% end %>
-                            </ul>
+                            </section>
                         </div>
                     </div>
                 </section>

@@ -49,7 +49,6 @@
                           <strong>
                           <th>Title </th>
                           <th>Description </th>
-                          <th>Measures </th>
                           <th></th>
                           <th></th>
                         </strong>
@@ -60,15 +59,14 @@
                           
                           <tr>
                             
-                            <td><p><%= dr_attr.name %><i class='badge label-success'><%= dr_attr.weightage %> % </i></p></td>
+                            <td><p><%= dr_attr.name %> <span class='badge label-success'><%= dr_attr.weightage %> % </span></p></td>
                            
                             <td><p style="text-align:justify; font-weight:bold;"><%= dr_attr.desc %></p></td>
                             
-                            <td><p style="text-align:justify; font-weight:bold;"><%= dr_attr.measures %></p></td>
-                           
+                       
                             <td><%= link_to "", edit_dr_attr_path(dr_attr), :remote => true, class: "icon-edit icon-large color-orange" %></td>
                            
-                            <td><%= link_to "", dr_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
+                            <td><%= link_to "", dr_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-trash icon-large color-red"  %></td>
 
                           </tr>
                           

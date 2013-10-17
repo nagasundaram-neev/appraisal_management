@@ -1,0 +1,76 @@
+<div class='span10'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset2">
+           <h2 class="page-title">Past DR Appraisals<br/></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span8 offset2">
+            <% if flash[:notice] %>
+              <div class="flash_notice">
+                <div class="alert alert-success">
+                  <%= notice %>
+                  <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+            <%end%>
+          </div>
+        </div>
+      <!-- Notification Area End-->
+     
+      <!-- Counting Area Start-->
+        <div class='row'>
+          <div class='span8 offset2'>
+            <section class="widget">
+              <span class="badge label-success">
+                <%= @dr_sheets.count %></span>
+                <strong> Past Appraisals</strong>
+              </span>
+            </section>
+          </div>
+        </div>
+      <!-- Counting Area Start--> 
+    
+      <!-- List Start -->
+        <div class='row'> 
+          <% if @dr_sheets.count > 0 %>
+            <div class='span10 offset1'>
+              <strong>
+                <section class="widget">
+                  <table class="table table-hover">
+                    <thead>
+                    <tr style="border-bottom:solid 1px;">
+                      <th>Appraisee Name</th>
+                      <th>Duration</th>
+                      <th>View</th>
+                      <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <% @dr_sheets.each do |sheet| %>
+                        <tr>
+                          <td><%= User.find(sheet.appraisee_id).first_name %></td>
+                          <td><%= AppraisalCycle.find(sheet.appraisal_cycle_id).start_date %> to <%= AppraisalCycle.find(sheet.appraisal_cycle_id).end_date %>  </td>
+                          <td><%= link_to "View Appraisal", dr_overall_performance_appraisal_cycles_path(:dr_sheet => {:id => sheet.id,:flag=> 1}), :remote => true %></td>
+                          <td><%= sheet.appraisee.email %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </section>
+              </strong>
+            </div>
+          <% end %>
+        </div>
+      <!-- List end -->
+    </div>
+  </section>
+</div>
