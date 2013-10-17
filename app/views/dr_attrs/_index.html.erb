@@ -1,0 +1,14 @@
+<body onload="cancel()">
+<%= link_to "Add Attribute", new_dr_attr_path, :remote => true, class: "btn btn-success" %>
+
+
+<div id="dr_attrs_list"><%= render :partial => "dr_attrs" %></div>
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("dr_attributes_form").style.display='none';
+}
+
+</script>
+</body>

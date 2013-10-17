@@ -8,6 +8,7 @@ AppraisalManagement::Application.routes.draw do
   match 'appraisal_cycles/total_performance_graph' => 'appraisal_cycles#total_performance_graph', as: :appraisal_cycles_total_performance_graph, via: [:get, :post]
   devise_for :users, :controllers => { registrations: 'users/registrations'}
   resources :kra_attrs
+  resources :dr_attrs
   resources :departments
   resources :roles
   resources :appraisal_cycles do

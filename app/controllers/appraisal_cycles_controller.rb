@@ -62,7 +62,7 @@ class AppraisalCyclesController < ApplicationController
       @flag=params[:appraisal_cycle][:flag]
       if params[:appraisal_cycle][:flag]=="0"# appraisee is loged in 
         @kra_sheets=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id)
-        @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id => params[:appraisal_cycle][:id], :appraisee_id => current_user.id).last
+        @kra_sheet_temp=@kra_sheets.last
       else
         @kra_sheets=KraSheet.where(:id => params[:appraisal_cycle][:id])
         @kra_sheet_temp=KraSheet.find(params[:appraisal_cycle][:id])

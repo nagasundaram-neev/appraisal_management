@@ -1,0 +1,85 @@
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset1">
+           <h2 class="page-title">DR Attributes </h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span11 offset1">
+            <% if flash[:notice] %>
+             <div class="flash_notice" id='attr_notice'>
+              <div class="alert alert-success">
+                <a class="close" data-dismiss="alert">×</a>
+                <%= notice %>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+        <!-- Notification Area Start-->
+        
+        <!-- Counting Area Start-->
+        <div class='row'>
+          <div class='span11 offset1'>
+            <section class="widget">
+              <span class="badge label-success">
+                <%= DrAttr.count %>
+              </span>
+              <strong>
+                DR Attributes avaliable
+              </strong>
+            </section>
+          </div>
+        </div>
+      <!-- Counting Area End-->
+      
+      <!-- List Start -->
+        <div class='row'>    
+          <% if DrAttr.count > 0 %>
+            <div class='span11 offset1'>
+                
+                  <section class="widget">
+                    <table class="table table-bordered table-hover">
+                      <thead >
+                        <tr style="border-bottom:solid 1px;">
+                          <strong>
+                          <th>Title </th>
+                          <th>Description </th>
+                          <th>Measures </th>
+                          <th></th>
+                          <th></th>
+                        </strong>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @dr_attrs.each do |dr_attr| %>
+                          
+                          <tr>
+                            
+                            <td><p><%= dr_attr.name %><i class='badge label-success'><%= dr_attr.weightage %> % </i></p></td>
+                           
+                            <td><p style="text-align:justify; font-weight:bold;"><%= dr_attr.desc %></p></td>
+                            
+                            <td><p style="text-align:justify; font-weight:bold;"><%= dr_attr.measures %></p></td>
+                           
+                            <td><%= link_to "", edit_dr_attr_path(dr_attr), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+                           
+                            <td><%= link_to "", dr_attr, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-remove icon-large color-red"  %></td>
+
+                          </tr>
+                          
+                        <% end %>
+                      </tbody>
+                    </table>
+                  </section>
+                </div>
+          <% end %>
+        </div>
+      <!-- List End -->
+    </div>
+ 
+          
