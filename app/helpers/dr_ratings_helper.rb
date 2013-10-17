@@ -9,6 +9,10 @@ module DrRatingsHelper
     end
   end
 
+def find_appraisee_details(dr_sheet_id)
+     @appraisee=User.where(:id => DrSheet.select(:appraisee_id).where(:id => dr_sheet_id).last.appraisee_id).last
+    return @appraisee
+  end
 
 
 	 def find_dr_sheet_details(id)
