@@ -1,0 +1,8 @@
+<% if @dr_attr.errors.any? -%>
+$('#attr_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
+$(":input:not(input[type=submit])").val("");
+$("#body-content").html("<%= escape_javascript( render(:partial => "dr_attrs") ) %>");
+$('#attr_notice').show()
+<% end -%>

@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20131016083500) do
     t.datetime "updated_at"
   end
 
+  create_table "dr_attrs", force: true do |t|
+    t.string   "name"
+    t.float    "weightage"
+    t.text     "desc"
+    t.text     "measures"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "dr_ratings", force: true do |t|
     t.integer  "dr_sheet_id"
     t.integer  "dr_attr_id"

@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :kra_sheet do
      appraisal_cycle_id 1
-     appraisee_id 2
-     appraiser_id 3
+     dr_appraisee_id 2
+     dr_appraiser_id 3
   end
 
 end

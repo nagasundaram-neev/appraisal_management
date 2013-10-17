@@ -18,7 +18,6 @@ gem  "rspec-rails", "~> 2.14.0", :group => :test
 gem "shoulda-matchers", "~> 2.4.0", :group => :test
 # Use factory_girl_rails for test data creation
 gem "factory_girl_rails", "~> 4.2.1"
-
 # Use devise for authentication
 gem "devise", "~> 3.1.1"
 
