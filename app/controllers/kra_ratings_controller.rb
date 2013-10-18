@@ -1,4 +1,5 @@
 class KraRatingsController < ApplicationController
+
 before_filter :authenticate_user!
 skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
@@ -79,10 +80,17 @@ before_filter :require_appraiser, :only => [:revert_signoff]
   end
 
   def revert_signoff
-    kr_sheet = KraSheet.find(params[:kra_sheet_id])
-    kr_sheet.update_attributes(:appraisee_status => 0)
+    @kr_sheet = KraSheet.find(params[:kra_sheet_id])
+   
+    @kr_sheet.update_attributes(:appraisee_status => 0)
+    Thread.new do
+      @kr_sheet.kra_disagree_notification_mail(@kr_sheet)
+    end
     flash[:notice] = "Appraisee  notified."
     #notify appraisee
+
+    #notification mail for disagree
+    
   end
 
 end

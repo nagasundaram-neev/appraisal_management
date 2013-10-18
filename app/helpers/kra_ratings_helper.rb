@@ -19,6 +19,6 @@ module KraRatingsHelper
   	return KraSheet.where(:id => id).last
   end
 
- 
+
 
 end

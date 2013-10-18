@@ -36,4 +36,6 @@ class KraRating < ActiveRecord::Base
 	  @kra_sheet=KraSheet.where(:appraiser_status => 0,:appraiser_id => id, :appraisee_id => appraisee_id).first.id
 	end
 	
+	
+
 end

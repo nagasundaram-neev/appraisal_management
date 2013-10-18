@@ -109,7 +109,11 @@
                  <% unless @status=@dr_sheet.appraisee_status %>
                   <%= link_to "SignOff",dr_status_update_dr_sheets_path(:id => @dr_sheet.id), :remote => true, class: "btn btn-success btn-block" %>
                   <% else %>
+                    <% unless @status=@dr_sheet.appraiser_status %>
                   <strong ><h4 class="btn btn-success">Submitted the DR form for Manager</h4></strong>
+                  <%else%>
+                  <strong ><h3 class="text-success">DR sheet is completed the assessing </h3></strong>
+                  <%end%>
                 <% end %>
               <% else %>
                  <% unless @status=@dr_sheet.appraiser_status %>

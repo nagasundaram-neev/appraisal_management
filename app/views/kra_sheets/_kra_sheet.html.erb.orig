@@ -5,7 +5,7 @@
       <!-- Heading start -->
         <div class='row'>
           <div class="span10 offset2">
-           <h2 class="page-title">Dr Sheets <small></small></h2>
+           <h2 class="page-title">Kra Sheets <small></small></h2>
           </div>
         </div>
       <!-- Heading End -->
@@ -24,16 +24,16 @@
             </div>
           </div>
       <!-- Notification Area End -->
-
-      <!-- Counting Area Start-->
+        
+        <!-- Counting Area Start-->
           <div class='row'>
             <div class='span10 offset1'>
               <section class="widget">
                 <span class="badge label-success">
-                  <%= DrSheet.count %>
+                  <%= KraSheet.count %>
                 </span>
                 <strong>
-                   DR Assigned List are
+                   KRA Assigned List are
                 </strong>
               </section>
             </div>
@@ -43,13 +43,13 @@
 
         <!-- List Start -->
           <div class='row'>
-            <% if DrSheet.count > 0 %>
+            <% if KraSheet.count > 0 %>
                <div class='span10 offset1'>
-                <section class="widget" id="dr-sheets">
+                <section class="widget" id="kra-sheets">
                 
                   <div class="accordion-group">
                     <blockquote>
-                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#pending-appraisals' >
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets'  href='#pending-appraisals' >
                         <span class="name">
                           <h4>
                             Pending Appraisals
@@ -58,19 +58,20 @@
                       </a>
                     </blockquote>
                       <div id= 'pending-appraisals' class="accordion-body collapse">
-                        <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
+                        <% @kra_sheets.where(:appraiser_status => 0).each do |kra_sheet| %>
                           <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
-                            Appraisee: <span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                            Appraiser: <span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                            Appraisee: <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                            Appraiser: <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
                             Status: <span class='label btn-info'>
-                              <% if dr_sheet.appraisee_status %>
+                              <% if kra_sheet.appraisee_status %>
                               Appraisee has Signed Off the form.
                               <% else %>
                                 Appraisee has not Signed Off the form yet.
                               <% end %>
                             </span>
-                            <span><%= link_to "", edit_dr_sheet_path(dr_sheet), :remote => true,:class => "icon-edit icon-2x pull-left color-orange" %></span>
-                            <span><%= link_to "", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash pull-left icon-2x color-red" %>
+                           
+                            <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash pull-left icon-2x color-red" %>
+                            <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit  pull-left icon-2x color-orange" %></span>
                             </span>
                           </div>
                         <% end %>                                  
@@ -80,7 +81,7 @@
                
                   <div class="accordion-group">
                     <blockquote>
-                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#completed-appraisals' >
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets'  href='#completed-appraisals' >
                         <span class="name">
                           <h4>
                             Completed Appraisals
@@ -91,7 +92,7 @@
                     <div id= 'completed-appraisals' class="accordion-body collapse offset1">
                     <% @distinct_appraisals.each do |id| %>
                       <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
-                      <% unless appraisal.dr_sheets.where(:appraiser_status => 1).first.nil? %>
+                      <% unless appraisal.kra_sheets.where(:appraiser_status => 1).first.nil? %>
                       <div class="accordion-group">
                         <blockquote>
                           <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
@@ -104,23 +105,28 @@
                         </blockquote>
                         <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
                         
-                          <% @dr_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |dr_sheet| %>
+                          <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |kra_sheet| %>
                             <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
-                             
-                              Appraisee:<span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                              Appraiser:<span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                             Appraisee:
+                              <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                              Appraiser: 
+                              <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
                               
-
                             </div>
                              
                               <% end %> 
                                  
                         </div>
                       </div>
-                      <% end %>
-                    <% end %>                      
-                  </div>
-                
+                    <% end %>
+<<<<<<< HEAD
+                    <% end %>
+
+||||||| merged common ancestors
+=======
+                    <% end %>
+>>>>>>> 70060dba7fd61c415eb52ea527fa08f32922a57d
+                </section>
             </div>
             <% end %>
           </div>

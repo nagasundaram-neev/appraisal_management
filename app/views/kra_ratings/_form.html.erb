@@ -48,7 +48,7 @@
                    <tbody >
                     
                      <% for kra_attr in @kra_rating.find_kra_attrs_for_role(current_user.id) do%>
-                       <tr >
+                       <tr id="<%= "self_tr_#{kra_attr.id}"%>">
                          <td style="text-align:justify;font-size:80%;" class='span12' >
                            <div id="accordion2" class="accordion" style="border-bottom:dotted 2px;border-top:dotted 2px;">
                             <div class="accordion-group">

@@ -1,0 +1,17 @@
+<html>
+	<head></head>
+		<body>
+    <h1 style="color:red">DR Form Disagreed</h1>
+    <p>
+        Mr/Mrs <%= @user.first_name%>,
+
+        You DR form disagreed by your appraiser manager <b><%= @appraiser_name %></b>
+     .<br/>
+    </p>
+    <p>
+      The DR form filled by you for the period <i><%= @appraisal_cycle %></i> was disagreed by     <b><%= @appraiser_name %></b>, so kindly fill your form again.
+
+    </p>
+    Thank you!
+    </body>
+  </html>
