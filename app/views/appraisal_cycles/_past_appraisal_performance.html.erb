@@ -70,7 +70,7 @@
                         </tr>
                       <% end %>
                     <% else%>
-                      <% user_appraisal_cycle.each do |appraisal_cycle| %>
+                      <% user_kra_appraisal_cycle.each do |appraisal_cycle| %>
                         <tr>
                         <td>
                         <%= link_to " " + appraisal_cycle.start_date.strftime('%B %Y').to_s+"  to  " + appraisal_cycle.end_date.strftime('%B %Y').to_s, appraisal_cycles_past_appraisal_summary_path(:appraisal => {:id => appraisal_cycle.id, :user => current_user.id}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
