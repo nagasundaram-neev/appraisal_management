@@ -64,7 +64,7 @@
                     <% if current_user.role == "admin" then %>
                       <% @appraisal_cycles.each do |appraisal_cycle| %>
                         <tr>
-                        <td><%= appraisal_cycle.start_date.strftime('%B %Y') %></td>
+                        <td><%= appraisal_cycle.start_date.strftime('%B %Y')%></td>
                         <td><%= appraisal_cycle.end_date.strftime('%B %Y') %></td>
                         <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %></td>
                         </tr>
@@ -73,7 +73,7 @@
                       <% user_appraisal_cycle.each do |appraisal_cycle| %>
                         <tr>
                         <td>
-                        <%= link_to " " + appraisal_cycle.start_date.strftime('%B %Y')..strftime('%B %Y').to_s+"  to  " + appraisal_cycle.end_date.strftime('%B %Y').strftime('%B %Y').to_s, overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => appraisal_cycle.id, :flag => 0}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
+                        <%= link_to " " + appraisal_cycle.start_date.strftime('%B %Y').to_s+"  to  " + appraisal_cycle.end_date.strftime('%B %Y').to_s, overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => appraisal_cycle.id, :flag => 0}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
                         </td>
                         </tr>
                       <% end %>

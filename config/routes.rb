@@ -3,6 +3,7 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/help"
   match 'appraisal_cycles/overall_performance' => 'appraisal_cycles#overall_performance', as: :appraisal_cycles_overall_performance, via: [:get, :post]
   match 'appraisal_cycles/dr_overall_performance' => 'appraisal_cycles#dr_overall_performance', as: :appraisal_cycles_dr_overall_performance, via: [:get, :post]
+  match 'appraisal_cycles/dr_kra_performance' => 'appraisal_cycles#dr_kra_performance', as: :appraisal_cycles_dr_kra_performance, via: [:get, :post]
   match 'kra_sheets/kra_status_update' => 'kra_sheets#kra_status_update', as: :kra_sheets_kra_status_update, via: [:get, :post]
   match 'kra_sheets/kra_manager_status_update' => 'kra_sheets#kra_manager_status_update', as: :kra_sheets_kra_manager_status_update, via: [:get, :post]
   match 'appraisal_cycles/performance_graph' => 'appraisal_cycles#performance_graph', as: :appraisal_cycles_performance_graph, via: [:get, :post]
@@ -18,6 +19,7 @@ AppraisalManagement::Application.routes.draw do
       get 'performance_graph'
       post 'total_performance_graph'
       get 'dr_overall_performance'
+      get 'dr_kra_performance'
     end
   end
   resources :kra_sheets do
@@ -32,7 +34,7 @@ AppraisalManagement::Application.routes.draw do
       get 'dr_manager_status_update'
     end
   end
-  resources :kra_ratings 
+  resources :kra_ratings
   resources :dr_ratings
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'
@@ -44,7 +46,8 @@ AppraisalManagement::Application.routes.draw do
   get 'get_past_dr_appraisees', to: 'home#get_past_dr_appraisees'
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
-  get 'update_notifications', to: 'home#get_notifications'
+  get 'dr_revert_signoff', to: 'dr_ratings#dr_revert_signoff'
+get 'update_notifications', to: 'home#get_notifications'
   root :to => 'home#index'
 
   get "home/index"

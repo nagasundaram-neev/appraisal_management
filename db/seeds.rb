@@ -47,6 +47,7 @@ b) (2) team members to be mentored every (quarter)
 c) (Zero) delays in conducting PPRs and DRs of team members ')
 
 
+
 # DR
 
 dr1=DrAttr.create!(name: 'Self Development', weightage: '10', desc: 'Demonstrating personal responsibility for career management, learning and development – Taking personal responsibility for setting own performance / developmental objectives, meeting training and self-developmental goals.  Actively seeking feedback – Ensuring that all reviews are conducted in time, actively seeking feedback from superiors/colleagues/customers.						')
