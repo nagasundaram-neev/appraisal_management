@@ -9,28 +9,47 @@ class AppraisalCycle < ActiveRecord::Base
   end
 
   def create_kra_sheets
+    p "inside in create_kr_sheets"
+    users_without_kraprsrs = []
     users = User.where("role != 'admin'")
     users.each do |user|
       appraiser_id = nil
-      unless user.kra_sheets.last.nil?
+      unless user.kra_sheets.last.nil?        
         appraiser_id = user.kra_sheets.last.appraiser_id
+      else
+        users_without_kraprsrs.push(user)
       end
       user.kra_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save        
     end
-    notification = Notification.new( :message => "New Appraisal is created for you.")
-    notification.save
-    notification.update_attributes(:sender => User.where(:role => 'admin').first)
-    notification.users = users
+    Thread.new do
+      notification = Notification.new( :message => "New KRA Appraisal is created for you.")
+      notification.save
+      notification.update_attributes(:sender => User.where(:role => 'admin').first)
+      notification.users = users
+    end
+    p "@@@@@@@@@@@########################################"
+    p users_without_kraprsrs.count
+    return users_without_kraprsrs
   end
 
   def create_dr_sheets
+    users_without_draprsrs = []
     User.where("role != 'admin'").each do |user|
       appraiser_id = nil
-      unless user.dr_sheets.last.nil?
+      unless user.dr_sheets.last.nil?        
         appraiser_id = user.dr_sheets.last.appraiser_id
+      else
+        users_without_draprsrs.push(user)
       end
         user.dr_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save
     end
+    Thread.new do
+      notification = Notification.new( :message => "New  DR Appraisal is created for you.")
+      notification.save
+      notification.update_attributes(:sender => User.where(:role => 'admin').first)
+      notification.users = users
+    end
+    return users_without_draprsrs
   end
 
   private

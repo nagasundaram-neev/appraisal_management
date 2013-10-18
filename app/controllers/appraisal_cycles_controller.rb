@@ -28,9 +28,18 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
     if @appraisal_cycle.save
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
-      
-      @appraisal_cycle.create_kra_sheets
-      @appraisal_cycle.create_dr_sheets
+      @users_without_kraprsrs = []
+      @users_without_draprsrs = []
+      p "------------------------"
+      p"calling create_kra_sheets"
+      @users_without_kraprsrs = @appraisal_cycle.create_kra_sheets
+      p "back from create_kra_sheets my users_without_kraprsrs count"
+      p @users_without_kraprsrs.count
+      @users_without_kraprsrs.each do |user|
+        p user.first_name
+      end
+
+      @users_without_draprsrs = @appraisal_cycle.create_dr_sheets
       @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages
