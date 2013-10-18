@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017055705) do
+ActiveRecord::Schema.define(version: 20131018071023) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -106,6 +106,13 @@ ActiveRecord::Schema.define(version: 20131017055705) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: true do |t|
+    t.integer  "sender_id"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "role_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -116,6 +123,13 @@ ActiveRecord::Schema.define(version: 20131017055705) do
 
   create_table "roles", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_many :roles, through: :role_users
   has_many :role_users
   
+  has_many :notifications,through: :user_notifications
+  has_many :user_notifications
+
   has_many :departments, through: :department_users
   has_many :department_users
 

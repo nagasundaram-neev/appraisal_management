@@ -15,12 +15,14 @@
               
               <fieldset>
                 <legend class="section">Info </legend>
+                 <% if flash[:notice] %>
                 <div class="flash_notice" id='dept_errors'>
                                     <div class="alert alert-error">
                                       <a class="close" data-dismiss="alert">×</a> 
                                         <%= notice %>
                                      </div>
                                     </div>
+                                    <%end%>
                   <div class="control-group">
                     <label for="name" class="control-label">Department Name <span class="required">*</label>
                       <div class="controls controls-row">

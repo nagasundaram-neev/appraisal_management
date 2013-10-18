@@ -47,6 +47,7 @@ b) (2) team members to be mentored every (quarter)
 c) (Zero) delays in conducting PPRs and DRs of team members ')
 
 
+
 # DR
 
 dr1=DrAttr.create!(name: 'Self Development', weightage: '10', desc: 'Demonstrating personal responsibility for career management, learning and development – Taking personal responsibility for setting own performance / developmental objectives, meeting training and self-developmental goals.  Actively seeking feedback – Ensuring that all reviews are conducted in time, actively seeking feedback from superiors/colleagues/customers.						')
@@ -378,4 +379,3 @@ dr_rating104 = DrRating.create!(dr_sheet_id: dr_sheet9.id, dr_attr_id: dr6.id, r
 dr_rating105 = DrRating.create!(dr_sheet_id: dr_sheet9.id, dr_attr_id: dr4.id, rating: '9',comment: 'good', rated_by: '1')
 dr_rating106 = DrRating.create!(dr_sheet_id: dr_sheet9.id, dr_attr_id: dr5.id, rating: '9',comment: 'good', rated_by: '1')
 dr_rating107 = DrRating.create!(dr_sheet_id: dr_sheet9.id, dr_attr_id: dr6.id, rating: '9',comment: 'good', rated_by: '1')
-

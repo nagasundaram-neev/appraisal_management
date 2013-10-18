@@ -17,7 +17,9 @@ class Users::RegistrationsController < DeviseController
       user = User.find_by_email(params[:user][:email])
       user.role_users.build(:role_id => params[:role_id][:id], :appraisal_cycles_id => params[:aprsl_cycl_id][:id]).save
       user.department_users.build(:department_id => params[:dept_id][:id],:start_date => params[:start_date]).save
-      UserMailer.welcome_email(user,params[:user][:password]).deliver
+      t1 = Thread.new do
+        UserMailer.welcome_email(user,params[:user][:password]).deliver
+      end
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)

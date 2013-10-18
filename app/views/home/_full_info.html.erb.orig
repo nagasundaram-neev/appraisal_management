@@ -1,0 +1,209 @@
+                <section class="widget widget-tabs">
+                    <header>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#profile">Profile</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#appraisees">Appraisee's</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#appraisers">Appraiser's</a>
+                            </li>
+                        </ul>
+                    </header>
+                    <div class="body tab-content">
+                        <div class="tab-pane active clearfix" id="profile">
+                            <h5 class="tab-header"><i class="icon-group"></i> Personal info for the user</h5>
+                            <ul class="users-list">
+
+                                <li >
+                                    <img src="/assets/user.png" alt="" class="pull-left img-circle">
+
+                                    <div class="user-info">
+                                        <div class="name"><a href="#">
+                                          <%= current_user.first_name+"  "+current_user.last_name %></a></div>
+                                        <div class="position">Entered In</div>
+                                        <div class="time"><%= current_user.created_at.strftime("%m/%d/%Y") %></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="/assets/user_type.png" alt="" class="pull-left img-circle">
+                                    <div class="user-info">
+                                        <div class="name"><a href="#">
+                                          User Type: </a></div>
+                                        <div class="position"><strong> &nbsp <%= (current_user.role.capitalize) %></strong></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="/assets/phone.png" alt="" class="pull-left img-circle">
+                                    <div class="user-info">
+                                        <div class="name"><a href="#" >
+                                         Phone Number: </a></div>
+                                        <div class="position">
+                                          <strong> <%= current_user.phone_no %></strong>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="/assets/role.png" alt="" class="pull-left img-circle">
+                                    <div class="user-info">
+                                        <div class="name"><a href="#" >
+                                         Current Role: <strong> <%= current_user.roles.last.name %></strong></a></div>
+                                        <div class="position">
+                                          From : <strong><%= current_user.roles.last.created_at().strftime("%m/%d/%Y") %></strong>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="/assets/bu.png" alt="" class="pull-left img-circle">
+                                    <div class="user-info">
+                                        <div class="name"><a href="#" >
+                                         Department: <strong> <%= current_user.departments.last.name %></strong></a></div>
+                                        <div class="position">
+                                          From : <strong><%= current_user.departments.last.created_at().strftime("%m/%d/%Y") %></strong>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-pane" id="appraisees">
+                            <h5 class="tab-header"><i class="icon-group"></i>Appraise's for <%= current_user.first_name %></h5>
+                                 <section class="widget widget-tabs">
+                                    <header>
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#kra_appraisee">KRA</a>
+                                            </li>
+                                             <li>
+                                               <a data-toggle="tab" href="#dr_appraisee">DR</a>
+                                            </li>
+                                        </ul>
+                                    </header>                             
+                                     <div class="body tab-content">
+                                        <div class="tab-pane active" id="kra_appraisee">
+                                            <ul class="users-list user-list-no-hover">
+                                                <% KraSheet.where(:appraiser_id=>current_user.id).each do |krasheet_appraisee| %>
+                                                    <li>
+                                                        <i class="pull-left icon-mobile-phone icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name"><a href="#"><%= User.find(krasheet_appraisee.appraisee_id).first_name %></a></div>
+                                                            <div class="options">
+                                                                <button class="btn  btn-success">
+                                                                    <i class="icon-phone"></i>
+                                                                    <%= User.find(krasheet_appraisee.appraisee_id).phone_no%>
+                                                                </button>
+                                                                <button class="btn btn-warning">
+                                                                <%= User.find(krasheet_appraisee.appraisee_id).roles.last.name%>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
+                                        </div>
+                                    
+
+                                        <div class="tab-pane" id="dr_appraisee">
+                                            <ul class="users-list user-list-no-hover">
+                                                <% DrSheet.where(:appraiser_id=>current_user.id).each do |drsheet_appraisee| %>
+                                                    <li>
+                                                        <i class="pull-left icon-mobile-phone icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name"><a href="#"><%= User.find(drsheet_appraisee.appraisee_id).first_name %></a></div>
+                                                            <div class="options">
+                                                                <button class="btn  btn-success">
+                                                                    <i class="icon-phone"></i>
+                                                                    <%= User.find(drsheet_appraisee.appraisee_id).phone_no%>
+                                                                </button>
+                                                                <button class="btn btn-warning">
+                                                                <%= User.find(drsheet_appraisee.appraisee_id).roles.last.name%>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <% end %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+                        </div>
+
+
+
+
+                       
+
+                        <div class="tab-pane" id="appraisers">
+                            <h5 class="tab-header"><i class="icon-comments"></i>Appraiser's for <%= current_user.first_name %></h5>
+                                <section class="widget widget-tabs">
+                                    <header>
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#kra">KRA</a>
+                                            </li>
+                                             <li>
+                                               <a data-toggle="tab" href="#dr">DR</a>
+                                            </li>
+                                        </ul>
+                                    </header>                             
+                                    
+                                    <div class="body tab-content">
+                                        <div class="tab-pane active" id="kra">
+                                            <ul class="users-list">
+                                                <% KraSheet.where(:appraisee_id=>current_user.id).each do |krasheet| %>
+<<<<<<< HEAD
+                                                <% unless krasheet.appraiser.nil? %>
+||||||| merged common ancestors
+=======
+                                                  <% unless krasheet.appraiser.nil? %>
+>>>>>>> 469529a0d9d2ad5b7ecf615566cdc8abeb97b951
+                                                    <li>
+                                                      <i class="pull-left icon-user icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name">
+                                                                <a href="#"><%= User.find(krasheet.appraiser_id).first_name %></a>
+                                                            </div>
+                                                            <div class="position">
+                                                              From : <strong><%= krasheet.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp To: &nbsp<%= krasheet.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
+                                                            </div>
+                                                            <div class="options">
+                                                              <i class="icon-phone"></i><%= User.find(krasheet.appraiser_id).phone_no %>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <% end %>
+                                                <% end %>
+                                                <% end %>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" id="dr">
+                                            <ul class="users-list">
+                                                <% DrSheet.where(:appraisee_id=>current_user.id).each do |drsheet| %>
+                                                <% unless drsheet.appraiser.nil? %>
+                                                    <li>
+                                                      <i class="pull-left icon-user icon-3x"></i>
+                                                        <div class="user-info">
+                                                            <div class="name">
+                                                                <a href="#"><%= User.find(drsheet.appraiser_id).first_name %></a>
+                                                            </div>
+                                                            <div class="position">
+                                                              From : <strong><%= drsheet.appraisal_cycle.start_date.strftime("%m/%d/%Y") %>&nbsp To: &nbsp<%= drsheet.appraisal_cycle.end_date.strftime("%m/%d/%Y") %> </strong>
+                                                            </div>
+                                                            <div class="options">
+                                                              <i class="icon-phone"></i><%= User.find(drsheet.appraiser_id).phone_no %>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <% end %>
+                                                <% end %>
+                                                <% end %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
