@@ -77,22 +77,13 @@ function checkvalue(rating)
              
 
               <section class="widget">
-                
               <% @sheet_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id))  %>
- 
-            
-            
-              
-
-                <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
-                                
-                <% unless rating_obj == nil then %>
-                 
-                 <% appraisee = find_appraisee_details(rating_obj.kra_sheet_id) %>
-
+              <% p @sheet_id %>
+              <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_manager(current_user.id,@appraisee.id),kra_attr.id,1)  %>
+              <% unless rating_obj == nil then %>
+                <% appraisee = find_appraisee_details(rating_obj.kra_sheet_id) %>
                 <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 1, :appraisee => appraisee ), :remote => true, class: "icon-edit icon-large color-orange pull-right" %>
-                              
-                  <strong>
+                <strong>
                  <small> Your rating is: </small>
                   <h6 class='badge'><%= rating_obj.rating %></h6>
                    <p>Comments</p><small><p><pre class=widget style='font-size:15px;'>  <%= rating_obj.comment %></pre></p></small>

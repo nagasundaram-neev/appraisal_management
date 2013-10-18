@@ -17,12 +17,14 @@
           <%= form_for(@kra_attr, :remote => true,  :validate => true,  :class => "form-horizontal label-left") do |f|  %>
           <fieldset>
             <legend class="section">Kra Attribute Details</legend>
-            <div class="flash_notice" id='attr_errors'>
-              <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">×</a> 
-                <%= notice %>
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='attr_errors'>
+                <div class="alert alert-error">
+                  <a class="close" data-dismiss="alert">×</a> 
+                  <%= notice %>
+                </div>
               </div>
-            </div>
+            <%end%>
             <div class="control-group">
               <label for="name" class="control-label">Title </label>
               <div class="controls controls-row">

@@ -17,3 +17,11 @@
 //= require_tree .
 //= require bootstrap
 //= require bootstrap-datepicker
+$(function() {  
+    setTimeout(updateNotifications, 20000);
+});
+
+function updateNotifications () {
+  $.ajax({url:"/update_notifications",success:function(){ }}); 
+  setTimeout(updateNotifications, 20000);
+}

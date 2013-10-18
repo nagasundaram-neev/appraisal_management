@@ -78,7 +78,7 @@ before_filter :require_appraiser, :only => [:revert_signoff]
     params.require(:dr_rating).permit(:dr_sheet_id, :dr_attr_id, :rating, :comment, :rated_by)
   end
 
-  def revert_signoff
+  def dr_revert_signoff
     dr_sheet = DrSheet.find(params[:dr_sheet_id])
     dr_sheet.update_attributes(:appraisee_status => 0)
     flash[:notice] = "Appraisee  notified."

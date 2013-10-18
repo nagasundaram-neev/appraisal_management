@@ -27,9 +27,10 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycle = AppraisalCycle.new(appraisal_cycle_params)
     if @appraisal_cycle.save
       flash[:notice] = "New Appraisal Cycle has been Successfully created."
+      
       @appraisal_cycle.create_kra_sheets
       @appraisal_cycle.create_dr_sheets
-      @appraisal_cycles = AppraisalCycle.all
+      @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
     else
         flash[:notice] = @appraisal_cycle.errors.full_messages
     end
@@ -56,7 +57,7 @@ class AppraisalCyclesController < ApplicationController
     @appraisal_cycle = AppraisalCycle.find(params[:id])
     @appraisal_cycle.destroy
     flash[:notice] = "Successfully removed."
-    @appraisal_cycles = AppraisalCycle.all
+    @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
   end
 
   def overall_performance

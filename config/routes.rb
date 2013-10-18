@@ -49,6 +49,8 @@ AppraisalManagement::Application.routes.draw do
   get 'get_past_dr_appraisees', to: 'home#get_past_dr_appraisees'
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
+  get 'dr_revert_signoff', to: 'dr_ratings#dr_revert_signoff'
+get 'update_notifications', to: 'home#get_notifications'
   root :to => 'home#index'
 
   get "home/index"

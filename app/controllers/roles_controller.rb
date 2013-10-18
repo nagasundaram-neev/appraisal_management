@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+ class RolesController < ApplicationController
 before_filter :authenticate_user!
 before_filter :require_admin
 before_filter :load, :only => [:new,:index, :create, :update]
@@ -10,6 +10,7 @@ before_action :check_selected_attributes, :only =>[:create, :update]
   end
   
   def create_new_role
+    flash[:notice] = nil
     @role = Role.new
   end
   
@@ -88,7 +89,8 @@ before_action :check_selected_attributes, :only =>[:create, :update]
 end
 
   def new_role
-  @role = Role.new
+    flash[:notice] = nil
+    @role = Role.new
   end
 
 

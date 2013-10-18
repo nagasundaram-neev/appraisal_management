@@ -18,20 +18,21 @@ include AppraisalCyclesHelper
     begin
       if current_user.role == "admin" then
         @appraisees = DrSheet.where("appraiser_status = 0 or appraisee_status = 0")
-      else
-      @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
+      elsif current_user.role == "appraiser"
+        @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0)
       end
       if @appraisees.first.nil? then
-        p "in if"
-        p @appraisees
         return @appraisees = nil
       else
-       return  @appraisees
+        return @appraisees
       end
-    rescue NoMethodError
+    rescue
       return nil
     end
   end
+
+
+
   def get_appraisees
     begin
       if current_user.role == "admin" then
@@ -49,34 +50,23 @@ include AppraisalCyclesHelper
     end
   end
 
-  def get_dr
-    if current_user.role == "admin" then
-      @appraisees = DrSheet.where("appraiser_status = 0 or appraisee_status = 0")
-    else
-      @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
-    end
-    if @appraisees.first.nil? then
-      return nil
-    else
-      return @appraisees
-    end
-  end
 
   def get_past_appraisees
     if current_user.role == "appraiser" then
-    @kra_sheets=current_user.appraiser_kra_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
+    @kra_sheets=KraSheet.where( :appraiser_id=>current_user.id,:appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
     elsif current_user.role == "admin" then
       @kra_sheets = KraSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
     end
   end
 
-  def get_past_dr
+  def get_past_dr_appraisees
     if current_user.role == "appraiser" then
     @dr_sheets=DrSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
     elsif current_user.role == "admin" then
       @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
     end
   end
+
 
   def total_performance_graph
     @graph_belongs_to=current_user
@@ -125,6 +115,17 @@ include AppraisalCyclesHelper
       @dr_attr_list = DrAttr.select(:name).collect(&:name)
     else
       flash[:notice]= "No Appraisal Published for you"
+    end
+  end
+def get_notifications
+    @notifications = []
+    begin
+      all_notifications = current_user.notifications
+    rescue NoMethodError
+      all_notifications = nil
+    end
+    unless all_notifications.nil?
+      @notifications = all_notifications.where("notifications.created_at > (?)", current_user.last_sign_in_at)
     end
   end
 

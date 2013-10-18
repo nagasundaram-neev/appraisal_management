@@ -11,13 +11,17 @@ class DrSheetsController < ApplicationController
   end
 
   def index
+    require_admin
     @dr_sheets = DrSheet.all.order("appraisal_cycle_id DESC")
+    @distinct_appraisals = DrSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")
   end
 
   def create
     @dr_sheet = DrSheet.new(dr_sheet_params)
       if @dr_sheet.save
-        @dr_sheet.alert_user(@dr_sheet.appraisee_id)
+        Thread.new do
+          @dr_sheet.alert_user(@dr_sheet.appraisee_id)
+        end
         flash[:notice] = "Successfully created the DR sheets."
         @dr_sheets=DrSheet.all
       else
