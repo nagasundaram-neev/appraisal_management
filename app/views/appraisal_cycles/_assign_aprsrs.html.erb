@@ -1,0 +1,98 @@
+<div class='span10'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span10 offset2">
+           <h2 class="page-title">Kra Sheets <small></small></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span10 offset1">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='sheet_notice'>
+                <div class="alert alert-success">
+                 <%= notice %>
+                 <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+              <%end%>
+            </div>
+          </div>
+      <!-- Notification Area End -->
+        
+        <!-- Counting Area Start-->
+          <div class='row'>
+            <div class='span9 offset1'>
+              <section class="widget">
+                <span class="badge label-success">
+                  <%= KraSheet.count %>
+                </span>
+                <strong>
+                   KRA Assigned List are
+                </strong>
+              </section>
+            </div>
+          </div>
+        <!-- Counting Area End-->
+
+
+        <!-- List Start -->
+          <div class='row'>
+            <% if KraSheet.count > 0 %>
+               <div class='span9 offset1'>
+                <section class="widget" id="users-without-aprsrs">
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#users-without-aprsrs'  href='#kr-aprsrs' >
+                        <span class="name">
+                          <h4>
+                            Users without kr appraisers
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+                      <div id= 'kr-aprsrs' class="accordion-body collapse">
+                        <% @users_without_kraprsrs.each do |user| %>
+                          <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
+                            Appraisee: <span class='label btn-success'><%= user.first_name %></span>
+                            <span><%= link_to "", edit_kra_sheet_path(user.kra_sheets.where(:appraiser_id => nil, :appraisal_cycle_id => @appraisal_cycle.id).last), :remote => true,:class => "icon-edit  pull-left icon-2x color-orange" %></span>
+                            </span>
+                          </div>
+                        <% end %>                                  
+                      </div>
+                  </div>
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#users-without-aprsrs'  href='#dr-aprsrs' >
+                        <span class="name">
+                          <h4>
+                            Users without dr appraisers
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+                    <div id= 'dr-aprsrs' class="accordion-body collapse offset1">
+                      <% @users_without_draprsrs.each do |user| %>
+                        <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
+                            Appraisee: <span class='label btn-success'><%= user.first_name %></span>  
+                           
+                          </div>
+                      
+                      
+                    <% end %>
+
+                </section>
+            </div>
+            <% end %>
+          </div>
+        <!-- List Area End -->  
+    </div>
+              </div>
+            </section>
+            </section>        
+</div>

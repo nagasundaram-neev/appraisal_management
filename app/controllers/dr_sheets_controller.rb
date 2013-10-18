@@ -42,6 +42,7 @@ class DrSheetsController < ApplicationController
     if @dr_sheet.update(dr_sheet_params)
       flash[:notice] = "Successfully updated DR sheets."
       @dr_sheets = DrSheet.all
+      @distinct_appraisals = DrSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")
     end
   end
 

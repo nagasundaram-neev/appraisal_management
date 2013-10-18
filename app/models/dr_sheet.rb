@@ -10,8 +10,12 @@ class DrSheet < ActiveRecord::Base
   end
 
   def find_appraiser_name
-  	@user=User.find(self.appraiser_id)
-  	@user.first_name
+    unless self.appraiser.nil?
+  	 @user=User.find(self.appraiser_id)
+  	 @user.first_name
+    else
+    "No appraiser assigned"
+    end
   end
 
   def find_cycle

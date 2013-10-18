@@ -1,8 +1,13 @@
-<% if @appraisal_cycle.errors.any? -%>
-$('#app_cycle_errors').show()
-$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
-<% else -%>
-$(":input:not(input[type=submit])").val("");
-$("#body-content").html("<%= escape_javascript( render(:partial => "appraisal_cycles") ) %>");
-$('#app_cycle_notice').show()
-<% end -%>
+<% if @users_without_kraprsrs.empty? and @users_without_draprsrs.empty? %>
+
+	<% if @appraisal_cycle.errors.any? -%>
+	$('#app_cycle_errors').show()
+	$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+	<% else -%>
+	$(":input:not(input[type=submit])").val("");
+	$("#body-content").html("<%= escape_javascript( render(:partial => "appraisal_cycles") ) %>");
+	$('#app_cycle_notice').show()
+	<% end -%>
+<% else %>
+	$("#body-content").html("<%= escape_javascript( render(:partial => "assign_aprsrs") ) %>");
+<% end %>
