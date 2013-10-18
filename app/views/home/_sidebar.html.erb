@@ -91,9 +91,9 @@
                 <a class="accordion-toggle collapsed" style="border-left:5px solid #8CBF26;" data-toggle="collapse" data-parent="#side-nav" href="#appraise-collapse"><i class="icon-group"></i> <span class="name">Appraisee's Appraisals</span></a>
                 <ul id="appraise-collapse" class="accordion-body collapse">
                     <li><%= link_to "KRA Pending Forms", get_appraisees_path, :remote => true %></li>
-                    <li><%= link_to "DR Pending Forms  ", get_dr_path, :remote => true %></li>
+                    <li><%= link_to "DR Pending Forms  ", get_dr_appraisees_path, :remote => true %></li>
                     <li><%= link_to "KRA Past Appraisals", get_past_appraisees_path, :remote => true %></li>
-                    <li><%= link_to "DR Past DR Appraisals", get_past_dr_path, :remote => true %></li>
+                    <li><%= link_to "DR Past DR Appraisals", get_past_dr_appraisees_path, :remote => true %></li>
                 </ul>
             </li>
           <% end %>
