@@ -59,7 +59,7 @@
               <legend class="section">Select the Appraisal Cycle </legend>
                 <div class="controls controls-row">
                   <div class='selectpicker'>
-                    <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date.strftime('%B %Y'),{:prompt => ""},{:data =>{},:class => "input widget", :style => "width:206px; height:38px;",'data-validation' => "required"}) %>
+                    <%= collection_select(:aprsl_cycl_id, :id, AppraisalCycle.all, :id, :start_date,{:prompt => ""},{:data =>{},:class => "input widget", :style => "width:206px; height:38px;",'data-validation' => "required"}) %>
                     </select>
                   </div>
                 </div>

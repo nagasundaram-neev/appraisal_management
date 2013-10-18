@@ -84,19 +84,21 @@ class AppraisalCyclesController < ApplicationController
     @performance_manager_array=[]
     @performance_self_array=[]
     if current_user.role=="admin"
-      @kra_sheets=KraSheet.where(:appraisee_id=> params[:user])
+      @kra_sheets=KraSheet.where(:appraisee_id=> params[:user],:appraisee_status=>1,:appraiser_status=>1)
+      @dr_sheets=DrSheet.where(:appraisee_id=>params[:user],:appraisee_status=>1,:appraiser_status=>1)
       @graph_belongs_to=User.find(params[:user])
     else
-      @kra_sheets=current_user.kra_sheets
+      @kra_sheets=current_user.kra_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
+      @dr_sheets=current_user.dr_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
       @graph_belongs_to=current_user
     end
       @kra_sheets.each do |kra_sheet|
         @kra_sheet_temp = kra_sheet
-        unless performance_sum == 0
-          @performance_manager_array << performance_sum
+        unless overall_sum_manager == 0
+          @performance_manager_array << overall_sum_manager
         end
-        unless performance_sum_self == 0 
-          @performance_self_array << performance_sum_self  
+        unless overall_sum_self == 0 
+          @performance_self_array << overall_sum_self 
         end
       @cycles=AppraisalCycle.where(:id=> current_user.kra_sheets.select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)).select(:start_date).collect(&:start_date)
       end
@@ -109,6 +111,10 @@ class AppraisalCyclesController < ApplicationController
     @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
     @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
     @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
+  end
+
+  def dr_kra_performance
+    
   end
 
   def performance_params

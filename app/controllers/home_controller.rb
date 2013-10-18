@@ -79,17 +79,18 @@ include AppraisalCyclesHelper
 
   def total_performance_graph
     @graph_belongs_to=current_user
-    @kra_sheets=current_user.kra_sheets
+    @kra_sheets=current_user.kra_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
     unless @kra_sheets.empty?
       @performance_manager_array=[]
       @performance_self_array=[]
+      @dr_sheets=current_user.dr_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
       @kra_sheets.each do |kra_sheet|
       @kra_sheet_temp = kra_sheet
-        unless performance_sum == 0
-          @performance_manager_array << performance_sum
+        unless overall_sum_manager == 0
+          @performance_manager_array << overall_sum_manager
         end
-        unless performance_sum_self == 0 
-          @performance_self_array << performance_sum_self  
+        unless overall_sum_self == 0 
+          @performance_self_array << overall_sum_self  
         end
       @cycles=AppraisalCycle.where(:id=> current_user.kra_sheets.select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)).select(:start_date).collect(&:start_date)
       end
