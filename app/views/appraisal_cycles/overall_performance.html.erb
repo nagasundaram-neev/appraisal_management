@@ -3,7 +3,7 @@
 
 		<div class="controls">
 
-			<%= f.collection_select :id, AppraisalCycle.all, :id, :start_date, :prompt => "Select Duration" %>
+			<%= f.collection_select :id, AppraisalCycle.all, :id, :start_date.strftime('%B %Y'), :prompt => "Select Duration" %>
   		</select>
   	</div>
 	<%= f.submit 'overall performance', class: "btn btn-primary" %> 

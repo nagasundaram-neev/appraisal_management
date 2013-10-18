@@ -82,6 +82,8 @@
                                <%= f.hidden_field :rated_by, :value => 0 %>
                                <section class="widget">
                                  
+                                 <% @sheet_id = find_dr_sheet_details(@dr_rating.find_dr_sheet_self(current_user.id))  %>
+                                  
           											<% @appraisal_cycle_id = find_dr_sheet_details(@dr_rating.find_dr_sheet_self(current_user.id)).appraisal_cycle_id  %>
               
                                 
@@ -159,7 +161,7 @@
                               
 
 
-  <%= link_to "Sumit to Manager", overall_performance_appraisal_cycles_path(:appraisal_cycle => {:id => @appraisal_cycle_id,:flag=> 0}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
+  <%= link_to "Sumit to Manager", dr_overall_performance_appraisal_cycles_path(:dr_sheet => {:id => @sheet_id,:flag=> 0}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
 
 
 

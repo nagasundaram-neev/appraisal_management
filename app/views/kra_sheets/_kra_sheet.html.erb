@@ -45,24 +45,68 @@
           <div class='row'>
             <% if KraSheet.count > 0 %>
                <div class='span10 offset1'>
-                <section class="widget" id='kra-sheets-all'>
-                  <% @distinct_appraisals.each do |id| %>
-                    <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
-                      <div class="accordion-group">
-                        <blockquote>
-                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets-all'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                <section class="widget" id="kra-sheets">
+                
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets'  href='#pending-appraisals' >
                         <span class="name">
                           <h4>
-                            <%= "#{appraisal.start_date} to #{appraisal.end_date}"%>
+                            Pending Appraisals
                           </h4>
                         </span>
-                        </a>
+                      </a>
+                    </blockquote>
+                      <div id= 'pending-appraisals' class="accordion-body collapse">
+                        <% @kra_sheets.where(:appraiser_status => 0).each do |kra_sheet| %>
+                          <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                            <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                            <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
+                            <span class='label btn-info'>
+                              <% if kra_sheet.appraisee_status %>
+                              Appraisee has Signed Off the form.
+                              <% else %>
+                                Appraisee has not Signed Off the form yet.
+                              <% end %>
+                            </span>
+                            <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit icon-large color-orange" %></span>
+                            <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-remove icon-large color-red" %>
+                            </span>
+                          </div>
+                        <% end %>                                  
+                      </div>
+                  </div>
+               
+               
+                  <div class="accordion-group" id= "abcdef">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#kra-sheets'  href='#completed-appraisals' >
+                        <span class="name">
+                          <h4>
+                            Completed Appraisals
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+                    <div id= 'completed-appraisals' class="accordion-body collapse">
+                    <% @distinct_appraisals.each do |id| %>
+                      <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
+                      <% unless appraisal.kra_sheets.where(:appraiser_status => 1).first.nil? %>
+                      <div class="accordion-group">
+                        <blockquote>
+                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                            <span class="name">
+                              <h5>
+                              <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
+                              </h5>
+                            </span>
+                          </a>
                         </blockquote>
                         <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
                         
-                          <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id).each do |kra_sheet| %>
-                            <div class='widget' style="background-color: rgba(255,255,255,.20); color:#FFF; margin-left:60px;">
-                              Appraisee: 
+                          <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |kra_sheet| %>
+                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                             Appraisee:
                               <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
                               Appraiser: 
                               <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
@@ -83,5 +127,7 @@
           </div>
         <!-- List Area End -->  
     </div>
-  </section>        
+              </div>
+            </section>
+            </section>        
 </div>

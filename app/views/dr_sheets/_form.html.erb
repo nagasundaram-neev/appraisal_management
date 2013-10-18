@@ -19,30 +19,21 @@
                                     <div class="alert alert-error">
                                       <a class="close" data-dismiss="alert">×</a> 
                                         <%= notice %>
-                                     </div>
-                                    </div>
-              <div class="control-group">
-                <label class="control-label" for="appraisal_cycle_id">
-                    Cycle list
-                </label>
-                <div class="controls">
-                  <%= f.collection_select :appraisal_cycle_id, AppraisalCycle.all, :id, :start_date, :prompt => "Select appraisal cycle" %>
-                  </select>
+                                     
                 </div>
-                <label class="control-label" for="appraisee_id">
-                    Appraisee
-                </label>
-                <div class="controls">
-                 
-                 <%= f.collection_select :appraisee_id, User.all, :id, :email, :prompt => "select appraisee",'data-validation' => "required" %>
-                  
-                </div>
+              </div>
+              <div >
+                <span class="label label-info"><%= " From #{@kra_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@kra_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
+              </div>
+              <div>
+                <span class="label label-info"><%= " For #{@kra_sheet.appraisee.first_name} "%></span>
+              </div>
+              <div>
                 <label class="control-label" for="appraiser_id">
                     Appraiser 
                 </label>
                 <div class="controls">
-
-                  <%= f.collection_select :appraiser_id, User.all, :id, :email, :prompt => "Select appraiser" %>
+                  <%= f.collection_select :appraiser_id, User.appraiser_list(@kra_sheet.appraisee), :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>
