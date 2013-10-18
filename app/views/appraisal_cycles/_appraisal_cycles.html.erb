@@ -64,8 +64,8 @@
                     <% if current_user.role == "admin" then %>
                       <% @appraisal_cycles.each do |appraisal_cycle| %>
                         <tr>
-                        <td><%= appraisal_cycle.start_date.strftime('%B %Y').strftime('%B %Y') %></td>
-                        <td><%= appraisal_cycle.end_date.strftime('%B %Y').strftime('%B %Y') %></td>
+                        <td><%= appraisal_cycle.start_date.strftime('%B %Y') %></td>
+                        <td><%= appraisal_cycle.end_date.strftime('%B %Y') %></td>
                         <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %></td>
                         </tr>
                       <% end %>

@@ -6,7 +6,7 @@ class DrAttrsController < ApplicationController
     @dr_attr = DrAttr.new
   end
   def new
-    
+    flash[:notice] = nil
   end
 
   def index
@@ -15,12 +15,17 @@ class DrAttrsController < ApplicationController
   
   def create
     @dr_attr = DrAttr.new(dr_attr_params)
+    if @dr_attr.total_weightage
       if @dr_attr.save
         flash[:notice] = "A DR Attribute has been successfully created."
         @dr_attrs=DrAttr.all
         else
         flash[:notice] = @dr_attr.errors.full_messages
       end
+    else
+      flash[:notice] = "cant add this attribute total weightage limit exceeds."
+      render "new"
+    end
     end
 
   def edit

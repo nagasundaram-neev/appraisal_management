@@ -14,11 +14,11 @@ class DepartmentsController < ApplicationController
   end
 
   def new
+    flash[:notice] = nil
   end
 
 
-  def index
-    
+  def index    
   end
 
   def create
@@ -74,7 +74,8 @@ class DepartmentsController < ApplicationController
     end
   end
   def new_dept
-  @dept = Department.new
+    flash[:notice] = nil
+    @dept = Department.new
   end
 
   def department_params

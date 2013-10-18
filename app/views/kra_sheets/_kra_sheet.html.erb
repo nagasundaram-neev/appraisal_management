@@ -92,34 +92,32 @@
                     <% @distinct_appraisals.each do |id| %>
                       <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
                       <% unless appraisal.kra_sheets.where(:appraiser_status => 1).first.nil? %>
-                      <div class="accordion-group">
-                        <blockquote>
-                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
-                            <span class="name">
-                              <h5>
-                              <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
-                              </h5>
-                            </span>
-                          </a>
-                        </blockquote>
-                        <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
-                        
-                          <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |kra_sheet| %>
-                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
-                             Appraisee:
-                              <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
-                              Appraiser: 
-                              <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
-                              <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash icon-2x icon-2x color-red pull-right" %>
-                                <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit icon-2x color-orange pull-right" %></span>
+                        <div class="accordion-group">
+                          <blockquote>
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                              <span class="name">
+                                <h5>
+                                <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
+                                </h5>
                               </span>
-
-                            </div>
-                             
-                              <% end %> 
-                                 
+                            </a>
+                          </blockquote>
+                          <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
+                            <% @kra_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |kra_sheet| %>
+                              <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                               Appraisee:
+                                <span class='label btn-success'><%= kra_sheet.find_appraisee_name %></span>
+                                Appraiser: 
+                                <span class='label btn-info'><%= kra_sheet.find_appraiser_name %></span>
+                                <span>
+                                  <%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash icon-2x icon-2x color-red pull-right" %>
+                                  <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit icon-2x color-orange pull-right" %></span>
+                                </span>
+                              </div>
+                            <% end %>
+                          </div>
                         </div>
-                      </div>
+                      <% end %>
                     <% end %>
                 </section>
             </div>

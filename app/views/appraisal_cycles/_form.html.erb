@@ -24,18 +24,20 @@
             <%= form_for(@appraisal_cycle, :remote => true,  :class => "form-horizontal label-left") do |f|  %>
             <fieldset>
               <legend class="section">Info </legend>
+               <% if flash[:notice] %>
               <div class="flash_notice" id='app_cycle_errors'>
                 <div class="alert alert-error">
                   <a class="close" data-dismiss="alert">×</a> 
                   <%= notice %>
                 </div>
               </div>
+              <% end%>
               <div class="control-group">
                 <label class="control-label" >Start Date</label>
                 <div class="controls controls-row">
                   <div class="input-append span7">
                     <i class=" add-on icon-calendar"></i>
-                    <%= f.text_field :start_date.strftime('%B %Y'), 'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd", 'data-validation' => "required"%>
+                    <%= f.text_field :start_date, 'data-behaviour' => 'datepicker', 'data-date-format' => "yyyy-mm-dd", 'data-validation' => "required"%>
                   </div>
                 </div>
               </div>
@@ -44,7 +46,7 @@
                 <div class="controls controls-row">
                   <div class="input-append span7">
                     <i class=" add-on icon-calendar"></i>
-                    <%= f.text_field :end_date.strftime('%B %Y'), 'data-behaviour' => 'datepicker','data-date-format' => "yyyy-mm-dd", 'data-validation' => "required" %>
+                    <%= f.text_field :end_date  , 'data-behaviour' => 'datepicker','data-date-format' => "yyyy-mm-dd", 'data-validation' => "required" %>
                   </div>
                 </div>
               </div>

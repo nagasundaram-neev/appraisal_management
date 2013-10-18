@@ -21,8 +21,6 @@ include AppraisalCyclesHelper
       @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
       end
       if @appraisees.first.nil? then
-        p "in if"
-        p @appraisees
         return @appraisees = nil
       else
        return  @appraisees
@@ -31,6 +29,18 @@ include AppraisalCyclesHelper
       return nil
     end
   end
+
+  def get_past_dr_appraisees
+    if current_user.role == "appraiser" then
+      @dr_sheets = []
+      unless current_user.appraiser_dr_sheets.empty?
+        @dr_sheets=current_user.appraiser_dr_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
+      end
+    elsif current_user.role == "admin" then
+      @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
+    end
+  end
+
   def get_appraisees
     begin
       if current_user.role == "admin" then
@@ -48,32 +58,11 @@ include AppraisalCyclesHelper
     end
   end
 
-  def get_dr
-    if current_user.role == "admin" then
-      @appraisees = DrSheet.where("appraiser_status = 0 or appraisee_status = 0")
-    else
-      @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
-    end
-    if @appraisees.first.nil? then
-      return nil
-    else
-      return @appraisees
-    end
-  end
-
   def get_past_appraisees
     if current_user.role == "appraiser" then
-    @kra_sheets=current_user.appraiser_kra_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
+      @kra_sheets=current_user.appraiser_kra_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
     elsif current_user.role == "admin" then
       @kra_sheets = KraSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
-    end
-  end
-
-  def get_past_dr
-    if current_user.role == "appraiser" then
-    @dr_sheets=DrSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
-    elsif current_user.role == "admin" then
-      @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
     end
   end
 
@@ -99,16 +88,28 @@ include AppraisalCyclesHelper
   end
 
     def performance_graph
-    @kra_sheet=KraSheet.where(:appraisee_id => current_user.id,:appraisee_status=>1,:appraiser_status=>1).last
-    unless @kra_sheet.nil?
-      @kra_ratings_by_manager_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1).select(:rating).map(&:rating)
-      @kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 0).select(:rating).map(&:rating)
-      @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
-      @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
-      @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
-      @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
-    else
-      flash[:notice]= "No Appraisal Published for you"
+      @kra_sheet=KraSheet.where(:appraisee_id => current_user.id,:appraisee_status=>1,:appraiser_status=>1).last
+      unless @kra_sheet.nil?
+        @kra_ratings_by_manager_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1).select(:rating).map(&:rating)
+        @kra_ratings_by_self_array=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 0).select(:rating).map(&:rating)
+        @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
+        @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
+        @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
+        @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
+      else
+        flash[:notice]= "No Appraisal Published for you"
+      end
+  end
+
+  def get_notifications
+    @notifications = []
+    begin
+      all_notifications = current_user.notifications
+    rescue NoMethodError
+      all_notifications = nil
+    end
+    unless all_notifications.nil?
+      @notifications = all_notifications.where("notifications.created_at > (?)", current_user.last_sign_in_at)
     end
   end
 

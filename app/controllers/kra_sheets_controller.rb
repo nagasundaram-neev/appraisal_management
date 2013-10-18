@@ -12,6 +12,7 @@ before_filter :authenticate_user!
   end
 
   def index
+    require_admin
     @kra_sheets = KraSheet.all.order("appraisal_cycle_id DESC")
     @distinct_appraisals = KraSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")
     
@@ -20,7 +21,9 @@ before_filter :authenticate_user!
   def create
     @kra_sheet = KraSheet.new(kra_sheet_params)
       if @kra_sheet.save
-        @kra_sheet.alert_user(@kra_sheet.appraisee_id)
+        Thread.new do
+          @kra_sheet.alert_user(@kra_sheet.appraisee_id)
+        end
         flash[:notice] = "Successfully created the KRA sheets."
         @kra_sheets=KraSheet.all
       else

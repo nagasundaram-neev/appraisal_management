@@ -154,6 +154,7 @@
                                         <div class="tab-pane active" id="kra">
                                             <ul class="users-list">
                                                 <% KraSheet.where(:appraisee_id=>current_user.id).each do |krasheet| %>
+                                                  <% unless krasheet.appraiser.nil? %>
                                                     <li>
                                                       <i class="pull-left icon-user icon-3x"></i>
                                                         <div class="user-info">
@@ -168,12 +169,14 @@
                                                             </div>
                                                         </div>
                                                     </li>
+                                                    <% end %>
                                                 <% end %>
                                             </ul>
                                         </div>
                                         <div class="tab-pane" id="dr">
                                             <ul class="users-list">
                                                 <% DrSheet.where(:appraisee_id=>current_user.id).each do |drsheet| %>
+                                                <% unless drsheet.appraiser.nil? %>
                                                     <li>
                                                       <i class="pull-left icon-user icon-3x"></i>
                                                         <div class="user-info">
@@ -188,6 +191,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
+                                                    <% end %>
                                                 <% end %>
                                             </ul>
                                         </div>

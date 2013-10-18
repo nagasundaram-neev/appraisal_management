@@ -32,7 +32,7 @@ AppraisalManagement::Application.routes.draw do
       get 'dr_manager_status_update'
     end
   end
-  resources :kra_ratings
+  resources :kra_ratings 
   resources :dr_ratings
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'
@@ -44,6 +44,7 @@ AppraisalManagement::Application.routes.draw do
   get 'get_past_dr_appraisees', to: 'home#get_past_dr_appraisees'
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
+  get 'update_notifications', to: 'home#get_notifications'
   root :to => 'home#index'
 
   get "home/index"

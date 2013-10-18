@@ -7,7 +7,7 @@ class KraAttrsController < ApplicationController
     @kra_attr = KraAttr.new
   end
   def new
-    
+    flash[:notice] = nil
   end
 
   def index
