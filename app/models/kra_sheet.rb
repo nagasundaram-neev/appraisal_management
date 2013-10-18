@@ -30,6 +30,13 @@ class KraSheet < ActiveRecord::Base
     user = User.find(id)
     UserMailer.new_aprsl_email(user).deliver
   end
+
+  def kra_disagree_notification_mail(kra_sheet)
+    appraisee = User.find(kra_sheet.appraisee_id)
+    appraiser=User.find(kra_sheet.appraiser_id)
+    appraial_cycle=AppraisalCycle.find(kra_sheet.appraisal_cycle_id)
+    UserMailer.kra_revert_signoff_email(appraisee,appraiser,appraisal_cycle).deliver
+ end
   
   
 end

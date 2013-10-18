@@ -154,7 +154,7 @@ function checkvalue(rating)
   
 
   <%= link_to "Submit to HR", dr_overall_performance_appraisal_cycles_path(:dr_sheet => {:id => @sheet_id,:flag=> 1}),class: "btn btn-success icon-edit icon-large color-orange pull-right", :remote => true %>
-  <%= link_to "Disagree", revert_signoff_path( :dr_sheet_id => @sheet_id ), :remote => true, class: "btn btn-danger" %>
+  <%= link_to "Disagree", dr_revert_signoff_path( :dr_sheet_id => @sheet_id ), :remote => true, class: "btn btn-danger" %>
   <%= link_to "Modify the Ratings", dr_ratings_path(:overall_edit_flag => 1), :remote => true, class: "btn icon-edit icon-large color-orange pull-right" %>
 
 

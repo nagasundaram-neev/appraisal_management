@@ -11,35 +11,25 @@ include AppraisalCyclesHelper
         @users=User.where('first_name LIKE ? OR email LIKE ? OR phone_no LIKE ? ','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%')
       end
     end
-
   end
   def get_dr_appraisees
     begin
       if current_user.role == "admin" then
         @appraisees = DrSheet.where("appraiser_status = 0 or appraisee_status = 0")
-      else
-      @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0,:appraisee_status => 1)
+      elsif current_user.role == "appraiser"
+        @appraisees = current_user.appraiser_dr_sheets.where(:appraiser_status => 0)
       end
       if @appraisees.first.nil? then
         return @appraisees = nil
       else
-       return  @appraisees
+        return @appraisees
       end
-    rescue NoMethodError
+    rescue
       return nil
     end
   end
 
-  def get_past_dr_appraisees
-    if current_user.role == "appraiser" then
-      @dr_sheets = []
-      unless current_user.appraiser_dr_sheets.empty?
-        @dr_sheets=current_user.appraiser_dr_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
-      end
-    elsif current_user.role == "admin" then
-      @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
-    end
-  end
+
 
   def get_appraisees
     begin
@@ -60,11 +50,20 @@ include AppraisalCyclesHelper
 
   def get_past_appraisees
     if current_user.role == "appraiser" then
-      @kra_sheets=current_user.appraiser_kra_sheets.where( :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
+    @kra_sheets=KraSheet.where( :appraiser_id=>current_user.id,:appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
     elsif current_user.role == "admin" then
       @kra_sheets = KraSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
     end
   end
+
+  def get_past_dr_appraisees
+    if current_user.role == "appraiser" then
+    @dr_sheets=DrSheet.where(:appraiser_id=>current_user.id, :appraisee_status => 1, :appraiser_status => 1).order("appraisal_cycle_id DESC") 
+    elsif current_user.role == "admin" then
+      @dr_sheets = DrSheet.where(:appraisee_status =>1, :appraiser_status => 1).order("appraisal_cycle_id DESC")
+    end
+  end
+
 
   def total_performance_graph
     @graph_belongs_to=current_user
