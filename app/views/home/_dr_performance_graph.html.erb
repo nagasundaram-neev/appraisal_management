@@ -1,0 +1,95 @@
+<div id="graph3"></div>
+<%= hidden_field_tag "dr_attr_list", @dr_attr_list.to_a %>
+
+    <script>
+        $(function () {
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart:{
+                        renderTo:'graph3',
+                        type:'column',
+                        defaultSeriesType: 'line',
+                        backgroundColor: {
+                          linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                          stops: [
+                            [0, 'rgb(96, 96, 96)'],
+                            [1, 'rgb(16, 16, 16)']
+                          ]
+                        },
+                        borderWidth: 0,
+                        borderRadius: 15,
+                        plotBackgroundColor: null,
+                        plotShadow: false,
+                        plotBorderWidth: 0
+                      },
+                    title:{
+                        style: {color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'},
+                        text:'<%= "#{current_user.first_name}" %> last appraisal'
+                        
+                        
+                    },
+                    xAxis:{
+                        
+                        title:{ text:'Attributes' },
+
+                        style: {
+                            color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                            },
+                        
+                        categories: $("#dr_attr_list").val().split(" ")
+
+                    }, 
+                    yAxis:{
+                        min:0,
+                        title:{
+                            text:'Rating'
+                        },
+                        style: {
+                            color: '#FFF',font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+                            }
+
+                    },
+                    legend:{
+                        layout:'vertical',
+                        backgroundColor:'#FFFFFF',
+                        align:'left',
+                        verticalAlign:'top',
+                        x:50,
+                        y:0,
+                        floating:true,
+                        shadow:true
+                    },
+                    tooltip:{
+                        formatter:function () {
+                            return '' +
+                                    'Rating' + ': ' +  + this.y;
+                        }
+                    },
+                    plotOptions:{
+                        column:{
+                            pointPadding:0.4,
+                            borderWidth:1
+                        }
+                    },
+
+
+                    series:[
+                        {
+                            name:'Rating By Manager',
+                            data:<%= @dr_ratings_by_manager_array %>,
+                            color: '#0F0'
+                        },
+                        
+                        {
+                            name:'Rating by Employee',
+                            data: <%= @dr_ratings_by_self_array %>,
+                            color:'#0FF'
+                        }
+                    ]
+                });
+            });
+
+        });
+    </script>
+   

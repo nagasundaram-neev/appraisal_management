@@ -64,7 +64,7 @@
               <a class="accordion-toggle collapsed" style="border-left:5px solid #E5603B;" data-toggle="collapse" data-parent="#side-nav" href="#overall-performance-collapse"><i class="icon-star"></i> <span class="name">Overall Performance</span></a>
                 <ul id="overall-performance-collapse" class="accordion-body collapse">
                   <li><%= link_to "Overall Performance Graph", total_performance_graph_appraisal_cycles_path, :remote => true %></li>
-                  <li><%= link_to "Past Assessments", "/", :remote => true %></li>
+                  <li><%= link_to "Past Assessments", appraisal_cycles_past_appraisal_performance_path, :remote => true %></li>
                 </ul>
             </li>
             

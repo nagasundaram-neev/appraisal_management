@@ -1,0 +1,52 @@
+<section class='widget span8'>
+  <div class="content container-fluid">
+    <div class="row-fluid">
+          <div class="span8">
+            <h2 class="page-title">Overall Performance Rating <small><br>KRA & DR Manager</small></h2>
+            <h4 class="page-title" style="color:#EAC85E;">Period:&nbsp<%= AppraisalCycle.find(@period).start_date %> &nbsp To &nbsp <%= AppraisalCycle.find(@period).end_date %></h4>
+            <br>
+          </div>
+    </div>
+    <div class="span8" align="center" >
+          <div class="body">
+            <div class="box span2 bg-color green">
+              <div class="big-text">
+                <%= (performance_sum).round(2) %> %
+              </div>
+              <div class="description">
+                <i class="icon-user"></i>
+                KRA Sheet <br>
+                Manager:&nbsp<span class="label label-success"><%=User.find(@kra_sheet_temp.appraiser_id).first_name  %></span>
+              </div>
+            </div>
+            <div class="box span2 bg-color green">
+              <div class="big-text">
+                <%= (dr_performance).round(2) %> %
+              </div>
+              <div class="description">
+                <i class="icon-user"></i>
+                DR Sheet <br>
+                Manager:&nbsp<span class="label label-success"><%=User.find(@dr_sheet.appraiser_id).first_name  %></span>
+              </div>
+            </div>
+            <div class="box span2 bg-color green">
+              <div class="big-text">
+                <%= ((performance_sum*0.7).round(2))+((dr_performance*0.3).round(2)) %> %
+              </div>
+              <div class="description">
+                <i class="icon-bar-chart icon-large"></i>
+                Total Pefprmance <br>
+                  <span class="label label-success"><%= current_user.first_name  %></span>
+              </div>
+            </div>
+
+    </div>      
+  </div>
+</section>
+<style type="text/css">
+  .box {
+    margin-top: 50px;
+    /*THIS does not work as expected: */
+    box-shadow: 0 0 5px 5px white;
+}
+</style>

@@ -73,7 +73,8 @@ module AppraisalCyclesHelper
 
 	def overall_sum_manager
 		@kra_ratings_by_manager=@kra_sheet_temp.kra_ratings.where(:rated_by => 1)
-	  @dr_sheet=@dr_sheets.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id).first
+	  @dr_sheet=DrSheet.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id,:appraisee_id=>@graph_belongs_to.id).first
+	  p @dr_sheet
 	  @dr_ratings_by_manager=DrRating.where(:dr_sheet_id=>@dr_sheet.id,:rated_by=>1)
 		kra_sum=0
 		@kra_ratings_by_manager.each do |kra_rating|
@@ -95,7 +96,7 @@ module AppraisalCyclesHelper
 
 	def overall_sum_self
 		@kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => 0)
-	  @dr_sheet=@dr_sheets.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id).first
+	  @dr_sheet=DrSheet.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id).first
 	  @dr_ratings_by_self=DrRating.where(:dr_sheet_id=>@dr_sheet.id,:rated_by=>0)
 		kra_sum=0
 		@kra_ratings_by_self.each do |kra_rating|

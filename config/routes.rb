@@ -2,6 +2,8 @@ AppraisalManagement::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   match 'appraisal_cycles/overall_performance' => 'appraisal_cycles#overall_performance', as: :appraisal_cycles_overall_performance, via: [:get, :post]
+  match 'appraisal_cycles/past_appraisal_performance' => 'appraisal_cycles#past_appraisal_performance', as: :appraisal_cycles_past_appraisal_performance, via: [:get, :post]
+  match 'appraisal_cycles/past_appraisal_summary' => 'appraisal_cycles#past_appraisal_summary', as: :appraisal_cycles_past_appraisal_summary, via: [:get, :post]
   match 'appraisal_cycles/dr_overall_performance' => 'appraisal_cycles#dr_overall_performance', as: :appraisal_cycles_dr_overall_performance, via: [:get, :post]
   match 'appraisal_cycles/dr_kra_performance' => 'appraisal_cycles#dr_kra_performance', as: :appraisal_cycles_dr_kra_performance, via: [:get, :post]
   match 'kra_sheets/kra_status_update' => 'kra_sheets#kra_status_update', as: :kra_sheets_kra_status_update, via: [:get, :post]
@@ -19,7 +21,8 @@ AppraisalManagement::Application.routes.draw do
       get 'performance_graph'
       post 'total_performance_graph'
       get 'dr_overall_performance'
-      get 'dr_kra_performance'
+      get 'past_appraisal_performance'
+      get 'past_appraisal_summary'
     end
   end
   resources :kra_sheets do

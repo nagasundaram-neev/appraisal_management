@@ -1,0 +1,93 @@
+<div class='span6 offset1'>
+  <section class="widget">
+    
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset2">
+            <h2 class="page-title">Performance <br/><small>All appraisal cycles</small></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notice Start -->
+        <div class="row" >
+          <div class="span8 offset2">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='app_cycle_notice'>
+              <div class="alert alert-success"> 
+                <%= notice %>
+                <a class="close" data-dismiss="alert">×</a>
+              </div> 
+            </div>
+            <%end%>   
+          </div>
+        </div>
+      <!-- Notice end -->
+
+      <!-- Count start -->
+        <div class='row'>
+          <div class='span8 offset2'>
+            <section class="widget">
+              <span class="badge label-success">
+                <% if current_user.role == "admin" then %>
+                  <%= AppraisalCycle.count %>
+                <% else %>
+                  <%= current_user.kra_sheets.count %>
+                <% end %>
+              </span>
+              <strong>
+               Appraisal Cycles
+              </strong>
+            </section>
+          </div>
+        </div>
+      <!-- Count end -->
+
+      <!-- List start -->
+      <div class='row'>
+      <% if AppraisalCycle.count > 0 %>
+        <div class='span8 offset2'>
+          <strong>
+            <section class="widget">
+              <table class="table table-hover">
+                <tbody>
+                  <tr style="border-bottom:solid 1px;">
+                    <% if current_user.role == "admin" then %>
+                       <th>Start Date</th>
+                       <th>End Date</th>
+                       <th><i class='icon-pencil'></th>
+                    <% else %>
+                       <th>Appraisal Periods</th>
+                    <%end%>
+                  </tr>
+                    <% if current_user.role == "admin" then %>
+                      <% @appraisal_cycles.each do |appraisal_cycle| %>
+                        <tr>
+                        <td><%= appraisal_cycle.start_date.strftime('%B %Y')%></td>
+                        <td><%= appraisal_cycle.end_date.strftime('%B %Y') %></td>
+                        <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+                        </tr>
+                      <% end %>
+                    <% else%>
+                      <% user_appraisal_cycle.each do |appraisal_cycle| %>
+                        <tr>
+                        <td>
+                        <%= link_to " " + appraisal_cycle.start_date.strftime('%B %Y').to_s+"  to  " + appraisal_cycle.end_date.strftime('%B %Y').to_s, appraisal_cycles_past_appraisal_summary_path(:appraisal => {:id => appraisal_cycle.id, :user => current_user.id}), :remote => true, :class => "icon-calendar btn btn-block btn-info" %>
+                        </td>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                </tbody>
+              </table>
+            </section>
+          </strong>
+        </div>
+      <% end %>
+      </div>
+      <!-- List end -->
+    </div>
+  
+  </section>
+</div>
+    
