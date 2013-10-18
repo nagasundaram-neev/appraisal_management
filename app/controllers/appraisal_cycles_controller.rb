@@ -19,7 +19,8 @@ class AppraisalCyclesController < ApplicationController
     if current_user.role == "admin"
       @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
     else
-      @appraisal_cycles = current_user.kra_sheets.where(:appraiser_status => 1).order("start_date DESC")
+      @kra_appraisal_cycles = current_user.kra_sheets.where(:appraiser_status => 1).order("start_date DESC")
+      @dr_appraisal_cycles = current_user.dr_sheets.where(:appraiser_status => 1).order("start_date DESC")
     end
   end
 

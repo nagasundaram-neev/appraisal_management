@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+$("#body-content").html("<%= escape_javascript(render(:partial => "get_past_dr_appraisees"))%>");
+||||||| merged common ancestors
+=======
+$("#body-content").html("<%= escape_javascript(render(:partial => "get_past_dr"))%>");
+>>>>>>> 469529a0d9d2ad5b7ecf615566cdc8abeb97b951

@@ -79,9 +79,13 @@ before_filter :require_appraiser, :only => [:revert_signoff]
   end
 
   def dr_revert_signoff
-    dr_sheet = DrSheet.find(params[:dr_sheet_id])
-    dr_sheet.update_attributes(:appraisee_status => 0)
+    @dr_sheet = DrSheet.find(params[:dr_sheet_id])
+    @dr_sheet.update_attributes(:appraisee_status => 0)
+    Thread.new do
+       @dr_sheet.dr_disagree_notification_mail(@dr_sheet) #notification by email
+     end
     flash[:notice] = "Appraisee  notified."
     #notify appraisee
   end
 end
+

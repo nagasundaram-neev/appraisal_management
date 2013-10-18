@@ -1,4 +1,5 @@
 class KraRatingsController < ApplicationController
+
 before_filter :authenticate_user!
 skip_before_filter :verify_authenticity_token, :only => [:update]
 before_filter :load, :only => [:new,:index]
@@ -79,19 +80,20 @@ before_filter :require_appraiser, :only => [:revert_signoff]
   end
 
   def revert_signoff
-    kr_sheet = KraSheet.find(params[:kra_sheet_id])
-    if kr_sheet.update_attributes(:appraisee_status => 0)
-    flash[:notice] = "Appraisee  notified."
-    #notify appraisee
-    notification = Notification.new( :message => "#{kr_sheet.appraiser.first_name} is disagree with your ratings please modify them")
-    notification.save
+    @kr_sheet = KraSheet.find(params[:kra_sheet_id])
    
-    notification.update_attributes(:sender => kr_sheet.appraiser)
-    notification.users = [kr_sheet.appraisee]
+    if @kr_sheet.update_attributes(:appraisee_status => 0)
+      Thread.new do
+        @kr_sheet.kra_disagree_notification_mail(@kr_sheet)
+      end
+      flash[:notice] = "Appraisee  notified."
+      
+      notification = Notification.new( :message => "#{@kr_sheet.appraiser.first_name} is disagree with your ratings please modify them")
+      notification.save
+      notification.update_attributes(:sender => @kr_sheet.appraiser)
+      notification.users = [@kr_sheet.appraisee]
     else
       flash[:notice] = "Sorry something went wrong cant update disagree again"
     end
-
   end
-
 end

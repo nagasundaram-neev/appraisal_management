@@ -23,17 +23,17 @@
                 </div>
               </div>
               <div >
-                <span class="label label-info"><%= " From #{@kra_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@kra_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
+                <span class="label label-info"><%= " From #{@dr_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@dr_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
               </div>
               <div>
-                <span class="label label-info"><%= " For #{@kra_sheet.appraisee.first_name} "%></span>
+                <span class="label label-info"><%= " For #{@dr_sheet.appraisee.first_name} "%></span>
               </div>
               <div>
                 <label class="control-label" for="appraiser_id">
                     Appraiser 
                 </label>
                 <div class="controls">
-                  <%= f.collection_select :appraiser_id, User.appraiser_list(@kra_sheet.appraisee), :id, :email, :prompt => "Select appraiser" %>
+                  <%= f.collection_select :appraiser_id, User.appraiser_list(@dr_sheet.appraisee), :id, :email, :prompt => "Select appraiser" %>
                   </select>
                 </div>
               </div>

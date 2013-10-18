@@ -12,7 +12,6 @@ include AppraisalCyclesHelper
         @users=User.where('first_name LIKE ? OR email LIKE ? OR phone_no LIKE ? ','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%','%'+params[:search].to_s+'%')
       end
     end
-
   end
   def get_dr_appraisees
     begin

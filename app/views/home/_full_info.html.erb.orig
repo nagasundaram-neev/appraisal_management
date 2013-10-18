@@ -154,7 +154,12 @@
                                         <div class="tab-pane active" id="kra">
                                             <ul class="users-list">
                                                 <% KraSheet.where(:appraisee_id=>current_user.id).each do |krasheet| %>
+<<<<<<< HEAD
                                                 <% unless krasheet.appraiser.nil? %>
+||||||| merged common ancestors
+=======
+                                                  <% unless krasheet.appraiser.nil? %>
+>>>>>>> 469529a0d9d2ad5b7ecf615566cdc8abeb97b951
                                                     <li>
                                                       <i class="pull-left icon-user icon-3x"></i>
                                                         <div class="user-info">
@@ -169,6 +174,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
+                                                    <% end %>
                                                 <% end %>
                                                 <% end %>
                                             </ul>
@@ -191,6 +197,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
+                                                    <% end %>
                                                 <% end %>
                                                 <% end %>
                                             </ul>
