@@ -1,0 +1,75 @@
+<div class='span6 offset2'>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span11 offset2">
+              <h2 class="page-title">Development Implications <small> </small></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span8 offset2">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='implication_notice'>
+                <div class="alert alert-success">
+                 <a class="close" data-dismiss="alert">×</a>
+                 <%= notice %> 
+                </div>
+              </div>
+            <%end%>
+         </div>
+       </div>
+      <!-- Notification Area End -->
+      
+      <!-- Counting Area Start-->
+        <div class='row'>
+          <div class='span8 offset2'>
+            <section class="widget">
+              <span class="badge label-success">
+                <%= Implication.count %>
+              </span>
+              <strong>
+                All Implications
+              </strong>
+            </section>  
+          </div>
+        </div>
+      <!-- Counting Area End -->
+    
+      <!-- List Start -->
+        <div class='row'>
+          <% if Implication.count > 0 %>
+            <div class='span8 offset2'>
+              <strong>
+                <section class="widget">
+                  <table class="table table-hover">
+                    <thead >
+                      <tr style="border-bottom:solid 1px;">
+                        <th>Implications</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      <% @implications.each do |implication| %>
+                        <tr>
+                          <td><%= implication.name %></td>
+                          <td><%= link_to "", edit_implication_path(implication), :remote => true, class: "icon-edit icon-large color-orange" %></td>
+                          <td><%= link_to "", implication, :remote => true, :confirm => 'Are you sure?', :method => :delete, class: "icon-trash icon-large color-red"  %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </section>
+              </strong>
+            </div>
+          <% end %>
+        </div>               
+      <!-- List Area End -->
+    </div>
+  </section>
+</div>

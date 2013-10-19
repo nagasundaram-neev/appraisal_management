@@ -15,6 +15,7 @@ AppraisalManagement::Application.routes.draw do
   resources :dr_attrs
   resources :departments
   resources :roles
+  resources :implications
   resources :appraisal_cycles do
     collection do
       get 'overall_performance'

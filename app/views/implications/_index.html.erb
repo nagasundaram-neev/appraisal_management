@@ -1,0 +1,14 @@
+<body onload="cancel()">
+<%= link_to "Add Implication", new_implication_path, :remote => true, class: "btn btn-success" %>
+
+
+<div id="implications_list"><%= render :partial => "implications" %></div>
+
+<script type="text/javascript">
+function cancel()
+{
+document.getElementById("implications_form").style.display='none';
+}
+
+</script>
+</body>

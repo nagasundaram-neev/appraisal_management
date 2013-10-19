@@ -17,9 +17,7 @@
 //= require_tree .
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require raphael.2.1.0.min.js
-//= require justgage.1.0.1.js
-//= require justgage.1.0.1.min.js
+
 
 
 
