@@ -1,0 +1,2 @@
+class LongtermSheetsController < ApplicationController
+end

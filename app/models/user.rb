@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   has_many :appraiser_kra_sheets, :foreign_key => "appraiser_id", :class_name => "KraSheet"
   has_many :dr_sheets, :foreign_key => "appraisee_id", :class_name => "DrSheet"
   has_many :appraiser_dr_sheets, :foreign_key => "appraiser_id", :class_name => "DrSheet"
-
+  
+  has_many :longterm_sheets, :foreign_key => "appraisee_id", :class_name => "LongtermSheet"
+  has_many :appraiser_longterm_sheets, :foreign_key => "appraiser_id", :class_name => "LongtermSheet"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

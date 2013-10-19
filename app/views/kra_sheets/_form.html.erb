@@ -28,26 +28,27 @@
               <div class="control-group">
                 
                 
-                  <span class="label label-info"><%= " From #{@kra_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@kra_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
+                  <span class="btn btn-info icon-calendar btn-block"><%= " From #{@kra_sheet.appraisal_cycle.start_date.strftime('%B %Y')} To #{@kra_sheet.appraisal_cycle.end_date.strftime('%B %Y')}"%></span>
               
                 </div><div>
-                <span class="label label-info"><%= " For #{@kra_sheet.appraisee.first_name} "%></span>
+                <span class="btn btn-info icon-user btn-block"><%= " For #{@kra_sheet.appraisee.first_name} "%></span>
               </div>
                 <label class="control-label" for="appraiser_id">
                     Appraiser 
                 </label>
                 <div class="controls">
-
-                  <%= f.collection_select :appraiser_id, User.appraiser_list(@kra_sheet.appraisee), :id, :email, :prompt => "Select appraiser" %>
+                  
+                  <%= f.collection_select :appraiser_id, User.appraiser_list(@kra_sheet.appraisee), :id, :email, :prompt => "Select appraiser"  %>
                   </select>
                 </div>
-              </div>
+              
         </fieldset>
 
                                                         
       <div class="form-actions">
         <%= f.submit class: "btn btn-primary" %>   
         <button type="button" class="btn  btn-xs icon-remove sign " onclick="$('#sheets_form').hide()"> Close</button>                       
+      </div>
       </div>
     <% end %>
   </div>

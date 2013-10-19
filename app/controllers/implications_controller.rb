@@ -1,0 +1,2 @@
+class ImplicationsController < ApplicationController
+end

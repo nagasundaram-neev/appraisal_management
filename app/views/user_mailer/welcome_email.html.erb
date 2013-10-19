@@ -3,13 +3,19 @@
 		<body>
     <h1>Appraisal management</h1>
     <p>
-      Your account is created on aprsl portal.
+      <% if @user.gender == 'M' %>
+        Mr 
+        <%else%>
+        Mrs
+        <% end %>
+          <%= @user.first_name%>,
+      Your account is created on appraisal portal.
      .<br/>
     </p>
     <p>
-      To login to the site, just follow this link: <%= @url %>.
-      your User ID is <%= @email %>
-      and your Password is : <%= @password %>
+      To login to the site, just follow this link: <%= @url %>.<br/>
+      Your User ID is <%= @email %><br/>
+      Your Password is : <%= @password %><br/>
       Please Change the Password after Login 
     </p>
     <p>Thanks for joining and have a great day!</p>

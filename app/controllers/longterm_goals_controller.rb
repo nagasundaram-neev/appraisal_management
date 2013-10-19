@@ -1,0 +1,2 @@
+class LongtermGoalsController < ApplicationController
+end

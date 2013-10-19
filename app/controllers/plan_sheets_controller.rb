@@ -1,0 +1,2 @@
+class PlanSheetsController < ApplicationController
+end

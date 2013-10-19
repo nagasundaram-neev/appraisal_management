@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018071023) do
+ActiveRecord::Schema.define(version: 20131019061628) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 20131018071023) do
     t.datetime "updated_at"
   end
 
+  create_table "dev_implications", force: true do |t|
+    t.integer  "longterm_sheet_id"
+    t.integer  "current_implication_id"
+    t.integer  "next_implication_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "dr_attrs", force: true do |t|
     t.string   "name"
     t.float    "weightage"
@@ -66,6 +74,12 @@ ActiveRecord::Schema.define(version: 20131018071023) do
     t.integer  "appraiser_id"
     t.boolean  "appraisee_status",   default: false
     t.boolean  "appraiser_status",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "implications", force: true do |t|
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,9 +120,41 @@ ActiveRecord::Schema.define(version: 20131018071023) do
     t.datetime "updated_at"
   end
 
+  create_table "longterm_goals", force: true do |t|
+    t.integer  "longterm_sheet_id"
+    t.text     "prof_goal"
+    t.text     "personal_goal"
+    t.text     "tech_strength"
+    t.text     "non_tech_strength"
+    t.text     "tech_imp"
+    t.text     "non_tech_imp"
+    t.text     "appraiser_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "longterm_sheets", force: true do |t|
+    t.integer  "appraisal_cycle_id"
+    t.integer  "appraisee_id"
+    t.integer  "appraiser_id"
+    t.boolean  "appraisee_status",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notifications", force: true do |t|
     t.integer  "sender_id"
     t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plan_sheets", force: true do |t|
+    t.integer  "longterm_sheet_id"
+    t.text     "agreed_goal"
+    t.text     "way_to_achieve"
+    t.text     "resources_required"
+    t.text     "measure"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

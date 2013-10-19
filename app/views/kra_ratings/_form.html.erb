@@ -50,7 +50,7 @@
                      <% for kra_attr in @kra_rating.find_kra_attrs_for_role(current_user.id) do%>
                        <tr id="<%= "self_tr_#{kra_attr.id}"%>">
                          <td style="text-align:justify;font-size:80%;" class='span12' >
-                           <div id="accordion2" class="accordion" style="border-bottom:dotted 2px;border-top:dotted 2px;">
+                           <div id="accordion2" class="accordion" style="border-bottom:solid 2px;">
                             <div class="accordion-group">
                              <div class="accordion-heading">
                               <a href=<%= "#collapse_#{kra_attr.id}" %> data-toggle="collapse" class="accordion-toggle" d>
@@ -61,7 +61,7 @@
                                     <strong><%= kra_attr.weightage.round %> %</strong>
                                        </span>
                                     </span>
-                           <div id=<%= "collapse_#{kra_attr.id}" %> class="accordion-body in collapse" style="height: auto;">
+                           <div id='<%= "collapse_#{kra_attr.id}" %>' class="accordion-body in collapse" style="height: auto;">
                             <strong>
                            <p class='page-title'>Description</p>
                            <pre class=widget style='font-size:15px;'><%= kra_attr.desc %></pre>

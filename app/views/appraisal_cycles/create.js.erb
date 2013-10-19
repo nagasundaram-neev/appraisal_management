@@ -1,4 +1,4 @@
-<% if @users_without_kraprsrs.empty? and @users_without_draprsrs.empty? %>
+<% if @users_without_kraprsrs.nil? and @users_without_draprsrs.nil? %>
 
 	<% if @appraisal_cycle.errors.any? -%>
 	$('#app_cycle_errors').show()

@@ -44,7 +44,7 @@
         <!-- List Start -->
           <div class='row'>
             <% if KraSheet.count > 0 %>
-               <div class='span9 offset1'>
+               <div class='span10 offset1'>
                 <section class="widget" id="kra-sheets">
                 
                   <div class="accordion-group">
@@ -70,8 +70,8 @@
                               <% end %>
                             </span>
                            
-                            <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash pull-left icon-2x color-red" %>
-                            <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit  pull-left icon-2x color-orange" %></span>
+                            <span><%= link_to "", kra_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash pull-left icon-large color-red" %>
+                            <span><%= link_to "", edit_kra_sheet_path(kra_sheet), :remote => true,:class => "icon-edit  pull-left icon-large color-green" %></span>
                             </span>
                           </div>
                         <% end %>                                  

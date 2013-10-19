@@ -3,7 +3,12 @@
 		<body>
     <h1 style="color:red">DR Form Disagreed</h1>
     <p>
-        Mr/Mrs <%= @user.first_name%>,
+        <% if @user.gender == 'M' %>
+        Mr 
+        <%else%>
+        Mrs
+        <% end %>
+         <%= @user.first_name%>,
 
         You DR form disagreed by your appraiser manager <b><%= @appraiser_name %></b>
      .<br/>
