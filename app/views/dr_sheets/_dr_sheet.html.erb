@@ -57,24 +57,24 @@
                         </span>
                       </a>
                     </blockquote>
-                      <div id= 'pending-appraisals' class="accordion-body collapse">
-                        <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
-                          <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
-                            Appraisee: <span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                            Appraiser: <span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
-                            Status: <span class='label btn-info'>
-                              <% if dr_sheet.appraisee_status %>
-                              Appraisee has Signed Off the form.
-                              <% else %>
-                                Appraisee has not Signed Off the form yet.
-                              <% end %>
-                            </span>
-                            <span><%= link_to "", edit_dr_sheet_path(dr_sheet), :remote => true,:class => "icon-edit icon-large pull-left color-green" %></span>
-                            <span><%= link_to "", dr_sheet, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "icon-trash pull-left icon-large color-red" %>
-                            </span>
-                          </div>
-                        <% end %>                                  
-                      </div>
+                      <table id="myTable" class=" tablesorter table table-bordered table-hover table-srtiped ">
+                        <thead>
+                          <th>Appraisee</th>
+                          <th>Appraiser</th>
+                          <th>Appraisal Period </th>
+                        </thead>
+                        <tbody>
+                      <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
+                        <tr>
+                          <td><%= dr_sheet.find_appraisee_name %></td> 
+                          <td><%= dr_sheet.find_appraiser_name %></td>  
+                          <td><%= AppraisalCycle.find(dr_sheet.appraisal_cycle_id).start_date %> &nbspTo&nbsp <%= AppraisalCycle.find(dr_sheet.appraisal_cycle_id).end_date %>  </td>
+                          <td><%= link_to "", edit_dr_sheet_path(dr_sheet), :remote => true,:class => "icon-edit  pull-left icon-large color-green" %></td>
+                        </tr>                             
+                      <% end %>
+  
+                      </tbody>         
+                      </table>
                   </div>
                
                
@@ -88,39 +88,27 @@
                         </span>
                       </a>
                     </blockquote>
-                    <div id= 'completed-appraisals' class="accordion-body collapse offset1">
-                    <% @distinct_appraisals.each do |id| %>
-                      <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
-                      <% unless appraisal.dr_sheets.where(:appraiser_status => 1).first.nil? %>
-                      <div class="accordion-group">
-                        <blockquote>
-                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
-                            <span class="name">
-                              <h5>
-                              <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
-                              </h5>
-                            </span>
-                          </a>
-                        </blockquote>
-                        <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
-                        
-                          <% @dr_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |dr_sheet| %>
-                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
-                             
-                              Appraisee:<span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                              Appraiser:<span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
-                              
-
-                            </div>
-                             
-                              <% end %> 
-                                 
-                        </div>
-                      </div>
+                    <div class="widget-large">
+                      <table id="myTable2" class="tablesorter table table-bordered table-hover table-srtiped ">
+                        <thead>
+                          <th>Appraisee</th>
+                          <th>Appraiser</th>
+                          <th>Appraisal Period </th>
+                        </thead>
+                        <tbody>
+                      <% @dr_sheets.where(:appraiser_status => 1).each do |dr_sheet| %>
+                        <tr>
+                          <td><%= dr_sheet.find_appraisee_name %></td> 
+                          <td><%= dr_sheet.find_appraiser_name %></td>  
+                          <td><%= AppraisalCycle.find(dr_sheet.appraisal_cycle_id).start_date %> &nbspTo&nbsp <%= AppraisalCycle.find(dr_sheet.appraisal_cycle_id).end_date %>  </td>
+                        </tr>                             
                       <% end %>
-                    <% end %>                      
+  
+                     </tbody>         
+                      </table>
+                    </div>
                   </div>
-                
+                </section>
             </div>
             <% end %>
           </div>
@@ -130,3 +118,19 @@
             </section>
             </section>        
 </div>
+<script type="text/javascript">
+  $(function(){
+  $("#myTable").tablesorter({ 
+              // sort on the first column and third column, order asc 
+              sortList: [[0,0],[2,0]] 
+
+          });
+  $("#myTable2").tablesorter({ 
+              // sort on the first column and third column, order asc 
+              sortList: [[0,0],[2,0]] 
+          });
+});
+
+</script>
+
+
