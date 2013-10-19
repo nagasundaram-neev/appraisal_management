@@ -1,0 +1,8 @@
+<% if @implication.errors.any? -%>
+$('#implication_errors').show()
+$("#body-content").html("<%= escape_javascript(render(:partial => "form"))%>");
+<% else -%>
+$(":input:not(input[type=submit])").val("");
+$("#body-content").html("<%= escape_javascript( render(:partial => "implications") ) %>");
+$('#implication_notice').show()
+<% end -%>

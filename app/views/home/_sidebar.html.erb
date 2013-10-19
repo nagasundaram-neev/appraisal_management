@@ -58,6 +58,14 @@
                     
                 </ul>
             </li>
+            <li class="accordion-group">
+                <a class="accordion-toggle collapsed" style="border-left:5px solid #7E87FF;" data-toggle="collapse" data-parent="#side-nav" href="#longterm-goals-collapse"> <span class="name">Long Term Goals</span></a>
+                <ul id="longterm-goals-collapse" class="accordion-body collapse">
+                    <li><%= link_to "Implecations", implications_path, :remote => true %></li>
+                    <li><%= link_to "New Implecation", new_implication_path, :remote => true %></li>
+                    
+                </ul>
+            </li>
           
           <% elsif current_user.role == "appraisee"|| current_user.role == "appraiser" then %>
             <li class="accordion-group">
