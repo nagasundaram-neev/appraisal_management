@@ -1,62 +1,92 @@
+<div class='span11'  style="margin:50px 70px">
+  <section class=widget>
+    <div class='row-fluid'>
+      <div class=row>
+        <div class='span12 offset1'>
+          <h2 class="page-title">
+            Overall Performance Rating<br/>
+            <small>
+              KRA & DR Manager
+            </small>
+          </h2>
+          <h4 class="page-title" style="color:#EAC85E;">
+            Period:&nbsp<%= AppraisalCycle.find(@period).start_date %> &nbsp To &nbsp <%= AppraisalCycle.find(@period).end_date %><br/>
+          </h4>
+         </div>
+       </div>
+
+       <div class='row'>
+        <span class='span3 widget offset1'>
+          <div id="kra-gauge" class="200x160px">
+          </div>
+          <div>
+            <i class="icon-user"></i>
+            KRA Manager:&nbsp
+            <span class="label label-success">
+              <%=User.find(@kra_sheet_temp.appraiser_id).first_name  %>
+            </span>
+          </div>
+         </span>
+
+         <span class='span3 widget offset1'>
+          <div id="dr-gauge" class="200x160px">
+          </div>
+          <div>
+            <i class="icon-user"></i>
+            DR Manager:&nbsp
+            <span class="label label-success">
+              <%=User.find(@dr_sheet.appraiser_id).first_name  %>
+            </span>
+          </div>
+        </span>
+
+        <span class='span3 widget offset1'>
+          <div id="tot-gauge" class="200x160px">
+          </div>
+          <div>
+            <i class="icon-bar-chart icon-large"></i> &nbsp Performance of: &nbsp 
+            <span class="label label-success"><%= current_user.first_name  %>
+            </span>
+          </div>
+        </span>
+       </div> 
+    </div>
+  </section>
+</div>
 
     
 
-<section class='widget span8 offset1' style="margin-top:15%">
-  <div class="content container-fluid">
-    <div class="row-fluid">
-          <div class="span8">
-            <h2 class="page-title">Overall Performance Rating <small><br>KRA & DR Manager</small></h2>
-            <h4 class="page-title" style="color:#EAC85E;">Period:&nbsp<%= AppraisalCycle.find(@period).start_date %> &nbsp To &nbsp <%= AppraisalCycle.find(@period).end_date %></h4>
-            <br>
-          </div>
-    </div>
-    <div class="span8" align="center" >
-          <div class="body">
-            <div class="box span2 bg-color green">
-              <div class="big-text">
-                <%= (performance_sum).round(2) %> %
-              </div>
-              <div class="description">
-                <i class="icon-user"></i>
-                KRA Sheet <br>
-                Manager:&nbsp<span class="label label-success"><%=User.find(@kra_sheet_temp.appraiser_id).first_name  %></span>
-              </div>
-            </div>
-            <div class="box span2 bg-color green">
-              <div class="big-text">
-                <%= (dr_performance).round(2) %> %
-              </div>
-              <div class="description">
-                <i class="icon-user"></i>
-                DR Sheet <br>
-                Manager:&nbsp<span class="label label-success"><%=User.find(@dr_sheet.appraiser_id).first_name  %></span>
-              </div>
-            </div>
-            <div class="box span2 bg-color green">
-              <div class="big-text">
-                <%= ((performance_sum*0.7).round(2))+((dr_performance*0.3).round(2)) %> %
-              </div>
-              <div class="description">
-                <i class="icon-bar-chart icon-large"></i>
-                Total Pefprmance <br>
-                  <span class="label label-success"><%= current_user.first_name  %></span>
-              </div>
-            </div>
-
-    </div>      
-  </div>
-</section>
-
-    <div id="gauge" class="200x160px">dfsd</div>
-
-    <script>
-    var g = new JustGage({
-    id: "gauge",
-    value: 67,
+    <script type="text/javascript">
+    var dr = new JustGage({
+    id: "dr-gauge",
+    value: '<%= (dr_performance).round(2) %>',
     min: 0,
     max: 100,
-    title: "Visitors"
+    title: "DR Performance",
+    levelColors: ["#faa401"],
+    levelColorsGradient: 0
     });
+    
+    var kra = new JustGage({
+    id: "kra-gauge",
+    value: ' <%= (performance_sum).round(2) %>',
+    min: 0,
+    max: 100,
+    title: "KRA Performance",
+    levelColors: ["#33CCFF"],
+    levelColorsGradient: 0
+    });
+
+var tot = new JustGage({
+    id: "tot-gauge",
+    value: '<%= ((performance_sum*0.7).round(2))+((dr_performance*0.3).round(2)) %>',
+    min: 0,
+    max: 100,
+    title: "Total Performance",
+   levelColors: ["#8CBF26"],
+    levelColorsGradient: 0
+    });
+
     </script>
 
 
