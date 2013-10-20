@@ -1,0 +1,15 @@
+<% if @flag == 0 -%>
+	<% unless current_user.longterm_sheets.where(:appraisee_status => 0).last.nil?  -%> 
+		$("#body-content").html("<%= escape_javascript(render(:partial => 'longterm_form_self'))%>");
+	<% else -%>
+		<% if @view_flag == 0 -%>
+		$("#body-content").html("<%= escape_javascript(render(:partial => 'longterm_view'))%>");
+		<% else -%>
+		$("#body-content").html("<h1>You signed off the current longterm sheet</h1>");
+		<% end -%>
+	<% end -%>
+<% else -%>
+	<% if @view_flag == 0 -%>
+		$("#body-content").html("<%= escape_javascript(render(:partial => 'longterm_view'))%>");
+	<% end -%>
+<% end -%>

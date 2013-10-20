@@ -1,6 +1,7 @@
 class AppraisalCycle < ActiveRecord::Base
   has_many :kra_sheets
   has_many :dr_sheets
+  has_many :longterm_sheets
   validates :start_date, :end_date, :presence => true, :uniqueness => true
   validate :end_after_start
   
@@ -9,7 +10,6 @@ class AppraisalCycle < ActiveRecord::Base
   end
 
   def create_kra_sheets
-    p "inside in create_kr_sheets"
     users_without_kraprsrs = []
     users = User.where("role != 'admin'")
     users.each do |user|
@@ -27,8 +27,6 @@ class AppraisalCycle < ActiveRecord::Base
       notification.update_attributes(:sender => User.where(:role => 'admin').first)
       notification.users = users
     end
-    p "@@@@@@@@@@@########################################"
-    p users_without_kraprsrs.count
     return users_without_kraprsrs
   end
 
@@ -42,6 +40,7 @@ class AppraisalCycle < ActiveRecord::Base
         users_without_draprsrs.push(user)
       end
         user.dr_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save
+        user.longterm_sheets.build(:appraiser_id => appraiser_id, :appraisal_cycle_id => self.id, :appraisee_status => 0).save
     end
     Thread.new do
       notification = Notification.new( :message => "New  DR Appraisal is created for you.")

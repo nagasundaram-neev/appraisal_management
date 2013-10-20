@@ -128,4 +128,22 @@ def get_notifications
     end
   end
 
+
+  def get_ls_appraisees
+     begin
+      if current_user.role == "admin" then
+        @appraisees = LongtermSheet.all#.where("appraisee_status = 0")
+      elsif current_user.role == "appraiser"
+        @appraisees = current_user.appraiser_longterm_sheets#.where(:appraisee_status => 1)
+      end
+      if @appraisees.first.nil? then
+        return @appraisees = nil
+      else
+        return @appraisees
+      end
+    rescue
+      return nil
+    end
+  end
+
 end

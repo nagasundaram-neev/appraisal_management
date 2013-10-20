@@ -44,7 +44,7 @@
                                     </label>
                                     <div class="btn-block controls">
                                     <strong>
-                                <%= collection_select(:kra_attrs_id, :id, KraAttr.all.order("weightage DESC"), :id, "name_and_weightage", {}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
+                                <%= collection_select(:kra_attrs_id, :id, KraAttr.all.order("weightage DESC"), :id, "name_and_weightage", {:prompt => ""}, {:data => {:placeholder => "Multiple Attributes"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
                                           
                                         </select>
                                         </strong>  

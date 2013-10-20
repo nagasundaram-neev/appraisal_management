@@ -40,6 +40,8 @@ class DrSheetsController < ApplicationController
   def update
     @dr_sheet = DrSheet.find(params[:id])
     if @dr_sheet.update(dr_sheet_params)
+      @longterm_sheet=LongtermSheet.where(:appraisee_id => @dr_sheet.appraisee_id, :appraisal_cycle_id => @dr_sheet.appraisal_cycle_id).last
+      @longterm_sheet.update_attributes(:appraiser_id => @dr_sheet.appraiser_id)
       flash[:notice] = "Successfully updated DR sheets."
       @dr_sheets = DrSheet.all
       @distinct_appraisals = DrSheet.select(:appraisal_cycle_id).distinct.order("appraisal_cycle_id DESC")

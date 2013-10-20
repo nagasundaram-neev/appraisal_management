@@ -1,0 +1,255 @@
+<div class="row-fluid">
+  <div class="span12">
+    <section class="widget">
+      <header>
+        <h1><i class="icon-road"></i> Longterm Plannings & Goals</h1>
+      </header>
+    </section>
+  </div>
+</div>
+
+<!-- Development need and learings start -->
+	<div class="row-fluid">
+      <div class="span12 ">
+        <section class="widget tiny">
+          <header>
+            <h4>Developmental Goal (Professional)</h4>
+          </header>
+          <div class="body">
+            <blockquote>
+              <%= @longterm_goal.prof_goal %>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+  </div>
+
+  <div class="row-fluid">
+      <div class="span12 ">
+        <section class="widget">
+          <header>
+            <h4>Developmental Goal (Personal)</h4>
+          </header>
+          <div class="body">
+            <blockquote>
+             <%= @longterm_goal.personal_goal%>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+  </div>
+   <div class="row-fluid">
+      <section class="widget">
+        <header>
+          <h4>
+            <center>Appraisee's Assesment - Learning’s</center>
+          </h4>
+        </header>
+			</section>      
+    </div>
+     <section class=widget>
+	    <div class="row-fluid">
+	      <div class="span2">
+	        <section class="widget">
+	          <header>
+	            <h4>
+	              <center>Improvement Area</center>
+	            </h4>
+	          </header>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	          <header>
+	            <h4>
+	              <center>Strengths</center>
+	            </h4>
+	          </header>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	          <header>
+	            <h4>
+	              <center>Areas of Improvement</center>
+	            </h4>
+	          </header>
+	        </section>
+	      </div>
+	    </div>
+	    <div class="row-fluid">
+	      <div class="span2" >
+	        <section class="widget-tiny" rows="6">
+	          <header>
+	            <h4>
+	              <center><strong>Technical</strong></center>
+	            </h4>
+	          </header>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	        	<%= @longterm_goal.tech_strength%>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	        	<%= @longterm_goal.non_tech_strength%>
+	        </section>
+	      </div>
+	    </div>
+	    <div class="row-fluid control-group" >
+	      <div class="span2" >
+	        <section class="widget-tiny" rows="6">
+	          <header >
+	            <h4>
+	              <center><strong>Non-Technical</strong></center>
+	            </h4>
+	          </header>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	        	<%= @longterm_goal.tech_imp%>
+	        </section>
+	      </div>
+	      <div class="span5">
+	        <section class="widget">
+	        	<%= @longterm_goal.non_tech_imp%>
+	        </section>
+	      </div>
+	    </div>
+    </section>
+<!-- Development need and learings end -->
+
+<!-- Development Plan Sheet Start -->
+	<div class="row-fluid">
+		<div class="span12">
+		 <section class="widget">
+			      <header>
+			        <h4>                             Development Plan             </h4>
+			      </header>
+	 		</section>
+		</div>
+	</div>
+	<div class="row-fluid">
+			  <div class="span12 ">
+			    <section class="widget tiny">
+			      <header>
+			        <h4>Agreed goals for the year ahead.</h4>
+			      </header>
+			      <div class="body">
+			        <blockquote>
+			        	<%= @plan_sheet.agreed_goal %>
+			        </blockquote>
+			      </div>
+			    </section>
+			  </div>
+	</div>
+	<section class='widget'>
+				<div class="row-fluid">
+				  <div class="span4">
+				    <section class="widget">
+				      <header>
+				        <h4>Training and Development implications?</h4>
+				      </header>
+				      <div class="body">What needs to be learned / developed ?</div>
+				    </section>
+				  </div>
+				  <div class="span4">
+				    <section class="widget">
+				      <header>
+				        <h4>Current Role</h4>
+				      </header>
+				      <div class="body">
+				        <div class="controls">
+				          <%= collection_select(:current_implication_id, :id, Implication.all, :id, :name, {}, {:data => {:placeholder => "Current Implications"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
+		              </select>
+				        </div>
+				      </div>
+				    </section>
+				  </div>
+				  <div class="span4">
+				    <section class="widget">
+				      <header>
+				        <h4>Next Role</h4>
+				      </header>
+				      <div class="body">
+				        <div class="controls">
+				          <%= collection_select(:next_implication_id, :id, Implication.all, :id, :name, {}, {:data => {:placeholder => "Next Implications"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
+		              </select>
+				        </div>
+				      </div>
+				    </section>
+				  </div>
+				</div>
+	</section>
+	<div class="row-fluid">
+			  <div class="span12 ">
+			    <section class="widget">
+			      <header>
+			        <h4>How will these be achieved?<small> How will it be learnt/developed?</small></h4>
+			      </header>
+			      <div class="body">
+			        <blockquote>
+			        	<%= @plan_sheet.way_to_achieve %>
+			        </blockquote>
+			      </div>
+			    </section>
+			  </div>
+			</div>
+			<div class="row-fluid">
+			  <div class="span12 ">
+			    <section class="widget">
+			      <header>
+			        <h4>Resources required ?<small> (including Employees time)</small></h4>
+			      </header>
+			      <div class="body">
+			        <blockquote>
+			        	<%= @plan_sheet.resources_required %>
+			        </blockquote>
+			      </div>
+			    </section>
+			  </div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12 ">
+				  <section class="widget">
+				    <header>
+				      <h4>How will success be measured?</h4>
+				    </header>
+				    <div class="body">
+				      <blockquote>
+			        	<%= @plan_sheet.measure %>
+				      </blockquote>
+				    </div>
+				  </section>
+				</div>
+			</div>
+			<div class="row-fluid">
+      <div class="span12 ">
+        <section class="widget">
+          <header>
+            <h4>Appraiser's Assesment - Learning’s<small> Appraiser's Views and Comments</small></h4>
+          </header>
+          <div class="body">
+            <blockquote>
+            	<% if @flag == 0 %>
+            	<%= @longterm_goal.appraiser_comment %>
+            	<% else %>
+            		<% if @longterm_goal.appraiser_comment.nil?  %>
+	            	<%= form_tag(appraiser_comment_save_path(:longterm_goal => @longterm_goal), :id => "appraiser_comment_save", :class => "appraiser_comment_save", :remote => true) do %>            
+		              <%= text_area_tag(:appraiser_comment,"",:class => "elastic-textarea autogrow input-block-level", :placeholder => "Appraiser Comments", :rows =>"5") %>
+		              	<input type="submit" value="Add" class="btn btn-primary">
+              	<%end%>
+		              <%else%>
+            				<%= @longterm_goal.appraiser_comment %>
+									<%end%>								
+		  						
+              <%end%>
+            </blockquote>
+          </div>
+        </section>
+      </div>
+  </div>
+<!-- Development Plan Sheet End -->

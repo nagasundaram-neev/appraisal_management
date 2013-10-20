@@ -5,7 +5,7 @@
       <!-- Heading start -->
         <div class='row'>
           <div class="span10 offset2">
-           <h2 class="page-title">Dr Sheets <small></small></h2>
+           <h2 class="page-title">LongTerm Sheets <small></small></h2>
           </div>
         </div>
       <!-- Heading End -->
@@ -30,10 +30,10 @@
             <div class='span10 offset1'>
               <section class="widget">
                 <span class="badge label-success">
-                  <%= DrSheet.count %>
+                  <%= LongtermSheet.count %>
                 </span>
                 <strong>
-                   DR Assigned List are
+                   Longterm Sheets Assigned List are
                 </strong>
               </section>
             </div>
@@ -43,13 +43,13 @@
 
         <!-- List Start -->
           <div class='row'>
-            <% if DrSheet.count > 0 %>
+            <% if LongtermSheet.count > 0 %>
                <div class='span10 offset1'>
-                <section class="widget" id="dr-sheets">
+                <section class="widget" id="longterm-sheets">
                 
                   <div class="accordion-group">
                     <blockquote>
-                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#pending-appraisals' >
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#longterm-sheets'  href='#pending-appraisals' >
                         <span class="name">
                           <h4>
                             Pending Appraisals
@@ -58,18 +58,17 @@
                       </a>
                     </blockquote>
                       <div id= 'pending-appraisals' class="accordion-body collapse">
-                        <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
+                        <% @longterm_sheets.where(:appraisee_status => 0).each do |longterm_sheet| %>
                           <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
-                            Appraisee: <span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                            Appraiser: <span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                            Appraisee: <span class='label btn-success'><%= longterm_sheet.find_appraisee_name %></span>
+                            Appraiser: <span class='label btn-info'><%= longterm_sheet.find_appraiser_name %></span>
                             Status: <span class='label btn-info'>
-                              <% if dr_sheet.appraisee_status %>
+                              <% if longterm_sheet.appraisee_status %>
                               Appraisee has Signed Off the form.
                               <% else %>
                                 Appraisee has not Signed Off the form yet.
                               <% end %>
                             </span>
-                            <span><%= link_to "", edit_dr_sheet_path(dr_sheet), :remote => true,:class => "icon-edit icon-large pull-left color-green" %></span>
                             
                           </div>
                         <% end %>                                  
@@ -79,7 +78,7 @@
                
                   <div class="accordion-group">
                     <blockquote>
-                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#dr-sheets'  href='#completed-appraisals' >
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#longterm-sheets'  href='#completed-appraisals' >
                         <span class="name">
                           <h4>
                             Completed Appraisals
@@ -90,7 +89,7 @@
                     <div id= 'completed-appraisals' class="accordion-body collapse offset1">
                     <% @distinct_appraisals.each do |id| %>
                       <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
-                      <% unless appraisal.dr_sheets.where(:appraiser_status => 1).first.nil? %>
+                      <% unless appraisal.longterm_sheets.where(:appraisee_status => 1).first.nil? %>
                       <div class="accordion-group">
                         <blockquote>
                           <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
@@ -103,11 +102,11 @@
                         </blockquote>
                         <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
                         
-                          <% @dr_sheets.where(:appraisal_cycle_id => appraisal.id, :appraiser_status => 1).each do |dr_sheet| %>
+                          <% @longterm_sheets.where(:appraisal_cycle_id => appraisal.id, :appraisee_status => 1).each do |longterm_sheet| %>
                             <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
                              
-                              Appraisee:<span class='label btn-success'><%= dr_sheet.find_appraisee_name %></span>
-                              Appraiser:<span class='label btn-info'><%= dr_sheet.find_appraiser_name %></span>
+                              Appraisee:<span class='label btn-success'><%= longterm_sheet.find_appraisee_name %></span>
+                              Appraiser:<span class='label btn-info'><%= longterm_sheet.find_appraiser_name %></span>
                               
 
                             </div>

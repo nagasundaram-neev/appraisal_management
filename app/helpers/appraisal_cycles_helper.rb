@@ -66,6 +66,14 @@ module AppraisalCyclesHelper
     @usr_aprsl_cycles
   end
 
+  def user_ls_appraisal_cycle
+    @usr_aprsl_cycles = []
+    longterm_sheets = current_user.longterm_sheets.where("appraisee_status = (?) ", 1)
+    longterm_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
+    @usr_aprsl_cycles
+  end
+
+
   def dr_performance
 	  @dr_ratings_by_manager=@dr_ratings.where(:rated_by => 1)		
 		sum=0

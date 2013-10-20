@@ -15,6 +15,7 @@ AppraisalManagement::Application.routes.draw do
   resources :dr_attrs
   resources :departments
   resources :roles
+  resources :longterm_sheets
   resources :implications
   resources :appraisal_cycles do
     collection do
@@ -40,6 +41,7 @@ AppraisalManagement::Application.routes.draw do
   end
   resources :kra_ratings
   resources :dr_ratings
+  resources :longterm_goals
   get 'new_role_user', to: 'roles#new_role'
   post 'add_role', to: 'roles#add_role'
   get 'new_dept', to: 'departments#new_dept'
@@ -48,10 +50,13 @@ AppraisalManagement::Application.routes.draw do
   get 'get_past_appraisees', to: 'home#get_past_appraisees'
   get 'get_dr_appraisees', to: 'home#get_dr_appraisees'
   get 'get_past_dr_appraisees', to: 'home#get_past_dr_appraisees'
+  get 'get_ls_appraisees', to: 'home#get_ls_appraisees'
   get 'total_performance_graph', to: 'home#total_performance_graph'
   get 'revert_signoff', to: 'kra_ratings#revert_signoff'
   get 'dr_revert_signoff', to: 'dr_ratings#dr_revert_signoff'
-get 'update_notifications', to: 'home#get_notifications'
+  get 'update_notifications', to: 'home#get_notifications'
+  get 'longterm_sheet_signoff', to: 'longterm_sheets#longterm_sheet_signoff'
+  post 'appraiser_comment_save', to: 'longterm_goals#appraiser_comment_save'
   root :to => 'home#index'
 
   get "home/index"
