@@ -1,27 +1,25 @@
 <section class='widget'>
-<strong>
+    <strong>
+    <table class='table table-bordered table-hover table-srtiped'>
+      <thead>
+        <tr>
+          <th><i class='icon-user icon-4x'></i></th>
+          <th><i class='icon-envelope icon-4x'></i></th>
+          <th><i class='icon-mobile-phone icon-4x'></i></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user.first_name, total_performance_graph_appraisal_cycles_path(:user => user),  class: "icon-large", :remote=>true %>
+        </td>
+        <td><%= user.email %></td>
+        <td><%= user.phone_no %></td>
+      </tr>
+      <% end %>
 
-
-<table class='table table-bordered table-hover table-srtiped'>
-  <thead>
-    <tr>
-      <th><i class='icon-user icon-4x'></i></th>
-      <th><i class='icon-envelope icon-4x'></i></th>
-      <th><i class='icon-mobile-phone icon-4x'></i></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-  <tr>
-    <td>
-      <%= link_to user.first_name, total_performance_graph_appraisal_cycles_path(:user => user),  class: "icon-large", :remote=>true %>
-    </td>
-    <td><%= user.email %></td>
-    <td><%= user.phone_no %></td>
-  </tr>
-  <% end %>
-
-</tbody>
-</table>
-</strong>
+    </tbody>
+    </table>
+    </strong>
 </section>

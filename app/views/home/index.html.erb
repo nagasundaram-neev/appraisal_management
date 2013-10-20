@@ -38,11 +38,82 @@
 </div>
 </div>
 <% else %>
-<div id="body-content">
+<div id="body-content ">
   <div class='row-fluid' >
 
-    
-                
+    <div class='span2 offset1'>
+      <div class="box card-container ">
+        <div class="big-text">
+         &nbsp<%= User.all.count %>
+        </div>
+        <div class="description">
+          <br>
+          <i class="icon-group"></i>
+            <strong>Employees</strong>
+        </div>
+      </div>
+    </div>
+    <div class='span2'>
+      <div class="card-container box">
+        <div class="card">
+          <div class="side big-text"><%= KraSheet.all.count %>
+            <strong style="font-size:15px;"><br>
+              <i class="icon-thumbs-up"></i>&nbsp KRA Sheets</strong></div>
+          <div class="side back">
+            <p style="font-size:20px"><br>Completed&nbsp</p>
+            <strong style="font-size:25px"><%= KraSheet.where(:appraiser_status=>1).count %></strong>
+            <p style="font-size:20px">Pending&nbsp</p>
+            <strong style="font-size:25px"><%= KraSheet.where(:appraiser_status=>0).count %></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='span2'>
+      <div class="card-container box">
+        <div class="card">
+          <div class="side big-text"><%= DrSheet.all.count %>
+            <strong style="font-size:15px;"><br>
+              <i class="icon-thumbs-up"></i>&nbsp DR Sheets</strong></div>
+          <div class="side back">
+            <p style="font-size:20px"><br>Completed&nbsp</p>
+            <strong style="font-size:25px"><%= DrSheet.where(:appraiser_status=>1).count %></strong>
+            <p style="font-size:20px">Pending&nbsp</p>
+            <strong style="font-size:25px"><%= DrSheet.where(:appraiser_status=>0).count %></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='span2'>
+      <div class="card-container box">
+        <div class="card">
+          <div class="side big-text"><%= Department.all.count %>
+            <strong style="font-size:15px;"><br>
+              <i class="icon-suitcase"></i>&nbsp Departments</strong></div>
+          <div class="side back">
+            <p style="text-align:center;">
+            <% Department.all.each do |role_name| %>
+            <br>
+              <%= role_name.name %>
+              <% end %></p> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='span2'>
+      <div class="card-container box">
+        <div class="card">
+          <div class="side big-text"><%= Role.all.count %>
+            <strong style="font-size:15px;"><br><i class="icon-suitcase"></i>&nbsp Roles</strong></div>
+          <div class="side back"><p style="text-align:left;"><% Role.all.each do |role_name| %>
+            <%= role_name.name %>,
+            <% end %></p> </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class='row-fluid' >
+            
                   <div class="input-prepend input-padding-increased pull-right">
                    
                      <%= text_field_tag :search, params[:search], :placeholder=>"search user", :style => "background-color: rgba(0,0,0,.20); color:white;" %> 
@@ -83,4 +154,42 @@ $.get($("#employee_search").attr("action"), $("#employee_search").serialize(), n
 });
 });
 </script>
+<style type="text/css">
+.box {
+    background: #8ec63f;
+    border-radius: 10%;
+    transition-property: background, border-radius;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+  }
+  .box:hover {
+    background: #f7941d;
+    border-radius: 10%;
+  }
+  .card-container {
+  height: 150px;
+  perspective: 600;
+  position: relative;
+  width: 150px;
+}
+.card {
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  backface-visibility: hidden;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.card .back {
+  transform: rotateY(180deg);
+}
+</style>
 
