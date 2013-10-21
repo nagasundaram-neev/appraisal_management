@@ -4,9 +4,11 @@ class LongtermSheet < ActiveRecord::Base
   belongs_to :appraisal_cycle
   has_many :longterm_goals
   has_many :plan_sheets
-  has_many :current_implications, through: :dev_implications, :source => :implication
-  has_many :next_implications, through:  :dev_implications, :source => :implication
-  has_many :dev_implications
+
+  has_many :curr_implications
+  has_many :next_implications
+
+
   validates_uniqueness_of :appraisee_id, scope: [:appraisal_cycle_id]
 
 

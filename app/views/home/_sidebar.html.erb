@@ -3,11 +3,11 @@
       
       <ul id="side-nav" class="side-nav">
           <li class="active">
-            <a href="/" style="border-left:5px solid #FFF;"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
+            <a href="/" style="border-left:5px solid #FFF;" accesskey ="D"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
           </li>
           <% if current_user.role == "admin" then %>
             <li class="accordion-group">
-              <a class="accordion-toggle collapsed" style="border-left:5px solid #EAC85E;" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse"> <span class="name">Appraisal Cycles</span></a>
+              <a class="accordion-toggle collapsed" style="border-left:5px solid #EAC85E;" data-toggle="collapse" data-parent="#side-nav" href="#aprsl-cycle-collapse" accesskey='a'> <span class="name">Appraisal Cycles</span></a>
               <ul id="aprsl-cycle-collapse" class="accordion-body collapse">
                   <li><%= link_to "Appraisal Cycles", appraisal_cycles_path, :remote => true %></li>
                   <li><%= link_to "New Appraisal Cycle", new_appraisal_cycle_path, :remote => true %></li>                          
@@ -97,7 +97,7 @@
               <a class="accordion-toggle collapsed" style="border-left:5px solid #EA089E;" data-toggle="collapse" data-parent="#side-nav" href="#longterm-collapse"><i class="icon-road"> </i> <span class="name">Longterm Goals </span></a>
                <ul id="longterm-collapse" class="accordion-body collapse">
                 <li>
-                  <%= link_to "Longterm Plannings", longterm_goals_path(:flag => 0), :remote => true, :class => "" %>
+                  <%= link_to "Longterm Plannings", longterm_goals_path(:flag => 0), :remote => true, :class => "", :accesskey => "l" %>
                 </li>
               </ul>
             </li>

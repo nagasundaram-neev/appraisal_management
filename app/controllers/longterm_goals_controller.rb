@@ -62,12 +62,19 @@ before_filter :load, :only => [:new,:index]
 
         @longterm_sheet.plan_sheets.build(:agreed_goal => params[:agreed_goal], :way_to_achieve => params[:way_to_achieve], :resources_required => params[:resources_required],:measure => params[:measure]).save
 
+        params[:curr_implication_id][:id].each do |curr_implication_id| 
+          unless curr_implication_id.empty?
+            CurrImplication.new(:longterm_sheet_id=>@longterm_sheet.id, :implication_id => curr_implication_id.to_i).save
+          end
+        end
+        params[:next_implication_id][:id].each do |next_implication_id| 
+          unless next_implication_id.empty?
+            NextImplication.new(:longterm_sheet_id=>@longterm_sheet.id, :implication_id => next_implication_id.to_i).save
+          end
+        end
+        
 
-        # @longterm_sheet.implications=Implication.where("id in (?)", params[:current_implication_id][:id])
-        # @longterm_sheet.implications=Implication.where("id in (?)", params[:next_implication_id][:id])
-
-
-        flash[:notice] = "Successfully saved the ratings."
+        flash[:notice] = "Successfully saved"
         @longterm_goal=@longterm_sheet.longterm_goals.last
         @plan_sheet=@longterm_sheet.plan_sheets.last
         @flag=0
@@ -115,7 +122,7 @@ before_filter :load, :only => [:new,:index]
     @longterm_goal.update_attributes(:appraiser_comment => params[:appraiser_comment])
   end
   def longterm_goal_params
-    params.require(:longterm_goal).permit(:longterm_sheet_id, :prof_goal, :personal_goal, :tech_strength, :non_tech_strength, :tech_imp, :non_tech_imp, :appraiser_comment, :agreed_goal,:current_implication_id,:next_implication_id,:way_to_achieve,:resources_required,
+    params.require(:longterm_goal).permit(:longterm_sheet_id, :prof_goal, :personal_goal, :tech_strength, :non_tech_strength, :tech_imp, :non_tech_imp, :appraiser_comment, :agreed_goal,:curr_implication_id,:next_implication_id,:way_to_achieve,:resources_required,
       :measure)
   end
 

@@ -67,13 +67,13 @@
                           <td><%= sheet.appraisee.first_name %></td>
                           <td><%= sheet.appraisal_cycle.end_date %></td>
 						              <td>
-                            <% if !sheet.appraisee_status %>
+                            <% if sheet.appraisee_status == 0 %>
 	                             Appraisee has not filled the form yet.
                             <% else %>
                               <h5>Appraisee has filled the form. </h5>
                             <% end %>
                           </td>
-                            <% if sheet.appraisee_status %>
+                            <% if sheet.appraisee_status ==1 %>
                               <%unless current_user.role=='admin' %>
                                 <td><%= link_to "View/Comment", longterm_goals_path(:appraisee_sheet_id => {:id => sheet.id, :flag => 1}), :remote => true %></td>
                               <%else%>

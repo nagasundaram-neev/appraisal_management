@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019061628) do
+ActiveRecord::Schema.define(version: 20131020140850) do
 
   create_table "appraisal_cycles", force: true do |t|
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "curr_implications", force: true do |t|
+    t.integer  "implication_id"
+    t.integer  "longterm_sheet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,14 +45,6 @@ ActiveRecord::Schema.define(version: 20131019061628) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "dev_implications", force: true do |t|
-    t.integer  "longterm_sheet_id"
-    t.integer  "current_implication_id"
-    t.integer  "next_implication_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -137,7 +136,14 @@ ActiveRecord::Schema.define(version: 20131019061628) do
     t.integer  "appraisal_cycle_id"
     t.integer  "appraisee_id"
     t.integer  "appraiser_id"
-    t.boolean  "appraisee_status",   default: false
+    t.integer  "appraisee_status",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "next_implications", force: true do |t|
+    t.integer  "implication_id"
+    t.integer  "longterm_sheet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

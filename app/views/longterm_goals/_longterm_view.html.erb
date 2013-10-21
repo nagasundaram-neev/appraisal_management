@@ -160,11 +160,17 @@
 				    <section class="widget">
 				      <header>
 				        <h4>Current Role</h4>
+				        <legend></legend>
 				      </header>
 				      <div class="body">
 				        <div class="controls">
-				          <%= collection_select(:current_implication_id, :id, Implication.all, :id, :name, {}, {:data => {:placeholder => "Current Implications"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
-		              </select>
+				        	<strong>
+				        		<ul>
+				        	<% @longterm_sheet.curr_implications.each do |curr_imp| %>
+				        		<li><%= Implication.find(curr_imp.implication_id).name %></li> 
+				        		<%end%>
+				        		</ul>
+		              </strong>
 				        </div>
 				      </div>
 				    </section>
@@ -173,11 +179,17 @@
 				    <section class="widget">
 				      <header>
 				        <h4>Next Role</h4>
+				        <legend></legend>
 				      </header>
 				      <div class="body">
 				        <div class="controls">
-				          <%= collection_select(:next_implication_id, :id, Implication.all, :id, :name, {}, {:data => {:placeholder => "Next Implications"}, :tabindex => "-1", :multiple => "true", :class => 'input-block-level text widget ', 'data-validation' => "required"  } ) %>
-		              </select>
+				         <strong>
+				         	<ul>
+				        	<% @longterm_sheet.next_implications.each do |next_imp| %>
+				        		<li><%= Implication.find(next_imp.implication_id).name %></li>
+				        		<%end%>
+				        		</ul>
+		              </strong>
 				        </div>
 				      </div>
 				    </section>
