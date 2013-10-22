@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20131020140850) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end 
+  end
 
   create_table "dr_attrs", force: true do |t|
     t.string   "name"
@@ -137,6 +137,8 @@ ActiveRecord::Schema.define(version: 20131020140850) do
     t.integer  "appraisee_id"
     t.integer  "appraiser_id"
     t.integer  "appraisee_status",   default: 0
+<<<<<<< HEAD
+=======
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,6 +146,7 @@ ActiveRecord::Schema.define(version: 20131020140850) do
   create_table "next_implications", force: true do |t|
     t.integer  "implication_id"
     t.integer  "longterm_sheet_id"
+>>>>>>> fc091d7dd08b2907d7ee61476697fccd5927f45f
     t.datetime "created_at"
     t.datetime "updated_at"
   end

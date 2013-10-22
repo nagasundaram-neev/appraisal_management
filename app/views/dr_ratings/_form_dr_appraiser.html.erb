@@ -12,7 +12,7 @@ function checkvalue(rating)
     
                      
    <% if @flag==1 %>
-   <% unless @appraisee.dr_sheets.where(:appraisee_status => 1, :appraiser_status => 0).last.nil? %>
+   <% unless @appraisee.dr_sheets.where(:appraisee_status => true, :appraiser_status => false).last.nil? %>
     <section class='widget'>
     <h3 class='page-title'>Development Review</h3>
     <p style="text-align:justify;font-size:30px" class="span12">
@@ -57,7 +57,7 @@ function checkvalue(rating)
            </td>
            <td>
              <section class="widget">
-           <% rating_obj = dr_attr_rating_obj(@dr_rating.get_appraisee_dr_sheet(@appraisee.id),dr_attr.id,0)  %>
+           <% rating_obj = dr_attr_rating_obj(@dr_rating.get_appraisee_dr_sheet(@appraisee.id),dr_attr.id,false)  %>
                                   <% unless rating_obj == nil then %>
                                    <small><strong> Appraisee rating is: </small>
                                    <h6 class='badge'><%= rating_obj.rating %></h6>
@@ -83,7 +83,7 @@ function checkvalue(rating)
             
               
 
-                <% rating_obj = dr_attr_rating_obj(@dr_rating.find_dr_sheet_manager(current_user.id,@appraisee.id),dr_attr.id,1)  %>
+                <% rating_obj = dr_attr_rating_obj(@dr_rating.find_dr_sheet_manager(current_user.id,@appraisee.id),dr_attr.id,true)  %>
                                 
                 <% unless rating_obj == nil then %>
                  

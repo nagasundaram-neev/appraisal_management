@@ -62,8 +62,8 @@
                 <a class="accordion-toggle collapsed" style="border-left:5px solid #7E87FF;" data-toggle="collapse" data-parent="#side-nav" href="#longterm-goals-collapse"> <span class="name">Long Term Goals</span></a>
                 <ul id="longterm-goals-collapse" class="accordion-body collapse">
                      <li><%= link_to "Longterm Sheets", longterm_sheets_path, :remote => true %></li>
-                    <li><%= link_to "Implecations", implications_path, :remote => true %></li>
-                    <li><%= link_to "New Implecation", new_implication_path, :remote => true %></li>
+                    <li><%= link_to "Implications", implications_path, :remote => true %></li>
+                    <li><%= link_to "New Implication", new_implication_path, :remote => true %></li>
                     
                 </ul>
             </li>
@@ -116,6 +116,9 @@
                     <li><%= link_to "KRA Past Appraisals", get_past_appraisees_path, :remote => true %></li>
                     <li><%= link_to "DR Past Appraisals", get_past_dr_appraisees_path, :remote => true %></li>
                     <li><%= link_to " Longterm Sheets", get_ls_appraisees_path, :remote => true %></li>
+                    <%if current_user.role == 'admin' %>
+                    <li><%= link_to "Overall Past Assessments", appraisal_cycles_past_appraisal_performance_path, :remote => true %></li>
+                    <%end%>
                 </ul>
             </li>
           <% end %>

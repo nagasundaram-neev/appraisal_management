@@ -19,8 +19,8 @@ class AppraisalCyclesController < ApplicationController
     if current_user.role == "admin"
       @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
     else
-      @kra_appraisal_cycles = current_user.kra_sheets.where(:appraiser_status => 1).order("start_date DESC")
-      @dr_appraisal_cycles = current_user.dr_sheets.where(:appraiser_status => 1).order("start_date DESC")
+      @kra_appraisal_cycles = current_user.kra_sheets.where(:appraiser_status => true).order("start_date DESC")
+      @dr_appraisal_cycles = current_user.dr_sheets.where(:appraiser_status => true).order("start_date DESC")
     end
   end
 
@@ -87,12 +87,12 @@ class AppraisalCyclesController < ApplicationController
     @performance_manager_array=[]
     @performance_self_array=[]
     if current_user.role=="admin"
-      @kra_sheets=KraSheet.where(:appraisee_id=> params[:user],:appraisee_status=>1,:appraiser_status=>1)
-      @dr_sheets=DrSheet.where(:appraisee_id=>params[:user],:appraisee_status=>1,:appraiser_status=>1)
+      @kra_sheets=KraSheet.where(:appraisee_id=> params[:user],:appraisee_status=>true,:appraiser_status => true)
+      @dr_sheets=DrSheet.where(:appraisee_id=>params[:user],:appraisee_status=>true,:appraiser_status => true)
       @graph_belongs_to=User.find(params[:user])
     else
-      @kra_sheets=current_user.kra_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
-      @dr_sheets=current_user.dr_sheets.where(:appraisee_status=>1,:appraiser_status=>1)
+      @kra_sheets=current_user.kra_sheets.where(:appraisee_status=>true,:appraiser_status => true)
+      @dr_sheets=current_user.dr_sheets.where(:appraisee_status=>true,:appraiser_status => true)
       @graph_belongs_to=current_user
     end
     @kra_sheets.each do |kra_sheet|
@@ -108,11 +108,11 @@ class AppraisalCyclesController < ApplicationController
   end
 
   def performance_graph
-    @kra_ratings_by_manager_array=current_user.kra_sheets.last.kra_ratings.where(:rated_by=>1).select(:rating).map(&:rating)
-    @kra_ratings_by_self_array=current_user.kra_sheets.last.kra_ratings.where(:rated_by=>0).select(:rating).map(&:rating)
+    @kra_ratings_by_manager_array=current_user.kra_sheets.last.kra_ratings.where(:rated_by=>true).select(:rating).map(&:rating)
+    @kra_ratings_by_self_array=current_user.kra_sheets.last.kra_ratings.where(:rated_by=>false).select(:rating).map(&:rating)
     @kra_ratings_by_self_array.map! { |x| x == nil ? 0 : x }
     @kra_ratings_by_manager_array.map! { |x| x == nil ? 0 : x }
-    @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => 1)
+    @rating_list=KraRating.where(:kra_sheet_id => @kra_sheet.id, :rated_by => true)
     @kra_attr_list = current_user.roles.last.kra_attrs.select(:name).collect(&:name)
   end
 
@@ -120,8 +120,8 @@ class AppraisalCyclesController < ApplicationController
     if current_user.role == "admin"
       @appraisal_cycles = AppraisalCycle.all.order("start_date DESC")
     else
-      @dr_appraisal=current_user.dr_sheets.where(:appraiser_status=>1,:appraisee_status=>1).select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)
-      @kra_appraisal=current_user.kra_sheets.where(:appraiser_status=>1,:appraisee_status=>1).select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)
+      @dr_appraisal=current_user.dr_sheets.where(:appraiser_status=>true,:appraisee_status=>true).select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)
+      @kra_appraisal=current_user.kra_sheets.where(:appraiser_status=>true,:appraisee_status=>true).select(:appraisal_cycle_id).collect(&:appraisal_cycle_id)
       cycles=@dr_appraisal & @kra_appraisal  
       @appraisal_cycles=AppraisalCycle.where(:id=> cycles) 
     end
@@ -130,9 +130,18 @@ class AppraisalCyclesController < ApplicationController
   def past_appraisal_summary
     @period= params[:appraisal][:id]
     @user= params[:appraisal][:user]
-    @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id=>params[:appraisal][:id],:appraisee_id=>params[:appraisal][:user]).last
-    @dr_sheet=DrSheet.where(:appraisal_cycle_id=>params[:appraisal][:id],:appraisee_id=>params[:appraisal][:user]).last
-    @dr_ratings=DrRating.where(:dr_sheet_id=>@dr_sheet.id)
+    
+    @kra_sheet_temp=KraSheet.where(:appraisal_cycle_id=>params[:appraisal][:id],:appraisee_id=>params[:appraisal][:user], :appraiser_status => 1).last
+    @dr_sheet=DrSheet.where(:appraisal_cycle_id=>params[:appraisal][:id],:appraisee_id=>params[:appraisal][:user], :appraiser_status => 1).last
+    unless @dr_sheet.nil?
+      @dr_ratings=DrRating.where(:dr_sheet_id=>@dr_sheet.id)
+    end
+    unless @kra_sheet_temp.nil?  and @dr_sheet.nil?
+      @filled = 1
+    else
+      @filled = 0
+
+    end
   end
 
   def performance_params

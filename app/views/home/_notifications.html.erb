@@ -1,12 +1,11 @@
 <% unless @notifications.empty? %>
 <% @notifications.each do |notification| %>
 	<li role="presentation">
-    <a class="support-ticket" href="#">
+    <a class="support-ticket">
       <div class="picture">
           <span class="label label-important"><i class="icon-bell-alt"></i></span>
       </div>
-      <div class="details">
-        New notification
+      <div class="details">        
         <%= notification.message %>
       </div>
     </a>

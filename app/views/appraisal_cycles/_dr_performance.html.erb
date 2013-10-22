@@ -32,7 +32,7 @@
                     <th>Rating</th>
                   </tr>
 
-                  <% @ratings=@dr_ratings.where(:rated_by => 0) %>
+                  <% @ratings=@dr_ratings.where(:rated_by => false) %>
                   <% @ratings.each do |attr_rating| %>
                     <tr>
                       <td><%= DrAttr.find(attr_rating.dr_attr_id).name %></td>
@@ -59,7 +59,7 @@
                       <th>Attribute</th>
                       <th>Rating</th>
                     </tr>
-                    <% @ratings=@dr_ratings.where(:rated_by => 1) %>
+                    <% @ratings=@dr_ratings.where(:rated_by => true) %>
                     <% @ratings.each do |attr_rating| %>
                        <tr>
                           <td><%= DrAttr.find(attr_rating.dr_attr_id).name %></td>

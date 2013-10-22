@@ -70,4 +70,17 @@ describe DepartmentsController do
     end
   end
 
+  describe "POST: #add_dept" do
+    it "should add the new department for the user whose id comes in request params " do
+      @user = FactoryGirl.create(:user)
+      xhr :post, :add_dept, {:user_id => {:id => @user.id}, :dept_id => {:id => @department.id}, :start_date => '21-11-2013' }
+      @user.department_users.where(:department_id => @department.id, :start_date => '2013-11-21').first.department.should  eq(@department)
+    end
+    it "should ser the end_date value as start_date value in params " do
+      @user = FactoryGirl.create(:user)
+      xhr :post, :add_dept, {:user_id => {:id => @user.id}, :dept_id => {:id => @department.id}, :start_date => '21-11-2013' }
+      @user.department_users.where(:department_id => @department.id, :start_date => '2013-11-21').first.end_date.to_s.should  eq('2013-11-21')
+    end
+  end
+
 end

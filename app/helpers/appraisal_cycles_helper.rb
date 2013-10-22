@@ -3,31 +3,31 @@ module AppraisalCyclesHelper
 	def progress_manager
 		user=@kra_sheet_temp.appraisee
 		@total_attributes=user.roles.last.kra_role_attrs.count
-		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 1).count
+		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => true).count
 		return ((@rated_attributes)*100)/@total_attributes
 	end
 
 	def progress_user
 		user=@kra_sheet_temp.appraisee
 		@total_attributes=user.roles.last.kra_role_attrs.count
-		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => 0).count
+		@rated_attributes=KraRating.where(:kra_sheet_id => @kra_sheet_temp.id, :rated_by => false).count
 		return ((@rated_attributes)*100)/@total_attributes
 	end
 
 	def dr_progress_user
-		@rated_attributes=@dr_ratings.where(:rated_by=>0).count
+		@rated_attributes=@dr_ratings.where(:rated_by => false).count
 		@total_attributes=DrAttr.all.count
 		return ((@rated_attributes)*100)/@total_attributes
 	end
 
 	def dr_progress_manager
-		@rated_attributes=@dr_ratings.where(:rated_by=>1).count
+		@rated_attributes=@dr_ratings.where(:rated_by =>true).count
 		@total_attributes=DrAttr.all.count
 		return ((@rated_attributes)*100)/@total_attributes
 	end
 
 	def performance_sum
-	  @kra_ratings_by_manager=@kra_sheet_temp.kra_ratings.where(:rated_by => 1)
+	  @kra_ratings_by_manager=@kra_sheet_temp.kra_ratings.where(:rated_by => true)
 		kra_sum=0
 		@kra_ratings_by_manager.each do |kra_rating|
 			if kra_rating.rating !=nil
@@ -40,7 +40,7 @@ module AppraisalCyclesHelper
 	end
 	
   def performance_sum_self
-	  @kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => 0)
+	  @kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => false)
 		@kra_attrs=KraAttr.all
 		sum=0
 		@kra_ratings_by_self.each do |kra_rating|
@@ -54,28 +54,28 @@ module AppraisalCyclesHelper
 
   def user_kra_appraisal_cycle
     @usr_aprsl_cycles = []
-    kr_sheets = current_user.kra_sheets.where("appraiser_status = (?) ", 1)
+    kr_sheets = current_user.kra_sheets.where(:appraiser_status => true)
     kr_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
     @usr_aprsl_cycles
   end
 
   def user_dr_appraisal_cycle
     @usr_aprsl_cycles = []
-    dr_sheets = current_user.dr_sheets.where("appraiser_status = (?) ", 1)
+    dr_sheets = current_user.dr_sheets.where(:appraiser_status => true)
     dr_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
     @usr_aprsl_cycles
   end
 
   def user_ls_appraisal_cycle
     @usr_aprsl_cycles = []
-    longterm_sheets = current_user.longterm_sheets.where("appraisee_status = (?) ", 1)
+    longterm_sheets = current_user.longterm_sheets.where(:appraisee_status => true)
     longterm_sheets.each { |x| @usr_aprsl_cycles.push(AppraisalCycle.find(x.appraisal_cycle_id)) }
     @usr_aprsl_cycles
   end
 
 
   def dr_performance
-	  @dr_ratings_by_manager=@dr_ratings.where(:rated_by => 1)		
+	  @dr_ratings_by_manager=@dr_ratings.where(:rated_by => true)		
 		sum=0
 		@dr_ratings_by_manager.each do |dr_rating|
 			if dr_rating.rating !=nil
@@ -87,10 +87,10 @@ module AppraisalCyclesHelper
 	end
 
 	def overall_sum_manager
-		@kra_ratings_by_manager=@kra_sheet_temp.kra_ratings.where(:rated_by => 1)
+		@kra_ratings_by_manager=@kra_sheet_temp.kra_ratings.where(:rated_by => true)
 	  @dr_sheet=DrSheet.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id,:appraisee_id=>@graph_belongs_to.id).first
 	  p @dr_sheet
-	  @dr_ratings_by_manager=DrRating.where(:dr_sheet_id=>@dr_sheet.id,:rated_by=>1)
+	  @dr_ratings_by_manager=DrRating.where(:dr_sheet_id=>@dr_sheet.id,:rated_by => true)
 		kra_sum=0
 		@kra_ratings_by_manager.each do |kra_rating|
 			if kra_rating.rating !=nil
@@ -110,9 +110,9 @@ module AppraisalCyclesHelper
 	end
 
 	def overall_sum_self
-		@kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => 0)
-	  @dr_sheet=DrSheet.where(:appraisal_cycle_id=>@kra_sheet_temp.appraisal_cycle_id).first
-	  @dr_ratings_by_self=DrRating.where(:dr_sheet_id=>@dr_sheet.id,:rated_by=>0)
+		@kra_ratings_by_self=@kra_sheet_temp.kra_ratings.where(:rated_by => false)
+	  @dr_sheet=DrSheet.where(:appraisal_cycle_id => @kra_sheet_temp.appraisal_cycle_id).first
+	  @dr_ratings_by_self=DrRating.where(:dr_sheet_id => @dr_sheet.id,:rated_by => false)
 		kra_sum=0
 		@kra_ratings_by_self.each do |kra_rating|
 			if kra_rating.rating !=nil

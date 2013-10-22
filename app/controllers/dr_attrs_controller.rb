@@ -10,9 +10,8 @@ class DrAttrsController < ApplicationController
   end
 
   def index
-    
   end
-  
+
   def create
     @dr_attr = DrAttr.new(dr_attr_params)
     if @dr_attr.total_weightage

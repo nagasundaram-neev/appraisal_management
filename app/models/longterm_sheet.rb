@@ -1,5 +1,5 @@
 class LongtermSheet < ActiveRecord::Base
-	belongs_to :appraisee, :foreign_key => "appraisee_id", :class_name => "User"
+  belongs_to :appraisee, :foreign_key => "appraisee_id", :class_name => "User"
   belongs_to :appraiser, :foreign_key => "appraiser_id", :class_name => "User"
   belongs_to :appraisal_cycle
   has_many :longterm_goals
@@ -13,12 +13,12 @@ class LongtermSheet < ActiveRecord::Base
 
 
   def find_appraisee_name
-  	@user=User.find(self.appraisee_id)
-  	@user.first_name
+    @user=User.find(self.appraisee_id)
+    @user.first_name
   end
 
   def find_appraiser_name
-  	unless self.appraiser.nil?
+    unless self.appraiser.nil?
     @user=self.appraiser
     @user.first_name
   else

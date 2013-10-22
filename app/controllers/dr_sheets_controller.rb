@@ -57,12 +57,22 @@ class DrSheetsController < ApplicationController
 
   def dr_status_update
     @dr_sheet = DrSheet.find(params[:id])
-    @dr_sheet.update_attributes!(:appraisee_status => true)
+    if @dr_sheet.update_attributes!(:appraisee_status => true)
+      notification = Notification.new( :message => "#{@dr_sheet.appraisee.first_name} has signed off his dr form.")
+      notification.save
+      notification.update_attributes(:sender => @dr_sheet.appraisee)
+      notification.users = [@dr_sheet.appraiser]
+    end
   end
 
   def dr_manager_status_update
     @dr_sheet = DrSheet.find(params[:id])
-    @dr_sheet.update_attributes!(:appraiser_status => true)
+    if @dr_sheet.update_attributes!(:appraiser_status => true)
+      notification = Notification.new( :message => "#{@dr_sheet.appraisee.first_name} dr sheet has ben signed off by his dr manager .")
+      notification.save
+      notification.update_attributes(:sender => @dr_sheet.appraiser)
+      notification.users = [User.where(:role => 'admin')]
+    end
   end
 
   def dr_sheet_params

@@ -58,7 +58,7 @@ before_filter :load, :only => [:new,:index]
         @longterm_sheet=LongtermSheet.find(@longterm_goal.longterm_sheet_id)
         
         
-        @longterm_sheet.update_attributes(:appraisee_status => 1) 
+        @longterm_sheet.update_attributes(:appraisee_status => true) 
 
         @longterm_sheet.plan_sheets.build(:agreed_goal => params[:agreed_goal], :way_to_achieve => params[:way_to_achieve], :resources_required => params[:resources_required],:measure => params[:measure]).save
 

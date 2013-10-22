@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css">
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
@@ -31,17 +32,16 @@ input.error {
       <header class="page-header">
         <div class="navbar">
           <div class="navbar-inner">
-
             <ul class="nav pull-right">
               <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" title="8 support tickets" href="#">
-                            <i class="icon-bell-alt"></i>
-                            <span class="count"></span>
-                        </a>
-                        <ul role="menu" class="dropdown-menu support" id="support-menu">
-                        </ul>
-                    </li>
-             <li class="hidden-phone dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" title="Notifications" href="#">
+                  <i  id = "notification-icon" class="icon-bell-alt"></i>
+                  <span class="count" id= "notification-count"></span>
+                </a>
+                <ul role="menu" class="dropdown-menu support" id="support-menu">
+                </ul>
+              </li>
+              <li class="hidden-phone dropdown">
                 <a href="#" title="Account" id="account" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-user"></i>
                 </a>
@@ -64,9 +64,9 @@ input.error {
                 </ul>
               </li>
               <li class="visible-phone">
-                  <a href="#" class="btn-navbar" data-toggle="collapse" data-target=".sidebar" title="">
-                      <i class="icon-reorder"></i>
-                  </a>
+                <a href="#" class="btn-navbar" data-toggle="collapse" data-target=".sidebar" title="">
+                  <i class="icon-reorder"></i>
+                </a>
               </li>
               <li class="hidden-phone"><a href="/users/sign_out" data-method ="delete" ><i class="icon-signout"></i></a>
               </li>
@@ -79,9 +79,8 @@ input.error {
       <div class="content container-fluid" id="body-content">
         <div class="row-fluid">
           <div class="span12">
-             
-            </div>
           </div>
+        </div>
          
   <% end %>
   <%= yield %>

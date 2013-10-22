@@ -34,7 +34,7 @@
                     <th>Rating</th>
                   </tr>
 
-                  <% @ratings=KraRating.where(:kra_sheet_id => kra_sheet.id,:rated_by => 0) %>
+                  <% @ratings=KraRating.where(:kra_sheet_id => kra_sheet.id,:rated_by => false) %>
                   <% @ratings.each do |attr_rating| %>
                     <tr>
                       <td><%= KraAttr.find(attr_rating.kra_attr_id).name %></td>
@@ -61,7 +61,7 @@
                       <th>Attribute</th>
                       <th>Rating</th>
                     </tr>
-                    <% @ratings=KraRating.where(:kra_sheet_id => kra_sheet.id,:rated_by => 1) %>
+                    <% @ratings=KraRating.where(:kra_sheet_id => kra_sheet.id,:rated_by => true) %>
                     <% @ratings.each do |attr_rating| %>
                        <tr>
                           <td><%= KraAttr.find(attr_rating.kra_attr_id).name %></td>

@@ -3,7 +3,7 @@
   function checkvalue(rating)
 {if ( rating.value > 10  ){alert("Value should be less then or equal to 10"); rating.value = 0; }}
 </script>
-<% unless current_user.kra_sheets.where(:appraisee_status => 0).first.nil? %>
+<% unless current_user.kra_sheets.where(:appraisee_status => false).first.nil? %>
   <% if current_user.role == "appraisee" || @flag==0 %>
   <div class="row-fluid">
     <div class="span12">
@@ -86,7 +86,7 @@
           <% @appraisal_cycle_id = find_kra_sheet_details(@kra_rating.find_kra_sheet_self(current_user.id)).appraisal_cycle_id  %>
               
                                 
-                                 <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,0)  %>
+                                 <% rating_obj = kr_attr_rating_obj(@kra_rating.find_kra_sheet_self(current_user.id),kra_attr.id,false)  %>
 
                                   <% unless rating_obj == nil then %>
                                    <%= link_to "", edit_kra_rating_path(rating_obj, :editflag => 0), :remote => true, class: "icon-edit icon-2x color-orange pull-right" %>

@@ -17,8 +17,7 @@ class DepartmentsController < ApplicationController
     flash[:notice] = nil
   end
 
-
-  def index    
+  def index
   end
 
   def create
@@ -31,7 +30,7 @@ class DepartmentsController < ApplicationController
       end
   end
 
-  def edit 
+  def edit
   @department = Department.find(params[:id])
   end
 
@@ -59,20 +58,26 @@ class DepartmentsController < ApplicationController
   def add_dept
     unless params[:user_id][:id].eql?("")
       user = User.find(params[:user_id][:id])
-    if user.department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
-      dept_user = user.department_users.where(:end_date => nil).first
-      #dept_role.end_date = params[:start_date]
-      dept_user.update_attributes(:end_date => params[:start_date])
-      flash[:notice]="New Department successfull added"
-      @departments = Department.all
-    else
-      flash[:error] = "Please select the Department for user."
-    end
+      p user.id
+      p "dept id in params is"
+      p params[:dept_id][:id]
+      p params[:start_date]
+      if user.department_users.build(:department_id => params[:dept_id][:id], :start_date => params[:start_date] ).save
+        p "department of user added"
+        dept_user = user.department_users.where(:end_date => nil).first
+        dept_user.update_attributes(:end_date => params[:start_date])
+        flash[:notice]="New Department successfull added"
+        @departments = Department.all
+      else
+        p "failed cant add dept user"
+        flash[:error] = "Please select the Department for user."
+      end
     else
       flash[:error] = "Please select the user"
       render :action => "new_dept"
     end
   end
+
   def new_dept
     flash[:notice] = nil
     @dept = Department.new

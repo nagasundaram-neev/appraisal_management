@@ -78,14 +78,20 @@ before_filter :require_appraiser, :only => [:revert_signoff]
     params.require(:dr_rating).permit(:dr_sheet_id, :dr_attr_id, :rating, :comment, :rated_by)
   end
 
+
+  # it sets the appraisee_status as  0 for the particular dr sheet row and sends the mail to appraisee
+  # and create a notification for the appraisee
   def dr_revert_signoff
     @dr_sheet = DrSheet.find(params[:dr_sheet_id])
-    @dr_sheet.update_attributes(:appraisee_status => 0)
+    @dr_sheet.update_attributes(:appraisee_status => false)
     Thread.new do
        @dr_sheet.dr_disagree_notification_mail(@dr_sheet) #notification by email
      end
+     notification = Notification.new( :message => "#{@dr_sheet.appraiser.first_name} is disagree with your dr ratings please modify them")
+     notification.save
+     notification.update_attributes(:sender => @dr_sheet.appraiser)
+     notification.users = [@dr_sheet.appraisee]
     flash[:notice] = "Appraisee  notified."
-    #notify appraisee
   end
 end
 

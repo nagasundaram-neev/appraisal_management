@@ -1,0 +1,186 @@
+<div class='span10 '>
+  <section class="widget">
+
+    <div class="row-fluid">
+      <!-- Heading start -->
+        <div class='row'>
+          <div class="span10 offset2">
+           <h2 class="page-title">Longterm Sheets <small></small></h2>
+          </div>
+        </div>
+      <!-- Heading End -->
+
+      <!-- Notification Area Start-->
+        <div class="row" >
+          <div class="span10 offset1">
+            <% if flash[:notice] %>
+              <div class="flash_notice" id='sheet_notice'>
+                <div class="alert alert-success">
+                 <%= notice %>
+                 <a class="close" data-dismiss="alert">×</a> 
+                </div>
+              </div>
+              <%end%>
+            </div>
+          </div>
+      <!-- Notification Area End -->
+
+      <!-- Counting Area Start-->
+          <div class='row'>
+            <div class='span10 offset1'>
+              <section class="widget">
+                <span class="badge label-success">
+                  <%= LongtermSheet.count %>
+                </span>
+                <strong>
+                   Longterm Sheet Assigned List are
+                </strong>
+              </section>
+            </div>
+          </div>
+        <!-- Counting Area End-->
+
+
+        <!-- List Start -->
+          <div class='row'>
+            <% if LongtermSheet.count > 0 %>
+               <div class='span10 offset1'>
+                <section class="widget" id="longterm_-sheets">
+                
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#longterm_-sheets'  href='#pending-appraisals' >
+                        <span class="name">
+                          <h4>
+                            Pending Appraisals
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+<<<<<<< HEAD
+                      <div id= 'pending-appraisals' class="accordion-body collapse">
+                        <% @longterm_sheets.where(:appraisee_status => false).each do |longterm_sheet| %>
+                          <div class='widget' style="background-color: rgba(255,255,255,255); color:#000;">
+                            Appraisee: <span class='label btn-success'><%= longterm_sheet.find_appraisee_name %></span>
+                            Appraiser: <span class='label btn-info'><%= longterm_sheet.find_appraiser_name %></span>
+                            Status: <span class='label btn-info'>
+                              <% if longterm_sheet.appraisee_status %>
+                              Appraisee has Signed Off the form.
+                              <% else %>
+                                Appraisee has not Signed Off the form yet.
+                              <% end %>
+                            </span>
+                            
+                          </div>
+                        <% end %>                                  
+                      </div>
+=======
+                      <table id="myTable" class=" tablesorter table table-bordered table-hover table-srtiped ">
+                        <thead>
+                          <th>Appraisee</th>
+                          <th>Appraiser</th>
+                          <th>Appraisal Period </th>
+                        </thead>
+                        <tbody>
+                      <% @longterm_sheets.where(:appraisee_status => 0).each do |longterm_sheet| %>
+                        <tr>
+                          <td><%= longterm_sheet.find_appraisee_name %></td> 
+                          <td><%= longterm_sheet.find_appraiser_name %></td>  
+                          <td><%= AppraisalCycle.find(longterm_sheet.appraisal_cycle_id).start_date %> &nbspTo&nbsp <%= AppraisalCycle.find(longterm_sheet.appraisal_cycle_id).end_date %>  </td>
+                        </tr>                             
+                      <% end %>
+  
+                      </tbody>         
+                      </table>
+>>>>>>> fc091d7dd08b2907d7ee61476697fccd5927f45f
+                  </div>
+               
+               
+                  <div class="accordion-group">
+                    <blockquote>
+                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#longterm_-sheets'  href='#completed-appraisals' >
+                        <span class="name">
+                          <h4>
+                            Completed Appraisals
+                          </h4>
+                        </span>
+                      </a>
+                    </blockquote>
+<<<<<<< HEAD
+                    <div id= 'completed-appraisals' class="accordion-body collapse offset1">
+                    <% @distinct_appraisals.each do |id| %>
+                      <% appraisal = AppraisalCycle.find(id.appraisal_cycle_id) %> 
+                      <% unless appraisal.longterm_sheets.where(:appraisee_status => true).first.nil? %>
+                      <div class="accordion-group">
+                        <blockquote>
+                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent='#completed-appraisals'  href=<%= "#appraisal-collapse#{appraisal.id}" %> >
+                            <span class="name">
+                              <h5>
+                              <%= "From #{appraisal.start_date.strftime('%B %Y')} To #{appraisal.end_date.strftime('%B %Y')}"%>
+                              </h5>
+                            </span>
+                          </a>
+                        </blockquote>
+                        <div id= '<%= "appraisal-collapse#{appraisal.id}" %>' class="accordion-body collapse">
+                        
+                          <% @longterm_sheets.where(:appraisal_cycle_id => appraisal.id, :appraisee_status => true).each do |longterm_sheet| %>
+                            <div class='widget' style="background-color: rgba(255,255,255,255); color:#000; margin-left:60px;">
+                             
+                              Appraisee:<span class='label btn-success'><%= longterm_sheet.find_appraisee_name %></span>
+                              Appraiser:<span class='label btn-info'><%= longterm_sheet.find_appraiser_name %></span>
+                              
+
+                            </div>
+                             
+                              <% end %> 
+                                 
+                        </div>
+                      </div>
+=======
+                    <div class="widget-large">
+                      <table id="myTable2" class="tablesorter table table-bordered table-hover table-srtiped ">
+                        <thead>
+                          <th>Appraisee</th>
+                          <th>Appraiser</th>
+                          <th>Appraisal Period </th>
+                        </thead>
+                        <tbody>
+                      <% @longterm_sheets.where(:appraisee_status => 1).each do |longterm_sheet| %>
+                        <tr>
+                          <td><%= longterm_sheet.find_appraisee_name %></td> 
+                          <td><%= longterm_sheet.find_appraiser_name %></td>  
+                          <td><%= AppraisalCycle.find(longterm_sheet.appraisal_cycle_id).start_date %> &nbspTo&nbsp <%= AppraisalCycle.find(longterm_sheet.appraisal_cycle_id).end_date %>  </td>
+                        </tr>                             
+>>>>>>> fc091d7dd08b2907d7ee61476697fccd5927f45f
+                      <% end %>
+  
+                     </tbody>         
+                      </table>
+                    </div>
+                  </div>
+                </section>
+            </div>
+            <% end %>
+          </div>
+        <!-- List Area End -->  
+    </div>
+              </div>
+            </section>
+            </section>        
+</div>
+<script type="text/javascript">
+  $(function(){
+  $("#myTable").tablesorter({ 
+              // sort on the first column and third column, order asc 
+              sortList: [[0,0],[2,0]] 
+
+          });
+  $("#myTable2").tablesorter({ 
+              // sort on the first column and third column, order asc 
+              sortList: [[0,0],[2,0]] 
+          });
+});
+
+</script>
+
+

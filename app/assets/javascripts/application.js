@@ -23,11 +23,23 @@
 
 
 
-/*$(function() {  
-    setTimeout(updateNotifications, 20000);
+$(function() {  
+  setTimeout(updateNotifications, 3000);
+  $("#notification-icon").click(function(){
+  	$("#notification-count").css("background-color","");
+		$("#notification-count").html("");
+  })
 });
 
 function updateNotifications () {
-  $.ajax({url:"/update_notifications",success:function(){ }}); 
-  setTimeout(updateNotifications, 20000);
-}*/
+	previous_length = $("#support-menu").children().length
+	
+  $.ajax({url:"/update_notifications",success:function(){ 
+  	current_length = $("#support-menu").children().length;  	
+  	if (current_length > previous_length){
+		$("#notification-count").css("background-color","red");
+		$("#notification-count").html(current_length - previous_length);
+	}
+  }});   
+  setTimeout(updateNotifications, 10000);
+}

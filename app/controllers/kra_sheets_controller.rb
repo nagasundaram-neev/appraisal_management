@@ -58,12 +58,22 @@ before_filter :authenticate_user!
 
   def kra_status_update
     @kra_sheet = KraSheet.find(params[:id])
-    @kra_sheet.update_attributes!(:appraisee_status => true)
+    if @kra_sheet.update_attributes!(:appraisee_status => true)
+      notification = Notification.new( :message => "#{@kra_sheet.appraisee.first_name} has signed off his kra form.")
+      notification.save
+      notification.update_attributes(:sender => @kra_sheet.appraisee)
+      notification.users = [@kra_sheet.appraiser]
+    end
   end
 
   def kra_manager_status_update
     @kra_sheet = KraSheet.find(params[:id])
-    @kra_sheet.update_attributes!(:appraiser_status => true)
+    if @kra_sheet.update_attributes!(:appraiser_status => true)
+      notification = Notification.new( :message => "#{@kra_sheet.appraisee.first_name} kra sheet has ben signed off by his kra manager .")
+      notification.save
+      notification.update_attributes(:sender => @kra_sheet.appraiser)
+      notification.users = [User.where(:role => 'admin')]
+    end
   end
 
   def kra_sheet_params

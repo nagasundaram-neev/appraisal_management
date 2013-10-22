@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-      <% @users.each do |user| %>
+      <% (User.all - User.where(:role => 'admin')).each do |user| %>
       <tr>
         <td>
           <%= link_to user.first_name, total_performance_graph_appraisal_cycles_path(:user => user),  class: "icon-large", :remote=>true %>

@@ -115,7 +115,7 @@
           <div class='span8 offset1'>
             <section class="widget">
               <span class="badge label-success">
-                  KRA:<%= current_user.kra_sheets.where(:appraiser_status => 1).count %>  
+                  KRA:<%= current_user.kra_sheets.where(:appraiser_status => true).count %>  
               </span>
               <strong>
                Appraisal Cycles
@@ -187,7 +187,7 @@
           <div class='span8 offset1'>
             <section class="widget">
               <span class="badge label-success">
-                  DR:<%= current_user.dr_sheets.where(:appraiser_status => 1).count %>  
+                  DR:<%= current_user.dr_sheets.where(:appraiser_status => true).count %>  
               </span>
               <strong>
                Appraisal Cycles
@@ -260,7 +260,7 @@
           <div class='span8 offset1'>
             <section class="widget">
               <span class="badge label-success">
-                  Longterm Plannings:<%= current_user.longterm_sheets.where(:appraisee_status => 1).count %>  
+                  Longterm Plannings:<%= current_user.longterm_sheets.where(:appraisee_status => true).count %>  
               </span>
               <strong>
                Appraisal Cycles

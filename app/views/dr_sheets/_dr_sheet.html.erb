@@ -64,7 +64,7 @@
                           <th>Appraisal Period </th>
                         </thead>
                         <tbody>
-                      <% @dr_sheets.where(:appraiser_status => 0).each do |dr_sheet| %>
+                      <% @dr_sheets.where(:appraiser_status => false).each do |dr_sheet| %>
                         <tr>
                           <td><%= dr_sheet.find_appraisee_name %></td> 
                           <td><%= dr_sheet.find_appraiser_name %></td>  
@@ -96,7 +96,7 @@
                           <th>Appraisal Period </th>
                         </thead>
                         <tbody>
-                      <% @dr_sheets.where(:appraiser_status => 1).each do |dr_sheet| %>
+                      <% @dr_sheets.where(:appraiser_status => true).each do |dr_sheet| %>
                         <tr>
                           <td><%= dr_sheet.find_appraisee_name %></td> 
                           <td><%= dr_sheet.find_appraiser_name %></td>  

@@ -60,7 +60,7 @@ class LongtermSheetsController < ApplicationController
 
   def longterm_sheet_signoff 
       @longterm_sheet = LongtermSheet.find(params[:longterm_sheet])
-      @longterm_sheet.update_attributes!(:appraisee_status => 1) #Longterm sheet submitted 
+      @longterm_sheet.update_attributes!(:appraisee_status => true) #Longterm sheet submitted 
   end
 
  

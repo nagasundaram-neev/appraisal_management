@@ -64,7 +64,7 @@
                           <th>Appraisal Period </th>
                         </thead>
                         <tbody>
-                      <% @kra_sheets.where(:appraiser_status => 0).each do |kra_sheet| %>
+                      <% @kra_sheets.where(:appraiser_status => false).each do |kra_sheet| %>
                         <tr>
                           <td><%= kra_sheet.find_appraisee_name %></td> 
                           <td><%= kra_sheet.find_appraiser_name %></td>  
@@ -96,7 +96,7 @@
                           <th>Appraisal Period </th>
                         </thead>
                         <tbody>
-                      <% @kra_sheets.where(:appraiser_status => 1).each do |kra_sheet| %>
+                      <% @kra_sheets.where(:appraiser_status => true).each do |kra_sheet| %>
                         <tr>
                           <td><%= kra_sheet.find_appraisee_name %></td> 
                           <td><%= kra_sheet.find_appraiser_name %></td>  

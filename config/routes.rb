@@ -24,7 +24,7 @@ AppraisalManagement::Application.routes.draw do
       post 'total_performance_graph'
       get 'dr_overall_performance'
       get 'past_appraisal_performance'
-      get 'past_appraisal_summary'
+      post 'past_appraisal_summary'
     end
   end
   resources :kra_sheets do

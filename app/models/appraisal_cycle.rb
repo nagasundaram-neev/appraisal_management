@@ -19,7 +19,7 @@ class AppraisalCycle < ActiveRecord::Base
       else
         users_without_kraprsrs.push(user)
       end
-      user.kra_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save        
+      user.kra_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => false, :appraiser_status => false).save        
     end
     Thread.new do
       notification = Notification.new( :message => "New KRA Appraisal is created for you.")
@@ -39,8 +39,8 @@ class AppraisalCycle < ActiveRecord::Base
       else
         users_without_draprsrs.push(user)
       end
-        user.dr_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => 0, :appraiser_status => 0).save
-        user.longterm_sheets.build(:appraiser_id => appraiser_id, :appraisal_cycle_id => self.id, :appraisee_status => 0).save
+        user.dr_sheets.build(:appraiser_id => appraiser_id , :appraisal_cycle_id => self.id,:appraisee_status => false, :appraiser_status => false).save
+        user.longterm_sheets.build(:appraiser_id => appraiser_id, :appraisal_cycle_id => self.id, :appraisee_status => false).save
     end
     Thread.new do
       notification = Notification.new( :message => "New  DR Appraisal is created for you.")

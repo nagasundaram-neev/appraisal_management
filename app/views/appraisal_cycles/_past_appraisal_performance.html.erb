@@ -44,32 +44,47 @@
         </div>
       <!-- Count end -->
 
+
+<!-- admin view for past overall performance of each user start -->
+<div class='row'>
+  <div class='span8 offset2'>
+    <strong>
+      <section class="widget">
+        <% if current_user.role == "admin" %>
+          <%= form_for(:appraisal,:method => :post, :url => { :action => :past_appraisal_summary  } , :remote => true,  :class => "form-horizontal label-left") do |f|  %>            
+            
+            <%= f.collection_select :user, User.all.order("first_name")-User.where(:role => 'admin'), :id, :first_name, :prompt => "Select User" %>
+            </select>
+            <%= f.collection_select :id, AppraisalCycle.all.order("start_date DESC"), :id, :start_date, :prompt => "Select Cycle" %>
+            </select>
+          
+            <input type="submit" value="Find" class="btn btn-primary">
+          <%end%>
+        </section>
+      </strong>
+    </div>
+  </div>
+      
+<!-- admin view for past overall performance of each user end -->
+    <%else%>
       <!-- List start -->
       <div class='row'>
       <% if AppraisalCycle.count > 0 %>
         <div class='span8 offset2'>
           <strong>
-            <section class="widget">
+            <section class="">
               <table class="table table-hover">
-                <tbody>
+                <thead>
                   <tr style="border-bottom:solid 1px;">
-                    <% if current_user.role == "admin" then %>
-                       <th>Start Date</th>
-                       <th>End Date</th>
-                       <th><i class='icon-pencil'></th>
-                    <% else %>
-                       <th>Appraisal Periods</th>
+                    <th>
+                    <% unless current_user.role == "admin" then %>
+                       Appraisal Periods
                     <%end%>
+                    </th>
                   </tr>
-                    <% if current_user.role == "admin" then %>
-                      <% @appraisal_cycles.each do |appraisal_cycle| %>
-                        <tr>
-                        <td><%= appraisal_cycle.start_date.strftime('%B %Y')%></td>
-                        <td><%= appraisal_cycle.end_date.strftime('%B %Y') %></td>
-                        <td><%= link_to "", edit_appraisal_cycle_path(appraisal_cycle), :remote => true, class: "icon-edit icon-large color-orange" %></td>
-                        </tr>
-                      <% end %>
-                    <% else%>
+                </thead>
+                <tbody>
+                   <% unless current_user.role == 'admin' %>
                       <% user_kra_appraisal_cycle.each do |appraisal_cycle| %>
                         <tr>
                         <td>
@@ -86,6 +101,7 @@
       <% end %>
       </div>
       <!-- List end -->
+      <%end%>
     </div>
   
   </section>

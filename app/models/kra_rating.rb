@@ -20,12 +20,12 @@ class KraRating < ActiveRecord::Base
 	end
 
 	def find_kra_sheet_self(id) 		
-		@kra_sheet=KraSheet.where(:appraisee_status => 0, :appraisee_id => id).last.id
+		@kra_sheet=KraSheet.where(:appraisee_status => false, :appraisee_id => id).last.id
 	end
 
 	def get_appraisee_kra_sheet(id)
 	begin
-		@kra_sheet=KraSheet.where(:appraisee_status => 1, :appraisee_id => id).last.id
+		@kra_sheet=KraSheet.where(:appraisee_status => true, :appraisee_id => id).last.id
 		return @kra_sheet
 	rescue NoMethodError
 		return nil
@@ -33,7 +33,7 @@ class KraRating < ActiveRecord::Base
 	end
 
 	def find_kra_sheet_manager(id,appraisee_id) 
-	  @kra_sheet=KraSheet.where(:appraiser_status => 0,:appraiser_id => id, :appraisee_id => appraisee_id).first.id
+	  @kra_sheet=KraSheet.where(:appraiser_status => false,:appraiser_id => id, :appraisee_id => appraisee_id).first.id
 	end
 	
 	

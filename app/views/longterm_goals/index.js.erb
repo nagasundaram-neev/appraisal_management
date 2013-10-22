@@ -1,5 +1,5 @@
 <% if @flag == 0 -%>
-	<% unless current_user.longterm_sheets.where(:appraisee_status => 0).last.nil?  -%> 
+	<% unless current_user.longterm_sheets.where(:appraisee_status => false).last.nil?  -%> 
 		$("#body-content").html("<%= escape_javascript(render(:partial => 'longterm_form_self'))%>");
 	<% else -%>
 		<% if @view_flag == 0 -%>

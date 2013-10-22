@@ -10,7 +10,7 @@
 
  <%= form_for(@longterm_goal, :remote => true) do |f|  %>
   
-  <% @longterm_sheet = current_user.longterm_sheets.where(:appraisee_status => 0).last  %> 
+  <% @longterm_sheet = current_user.longterm_sheets.where(:appraisee_status => false).last  %> 
 
   <%= f.hidden_field :longterm_sheet_id, :value => @longterm_sheet.id %>
 

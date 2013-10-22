@@ -43,7 +43,7 @@
 
       <!-- List Start -->
         <div class='row'>
-          <% if @appraisees.count > 0 %>
+          <% unless @appraisees.empty? %>
             <div class='span8 offset2'>
               <strong>
                 <section class="widget">
