@@ -2,7 +2,7 @@
 <% if current_user.role=='appraisee' -%>
 $("#body-content").html("<%= escape_javascript(render(:partial => "form_dr_appraisee"))%>");
 <% else -%>
-$("#body-content").html("<%= escape_javascript(render(:partial => "form_dr_appraiser"))%>");
+$("#body-content").html("<%= escape_javascript(render(:partial => "form_anager_rating.html"))%>");
 $('#dr_attr_edit_rating_form').hide();
 <% end -%>
 </script>
